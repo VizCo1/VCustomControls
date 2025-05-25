@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/2DSlider/2DSlider.uss?fileID=7433441132597879392&amp;guid=1e41f464bfc41c54eb17108fc5941ef2&amp;type=3#2DSlider" />
-    <Slider2D name="Slider2D" min-value="1,1" value="0,0" max-value="2,2" style="margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; background-color: rgb(102, 102, 102); flex-grow: 1;" />
+    <Style src="project://database/Assets/2DSlider/Slider2D.uss?fileID=7433441132597879392&amp;guid=1e41f464bfc41c54eb17108fc5941ef2&amp;type=3#Slider2D" />
+    <Slider2D name="Slider2D" style="margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; background-color: rgb(102, 102, 102); flex-grow: 1;" />
     <ui:Slider name="RGBSlider" focusable="false" show-input-field="true" fill="true" style="height: 150px; margin-top: 0; margin-right: 8px; margin-bottom: 0; margin-left: 0;" />
 </ui:UXML>

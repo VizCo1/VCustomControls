@@ -1,0 +1,13 @@
+.unity-text-element {
+    margin: 0;
+    padding: 0;
+}
+
+.dragger-element {
+    position:  absolute;
+    border-color: black;
+    border-radius: 2px;
+    border-width: 2px;
+    width: 12px;
+    height: 12px;
+}

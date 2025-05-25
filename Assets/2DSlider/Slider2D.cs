@@ -1,16 +1,15 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [UxmlElement]
-public sealed partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
+public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
 {
     private const string DraggerClass = "dragger-element";
     private const string DraggerName = "DraggerElement";
 
     [Header("Slider2D")]
     [UxmlAttribute]
-    private Vector2 MinValue
+    public Vector2 MinValue
     {
         get => _minValue;
         set
@@ -22,7 +21,7 @@ public sealed partial class Slider2D : VisualElement, INotifyValueChanged<Vector
     }
 
     [UxmlAttribute]
-    private Vector2 MaxValue
+    public Vector2 MaxValue
     {
         get => _maxValue;
         set
@@ -112,8 +111,8 @@ public sealed partial class Slider2D : VisualElement, INotifyValueChanged<Vector
     
     private void MoveDragger()
     {
-        var remappedPercentageX = _value.x / (_minValue.x + _maxValue.x);
-        var remappedPercentageY = _value.y / (_minValue.y + _maxValue.y);
+        var remappedPercentageX = (_value.x - _minValue.x) / (_maxValue.x - _minValue.x);
+        var remappedPercentageY = (_value.y - _minValue.y) / (_maxValue.y - _minValue.y);
         
         var adjustedPosX = remappedPercentageX * resolvedStyle.width - _offset.x;
         var adjustedPosY = remappedPercentageY * resolvedStyle.height - _offset.y;
