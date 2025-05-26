@@ -1,4 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/2DSlider/Slider2D.uss?fileID=7433441132597879392&amp;guid=1e41f464bfc41c54eb17108fc5941ef2&amp;type=3#Slider2D" />
-    <Slider2D name="Slider2DExample" class="slider2d-example" />
-</ui:UXML>
