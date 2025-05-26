@@ -1,8 +1,3 @@
-.unity-text-element {
-    margin: 0;
-    padding: 0;
-}
-
 .slider2d-dragger-element {
     position:  absolute;
     border-color: white;

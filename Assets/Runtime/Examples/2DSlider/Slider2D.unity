@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60acbdee1b68577408204420c655c322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _document: {fileID: 0}
+  _dataSourceSlider2D: {fileID: 11400000, guid: ffd17835e7ff15d4d8dc7619b0233194, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
