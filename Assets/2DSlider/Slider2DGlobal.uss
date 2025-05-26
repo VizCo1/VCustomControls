@@ -3,9 +3,9 @@
     padding: 0;
 }
 
-.dragger-element {
+.slider2d-dragger-element {
     position:  absolute;
-    border-color: black;
+    border-color: white;
     border-radius: 2px;
     border-width: 2px;
     width: 12px;

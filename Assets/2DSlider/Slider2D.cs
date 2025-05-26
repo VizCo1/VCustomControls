@@ -1,12 +1,17 @@
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [UxmlElement]
 public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
 {
-    private const string DraggerClass = "dragger-element";
-    private const string DraggerName = "DraggerElement";
-
+    private static readonly BindingId ValueProperty = (BindingId) nameof(value);
+    
+    public static readonly string Slider2DClass = "slider2d"; 
+    public static readonly string DraggerClass = Slider2DClass + "-dragger-element";
+    
+    public static readonly string DraggerName = "DraggerElement";
+    
     [Header("Slider2D")]
     [UxmlAttribute]
     public Vector2 MinValue
@@ -33,6 +38,7 @@ public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
     }
     
     [UxmlAttribute]
+    [CreateProperty]
     public Vector2 value
     {
         get => _value;
@@ -51,6 +57,8 @@ public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
             
             pooled.target = this;
             SendEvent(pooled);
+            
+            NotifyPropertyChanged(in ValueProperty);
         }
     }
 
@@ -65,6 +73,8 @@ public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
 
     public Slider2D()
     {
+        AddToClassList(Slider2DClass);
+        
         CreateDraggerElement();
 
         RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
@@ -77,6 +87,7 @@ public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
     private void OnGeometryChanged(GeometryChangedEvent evt)
     {
         _offset = new Vector2(_draggerElement.resolvedStyle.width / 2f, _draggerElement.resolvedStyle.height / 2f);
+        
         MoveDragger();
     }
 
@@ -84,6 +95,8 @@ public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
     {
         if (evt.button != 0)
             return;
+        
+        value = RemapBetweenMinAndHighValues(evt.localMousePosition);
         
         _canMove = true;
         this.CapturePointer(evt.button);
@@ -94,10 +107,7 @@ public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
         if (!_canMove)
             return;
         
-        var valueX = evt.localMousePosition.x / resolvedStyle.width * (_minValue.x + _maxValue.x);
-        var valueY = evt.localMousePosition.y / resolvedStyle.height * (_minValue.y + _maxValue.y);
-        
-        value = new Vector2(valueX, valueY);
+        value = RemapBetweenMinAndHighValues(evt.localMousePosition);
     }
     
     private void OnMouseUp(MouseUpEvent evt)
@@ -114,10 +124,19 @@ public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
         var remappedPercentageX = (_value.x - _minValue.x) / (_maxValue.x - _minValue.x);
         var remappedPercentageY = (_value.y - _minValue.y) / (_maxValue.y - _minValue.y);
         
-        var adjustedPosX = remappedPercentageX * resolvedStyle.width - _offset.x;
-        var adjustedPosY = remappedPercentageY * resolvedStyle.height - _offset.y;
+        var adjustedPosX = remappedPercentageX * resolvedStyle.width - _offset.x - resolvedStyle.paddingLeft;
+        var adjustedPosY = remappedPercentageY * resolvedStyle.height - _offset.y - resolvedStyle.paddingTop;
+        
         
         _draggerElement.style.translate = new Translate(new Length(adjustedPosX, LengthUnit.Pixel), new Length(adjustedPosY, LengthUnit.Pixel));
+    }
+    
+    private Vector2 RemapBetweenMinAndHighValues(Vector2 position)
+    {
+        var posX = _minValue.x + position.x / resolvedStyle.width * (_maxValue.x - _minValue.x);
+        var posY = _minValue.y + position.y / resolvedStyle.height * (_maxValue.y - _minValue.y);
+        
+        return new Vector2(posX, posY);
     }
     
     private void CreateDraggerElement()

@@ -2,3 +2,9 @@
     --color-dark-gray: rgb(45, 45, 45);
     --color-white: rgb(255, 255, 255);
 }
+
+.slider2d-example {
+    background-color: rgb(84, 84, 84);
+    flex-grow: 1;
+    margin: 12px;
+}
