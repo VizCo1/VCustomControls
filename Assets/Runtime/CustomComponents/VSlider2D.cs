@@ -5,16 +5,16 @@ using UnityEngine.UIElements;
 namespace VCustomComponents.Runtime.CustomComponents
 {
     [UxmlElement]
-    public partial class Slider2D : VisualElement, INotifyValueChanged<Vector2>
+    public partial class VSlider2D : VisualElement, INotifyValueChanged<Vector2>
     {
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
     
-        public static readonly string Slider2DClass = "slider2d"; 
-        public static readonly string DraggerClass = Slider2DClass + "-dragger-element";
+        public static readonly string VSlider2DClass = "slider2d"; 
+        public static readonly string DraggerClass = VSlider2DClass + "-dragger-element";
     
         public static readonly string DraggerName = "DraggerElement";
     
-        [Header("Slider2D")]
+        [Header("VSlider2D")]
         [UxmlAttribute]
         public Vector2 MinValue
         {
@@ -73,9 +73,9 @@ namespace VCustomComponents.Runtime.CustomComponents
     
         private VisualElement _draggerElement;
 
-        public Slider2D()
+        public VSlider2D()
         {
-            AddToClassList(Slider2DClass);
+            AddToClassList(VSlider2DClass);
         
             CreateDraggerElement();
 

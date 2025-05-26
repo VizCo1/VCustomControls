@@ -1,6 +1,6 @@
 @import url("unity-theme://default");
 
-@import url("Slider2DGlobal.uss");
+
 
 
 VisualElement {}

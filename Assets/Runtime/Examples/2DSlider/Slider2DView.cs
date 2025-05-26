@@ -15,7 +15,7 @@ namespace VCustomComponents.Runtime.Examples._2DSlider
 
         private void Start()
         {
-            var slider2D = _document.rootVisualElement.Q<VCustomComponents.Runtime.CustomComponents.Slider2D>();
+            var slider2D = _document.rootVisualElement.Q<VCustomComponents.Runtime.CustomComponents.VSlider2D>();
 
             slider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);
         }

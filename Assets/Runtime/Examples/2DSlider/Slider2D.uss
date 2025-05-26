@@ -3,3 +3,12 @@
     flex-grow: 1;
     margin: 12px;
 }
+
+.slider2d-example > .slider2d-dragger-element {
+    position:  absolute;
+    border-color: white;
+    border-radius: 2px;
+    border-width: 2px;
+    width: 12px;
+    height: 12px;
+}

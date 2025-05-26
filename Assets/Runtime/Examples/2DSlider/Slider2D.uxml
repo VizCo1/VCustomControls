@@ -1,4 +1,4 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Runtime/Examples/2DSlider/Slider2D.uss?fileID=7433441132597879392&amp;guid=e830ab12783e9074199facbbb3579419&amp;type=3#Slider2D" />
-    <VCustomComponents.Runtime.CustomComponents.Slider2D style="margin-top: 12px; margin-right: 12px; margin-bottom: 12px; margin-left: 12px; height: 223px; background-color: rgb(195, 195, 195);" />
+    <VCustomComponents.Runtime.CustomComponents.VSlider2D class="slider2d-example" />
 </ui:UXML>
