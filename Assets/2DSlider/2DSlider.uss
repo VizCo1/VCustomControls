@@ -1,4 +1,0 @@
-:root {
-    --color-dark-gray: rgb(45, 45, 45);
-    --color-white: rgb(255, 255, 255);
-}
