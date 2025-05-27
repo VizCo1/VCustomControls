@@ -1,6 +1,6 @@
-using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.Properties;
 
 namespace VCustomComponents.Runtime.CustomComponents
 {
@@ -14,7 +14,7 @@ namespace VCustomComponents.Runtime.CustomComponents
     
         public static readonly string DraggerName = "DraggerElement";
     
-        [Header("VSlider2D")]
+        [Header(nameof(VSlider2D))]
         [UxmlAttribute]
         public Vector2 MinValue
         {

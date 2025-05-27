@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 19101, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Slider2DPanelSettings
   m_EditorClassIdentifier: 
-  themeUss: {fileID: 4413694071827464959, guid: c07d950b6eef2bf4b9d39d3edbd6d82d, type: 3}
+  themeUss: {fileID: -4733365628477956816, guid: f7357267c8db92540b2173772fac62b1, type: 3}
   m_DisableNoThemeWarning: 0
   m_TargetTexture: {fileID: 0}
   m_RenderMode: 0
