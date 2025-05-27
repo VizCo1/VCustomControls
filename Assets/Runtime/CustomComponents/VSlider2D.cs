@@ -126,10 +126,9 @@ namespace VCustomComponents.Runtime.CustomComponents
             var remappedPercentageX = (_value.x - _minValue.x) / (_maxValue.x - _minValue.x);
             var remappedPercentageY = (_value.y - _minValue.y) / (_maxValue.y - _minValue.y);
         
-            var adjustedPosX = remappedPercentageX * resolvedStyle.width - _offset.x - resolvedStyle.paddingLeft;
-            var adjustedPosY = remappedPercentageY * resolvedStyle.height - _offset.y - resolvedStyle.paddingTop;
-        
-        
+            var adjustedPosX = remappedPercentageX * resolvedStyle.width - _offset.x - resolvedStyle.paddingLeft - resolvedStyle.borderLeftWidth;
+            var adjustedPosY = remappedPercentageY * resolvedStyle.height - _offset.y - resolvedStyle.paddingTop - resolvedStyle.borderTopWidth;
+            
             _draggerElement.style.translate = new Translate(new Length(adjustedPosX, LengthUnit.Pixel), new Length(adjustedPosY, LengthUnit.Pixel));
         }
     

@@ -6,18 +6,40 @@ namespace VCustomComponents.Runtime.CustomComponents
     [UxmlElement]
     public partial class VEnumDropdownCustom : EnumField
     {
+        private const string BaseDropdownClass = "unity-base-dropdown";
         private const bool OneTime = true;
         
         [Header(nameof(VEnumDropdownCustom))]
         
         [UxmlAttribute]
-        private string Class { get; set; }
+        private string ClassToAdd { get; set; }
         
         public VEnumDropdownCustom() 
         {
+#if UNITY_EDITOR
+            if (Application.isPlaying)
+            {
+                RegisterCallback<MouseDownEvent>(OnMouseDown);
+            }
+            else
+            {
+                RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
+            }
+#else
             RegisterCallback<MouseDownEvent>(OnMouseDown);
+#endif   
         }
 
+#if UNITY_EDITOR
+        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        {
+            if (ClassToAdd.Contains(" "))
+            {
+                Debug.LogError($"{nameof(ClassToAdd)} can't have spaces: {ClassToAdd}");
+            }
+        }
+#endif
+        
         private void OnMouseDown(MouseDownEvent evt)
         {
             if (evt.button != 0) 
@@ -30,9 +52,9 @@ namespace VCustomComponents.Runtime.CustomComponents
 
         private void DelayedInit()
         {
-            var baseDropdownElement = panel.visualTree.Q(className: "Dropdown");
+            var baseDropdownElement = panel.visualTree.Q(className: BaseDropdownClass);
             
-            baseDropdownElement.AddToClassList(Class);
+            baseDropdownElement.AddToClassList(ClassToAdd);
         }
     }
 }

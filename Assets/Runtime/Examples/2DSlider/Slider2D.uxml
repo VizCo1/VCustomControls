@@ -1,4 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
     <Style src="project://database/Assets/Runtime/Examples/2DSlider/Slider2D.uss?fileID=7433441132597879392&amp;guid=e830ab12783e9074199facbbb3579419&amp;type=3#Slider2D" />
-    <VCustomComponents.Runtime.CustomComponents.VSlider2D class="slider2d-example" />
+    <ui:Instance template="ExamplesTemplate" name="ExampleSlider2D">
+        <AttributeOverrides element-name="TitleLabel" text="VSlider2D" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control behaves exactly like a normal Slider but in 2D. Check the console to see how the value changes!" />
+        <VCustomComponents.Runtime.CustomComponents.VSlider2D class="slider2d-example" />
+    </ui:Instance>
 </ui:UXML>

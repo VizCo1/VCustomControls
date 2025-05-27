@@ -1,0 +1,46 @@
+:root {
+    --color-background: rgb(216, 211, 224);
+    --color-primary: rgb(242, 198, 180);
+    --color-secondary: rgb(180, 214, 193);
+    --color-accent: rgb(111, 174, 232);
+    --color-text: rgb(60, 60, 67);
+    --border-radius-example: 5px;
+    --border-width-example: 2px;
+    --font-size1-example: 18px;
+    --font-size2-example: 14px;
+}
+
+TemplateContainer {
+    flex-grow: 1;
+}
+
+.examples-template-container {
+    flex-grow: 1;
+    background-color: var(--color-background);
+    padding: 16px;
+}
+
+.title-label {
+    color: var(--color-text);
+    font-size: 72px;
+    margin: 0 0 16px 0;
+    padding: 0;
+    -unity-font-style: bold;
+}
+
+.description-label {
+    color: var(--color-text);
+    white-space: normal;
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+}
+
+.content-container {
+    border-color: var(--color-accent);
+    border-radius: 10px;
+    border-width: 5px;
+    flex-grow: 1;
+    margin: 16px 0 0 0;
+    padding: 16px;
+}
