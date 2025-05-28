@@ -1,0 +1,28 @@
+.spinner-container {
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.spinner-example {
+    border-color: var(--color-accent) var(--color-primary);
+    border-width: 200px;
+    border-radius: 250px;
+    width: 500px;
+    height: 500px;
+}
+
+.examples-button-container {
+    align-items: flex-end;
+    flex-grow: 0;
+    margin: 0 32px;
+}
+
+.examples-slider-container {
+    flex-grow: 0;
+    position: absolute;
+    left: 450px;
+    right: 550px;
+    bottom: 74px;
+}

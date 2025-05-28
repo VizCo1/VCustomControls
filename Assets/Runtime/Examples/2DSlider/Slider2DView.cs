@@ -7,6 +7,7 @@ namespace VCustomComponents
     public class Slider2DView : MonoBehaviour
     {
         private UIDocument _document;
+        private VSlider2D _slider2D;
 
         private void Awake()
         {
@@ -15,9 +16,14 @@ namespace VCustomComponents
 
         private void Start()
         {
-            var slider2D = _document.rootVisualElement.Q<VSlider2D>();
+            _slider2D = _document.rootVisualElement.Q<VSlider2D>();
 
-            slider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);
+            _slider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);
+        }
+        
+        private void OnDestroy()
+        {
+            _slider2D.UnregisterValueChangedCallback(OnSlider2DValueChanged);
         }
 
         private void OnSlider2DValueChanged(ChangeEvent<Vector2> evt)
