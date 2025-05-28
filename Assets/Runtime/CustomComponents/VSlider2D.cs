@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.Properties;
 
-namespace VCustomComponents.Runtime.CustomComponents
+namespace VCustomComponents
 {
     [UxmlElement]
     public partial class VSlider2D : VisualElement, INotifyValueChanged<Vector2>

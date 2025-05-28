@@ -5,8 +5,8 @@
         <AttributeOverrides element-name="TitleLabel" text="VDropdownCustom" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to have more than one style for the dropdown&apos;s list. Choose the class to add and use it to style the list! Make sure that you&apos;re using a global USS." />
         <ui:VisualElement name="DropdownContainer" class="dropdown-container">
-            <VCustomComponents.Runtime.CustomComponents.VDropdownCustom name="VDropdownCustomPrimary" choices="Choice 1,Choice 2,Choice 3" index="0" class-to-add="dropdown-primary" focusable="false" class="dropdown-example" />
-            <VCustomComponents.Runtime.CustomComponents.VDropdownCustom name="VDropdownCustomSecondary" choices="Choice 1,Choice 2,Choice 3" index="0" class-to-add="dropdown-secondary" focusable="false" class="dropdown-example" />
+            <VCustomComponents.VDropdownCustom name="VDropdownCustomPrimary" class-to-add="dropdown-primary" choices="Choice 1,Choice 2,Choice 3" index="0" focusable="false" class="dropdown-example" />
+            <VCustomComponents.VDropdownCustom name="VDropdownCustomSecondary" class-to-add="dropdown-secondary" choices="Choice 1,Choice 2,Choice 3" index="1" focusable="false" class="dropdown-example" />
         </ui:VisualElement>
     </ui:Instance>
 </ui:UXML>

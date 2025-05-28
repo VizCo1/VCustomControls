@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VCustomComponents.Runtime.CustomComponents
+namespace VCustomComponents
 {
     [UxmlElement]
     public partial class VEnumDropdownCustom : EnumField
@@ -17,17 +17,12 @@ namespace VCustomComponents.Runtime.CustomComponents
         public VEnumDropdownCustom() 
         {
 #if UNITY_EDITOR
-            if (Application.isPlaying)
-            {
-                RegisterCallback<MouseDownEvent>(OnMouseDown);
-            }
-            else
-            {
-                RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
-            }
-#else
+            if (!Application.isPlaying)
+                return;
+            
+            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
+#endif
             RegisterCallback<MouseDownEvent>(OnMouseDown);
-#endif   
         }
 
 #if UNITY_EDITOR

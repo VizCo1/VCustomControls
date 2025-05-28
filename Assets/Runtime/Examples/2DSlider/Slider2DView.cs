@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VCustomComponents.Runtime.Examples._2DSlider
+namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
     public class Slider2DView : MonoBehaviour
@@ -15,7 +15,7 @@ namespace VCustomComponents.Runtime.Examples._2DSlider
 
         private void Start()
         {
-            var slider2D = _document.rootVisualElement.Q<VCustomComponents.Runtime.CustomComponents.VSlider2D>();
+            var slider2D = _document.rootVisualElement.Q<VSlider2D>();
 
             slider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);
         }

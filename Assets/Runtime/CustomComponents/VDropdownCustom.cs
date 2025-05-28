@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VCustomComponents.Runtime.CustomComponents
+namespace VCustomComponents
 {
     [UxmlElement]
     public partial class VDropdownCustom : DropdownField
@@ -17,17 +17,12 @@ namespace VCustomComponents.Runtime.CustomComponents
         public VDropdownCustom() 
         {
 #if UNITY_EDITOR
-            if (Application.isPlaying)
-            {
-                RegisterCallback<MouseDownEvent>(OnMouseDown);
-            }
-            else
-            {
-                RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
-            }
-#else
-            RegisterCallback<MouseDownEvent>(OnMouseDown);
+            if (!Application.isPlaying)
+                return;
+            
+            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
 #endif
+            RegisterCallback<MouseDownEvent>(OnMouseDown);
         }
 
 #if UNITY_EDITOR

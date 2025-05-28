@@ -1,9 +1,9 @@
 :root {
-    --color-background: rgb(216, 211, 224);
-    --color-primary: rgb(242, 198, 180);
-    --color-secondary: rgb(180, 214, 193);
-    --color-accent: rgb(111, 174, 232);
-    --color-text: rgb(60, 60, 67);
+    --color-background: rgb(255, 231, 185);
+    --color-primary: rgb(156, 118, 172);
+    --color-secondary: rgb(176, 113, 222);
+    --color-accent: rgb(114, 106, 149);
+    --color-transparent: rgba(0, 0, 0, 0);
     --border-radius-example: 5px;
     --border-width-example: 2px;
     --font-size1-example: 18px;
@@ -21,26 +21,30 @@ TemplateContainer {
 }
 
 .title-label {
-    color: var(--color-text);
+    background-color: var(--color-accent);
+    color: var(--color-background);
+    border-color: var(--color-transparent) var(--color-background) var(--color-background) var(--color-transparent);
+    border-radius: 15px 3px 5px 3px;
+    border-width: 20px;
+    -unity-font-style: bold;
     font-size: 72px;
     margin: 0 0 16px 0;
-    padding: 0;
-    -unity-font-style: bold;
+    padding: 0 0 20px 0;
 }
 
 .description-label {
-    color: var(--color-text);
+    color: var(--color-accent);
     white-space: normal;
-    font-size: 28px;
+    font-size: 32px;
     margin: 0;
     padding: 0;
 }
 
 .content-container {
-    border-color: var(--color-accent);
-    border-radius: 10px;
-    border-width: 5px;
+    border-color:  var(--color-accent) var(--color-transparent)  var(--color-transparent) var(--color-accent);
+    border-radius: 15px 3px 5px 3px;
+    border-width: 10px;
     flex-grow: 1;
-    margin: 16px 0 0 0;
-    padding: 16px;
+    margin: 26px 0 0 0;
+    padding: 20px;
 }

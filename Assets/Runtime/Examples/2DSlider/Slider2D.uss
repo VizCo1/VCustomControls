@@ -3,13 +3,13 @@
     flex-grow: 1;
     border-width: var(--border-width-example);
     border-radius: var(--border-radius-example);
-    border-color: var(--color-background);
+    border-color: var(--color-secondary);
 }
 
 .slider2d-example > .slider2d-dragger-element {
     position:  absolute;
     border-color: var(--color-accent);
-    border-width: 2px;
+    border-width: 4px;
     border-radius: 18px;
     width: 24px;
     height: 24px;
