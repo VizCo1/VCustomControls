@@ -5,7 +5,7 @@
     <Style src="project://database/Assets/Runtime/Examples/AspectRatio/AspectRatio.uss?fileID=7433441132597879392&amp;guid=367d2d05c46b2304486d0627baa8040c&amp;type=3#AspectRatio" />
     <ui:Instance template="ExamplesTemplate" name="ExampleAspectRatio">
         <AttributeOverrides element-name="TitleLabel" text="VAspectRatio" />
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom control maintains a fixed aspect ratio, with an option to only enforce it for wide screens." />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control maintains a fixed aspect ratio, with an option to only enforce it for wide screens. Usually used as a container filling the entire screen." />
         <VCustomComponents.VAspectRatio name="VAspectRatio" class="aspect-ratio-example">
             <ui:Instance template="Slider2D" name="ExampleSlider2DContainer" />
         </VCustomComponents.VAspectRatio>
