@@ -10,12 +10,12 @@
             <ui:Instance template="ExamplesButton" name="ExamplesButtonContainer1" class="examples-button-container">
                 <AttributeOverrides element-name="ExamplesButton" text="TOGGLE SPINNER" />
             </ui:Instance>
-            <VCustomComponents.VSpinner name="VSpinner" speed="2.5" class="spinner-example" />
+            <VCustomComponents.VSpinner name="VSpinner" speed="0.5" class="spinner-example" />
             <ui:Instance template="ExamplesButton" name="ExamplesButtonContainer2" class="examples-button-container">
                 <AttributeOverrides element-name="ExamplesButton" text="RESET ROTATION" />
             </ui:Instance>
             <ui:Instance template="ExamplesSlider" name="ExamplesSliderContainer" class="examples-slider-container">
-                <AttributeOverrides element-name="ExamplesSlider" high-value="10" value="5" label="Spinner Speed" />
+                <AttributeOverrides element-name="ExamplesSlider" value="0.5" label="Spinner Speed" high-value="1" />
             </ui:Instance>
         </ui:VisualElement>
     </ui:Instance>
