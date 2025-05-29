@@ -11,8 +11,6 @@ namespace VCustomComponents
         
         private UIDocument _document;
         private VAspectRatio _aspectRatio;
-        private SliderInt _verticalSlider;
-        private SliderInt _horizontalSlider;
         
         private void Awake()
         {
@@ -22,16 +20,16 @@ namespace VCustomComponents
         private void Start()
         {
             _aspectRatio =  _document.rootVisualElement.Q<VAspectRatio>();
-            _verticalSlider = (SliderInt)_document.rootVisualElement.Q(VerticalSliderName)[0];
-            _horizontalSlider = (SliderInt)_document.rootVisualElement.Q(HorizontalSliderName)[0];
+            var verticalSlider = (SliderInt)_document.rootVisualElement.Q(VerticalSliderName)[0];
+            var horizontalSlider = (SliderInt)_document.rootVisualElement.Q(HorizontalSliderName)[0];
 
-            _verticalSlider.value = _aspectRatio.RatioHeight;
-            _horizontalSlider.value = _aspectRatio.RatioWidth;
+            verticalSlider.value = _aspectRatio.RatioHeight;
+            horizontalSlider.value = _aspectRatio.RatioWidth;
             
-            _verticalSlider.RegisterValueChangedCallback(OnVerticalSliderValueChanged);
-            _horizontalSlider.RegisterValueChangedCallback(OnHorizontalSliderValueChanged);
+            verticalSlider.RegisterValueChangedCallback(OnVerticalSliderValueChanged);
+            horizontalSlider.RegisterValueChangedCallback(OnHorizontalSliderValueChanged);
         }
-        
+
         private void OnVerticalSliderValueChanged(ChangeEvent<int> evt)
         {
             _aspectRatio.RatioHeight = evt.newValue;
