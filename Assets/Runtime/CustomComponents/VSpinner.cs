@@ -20,13 +20,10 @@ namespace VCustomComponents
             get => _speed;
             set
             {
-                if (value == _speed || value > 1)
+                if (Mathf.Approximately(value, _speed) || value > 1)
                     return;
                 
                 _speed = value;
-                
-                if (panel == null) 
-                    return;
                 
                 NotifyPropertyChanged(in SpeedProperty);
             }

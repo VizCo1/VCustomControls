@@ -27,9 +27,6 @@ namespace VCustomComponents
                 _ratioWidth = value;
                 UpdateAspect();
                 
-                if (panel == null) 
-                    return;
-                
                 NotifyPropertyChanged(in RatioWidthProperty);
             }
         }
@@ -45,9 +42,6 @@ namespace VCustomComponents
                 
                 _ratioHeight = value;
                 UpdateAspect();
-                
-                if (panel == null) 
-                    return;
                 
                 NotifyPropertyChanged(in RatioHeightProperty);
             }
