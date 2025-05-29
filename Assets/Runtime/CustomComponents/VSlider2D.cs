@@ -15,6 +15,7 @@ namespace VCustomComponents
         public static readonly string DraggerName = "DraggerElement";
     
         [Header(nameof(VSlider2D))]
+        
         [UxmlAttribute]
         public Vector2 MinValue
         {
@@ -39,8 +40,7 @@ namespace VCustomComponents
             }
         }
     
-        [UxmlAttribute]
-        [CreateProperty]
+        [UxmlAttribute, CreateProperty]
         public Vector2 value
         {
             get => _value;

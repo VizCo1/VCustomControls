@@ -27,6 +27,8 @@ namespace VCustomComponents
             _slider = _document.rootVisualElement.Q<Slider>();
             _buttonToggle = (Button)_document.rootVisualElement.Q(ButtonContainer1Name)[0];
             _buttonReset = (Button)_document.rootVisualElement.Q(ButtonContainer2Name)[0];
+
+            _slider.value = _spinner.Speed;
             
             _spinner.RegisterValueChangedCallback(OnSpinnerValueChanged);
             _slider.RegisterValueChangedCallback(OnSliderValueChanged);

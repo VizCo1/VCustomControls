@@ -129,7 +129,7 @@ TemplateContainer {
 }
 
 .examples-slider .unity-base-field {
-    width: 50px;
+    width: 44px;
 }
 
 .examples-slider .unity-base-text-field__input {
