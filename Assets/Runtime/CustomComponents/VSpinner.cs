@@ -14,13 +14,13 @@ namespace VCustomComponents
 
         [Header(nameof(VSpinner))]
         
-        [UxmlAttribute, CreateProperty, Range(0, 10), Tooltip("This value indicates the rotation speed.")]
+        [UxmlAttribute, CreateProperty, Range(0, 1), Tooltip("This value indicates the rotation speed.")]
         public float Speed
         {
             get => _speed;
             set
             {
-                if (value == _speed)
+                if (value == _speed || value > 1)
                     return;
                 
                 _speed = value;
@@ -81,9 +81,9 @@ namespace VCustomComponents
                 .Until(() => !_value);
         }
 
-        private void StartRotate()
+        private void StartRotate(TimerState timerState)
         {
-            _degrees += Speed;
+            _degrees += Speed * timerState.deltaTime;
             
             if (float.IsInfinity(_degrees))
             {

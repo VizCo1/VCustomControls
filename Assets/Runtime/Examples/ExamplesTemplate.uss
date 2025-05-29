@@ -72,9 +72,9 @@ TemplateContainer {
 }
 
 .examples-slider {
-    margin: 0;
     min-height: auto;
     height: 20px;
+    margin: 0;
 }
 
 .examples-slider > .unity-text-element {
@@ -129,7 +129,7 @@ TemplateContainer {
 }
 
 .examples-slider .unity-base-field {
-    width: 44px;
+    width: auto;
 }
 
 .examples-slider .unity-base-text-field__input {
@@ -146,5 +146,31 @@ TemplateContainer {
 .examples-slider .unity-base-field .unity-text-element {
     color: var(--color-background);
     font-size: var(--font-size1-example);
+    width: 55px;
     padding: 0;
+    -unity-text-align: middle-center;
+}
+
+.examples-toggle {
+    margin: 0;
+    align-self: flex-start;
+}
+
+.examples-toggle > .unity-text-element {
+    min-width: auto;
+    font-size: var(--font-size1-example);
+    padding: 0;
+    margin: 0 16px 0 0;
+}
+
+.examples-toggle > .unity-toggle__input {
+    flex-grow: 0;
+    flex-basis: auto;
+    width: 20px;
+    height: 20px;
+}
+
+.examples-toggle .unity-toggle__checkmark {
+    height: 100%;
+    width: 100%;
 }

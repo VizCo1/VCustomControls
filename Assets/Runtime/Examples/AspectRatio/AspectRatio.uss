@@ -1,0 +1,21 @@
+.aspect-ratio-example {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.slider-vertical {
+    flex-grow: 0;
+}
+
+.slider-horizontal {
+    flex-grow: 0;
+    margin: 0 0 20px 0;
+}
+
+.slider-horizontal .unity-base-field__label {
+    width: 125px;
+}
+
+.slider-vertical .unity-base-field__label {
+    width: 125px;
+}
