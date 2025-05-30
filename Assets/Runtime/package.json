@@ -4,7 +4,7 @@
   "displayName": "VCustomControls",
   "unity": "6000.1.2",
   "dependencies": {
-    "com.unity.cinemachine": "3.1.0"
+    "DOTween (HOTween v2)": "1.2.765"
   },
   "author": {
     "name": "Victor Izquierdo Alegre",

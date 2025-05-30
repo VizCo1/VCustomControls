@@ -47,7 +47,8 @@ namespace VCustomComponents
 
         private void DelayedInit()
         {
-            var baseDropdownElement = panel.visualTree.Q(className: BaseDropdownClass);
+            if (!panel.visualTree.TryGetVisualElement(null, BaseDropdownClass, out var baseDropdownElement))
+                return;
             
             baseDropdownElement.AddToClassList(ClassToAdd);
         }
