@@ -12,7 +12,7 @@
                     <AttributeOverrides element-name="ExamplesButton" text="Add element to the scroll view" />
                 </ui:Instance>
                 <VCustomComponents.VScrollViewInfinite name="VScrollViewInfiniteVertical" class="scroll-view-infinite">
-                    <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical" style="height: 400px;">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
                     <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
@@ -21,7 +21,7 @@
                     <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="C" />
                     </ui:Instance>
-                    <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical" style="height: 540px;">
                         <AttributeOverrides element-name="ExamplesButton" text="D" />
                     </ui:Instance>
                     <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
