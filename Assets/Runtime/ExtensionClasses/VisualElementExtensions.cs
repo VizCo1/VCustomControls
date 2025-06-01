@@ -52,7 +52,7 @@ namespace VCustomComponents
         }
         
         public static bool TryGetVisualElement<T>(
-            this T element, 
+            this VisualElement element, 
             string name,
             string className,
             out T visualElement)  
