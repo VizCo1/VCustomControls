@@ -3,7 +3,7 @@
 }
 
 .examples-button-container-infinite-horizontal {
-    width: 425px;
+    width: 525px;
     height: 100%;
     margin: 0 4px 0 0;
 }

@@ -71,7 +71,7 @@ namespace VCustomComponents
         private void OnRemoveElementButtonClicked(ClickEvent evt, VScrollViewInfinite scrollViewInfinite)
         {
             // var randomIndex = Random.Range(0, scrollViewInfinite.childCount);
-            var randomIndex = 0;
+            var randomIndex = scrollViewInfinite.childCount - 1;
             scrollViewInfinite.RemoveAt(randomIndex);
         }
     }

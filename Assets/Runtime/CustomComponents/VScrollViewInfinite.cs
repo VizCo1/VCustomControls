@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace VCustomComponents
@@ -77,13 +78,16 @@ namespace VCustomComponents
 
         private void OnScrollerValueChanged(float newValue)
         {
+            if (childCount == 0)
+                return;
+            
             _direction = newValue <= _previousVerticalScrollerValue ? Direction.Positive : Direction.Negative;
             
             _previousVerticalScrollerValue = newValue;
 
             CalculateScrollerOffset();
             
-            if (newValue >= _highValue - _scrollerOffset && _direction == Direction.Negative)
+            if (newValue + _scrollerOffset >= _highValue && _direction == Direction.Negative)
             {
                 if (mode == ScrollViewMode.Vertical)
                 {
@@ -94,7 +98,7 @@ namespace VCustomComponents
                     HandleHorizontalDown();
                 }
             }
-            else if (newValue <= _lowValue + _scrollerOffset && _direction == Direction.Positive)
+            else if (newValue - _scrollerOffset <= _lowValue && _direction == Direction.Positive)
             {
                 if (mode == ScrollViewMode.Vertical)
                 {
@@ -109,29 +113,20 @@ namespace VCustomComponents
 
         private void CalculateScrollerOffset()
         {
-            if (_direction == Direction.Positive)
+            var index = 0;
+            if (_direction == Direction.Negative)
             {
-                var element = contentContainer[0];
-                if (mode == ScrollViewMode.Vertical)
-                {
-                    _scrollerOffset = element.GetTotalHeight() * 0.75f;
-                }
-                else
-                {
-                    _scrollerOffset = element.GetTotalWidth() * 0.75f;
-                }
+                index = childCount - 1;
+            }
+            
+            var element = contentContainer[index];
+            if (mode == ScrollViewMode.Vertical)
+            {
+                _scrollerOffset = element.GetTotalHeight();
             }
             else
             {
-                var element = contentContainer[childCount - 1];
-                if (mode == ScrollViewMode.Vertical)
-                {
-                    _scrollerOffset = element.GetTotalHeight() * 0.75f;
-                }
-                else
-                {
-                    _scrollerOffset = element.GetTotalWidth() * 0.75f;
-                }
+                _scrollerOffset = element.GetTotalWidth();
             }
         }
 
@@ -169,6 +164,8 @@ namespace VCustomComponents
 
         private void HandleVerticalUp()
         {
+            Debug.Log("HandleVerticalUp");
+            
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
@@ -179,7 +176,7 @@ namespace VCustomComponents
                 
             var offset = firstChild.resolvedStyle.translate.y - lastChildTotalHeight;
             lastChild.style.translate = new Translate(0, offset);
-                
+            
             lastChild.SendToBack();
         }
 
@@ -222,11 +219,12 @@ namespace VCustomComponents
                         _lowValue += elementTotalHeight;
                         _highValue += elementTotalHeight;
 
-                        var lastChildPosY = lastChild != null
-                            ? lastChild.resolvedStyle.translate.y
-                            : 0f;
+                        var offset = 0f;
+                        if (lastChild != null)
+                        {
+                            offset = lastChild.resolvedStyle.translate.y + lastChild.GetTotalHeight();
+                        }
                         
-                        var offset = lastChildPosY + lastChild.GetTotalHeight();
                         element.style.translate = new Translate(0, offset);
                         
                         element.SetVisibility(true);
@@ -242,12 +240,14 @@ namespace VCustomComponents
                 
                         _lowValue += elementTotalWidth;
                         _highValue += elementTotalWidth;
-                
-                        var lastChildPosX = lastChild != null
-                            ? lastChild.resolvedStyle.translate.x
-                            : 0f;
+
+
+                        var offset = 0f;
+                        if (lastChild != null)
+                        {
+                            offset = lastChild.resolvedStyle.translate.x + lastChild.GetTotalWidth();
+                        }
                         
-                        var offset = lastChildPosX + lastChild.GetTotalWidth();
                         element.style.translate =  new Translate(offset, 0);
                         
                         element.SetVisibility(true);
@@ -258,51 +258,55 @@ namespace VCustomComponents
 
         public new void Remove(VisualElement elementToRemove)
         {
+            if (!contentContainer.Contains(elementToRemove))
+                throw new ArgumentException("The element to remove is not contained by the ScrollView.");
+            
             RemoveAt(contentContainer.IndexOf(elementToRemove));
         }
         
         public new void RemoveAt(int index)
         {
+            if (index >= childCount || index < 0)
+                throw new IndexOutOfRangeException($"The index must be between 0 and {childCount - 1}.");
+            
             var elementToRemove = contentContainer.ElementAt(index);
 
             if (mode == ScrollViewMode.Vertical)
             {
                 var elementToRemoveTotalHeight = elementToRemove.GetTotalHeight();
                 
-                _lowValue -= elementToRemoveTotalHeight;
                 _highValue -= elementToRemoveTotalHeight;
                 
-                var offset = 0f;
-                for (var i = index; i < childCount - 1; i++)
+                for (var i = index; i < childCount; i++)
                 {
                     var child = contentContainer.ElementAt(i);
                     var childPosition = child.resolvedStyle.translate.y;
                     
-                    offset -= elementToRemoveTotalHeight;
-                    
-                    child.style.translate = new Translate(0, childPosition - offset);
+                    child.style.translate = new Translate(0, childPosition - elementToRemoveTotalHeight);
                 }
+                
+                base.RemoveAt(index);
+                
+                OnScrollerValueChanged(verticalScroller.value);
             }
             else
             {
                 var elementToRemoveTotalWidth = elementToRemove.GetTotalWidth();
                 
-                _lowValue -= elementToRemoveTotalWidth;
                 _highValue -= elementToRemoveTotalWidth;
                 
-                var offset = 0f;
-                for (var i = index; i < childCount - 1; i++)
+                for (var i = index; i < childCount; i++)
                 {
                     var child = contentContainer.ElementAt(i);
                     var childPosition = child.resolvedStyle.translate.x;
                     
-                    offset -= elementToRemoveTotalWidth;
-                    
-                    child.style.translate = new Translate(childPosition - offset, 0);
+                    child.style.translate = new Translate(childPosition - elementToRemoveTotalWidth, 0);
                 }
+                
+                base.RemoveAt(index);
+                
+                OnScrollerValueChanged(horizontalScroller.value);
             }
-            
-            base.RemoveAt(index);
         }
 
         private enum Direction
