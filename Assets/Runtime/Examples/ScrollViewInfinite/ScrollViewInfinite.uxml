@@ -8,9 +8,14 @@
         <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to be infinite. But we aware that if all the elements are visible at the same time it will not work properly!" />
         <ui:Instance template="ExamplesTabView" name="ExamplesTabViewContainer" class="examples-template-instance">
             <ui:Tab label="Vertical" name="ScrollViewInfiniteVertical">
-                <ui:Instance template="ExamplesButton" name="AddToScrollViewVertical" class="add-to-scroll-button">
-                    <AttributeOverrides element-name="ExamplesButton" text="Add element to the scroll view" />
-                </ui:Instance>
+                <ui:VisualElement name="RowContainer" style="flex-direction: row;">
+                    <ui:Instance template="ExamplesButton" name="AddToScrollViewVertical" class="add-to-scroll-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="Add Element" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="AddToScrollViewVertical" class="add-to-scroll-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="Remove Random Element" />
+                    </ui:Instance>
+                </ui:VisualElement>
                 <VCustomComponents.VScrollViewInfinite name="VScrollViewInfiniteVertical" class="scroll-view-infinite">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical" style="height: 400px;">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
@@ -36,9 +41,14 @@
                 </VCustomComponents.VScrollViewInfinite>
             </ui:Tab>
             <ui:Tab label="Horizontal" name="ScrollViewInfiniteHorizontal">
-                <ui:Instance template="ExamplesButton" name="AddToScrollViewHorizontal" class="add-to-scroll-button">
-                    <AttributeOverrides element-name="ExamplesButton" text="Add element to the scroll view" />
-                </ui:Instance>
+                <ui:VisualElement name="RowContainer" style="flex-direction: row;">
+                    <ui:Instance template="ExamplesButton" name="AddToScrollViewHorizontal" class="add-to-scroll-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="Add Element" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="AddToScrollViewHorizontal" class="add-to-scroll-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="Remove Random Element" />
+                    </ui:Instance>
+                </ui:VisualElement>
                 <VCustomComponents.VScrollViewInfinite name="VScrollViewInfiniteHorizontal" mode="Horizontal" class="scroll-view-infinite">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-horizontal">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
