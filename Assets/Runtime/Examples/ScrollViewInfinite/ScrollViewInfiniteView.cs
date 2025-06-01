@@ -10,6 +10,8 @@ namespace VCustomComponents
         private const string HorizontalTabName = "ScrollViewInfiniteHorizontal";
         private const string InfiniteVerticalButton = "examples-button-container-infinite-vertical";
         private const string InfiniteHorizontalButton = "examples-button-container-infinite-horizontal";
+        private const string RemoveElementButtonVertical = "RemoveScrollViewVertical";
+        private const string RemoveElementButtonHorizontal = "RemoveScrollViewHorizontal";
         
         [SerializeField]
         private VisualTreeAsset _elementToAdd;
@@ -31,14 +33,23 @@ namespace VCustomComponents
             var scrollViewInfiniteVertical = verticalTab.Q<VScrollViewInfinite>();
             var scrollViewInfiniteHorizontal = horizontalTab.Q<VScrollViewInfinite>();
             
-            var buttonVertical = verticalTab.Q<Button>();
-            var buttonHorizontal = horizontalTab.Q<Button>();
+            var addElementButtonVertical = verticalTab.Q<Button>();
+            var addElementButtonHorizontal = horizontalTab.Q<Button>();
             
-            buttonVertical.RegisterCallback<ClickEvent, VScrollViewInfinite>
+            addElementButtonVertical.RegisterCallback<ClickEvent, VScrollViewInfinite>
                 (OnAddElementButtonClicked, scrollViewInfiniteVertical);
             
-            buttonHorizontal.RegisterCallback<ClickEvent, VScrollViewInfinite>
+            addElementButtonHorizontal.RegisterCallback<ClickEvent, VScrollViewInfinite>
                 (OnAddElementButtonClicked, scrollViewInfiniteHorizontal);
+            
+            var removeElementButtonVertical = (Button)verticalTab.Q(RemoveElementButtonVertical)[0];
+            var removeElementButtonHorizontal = (Button)horizontalTab.Q(RemoveElementButtonHorizontal)[0];
+            
+            removeElementButtonVertical.RegisterCallback<ClickEvent, VScrollViewInfinite>
+                (OnRemoveElementButtonClicked, scrollViewInfiniteVertical);
+            
+            removeElementButtonHorizontal.RegisterCallback<ClickEvent, VScrollViewInfinite>
+                (OnRemoveElementButtonClicked, scrollViewInfiniteHorizontal);
         }
 
         private void OnAddElementButtonClicked(ClickEvent evt, VScrollViewInfinite scrollViewInfinite)
@@ -50,16 +61,18 @@ namespace VCustomComponents
                 button.text = "Dynamically added!!";
             }
 
-            if (scrollViewInfinite.mode == ScrollViewMode.Vertical)
-            {
-                element.AddToClassList(InfiniteVerticalButton);
-            }
-            else
-            {
-                element.AddToClassList(InfiniteHorizontalButton);
-            }
-            
+            element.AddToClassList(scrollViewInfinite.mode == ScrollViewMode.Vertical
+                ? InfiniteVerticalButton
+                : InfiniteHorizontalButton);
+
             scrollViewInfinite.Add(element);
+        }
+
+        private void OnRemoveElementButtonClicked(ClickEvent evt, VScrollViewInfinite scrollViewInfinite)
+        {
+            // var randomIndex = Random.Range(0, scrollViewInfinite.childCount);
+            var randomIndex = 0;
+            scrollViewInfinite.RemoveAt(randomIndex);
         }
     }
 }
