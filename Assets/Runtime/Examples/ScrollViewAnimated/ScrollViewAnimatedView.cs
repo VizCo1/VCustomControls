@@ -14,6 +14,7 @@ namespace VCustomComponents
 
         private const string ScrollViewAnimatedVerticalTabName = "ScrollViewAnimatedVertical";
         private const string ScrollViewAnimatedHorizontalTabName = "ScrollViewAnimatedHorizontal";
+        private const string RowContainerName = "RowContainer";
         
         private UIDocument _document;
         
@@ -35,11 +36,11 @@ namespace VCustomComponents
             var root = _document.rootVisualElement;
             
             _easeDropdownVertical = (EnumField)root.Q(EaseEnumDropdownContainerVerticalName)[0];
-            _easeDropdownVertical.value = Ease.InOutElastic;
+            _easeDropdownVertical.value = Ease.Linear;
             _durationFloatFieldVertical =  (FloatField)root.Q(DurationFloatFieldContainerVertical)[0];
             
             _easeDropdownHorizontal = (EnumField)root.Q(EaseEnumDropdownContainerHorizontal)[0];
-            _easeDropdownHorizontal.value = Ease.InOutElastic;
+            _easeDropdownHorizontal.value = Ease.Linear;
             _durationFloatFieldHorizontal =  (FloatField)root.Q(DurationFloatFieldContainerHorizontal)[0];
             
             var verticalTab = root.Q(ScrollViewAnimatedVerticalTabName);
@@ -49,14 +50,14 @@ namespace VCustomComponents
             _scrollViewAnimatedHorizontal = horizontalTab.Q<VScrollViewAnimated>();
 
             var index = 0;
-            verticalTab.Query<Button>().ForEach(button =>
+            verticalTab.Q(RowContainerName).Query<Button>().ForEach(button =>
             {
                 button.RegisterCallback<ClickEvent, int>(OnVerticalButtonClicked, index);
                 index++;
             });
 
             index = 0;
-            horizontalTab.Query<Button>().ForEach(button =>
+            horizontalTab.Q(RowContainerName).Query<Button>().ForEach(button =>
             {
                 button.RegisterCallback<ClickEvent, int>(OnHorizontalButtonClicked, index);
                 index++;
@@ -66,18 +67,13 @@ namespace VCustomComponents
         private void OnVerticalButtonClicked(ClickEvent evt, int index)
         {
             var element = _scrollViewAnimatedVertical[index];
-            _scrollViewAnimatedVertical.AnimatedScrollToElement(element, _durationFloatFieldVertical.value, (Ease)_easeDropdownVertical.value);
+            _scrollViewAnimatedVertical.AnimatedScrollTo(element, _durationFloatFieldVertical.value, (Ease)_easeDropdownVertical.value);
         }
         
         private void OnHorizontalButtonClicked(ClickEvent evt, int index)
         {
-            var element = _scrollViewAnimatedVertical[index];
-            _scrollViewAnimatedHorizontal.AnimatedScrollToElement(element, _durationFloatFieldHorizontal.value, (Ease)_easeDropdownHorizontal.value);
-        }
-
-        private void OnDestroy() 
-        {
-        
+            var element = _scrollViewAnimatedHorizontal[index];
+            _scrollViewAnimatedHorizontal.AnimatedScrollTo(element, _durationFloatFieldHorizontal.value, (Ease)_easeDropdownHorizontal.value);
         }
     }
 }

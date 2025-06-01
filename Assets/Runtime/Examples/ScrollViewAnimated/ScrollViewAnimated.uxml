@@ -36,7 +36,7 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" class="scroll-view-animated">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true" class="scroll-view-animated">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>

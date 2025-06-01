@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
@@ -9,9 +10,6 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VScrollViewInfinite : ScrollView
     {
-        
-        [Header(nameof(VScrollViewInfinite))]
-        
         private Direction _direction;
         private float _lowValue;
         private float _highValue;
@@ -25,10 +23,10 @@ namespace VCustomComponents
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
-            RegisterCallbackOnce<GeometryChangedEvent>(InfiniteModeOnGeometryChanged);
+            RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
                 
             touchScrollBehavior = TouchScrollBehavior.Unrestricted;
-
+            
             horizontalScrollerVisibility = ScrollerVisibility.Hidden;
             verticalScrollerVisibility = ScrollerVisibility.Hidden;
                 
@@ -41,12 +39,11 @@ namespace VCustomComponents
                     horizontalScroller.valueChanged += InfiniteModeScrollerOnValueChanged;
                     break;
                 default:
-                    Debug.LogError("ScrollViewMode must be set to Vertical or Horizontal when using InfiniteMode");
-                    break;
+                    throw new ArgumentException("ScrollViewMode must be set to Vertical or Horizontal when using InfiniteMode");
             }
         }
         
-        private void InfiniteModeOnGeometryChanged(GeometryChangedEvent evt)
+        private void OnGeometryChanged(GeometryChangedEvent evt)
         {
             var offset = 0f;
 

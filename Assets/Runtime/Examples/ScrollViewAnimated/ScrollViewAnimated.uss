@@ -33,3 +33,9 @@
     height: 50px;
     align-self: center;
 }
+
+.scroll-view-animated-target {
+    border-color: rgb(205, 205, 205);
+    border-radius: var(--border-radius-example);
+    border-width: 10px;
+}

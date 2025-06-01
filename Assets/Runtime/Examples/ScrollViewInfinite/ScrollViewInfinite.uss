@@ -13,3 +13,8 @@
     height: 200px;
     margin: 0 0 4px 0;
 }
+
+.add-to-scroll-button {
+    align-self: flex-start;
+    margin: 0 0 8px 0;
+}
