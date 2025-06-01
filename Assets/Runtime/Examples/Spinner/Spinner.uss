@@ -15,12 +15,10 @@
 
 .examples-button-container {
     align-items: flex-end;
-    flex-grow: 0;
     margin: 0 32px;
 }
 
 .examples-slider-container {
-    flex-grow: 0;
     position: absolute;
     left: 450px;
     right: 550px;

@@ -10,7 +10,7 @@
     --font-size2-example: 14px;
 }
 
-TemplateContainer {
+.examples-template-instance {
     flex-grow: 1;
 }
 

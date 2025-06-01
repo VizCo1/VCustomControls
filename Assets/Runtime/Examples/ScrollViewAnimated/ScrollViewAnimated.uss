@@ -3,7 +3,6 @@
 }
 
 .examples-button-container-animated-horizontal {
-    flex-grow: 0;
     width: 425px;
     margin: 0 4px 0 0;
 }
@@ -18,13 +17,19 @@
     margin: 0 0 8px 0;
 }
 
+.row-button {
+    margin: 0 8px 0 0;
+}
+
 .ease-enum-dropdown-container {
-    flex-grow: 0;
+    justify-content: center;
     width: 300px;
+    margin: 0 0 0 8px;
 }
 
 .duration-float-field-container {
-    flex-grow: 0;
     width: 200px;
     margin: 0 0 0 16px;
+    height: 50px;
+    align-self: center;
 }

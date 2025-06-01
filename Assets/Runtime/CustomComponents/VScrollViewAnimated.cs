@@ -12,51 +12,57 @@ namespace VCustomComponents
         
         [Header(nameof(VScrollViewAnimated))]
         
-        private float _lowValue;
-        private float _highValue;
-        private float _scrollerOffset;
-        private float _previousVerticalScrollerValue;
-        
         private TweenerCore<float, float, FloatOptions> _animationTween1D; 
-        private TweenerCore<Vector2, Vector2, VectorOptions> _animationTween2D; 
+        private TweenerCore<Vector2, Vector2, VectorOptions> _animationTween2D;
+
+        private bool _isAnimating;
+        private float _previousMouseWheelScrollSize;
         
         public VScrollViewAnimated() 
         {
-            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
-            RegisterCallback<KeyDownEvent>(OnKeyDown);
-        }
-
-        private int _index = 0;
-        private void OnKeyDown(KeyDownEvent evt)
-        {
-            if (evt.keyCode == KeyCode.Q)
+            touchScrollBehavior = TouchScrollBehavior.Unrestricted;
+            
+            if (mode == ScrollViewMode.Vertical)
             {
-                Debug.Log(name + " Moving");
-                ScrollToElement(contentContainer[_index], 2f, Ease.Linear);
+                verticalScroller.valueChanged += OnVerticalScrollerValueChanged;
             }
-            else if (evt.keyCode == KeyCode.E)
+            else if (mode == ScrollViewMode.Horizontal)
             {
-                _index++;
-                
-                if (_index >= contentContainer.childCount)
-                    _index = 0;
-                
-                Debug.Log(name + " " + _index);
+                horizontalScroller.valueChanged += OnHorizontalScrollerValueChanged;
+            }
+            else
+            {
+                verticalScroller.valueChanged += OnVerticalScrollerValueChanged;
+                horizontalScroller.valueChanged += OnHorizontalScrollerValueChanged;
             }
         }
 
-        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        private void OnVerticalScrollerValueChanged(float newValue)
         {
-            if (touchScrollBehavior == TouchScrollBehavior.Unrestricted)
-            {
-                Debug.LogError("TouchScrollBehavior can't be Unrestricted when using AnimatedMode");
-            }
+            if (_isAnimating)
+                return;
+            
+            verticalScroller.value = newValue.Clamp(verticalScroller.lowValue, verticalScroller.highValue);
         }
         
-        public void ScrollToElement(VisualElement element, float duration, Ease ease = Ease.Linear)
+        private void OnHorizontalScrollerValueChanged(float newValue)
+        {
+            if (_isAnimating)
+                return;
+            
+            horizontalScroller.value = newValue.Clamp(horizontalScroller.lowValue, horizontalScroller.highValue);
+        }
+
+        public void AnimatedScrollToElement(VisualElement element, float duration, Ease ease = Ease.Linear)
         {
             _animationTween1D?.Kill();
             _animationTween2D?.Kill();
+            
+            _isAnimating = true;
+            _previousMouseWheelScrollSize = mouseWheelScrollSize;
+            mouseWheelScrollSize = 0;
+            verticalScroller.pickingMode = PickingMode.Ignore;
+            horizontalScroller.pickingMode = PickingMode.Ignore;
             
             if (mode == ScrollViewMode.Vertical)
             {
@@ -66,10 +72,14 @@ namespace VCustomComponents
                 
                 _animationTween1D = DOTween.To(
                     () => verticalScroller.value,
-                    newValue => verticalScroller.value = newValue, 
+                    newValue =>
+                    {
+                        verticalScroller.value = newValue;
+                    }, 
                     targetPosition,
                     duration)
-                    .SetEase(ease);
+                    .SetEase(ease)
+                    .OnComplete(OnAnimationCompleted);
             }
             else if (mode == ScrollViewMode.Horizontal)
             {
@@ -79,17 +89,23 @@ namespace VCustomComponents
                 
                 _animationTween1D = DOTween.To(
                     () => horizontalScroller.value,
-                    newValue => horizontalScroller.value = newValue, 
+                    newValue =>
+                    {
+                        horizontalScroller.value = newValue;
+                    }, 
                     targetPosition,
                     duration)
-                    .SetEase(ease);
+                    .SetEase(ease)
+                    .OnComplete(OnAnimationCompleted);
             }
             else
             {
-                var horizontalLimit = new Vector2(horizontalScroller.lowValue, horizontalScroller.highValue);
-                var verticalLimit = new Vector2(verticalScroller.lowValue, verticalScroller.highValue);
+                var lowLimit = new Vector2(horizontalScroller.lowValue, horizontalScroller.highValue);
+                var highLimit = new Vector2(verticalScroller.lowValue, verticalScroller.highValue);
                 
-                var targetPosition = element.ChangeCoordinatesTo(contentContainer, element.contentRect.position).Clamp(horizontalLimit, verticalLimit);
+                var targetPosition = element
+                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position)
+                    .Clamp(lowLimit, highLimit);
 
                 _animationTween2D = DOTween.To(
                     () => new Vector2(horizontalScroller.value, verticalScroller.value),
@@ -100,8 +116,17 @@ namespace VCustomComponents
                     },
                     targetPosition,
                     duration)
-                    .SetEase(ease);
+                    .SetEase(ease)
+                    .OnComplete(OnAnimationCompleted);
             }
+        }
+
+        private void OnAnimationCompleted()
+        {
+            _isAnimating = false;
+            mouseWheelScrollSize = _previousMouseWheelScrollSize;
+            verticalScroller.pickingMode = PickingMode.Position;
+            horizontalScroller.pickingMode = PickingMode.Position;
         }
     }
 }

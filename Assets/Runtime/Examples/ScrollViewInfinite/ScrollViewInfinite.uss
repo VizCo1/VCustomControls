@@ -3,14 +3,12 @@
 }
 
 .examples-button-container-infinite-horizontal {
-    flex-grow: 0;
     width: 425px;
     height: 100%;
     margin: 0 4px 0 0;
 }
 
 .examples-button-container-infinite-vertical {
-    flex-grow: 0;
     width: 100%;
     height: 200px;
     margin: 0 0 4px 0;
