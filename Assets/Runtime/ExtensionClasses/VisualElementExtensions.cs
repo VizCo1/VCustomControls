@@ -4,14 +4,28 @@ namespace VCustomComponents
 {
     public static class VisualElementExtensions
     {
-        public static float GetRealHeight(this VisualElement element)
+        public static float GetRealHeight(this VisualElement element, bool ignoreTemplateContainer = false)
         {
-            return element.resolvedStyle.height + element.resolvedStyle.marginTop + element.resolvedStyle.marginBottom;
+            var realElement = element;
+            
+            if (ignoreTemplateContainer)
+            {
+                realElement = element.hierarchy[0];
+            }
+            
+            return realElement.resolvedStyle.height + realElement.resolvedStyle.marginTop + realElement.resolvedStyle.marginBottom;
         }
         
-        public static float GetRealWidth(this VisualElement element)
+        public static float GetRealWidth(this VisualElement element, bool ignoreTemplateContainer = false)
         {
-            return element.resolvedStyle.width + element.resolvedStyle.marginLeft + element.resolvedStyle.marginRight;
+            var realElement = element;
+            
+            if (ignoreTemplateContainer)
+            {
+                realElement = element.hierarchy[0];
+            }
+            
+            return realElement.resolvedStyle.width + realElement.resolvedStyle.marginLeft + realElement.resolvedStyle.marginRight;
         }
 
         public static void SetVisibility(this VisualElement element, bool isVisible)
@@ -44,7 +58,7 @@ namespace VCustomComponents
             out T visualElement)  
             where T : VisualElement
         {
-            visualElement = element.Q<T>();
+            visualElement = element.Q<T>(name, className);
             
             return visualElement != null;
         }

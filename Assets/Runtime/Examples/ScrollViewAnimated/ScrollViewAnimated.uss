@@ -1,0 +1,30 @@
+.scroll-view-animated {
+    flex-grow: 1;
+}
+
+.examples-button-container-animated-horizontal {
+    flex-grow: 0;
+    width: 425px;
+    margin: 0 4px 0 0;
+}
+
+.examples-button-container-animated-vertical {
+    height: 200px;
+    margin: 0 0 4px 0;
+}
+
+.row-container {
+    flex-direction: row;
+    margin: 0 0 8px 0;
+}
+
+.ease-enum-dropdown-container {
+    flex-grow: 0;
+    width: 300px;
+}
+
+.duration-float-field-container {
+    flex-grow: 0;
+    width: 200px;
+    margin: 0 0 0 16px;
+}

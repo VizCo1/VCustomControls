@@ -1,85 +1,50 @@
-using System;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Unity.Properties;
 
 namespace VCustomComponents
 {
     [UxmlElement]
-    public partial class VScrollViewCustom : ScrollView
+    public partial class VScrollViewInfinite : ScrollView
     {
         
-        [Header(nameof(VScrollViewCustom))]
+        [Header(nameof(VScrollViewInfinite))]
         
-        [UxmlAttribute]
-        private Mode ChosenMode { get; set; }
-        
-        private float _scrollerOffset;
-        private float _previousVerticalScrollerValue;
+        private Direction _direction;
         private float _lowValue;
         private float _highValue;
-        private Direction _direction;
+        private float _scrollerOffset;
+        private float _previousVerticalScrollerValue;
         
-        public VScrollViewCustom() 
+        public VScrollViewInfinite() 
         {
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
-            RegisterCallback<KeyDownEvent>(OnKeyDown);
-        }
-
-        private int _index = 0;
-        private void OnKeyDown(KeyDownEvent evt)
-        {
-            if (evt.keyCode == KeyCode.Q)
-            {
-                ScrollToElement(contentContainer[_index], 2f, Ease.Linear);
-            }
-            else if (evt.keyCode == KeyCode.W)
-            {
-                _index++;
-                
-                if (_index >= contentContainer.childCount)
-                    _index = 0;
-                
-                Debug.Log(_index);
-            }
-
         }
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
-            if (ChosenMode == Mode.InfiniteMode)
+            RegisterCallbackOnce<GeometryChangedEvent>(InfiniteModeOnGeometryChanged);
+                
+            touchScrollBehavior = TouchScrollBehavior.Unrestricted;
+
+            horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+            verticalScrollerVisibility = ScrollerVisibility.Hidden;
+                
+            switch (mode)
             {
-                RegisterCallbackOnce<GeometryChangedEvent>(InfiniteModeOnGeometryChanged);
-                
-                touchScrollBehavior = TouchScrollBehavior.Unrestricted;
-
-                horizontalScrollerVisibility = ScrollerVisibility.Hidden;
-                verticalScrollerVisibility = ScrollerVisibility.Hidden;
-                
-                switch (mode)
-                {
-                    case ScrollViewMode.Vertical:
-                        verticalScroller.valueChanged += InfiniteModeScrollerOnValueChanged;
-                        break;
-                    case ScrollViewMode.Horizontal:
-                        horizontalScroller.valueChanged += InfiniteModeScrollerOnValueChanged;
-                        break;
-                    default:
-                        Debug.LogError("ScrollViewMode must be set to Vertical or Horizontal");
-                        break;
-                }
-
-                return;
-            }
-
-            if (ChosenMode == Mode.AnimatedMode)
-            {
-                
+                case ScrollViewMode.Vertical:
+                    verticalScroller.valueChanged += InfiniteModeScrollerOnValueChanged;
+                    break;
+                case ScrollViewMode.Horizontal:
+                    horizontalScroller.valueChanged += InfiniteModeScrollerOnValueChanged;
+                    break;
+                default:
+                    Debug.LogError("ScrollViewMode must be set to Vertical or Horizontal when using InfiniteMode");
+                    break;
             }
         }
-        
-#region Infinite mode
         
         private void InfiniteModeOnGeometryChanged(GeometryChangedEvent evt)
         {
@@ -117,13 +82,13 @@ namespace VCustomComponents
 
         private void InfiniteModeScrollerOnValueChanged(float newValue)
         {
-            _direction = newValue <= _previousVerticalScrollerValue ? Direction.Up : Direction.Down;
+            _direction = newValue <= _previousVerticalScrollerValue ? Direction.Positive : Direction.Negative;
             
             _previousVerticalScrollerValue = newValue;
 
             CalculateScrollerOffset();
             
-            if (newValue >= _highValue - _scrollerOffset && _direction == Direction.Down)
+            if (newValue >= _highValue - _scrollerOffset && _direction == Direction.Negative)
             {
                 if (mode == ScrollViewMode.Vertical)
                 {
@@ -134,7 +99,7 @@ namespace VCustomComponents
                     HandleHorizontalDown();
                 }
             }
-            else if (newValue <= _lowValue + _scrollerOffset && _direction == Direction.Up)
+            else if (newValue <= _lowValue + _scrollerOffset && _direction == Direction.Positive)
             {
                 if (mode == ScrollViewMode.Vertical)
                 {
@@ -149,7 +114,7 @@ namespace VCustomComponents
 
         private void CalculateScrollerOffset()
         {
-            if (_direction == Direction.Up)
+            if (_direction == Direction.Positive)
             {
                 var element = contentContainer[0];
                 if (mode == ScrollViewMode.Vertical)
@@ -253,41 +218,8 @@ namespace VCustomComponents
 
         private enum Direction
         {
-            Up,
-            Down,
-        }
-        
-#endregion
-
-#region Animated mode
-
-        public void ScrollToElement(VisualElement element, float duration, Ease ease = Ease.Linear)
-        {
-            var targetPosition = 0f;
-            if (mode == ScrollViewMode.Vertical)
-            {
-                var value = element.ChangeCoordinatesTo(contentContainer, element.contentRect.position);
-                Debug.Log(value);
-            }
-            else if (mode == ScrollViewMode.Horizontal)
-            {
-                
-            }
-            
-            DOTween.To(
-                () => verticalScroller.value,
-                newValue => verticalScroller.value = newValue, 
-                targetPosition,
-                duration)
-                .SetEase(ease);
-        }
-
-#endregion
-
-        private enum Mode
-        {
-            InfiniteMode,
-            AnimatedMode,
+            Positive,
+            Negative,
         }
     }
 }

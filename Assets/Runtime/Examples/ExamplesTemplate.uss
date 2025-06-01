@@ -14,6 +14,25 @@ TemplateContainer {
     flex-grow: 1;
 }
 
+.unity-tab-view .unity-tab-view__content-container {
+    flex-grow: 1;
+}
+
+.unity-tab {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.unity-tab:checked {
+    display: flex;
+}
+
+.unity-tab .unity-tab__content-container {
+    flex-grow: 1;
+}
+
 .examples-template-container {
     flex-grow: 1;
     background-color: var(--color-background);
@@ -46,7 +65,7 @@ TemplateContainer {
     border-width: 10px;
     flex-grow: 1;
     margin: 26px 0 0 0;
-    padding: 20px;
+    padding: 20px 10px 10px 20px;
 }
 
 .examples-button {
@@ -59,6 +78,7 @@ TemplateContainer {
     font-size: 32px;
     margin: 0;
     padding: 8px 16px;
+    flex-grow: 1;
 }
 
 .examples-button.unity-button:hover {
@@ -173,4 +193,215 @@ TemplateContainer {
 .examples-toggle .unity-toggle__checkmark {
     height: 100%;
     width: 100%;
+}
+
+.examples-tab-view {
+    flex-grow: 1;
+}
+
+.examples-tab-view .unity-tab-view__content-viewport {
+    margin: 0 0 8px 0;
+}
+
+.examples-tab-view .unity-tab__header {
+    background-color: var(--color-accent);
+    border-radius: var(--border-radius-example) var(--border-radius-example) 0 0;
+    margin: 0 2px 0 0;
+}
+
+.examples-tab-view .unity-tab__header:hover {
+    background-color: rgb(162, 124, 189);
+}
+
+.examples-tab-view .unity-tab__header:checked {
+    background-color: var(--color-secondary);
+}
+
+.examples-tab-view .unity-text-element {
+    color: var(--color-background);
+    font-size: var(--font-size1-example);
+    -unity-font-style: bold;
+    margin: 4px 0;
+}
+
+.examples-tab-view .unity-tab__header-underline {
+    display: none;
+}
+
+.unity-scroller--vertical {
+    margin: 0 0 0 8px;
+}
+
+.unity-scroller--horizontal {
+    margin: 8px 0 0 0;
+}
+
+.unity-scroller .unity-base-slider {
+    margin: 0;
+}
+
+.unity-scroller .unity-repeat-button {
+    display: none;
+}
+
+.unity-scroller .unity-base-slider__tracker {
+    display: none;
+}
+
+.unity-scroller .unity-base-slider--horizontal .unity-base-slider__dragger {
+    height: 100%;
+}
+
+.unity-scroller .unity-base-slider__dragger {
+    background-color: var(--color-primary);
+    border-color: var(--color-accent);
+    border-radius: var(--border-radius-example);
+    border-width: 8px;
+    left: auto;
+    top: auto;
+    width: 100%;
+}
+
+.unity-scroller .unity-base-slider__drag-container .unity-base-slider__dragger:hover {
+    background-color: var(--color-primary);
+}
+
+.unity-scroll-view:hover .unity-scroller .unity-base-slider__drag-container .unity-base-slider__dragger {
+    background-color: var(--color-primary);
+    border-color:  var(--color-primary);
+}
+
+.examples-enum-dropdown {
+    margin: 0;
+}
+
+.examples-enum-dropdown > .unity-text-element {
+    color: var(--color-accent);
+    font-size: var(--font-size1-example);
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    min-width: auto;
+    margin: 0 16px 0 0;
+    padding: 0;
+}
+
+.examples-enum-dropdown > .unity-base-field__input {
+    background-color: var(--color-primary);
+    border-color: var(--color-accent);
+    border-radius: var(--border-radius-example);
+    border-width: 4px;
+    margin: 0;
+}
+
+.examples-enum-dropdown .unity-enum-field__text {
+    color: var(--color-background);
+    font-size: var(--font-size1-example);
+    margin: 0 12px 0 0;
+}
+
+.examples-enum-dropdown .unity-enum-field__arrow {
+    -unity-background-image-tint-color: var(--color-background);
+}
+
+.examples-enum-dropdown.unity-base-field:hover > .unity-base-field__input {
+    background-color: var(--color-primary);
+    border-color: var(--color-secondary);
+}
+
+.examples-enum-dropdown.unity-base-field:active > .unity-base-field__input {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.examples-enum-dropdown-list .unity-base-dropdown__container-outer {
+    background-color: var(--color-accent);
+    border-color: var(--color-secondary);
+    border-radius: var(--border-radius-example);
+    border-width: 4px;
+}
+
+.examples-enum-dropdown-list .unity-base-dropdown__container-inner {
+    background-color: var(--color-transparent);
+    padding: 4px;
+    max-height: 408px;
+}
+
+.examples-enum-dropdown-list .unity-scroll-view__content-container {
+    background-color: var(--color-accent);
+}
+
+.examples-enum-dropdown-list .unity-base-dropdown__item {
+    background-color: var(--color-accent);
+    border-radius: var(--border-radius-example);
+    min-height: auto;
+    padding: 8px;
+    margin: 1px;
+}
+
+.examples-enum-dropdown-list.unity-base-dropdown .unity-base-dropdown__item:hover {
+    background-color: var(--color-primary);
+}
+
+.examples-enum-dropdown-list.unity-base-dropdown .unity-base-dropdown__item:checked {
+    background-color: var(--color-secondary);
+}
+
+.examples-enum-dropdown-list .unity-base-dropdown__checkmark {
+    display: none;
+}
+
+.examples-enum-dropdown-list .unity-base-dropdown__label {
+    color: var(--color-background);
+    font-size: var(--font-size1-example);
+    margin: 0;
+    padding: 0;
+}
+
+.examples-enum-dropdown-list .unity-scroller {
+    margin: 0 0 0 8px;
+}
+
+.examples-float-field {
+    flex-grow: 1;
+    margin: 0;
+    --unity-cursor-color: var(--color-accent);
+    --unity-selection-color: rgba(114, 106, 149, 0.20);
+}
+
+.examples-float-field .unity-text-element {
+    color: var(--color-background);
+    -unity-text-align: middle-center;
+    font-size: var(--font-size1-example);
+    padding: 0 8px;
+}
+
+.examples-float-field > .unity-text-element {
+    color: var(--color-accent);
+    font-size: var(--font-size1-example);
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    min-width: auto;
+    margin: 0 16px 0 0;
+    padding: 0;
+}
+
+.examples-float-field > .unity-base-text-field__input {
+    background-color: var(--color-primary);
+    border-color: var(--color-accent);
+    border-width: 4px;
+    border-radius: var(--border-radius-example);
+    min-width: 70px;
+    padding: 8px 0;
+}
+
+.examples-float-field.unity-base-field:focus > .unity-base-text-field__input {
+    border-color: var(--color-secondary);
+}
+
+.examples-float-field.unity-base-field:hover > .unity-base-text-field__input {
+    border-color: var(--color-secondary);
+}
+
+.examples-float-field .unity-base-text-field__input--placeholder {
+    -unity-font-style: italic;
 }
