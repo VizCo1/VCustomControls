@@ -6,8 +6,8 @@
     <ui:Template name="ExamplesButton" src="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" />
     <Style src="project://database/Assets/Runtime/Examples/ScrollViewAnimated/ScrollViewAnimated.uss?fileID=7433441132597879392&amp;guid=59f1e6077ff82084a8bccc016cf5f31e&amp;type=3#ScrollViewAnimated" />
     <ui:Instance template="ExamplesTemplate" name="ScrollViewCustomExample">
-        <AttributeOverrides element-name="TitleLabel" text="VScrollViewInfinite" />
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to be infinite. But we aware that if all the elements are visible at the same time it will not work properly!" />
+        <AttributeOverrides element-name="TitleLabel" text="VScrollViewAnimated" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to scroll to any element." />
         <ui:Instance template="ExamplesTabView" name="ExamplesTabViewContainer">
             <ui:Tab label="Vertical" name="ScrollViewInfiniteVertical">
                 <ui:VisualElement name="RowContainer" class="row-container">

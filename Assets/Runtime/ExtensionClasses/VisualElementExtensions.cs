@@ -4,7 +4,7 @@ namespace VCustomComponents
 {
     public static class VisualElementExtensions
     {
-        public static float GetRealHeight(this VisualElement element, bool ignoreTemplateContainer = false)
+        public static float GetTotalHeight(this VisualElement element, bool ignoreTemplateContainer = false)
         {
             var realElement = element;
             
@@ -16,7 +16,7 @@ namespace VCustomComponents
             return realElement.resolvedStyle.height + realElement.resolvedStyle.marginTop + realElement.resolvedStyle.marginBottom;
         }
         
-        public static float GetRealWidth(this VisualElement element, bool ignoreTemplateContainer = false)
+        public static float GetTotalWidth(this VisualElement element, bool ignoreTemplateContainer = false)
         {
             var realElement = element;
             

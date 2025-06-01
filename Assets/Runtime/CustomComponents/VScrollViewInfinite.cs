@@ -61,7 +61,7 @@ namespace VCustomComponents
                     child.style.position = Position.Absolute;
                     child.style.translate =  new Translate(new Length(0), new Length(offset));
                     
-                    offset += child.GetRealHeight();
+                    offset += child.GetTotalHeight();
                 }
             }
             else
@@ -75,7 +75,7 @@ namespace VCustomComponents
                     child.style.position = Position.Absolute;
                     child.style.translate =  new Translate(new Length(offset), new Length(0));
                     
-                    offset += child.GetRealWidth();
+                    offset += child.GetTotalWidth();
                 }
             }
         }
@@ -119,11 +119,11 @@ namespace VCustomComponents
                 var element = contentContainer[0];
                 if (mode == ScrollViewMode.Vertical)
                 {
-                    _scrollerOffset = element.GetRealHeight() * 0.75f;
+                    _scrollerOffset = element.GetTotalHeight() * 0.75f;
                 }
                 else
                 {
-                    _scrollerOffset = element.GetRealWidth() * 0.75f;
+                    _scrollerOffset = element.GetTotalWidth() * 0.75f;
                 }
             }
             else
@@ -131,11 +131,11 @@ namespace VCustomComponents
                 var element = contentContainer[childCount - 1];
                 if (mode == ScrollViewMode.Vertical)
                 {
-                    _scrollerOffset = element.GetRealHeight() * 0.75f;
+                    _scrollerOffset = element.GetTotalHeight() * 0.75f;
                 }
                 else
                 {
-                    _scrollerOffset = element.GetRealWidth() * 0.75f;
+                    _scrollerOffset = element.GetTotalWidth() * 0.75f;
                 }
             }
         }
@@ -145,9 +145,9 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var lastChildRealWidth = lastChild.GetRealWidth();
+            var lastChildRealWidth = lastChild.GetTotalWidth();
                 
-            _lowValue -= firstChild.GetRealWidth();
+            _lowValue -= firstChild.GetTotalWidth();
             _highValue -= lastChildRealWidth;
                 
             horizontalScroller.highValue = _highValue;
@@ -164,9 +164,9 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var lastChildRealWidth = lastChild.GetRealWidth();
+            var lastChildRealWidth = lastChild.GetTotalWidth();
                     
-            _lowValue += firstChild.GetRealWidth();
+            _lowValue += firstChild.GetTotalWidth();
             _highValue += lastChildRealWidth;
                 
             horizontalScroller.highValue = _highValue;
@@ -183,9 +183,9 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var lastChildReal = lastChild.GetRealHeight();
+            var lastChildReal = lastChild.GetTotalHeight();
                 
-            _lowValue -= firstChild.GetRealHeight();
+            _lowValue -= firstChild.GetTotalHeight();
             _highValue -= lastChildReal;
                 
             verticalScroller.highValue = _highValue;
@@ -202,9 +202,9 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var lastChildRealHeight = lastChild.GetRealHeight();
+            var lastChildRealHeight = lastChild.GetTotalHeight();
                     
-            _lowValue += firstChild.GetRealHeight();
+            _lowValue += firstChild.GetTotalHeight();
             _highValue += lastChildRealHeight;
                 
             verticalScroller.highValue = _highValue;
