@@ -14,7 +14,12 @@
     margin: 0 0 4px 0;
 }
 
+.row-container {
+    flex-direction: row;
+    margin: 0 0 8px 0;
+}
+
 .add-to-scroll-button {
     align-self: flex-start;
-    margin: 0 0 8px 0;
+    margin: 0 8px 0 0;
 }

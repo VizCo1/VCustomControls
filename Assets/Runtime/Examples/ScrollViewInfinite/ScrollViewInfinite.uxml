@@ -8,11 +8,11 @@
         <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to be infinite. But we aware that if all the elements are visible at the same time it will not work properly!" />
         <ui:Instance template="ExamplesTabView" name="ExamplesTabViewContainer" class="examples-template-instance">
             <ui:Tab label="Vertical" name="ScrollViewInfiniteVertical">
-                <ui:VisualElement name="RowContainer" style="flex-direction: row;">
+                <ui:VisualElement name="RowContainer" class="row-container">
                     <ui:Instance template="ExamplesButton" name="AddToScrollViewVertical" class="add-to-scroll-button">
                         <AttributeOverrides element-name="ExamplesButton" text="Add Element" />
                     </ui:Instance>
-                    <ui:Instance template="ExamplesButton" name="AddToScrollViewVertical" class="add-to-scroll-button">
+                    <ui:Instance template="ExamplesButton" name="RemoveScrollViewVertical">
                         <AttributeOverrides element-name="ExamplesButton" text="Remove Random Element" />
                     </ui:Instance>
                 </ui:VisualElement>
@@ -41,11 +41,11 @@
                 </VCustomComponents.VScrollViewInfinite>
             </ui:Tab>
             <ui:Tab label="Horizontal" name="ScrollViewInfiniteHorizontal">
-                <ui:VisualElement name="RowContainer" style="flex-direction: row;">
+                <ui:VisualElement name="RowContainer" class="row-container">
                     <ui:Instance template="ExamplesButton" name="AddToScrollViewHorizontal" class="add-to-scroll-button">
                         <AttributeOverrides element-name="ExamplesButton" text="Add Element" />
                     </ui:Instance>
-                    <ui:Instance template="ExamplesButton" name="AddToScrollViewHorizontal" class="add-to-scroll-button">
+                    <ui:Instance template="ExamplesButton" name="RemoveScrollViewHorizontal">
                         <AttributeOverrides element-name="ExamplesButton" text="Remove Random Element" />
                     </ui:Instance>
                 </ui:VisualElement>
