@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Assets/Runtime/Examples/RadialSlider/RadialSlider.uss?fileID=7433441132597879392&amp;guid=6aa4d57856bae71499ad9ae08b0bd8ac&amp;type=3#RadialSlider" />
+    <ui:Instance template="ExamplesTemplate" name="ExampleRadialSlider" style="flex-grow: 1;">
+        <VCustomComponents.VRadialSlider value="0.3" ending-angle="360" starting-angle="180" center-offset="0,50" line-width="25" style="width: 500px; align-self: center; flex-grow: 1;" />
+    </ui:Instance>
+</ui:UXML>
