@@ -5,7 +5,7 @@
     <Style src="project://database/Assets/Runtime/Examples/ScrollViewInfinite/ScrollViewInfinite.uss?fileID=7433441132597879392&amp;guid=112d9514f2a9f034185e98c060a747c8&amp;type=3#ScrollViewInfinite" />
     <ui:Instance template="ExamplesTemplate" name="ScrollViewCustomExample" class="examples-template-instance">
         <AttributeOverrides element-name="TitleLabel" text="VScrollViewInfinite" />
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to be infinite. But we aware that if all the elements are visible at the same time it will not work properly!" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to be infinite. But we aware that if all the elements are visible at the same time it will not work properly! Also be careful with the scrolling speed!" />
         <ui:Instance template="ExamplesTabView" name="ExamplesTabViewContainer" class="examples-template-instance">
             <ui:Tab label="Vertical" name="ScrollViewInfiniteVertical">
                 <ui:VisualElement name="RowContainer" class="row-container">

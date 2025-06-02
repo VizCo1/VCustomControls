@@ -8,6 +8,12 @@ namespace VCustomComponents
     public partial class VScrollViewInfinite : ScrollView
     {
         private const bool DoOneTime = true;
+
+        [Header(nameof(VScrollViewInfinite))]
+        [UxmlAttribute]
+        [Tooltip(
+            "Increase the value if you're having popping problems, but we aware that you may need to have more elements in the ScrollView")]
+        private float ScrollerOffsetMultiplier { get; set; } = 1f;
         
         private Direction _direction;
         private float _lowValue;
@@ -19,7 +25,7 @@ namespace VCustomComponents
         {
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
         }
-
+        
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
             touchScrollBehavior = TouchScrollBehavior.Unrestricted;
@@ -81,7 +87,7 @@ namespace VCustomComponents
             if (childCount == 0)
                 return;
             
-            _direction = newValue <= _previousVerticalScrollerValue ? Direction.Positive : Direction.Negative;
+            _direction = newValue < _previousVerticalScrollerValue ? Direction.Positive : Direction.Negative;
             
             _previousVerticalScrollerValue = newValue;
 
@@ -122,11 +128,11 @@ namespace VCustomComponents
             var element = contentContainer[index];
             if (mode == ScrollViewMode.Vertical)
             {
-                _scrollerOffset = element.GetTotalHeight();
+                _scrollerOffset = element.GetTotalHeight() * ScrollerOffsetMultiplier;
             }
             else
             {
-                _scrollerOffset = element.GetTotalWidth();
+                _scrollerOffset = element.GetTotalWidth() * ScrollerOffsetMultiplier;
             }
         }
 
@@ -164,8 +170,6 @@ namespace VCustomComponents
 
         private void HandleVerticalUp()
         {
-            Debug.Log("HandleVerticalUp");
-            
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
@@ -216,7 +220,6 @@ namespace VCustomComponents
                     {
                         var elementTotalHeight = element.GetTotalHeight();
                 
-                        _lowValue += elementTotalHeight;
                         _highValue += elementTotalHeight;
 
                         var offset = 0f;
@@ -238,9 +241,7 @@ namespace VCustomComponents
                     {
                         var elementTotalWidth = element.GetTotalWidth();
                 
-                        _lowValue += elementTotalWidth;
                         _highValue += elementTotalWidth;
-
 
                         var offset = 0f;
                         if (lastChild != null)
@@ -259,7 +260,7 @@ namespace VCustomComponents
         public new void Remove(VisualElement elementToRemove)
         {
             if (!contentContainer.Contains(elementToRemove))
-                throw new ArgumentException("The element to remove is not contained by the ScrollView.");
+                throw new ArgumentException("The element to remove is not in the ScrollView contentContainer.");
             
             RemoveAt(contentContainer.IndexOf(elementToRemove));
         }
