@@ -305,6 +305,7 @@ namespace VCustomComponents
         private Vector2 _center;
         private bool _canMove;
         private State _state;
+        private float _previousAngle;
 
         public VRadialSlider() 
         {
@@ -403,6 +404,8 @@ namespace VCustomComponents
             {
                 angle += DegreesInCircle;
             }
+
+            _previousAngle = angle;
             
             value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
             
@@ -416,19 +419,39 @@ namespace VCustomComponents
 
             var dir = evt.localMousePosition - _center;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
+            
             if (angle < 0)
             {
                 angle += DegreesInCircle;
             }
+            
+            if(Mathf.DeltaAngle(_previousAngle, angle) > 0f)
+            {
+                if (_previousAngle > angle)
+                    return;
+            }
+            else
+            {
+                if (_previousAngle < angle)
+                    return;
+            }
 
-            var arcLength = (_endingAngle - _startingAngle + DegreesInCircle) % DegreesInCircle;
-            var relativeAngle = (angle - _startingAngle + DegreesInCircle) % DegreesInCircle;
-
-            if (relativeAngle > arcLength)
-                return;
-
-            value = _minValue + (relativeAngle / arcLength) * (_maxValue - _minValue);
+            // var arcLength = (_endingAngle - _startingAngle + DegreesInCircle) % DegreesInCircle;
+            //
+            // // if (Mathf.Approximately(arcLength, 0f))
+            // // {
+            // //     arcLength = DegreesInCircle;
+            // // }
+            //
+            // var relativeAngle = (angle - _startingAngle + DegreesInCircle) % DegreesInCircle;
+            //
+            // if (relativeAngle > arcLength)
+            //     return;
+            
+            _previousAngle = angle;
+            
+            value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
+            // value = _minValue + (relativeAngle / arcLength) * (_maxValue - _minValue);
         }
         
         private void OnMouseUp(MouseUpEvent evt)
