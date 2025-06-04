@@ -435,23 +435,10 @@ namespace VCustomComponents
                 if (_previousAngle < angle)
                     return;
             }
-
-            // var arcLength = (_endingAngle - _startingAngle + DegreesInCircle) % DegreesInCircle;
-            //
-            // // if (Mathf.Approximately(arcLength, 0f))
-            // // {
-            // //     arcLength = DegreesInCircle;
-            // // }
-            //
-            // var relativeAngle = (angle - _startingAngle + DegreesInCircle) % DegreesInCircle;
-            //
-            // if (relativeAngle > arcLength)
-            //     return;
             
             _previousAngle = angle;
             
             value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
-            // value = _minValue + (relativeAngle / arcLength) * (_maxValue - _minValue);
         }
         
         private void OnMouseUp(MouseUpEvent evt)
