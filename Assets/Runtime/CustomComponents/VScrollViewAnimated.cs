@@ -78,7 +78,7 @@ namespace VCustomComponents
         public void AnimatedScrollTo(VisualElement element, float duration, Ease ease = Ease.Linear)
         {
             if (!contentContainer.Contains(element))
-                throw new ArgumentException("Cannot scroll to a VisualElement that's not a child of the ScrollView content-container.");
+                throw new ArgumentException("Cannot scroll to a VisualElement that's not a child of the ScrollView contentContainer.");
             
             _animationTween1D?.Kill();
             _animationTween2D?.Kill();

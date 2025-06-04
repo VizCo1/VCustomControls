@@ -3,6 +3,6 @@
     <Style src="project://database/Assets/Runtime/Examples/RadialSlider/RadialSlider.uss?fileID=7433441132597879392&amp;guid=6aa4d57856bae71499ad9ae08b0bd8ac&amp;type=3#RadialSlider" />
     <ui:Instance template="ExamplesTemplate" name="ExampleRadialSlider" style="flex-grow: 1;">
         <AttributeOverrides element-name="TitleLabel" text="VRadialSlider" />
-        <VCustomComponents.VRadialSlider value="0.5" fill-color="#FF0000FF" starting-angle="108.8" fill-color-hover="#FF0000FF" fill-color-active="#FF0000FF" background-color-active="#FFFFFFFF" background-color-hover="#D7D7D7FF" background-color="#9D9D9DFF" is-interactive="true" dragger-width="15" dragger-offset1="10" dragger-offset2="10" style="width: 400px; align-self: center; height: 400px;" />
+        <VCustomComponents.VRadialSlider value="0.31" starting-angle="210" background-color-active="#FFFFFFFF" background-color-hover="#D7D7D7FF" background-color="#9D9D9DFF" is-interactive="true" dragger-width="13.5" dragger-offset1="77.9" dragger-offset2="0" ending-angle="330" dragger-color-hover="#9D9D9DFF" dragger-color-active="#6B6B6BFF" style="width: 400px; align-self: center; height: 400px;" />
     </ui:Instance>
 </ui:UXML>
