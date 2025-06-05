@@ -25,7 +25,6 @@ namespace VCustomComponents
                 if (_isInteractive)
                 {
                     RegisterCallback<MouseDownEvent>(OnMouseDown);
-                    RegisterCallback<MouseMoveEvent>(OnMouseMove);
                     RegisterCallback<MouseUpEvent>(OnMouseUp);
                     RegisterCallback<MouseEnterEvent>(OnMouseEnter);
                     RegisterCallback<MouseLeaveEvent>(OnMouseLeave);
@@ -33,7 +32,6 @@ namespace VCustomComponents
                 else
                 {
                     UnregisterCallback<MouseDownEvent>(OnMouseDown);
-                    UnregisterCallback<MouseMoveEvent>(OnMouseMove);
                     UnregisterCallback<MouseUpEvent>(OnMouseUp);
                     UnregisterCallback<MouseEnterEvent>(OnMouseEnter);
                     UnregisterCallback<MouseLeaveEvent>(OnMouseLeave);
@@ -89,7 +87,7 @@ namespace VCustomComponents
             }
         }
 
-        [UxmlAttribute, Range(0f, 360f)]
+        [UxmlAttribute, Range(0f, 359f)]
         public float StartingAngle
         {
             get => _startingAngle;
@@ -100,7 +98,7 @@ namespace VCustomComponents
             }
         }
         
-        [UxmlAttribute, Range(0f, 360f)]
+        [UxmlAttribute, Range(0f, 359f)]
         public float EndingAngle
         {
             get => _endingAngle;
@@ -283,7 +281,7 @@ namespace VCustomComponents
         private float _minValue;
         private float _maxValue = 1f;
         private float _startingAngle;
-        private float _endingAngle = 360f;
+        private float _endingAngle = 359f;
 
         private Color _backgroundColor = new(200, 200, 200);
         private Color _backgroundColorHover = new(225, 225, 225);
@@ -303,7 +301,6 @@ namespace VCustomComponents
         private float _draggerOffset2 = 5f;
         
         private Vector2 _center;
-        private bool _canMove;
         private State _state;
         private float _previousAngle;
 
@@ -395,6 +392,8 @@ namespace VCustomComponents
             
             this.CapturePointer(0);
             
+            RegisterCallback<MouseMoveEvent>(OnMouseMove);
+            
             _state |= State.Active;
 
             var dir = evt.localMousePosition - _center;
@@ -408,15 +407,10 @@ namespace VCustomComponents
             _previousAngle = angle;
             
             value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
-            
-            _canMove = true;
         }
 
         private void OnMouseMove(MouseMoveEvent evt)
         {
-            if (!_canMove)
-                return;
-
             var dir = evt.localMousePosition - _center;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             
@@ -425,15 +419,23 @@ namespace VCustomComponents
                 angle += DegreesInCircle;
             }
             
+            Debug.Log(angle);
+            
             if(Mathf.DeltaAngle(_previousAngle, angle) > 0f)
             {
                 if (_previousAngle > angle)
+                {
+                    value = _maxValue;
                     return;
+                }
             }
             else
             {
                 if (_previousAngle < angle)
+                {
+                    value = _minValue;
                     return;
+                }
             }
             
             _previousAngle = angle;
@@ -449,9 +451,9 @@ namespace VCustomComponents
             _state &= ~State.Active;
             MarkDirtyRepaint();
             
+            UnregisterCallback<MouseMoveEvent>(OnMouseMove);
+            
             this.ReleasePointer(0);
-
-            _canMove = false;
         }
         
         private Vector2 GetCircularPosition2D(float angleDegrees, float radius, Vector2 center)

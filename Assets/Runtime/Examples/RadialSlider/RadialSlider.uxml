@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
-    <Style src="project://database/Assets/Runtime/Examples/RadialSlider/RadialSlider.uss?fileID=7433441132597879392&amp;guid=6aa4d57856bae71499ad9ae08b0bd8ac&amp;type=3" />
+    <Style src="project://database/Assets/Runtime/Examples/RadialSlider/RadialSlider.uss?fileID=7433441132597879392&amp;guid=6aa4d57856bae71499ad9ae08b0bd8ac&amp;type=3#RadialSlider" />
     <ui:Instance template="ExamplesTemplate" name="ExampleRadialSlider" style="flex-grow: 1;">
         <AttributeOverrides element-name="TitleLabel" text="VRadialSlider" />
-        <VCustomComponents.VRadialSlider background-color-active="#FFFFFFFF" background-color-hover="#D7D7D7FF" background-color="#9D9D9DFF" dragger-width="13.5" dragger-offset1="77.9" dragger-offset2="0" dragger-color-hover="#9D9D9DFF" dragger-color-active="#6B6B6BFF" is-interactive="true" fill-color="#FF0000FF" fill-color-hover="#FF0000FF" fill-color-active="#FF0000FF" ending-angle="360" starting-angle="196" style="width: 400px; align-self: center; height: 400px;" />
+        <VCustomComponents.VRadialSlider background-color="#726A95FF" dragger-color-hover="#B071DEFF" dragger-color-active="#B071DEFF" is-interactive="true" value="0.5" line-width="10" name="VRadialSlider" dragger-color="#B071DEFF" background-color-hover="#726A95FF" background-color-active="#726A95FF" fill-color-active="#9C76ACFF" dragger-offset1="10" dragger-offset2="10" fill-color-hover="#9C76ACFF" fill-color="#9C76ACFF" style="width: 400px; align-self: center; height: 400px;" />
     </ui:Instance>
 </ui:UXML>
