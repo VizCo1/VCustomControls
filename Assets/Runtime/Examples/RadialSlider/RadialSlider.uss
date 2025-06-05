@@ -1,0 +1,6 @@
+.radial-slider {
+    align-self: center;
+    top: 90px;
+    width: 600px;
+    height: 600px;
+}
