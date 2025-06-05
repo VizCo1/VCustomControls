@@ -3,6 +3,7 @@
     <Style src="project://database/Assets/Runtime/Examples/RadialSlider/RadialSlider.uss?fileID=7433441132597879392&amp;guid=6aa4d57856bae71499ad9ae08b0bd8ac&amp;type=3#RadialSlider" />
     <ui:Instance template="ExamplesTemplate" name="ExampleRadialSlider" style="flex-grow: 1;">
         <AttributeOverrides element-name="TitleLabel" text="VRadialSlider" />
-        <VCustomComponents.VRadialSlider background-color="#726A95FF" dragger-color-hover="#B071DEFF" dragger-color-active="#B071DEFF" is-interactive="true" value="0.5" line-width="10" name="VRadialSlider" dragger-color="#B071DEFF" background-color-hover="#726A95FF" background-color-active="#726A95FF" fill-color-active="#9C76ACFF" dragger-offset1="10" dragger-offset2="10" fill-color-hover="#9C76ACFF" fill-color="#9C76ACFF" style="width: 400px; align-self: center; height: 400px;" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control behaves as a slider but it&apos;s radial and with a lot of attributes to customize it!" />
+        <VCustomComponents.VRadialSlider background-color="#726A95FF" dragger-color-hover="#9B64C3FF" dragger-color-active="#B071DEFF" is-interactive="true" value="0.5" line-width="10" name="VRadialSlider" dragger-color="#9E70BFFF" background-color-hover="#726A95FF" background-color-active="#726A95FF" fill-color-active="#9C76ACFF" dragger-offset1="20" dragger-offset2="20" fill-color-hover="#9C76ACFF" fill-color="#9C76ACFF" fill-line-width="12" background-line-width="20" line-cap="Butt" ending-angle="360" dragger-line-cap="Butt" dragger-width="15" fill-line-cap="Butt" />
     </ui:Instance>
 </ui:UXML>

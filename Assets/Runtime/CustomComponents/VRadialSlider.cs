@@ -87,7 +87,7 @@ namespace VCustomComponents
             }
         }
 
-        [UxmlAttribute, Range(0f, 359f)]
+        [UxmlAttribute, Range(0f, 360f)]
         public float StartingAngle
         {
             get => _startingAngle;
@@ -98,7 +98,7 @@ namespace VCustomComponents
             }
         }
         
-        [UxmlAttribute, Range(0f, 359f)]
+        [UxmlAttribute, Range(0f, 360f)]
         public float EndingAngle
         {
             get => _endingAngle;
@@ -108,7 +108,21 @@ namespace VCustomComponents
                 MarkDirtyRepaint();
             }
         }
+        
+        [UxmlAttribute]
+        public Vector2 CenterOffset
+        {
+            get => _centerOffset;
+            set
+            {
+                _centerOffset = value;
+                _center = contentRect.center + _centerOffset;
+                MarkDirtyRepaint();
+            }
+        }
 
+        [Header("Background")]
+        
         [UxmlAttribute]
         public Color BackgroundColor
         {
@@ -143,6 +157,30 @@ namespace VCustomComponents
         }
         
         [UxmlAttribute]
+        public float BackgroundLineWidth
+        {
+            get => _backgroundLineWidth;
+            set
+            {
+                _backgroundLineWidth = value;
+                MarkDirtyRepaint();
+            }
+        }
+        
+        [UxmlAttribute]
+        public LineCap BackgroundLineCap
+        {
+            get => _backgroundLineCap;
+            set
+            {
+                _backgroundLineCap = value;
+                MarkDirtyRepaint();
+            }
+        }
+        
+        [Header("Fill")]
+        
+        [UxmlAttribute]
         public Color FillColor
         {
             get => _fillColor;
@@ -174,40 +212,30 @@ namespace VCustomComponents
                 MarkDirtyRepaint();
             }
         }
-
+        
         [UxmlAttribute]
-        public float LineWidth
+        public float FillLineWidth
         {
-            get => _lineWidth;
+            get => _fillLineWidth;
             set
             {
-                _lineWidth = value;
+                _fillLineWidth = value;
                 MarkDirtyRepaint();
             }
         }
         
         [UxmlAttribute]
-        public Vector2 CenterOffset
+        public LineCap FillLineCap
         {
-            get => _centerOffset;
+            get => _fillLineCap;
             set
             {
-                _centerOffset = value;
-                _center = contentRect.center + _centerOffset;
+                _fillLineCap = value;
                 MarkDirtyRepaint();
             }
         }
         
-        [UxmlAttribute]
-        public LineCap LineCap
-        {
-            get => _lineCap;
-            set
-            {
-                _lineCap = value;
-                MarkDirtyRepaint();
-            }
-        }
+        [Header("Dragger")]
         
         [UxmlAttribute]
         public Color DraggerColor
@@ -254,6 +282,17 @@ namespace VCustomComponents
         }
         
         [UxmlAttribute]
+        public LineCap DraggerLineCap
+        {
+            get => _draggerLineCap;
+            set
+            {
+                _draggerLineCap = value;
+                MarkDirtyRepaint();
+            }
+        }
+        
+        [UxmlAttribute]
         public float DraggerOffset1
         {
             get => _draggerOffset1;
@@ -281,22 +320,25 @@ namespace VCustomComponents
         private float _minValue;
         private float _maxValue = 1f;
         private float _startingAngle;
-        private float _endingAngle = 359f;
+        private float _endingAngle = 360f;
 
+        private Vector2 _centerOffset;
         private Color _backgroundColor = new(200, 200, 200);
         private Color _backgroundColorHover = new(225, 225, 225);
         private Color _backgroundColorActive = new(255, 255, 255);
         private Color _fillColor = new (0, 0, 0, 0);
         private Color _fillColorHover = new (0, 0, 0, 0);
         private Color _fillColorActive = new (0, 0, 0, 0);
-        private Vector2 _centerOffset;
-        private LineCap _lineCap = LineCap.Round;
-        private float _lineWidth = 10f;
-        
         private Color _draggerColor = new(80, 80, 80);
         private Color _draggerColorHover = new(55, 55, 55);
         private Color _draggerColorActive = new(35, 35, 35);
+        private LineCap _backgroundLineCap = LineCap.Round;
+        private LineCap _fillLineCap = LineCap.Round;
+        private LineCap _draggerLineCap = LineCap.Round;
+        private float _backgroundLineWidth = 10f;
+        private float _fillLineWidth = 10f;
         private float _draggerWidth = 10f;
+        
         private float _draggerOffset1 = 5f;
         private float _draggerOffset2 = 5f;
         
@@ -340,11 +382,11 @@ namespace VCustomComponents
                 draggerColor = _draggerColorHover;
             }
             
-            painter2D.lineWidth = _lineWidth;
+            painter2D.lineWidth = _backgroundLineWidth;
             painter2D.strokeColor = backgroundColor;
-            painter2D.lineCap = _lineCap;
+            painter2D.lineCap = _backgroundLineCap;
             
-            var radius = contentRect.width * 0.5f - _lineWidth * 0.5f;
+            var radius = contentRect.width * 0.5f - _backgroundLineWidth * 0.5f;
             
             painter2D.BeginPath();
             painter2D.Arc(_center, radius, _startingAngle, _endingAngle);
@@ -355,6 +397,8 @@ namespace VCustomComponents
             if (fillColor.a != 0f)
             {
                 painter2D.strokeColor = fillColor;
+                painter2D.lineWidth = _fillLineWidth;
+                painter2D.lineCap = _fillLineCap;
                 
                 painter2D.BeginPath();
                 painter2D.Arc(_center, radius, _startingAngle, angle);
@@ -366,6 +410,7 @@ namespace VCustomComponents
             
             painter2D.strokeColor = draggerColor;
             painter2D.lineWidth = _draggerWidth;
+            painter2D.lineCap = _draggerLineCap;
             
             painter2D.BeginPath();
             painter2D.MoveTo(circlePathPos1);
@@ -418,8 +463,6 @@ namespace VCustomComponents
             {
                 angle += DegreesInCircle;
             }
-            
-            Debug.Log(angle);
             
             if(Mathf.DeltaAngle(_previousAngle, angle) > 0f)
             {
