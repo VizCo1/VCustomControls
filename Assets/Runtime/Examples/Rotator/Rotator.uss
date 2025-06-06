@@ -1,0 +1,7 @@
+.rotator-example-container {
+    flex-grow: 1;
+}
+
+.rotator {
+    flex-direction: row;
+}
