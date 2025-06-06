@@ -64,10 +64,9 @@ namespace VCustomComponents
             get => _sprites;
             set
             {
-#if !UNITY_EDITOR
                 if (value == null)
                     throw new NullReferenceException("Can't set Sprites to null");
-#endif
+
                 StopAnimation();
                 
                 _sprites = value;
