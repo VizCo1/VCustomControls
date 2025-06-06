@@ -1,0 +1,11 @@
+.container {
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.animated-sprite-example {
+    width: 400px; 
+    height: 400px; 
+}
