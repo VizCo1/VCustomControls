@@ -45,7 +45,10 @@ namespace VCustomComponents
             set
             {
                 _frameRate = value;
-                PlayAnimation();
+                if (_value)
+                {
+                    PlayAnimation();
+                }
             }
         }
 
@@ -61,6 +64,10 @@ namespace VCustomComponents
             get => _sprites;
             set
             {
+#if !UNITY_EDITOR
+                if (value == null)
+                    throw new NullReferenceException("Can't set Sprites to null");
+#endif
                 StopAnimation();
                 
                 _sprites = value;
@@ -94,12 +101,12 @@ namespace VCustomComponents
     
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
+            _completedLoops = 0;
+            
             if (Sprites == null)
-                throw new NullReferenceException("Sprites not set");
+                return;
             
             style.backgroundImage = new StyleBackground(Sprites[CurrentIndex]);
-            
-            _completedLoops = 0;
         }
         
         private void PlayAnimation()
