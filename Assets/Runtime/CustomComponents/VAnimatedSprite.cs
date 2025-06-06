@@ -53,17 +53,35 @@ namespace VCustomComponents
         public int Loops  { get; set; } = -1;
         
         [UxmlAttribute]
-        public bool StartOnAttached { get; set; }
-        
-        [UxmlAttribute]
         public int CurrentIndex { get; private set; }
-        
+
         [UxmlAttribute]
-        public Sprite[] Sprites { get; set; }
+        public Sprite[] Sprites
+        {
+            get => _sprites;
+            set
+            {
+                StopAnimation();
+                
+                _sprites = value;
+                
+                ResetAnimationIndex();
+
+                if (_value)
+                {
+                    PlayAnimation();
+                }
+                else
+                {
+                    ResetLoops();
+                }
+            }
+        }
 
         private bool _value;
         private int _frameRate = 24;
         private int _completedLoops;
+        private Sprite[] _sprites;
         
         private IVisualElementScheduledItem _scheduledItem;
         
@@ -79,11 +97,6 @@ namespace VCustomComponents
             style.backgroundImage = new StyleBackground(Sprites[CurrentIndex]);
             
             _completedLoops = 0;
-
-            if (StartOnAttached)
-            {
-                value = true;
-            }
         }
         
         private void PlayAnimation()
