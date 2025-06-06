@@ -94,6 +94,9 @@ namespace VCustomComponents
     
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
+            if (Sprites == null)
+                throw new NullReferenceException("Sprites not set");
+            
             style.backgroundImage = new StyleBackground(Sprites[CurrentIndex]);
             
             _completedLoops = 0;
