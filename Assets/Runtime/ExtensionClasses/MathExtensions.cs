@@ -16,5 +16,10 @@ namespace VCustomComponents
         {
             return Mathf.Clamp(value, min, max);
         }
+        
+        public static int Clamp(this int value, int min, int max)
+        {
+            return Mathf.Clamp(value, min, max);
+        }
     }
 }
