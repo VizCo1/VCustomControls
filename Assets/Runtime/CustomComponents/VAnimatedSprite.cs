@@ -106,7 +106,7 @@ namespace VCustomComponents
             if (ShouldStopAnimation())
                 return;
             
-            var intervalMs = 1000 / FrameRate; 
+            var intervalMs = Mathf.RoundToInt(1000f / FrameRate); 
             
             _scheduledItem = schedule
                 .Execute(() =>
@@ -114,11 +114,11 @@ namespace VCustomComponents
                     style.backgroundImage = new StyleBackground(Sprites[CurrentIndex]);
                     CurrentIndex++;
 
-                    if (CurrentIndex >= Sprites.Length)
-                    {
-                        CurrentIndex = 0;
-                        _completedLoops++;
-                    }
+                    if (CurrentIndex < Sprites.Length) 
+                        return;
+                    
+                    CurrentIndex = 0;
+                    _completedLoops++;
                 })
                 .Until(ShouldStopAnimation)
                 .Every(intervalMs);
