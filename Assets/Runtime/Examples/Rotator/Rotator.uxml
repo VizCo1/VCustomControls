@@ -4,11 +4,17 @@
     <Style src="project://database/Assets/Runtime/Examples/Rotator/Rotator.uss?fileID=7433441132597879392&amp;guid=79a035aa7a9f3604d92756ab80661414&amp;type=3#Rotator" />
     <ui:Instance template="ExamplesTemplate" name="RotatorExample" class="rotator-example-container">
         <AttributeOverrides element-name="TitleLabel" text="VRotator" />
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom control..." />
-        <VCustomComponents.VRotator name="VRotator" options="Default1,Default2,Default3" has-buttons="true" are-buttons-loopable="true">
-            <ui:Instance template="ExamplesButton" name="LeftRotatorButton" />
-            <ui:Label name="RotatorLabel" />
-            <ui:Button text="Button" name="RightRotatorButton" />
-        </VCustomComponents.VRotator>
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows you to easily change a label from a set of options." />
+        <ui:VisualElement name="Container" class="container">
+            <VCustomComponents.VRotator name="HorizontalVRotator" options="Some value,Other value,More values!,Nothing" has-buttons="true" are-buttons-loopable="true" value="1" class="horizontal-rotator">
+                <ui:Instance template="ExamplesButton" name="LeftRotatorButton">
+                    <AttributeOverrides element-name="ExamplesButton" text="Previous" />
+                </ui:Instance>
+                <ui:Label name="RotatorLabel" text="Label" class="rotator-label" />
+                <ui:Instance template="ExamplesButton" name="RightRotatorButton">
+                    <AttributeOverrides element-name="ExamplesButton" text="Next" />
+                </ui:Instance>
+            </VCustomComponents.VRotator>
+        </ui:VisualElement>
     </ui:Instance>
 </ui:UXML>

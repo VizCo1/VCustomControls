@@ -77,9 +77,9 @@
     border-width: 2px;
     -unity-font-style: bold;
     font-size: 32px;
+    flex-grow: 1;
     margin: 0;
     padding: 8px 16px;
-    flex-grow: 1;
 }
 
 .examples-button.unity-button:hover {

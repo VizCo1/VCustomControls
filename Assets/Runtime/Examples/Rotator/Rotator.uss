@@ -2,6 +2,23 @@
     flex-grow: 1;
 }
 
-.rotator {
+.container {
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.horizontal-rotator {
     flex-direction: row;
+    height: 55px;
+}
+
+.rotator-label {
+    color: var(--color-accent);
+    font-size: var(--font-size1-example);
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    width: 150px;
+    margin: 0 16px;
+    padding: 0;
 }

@@ -13,13 +13,8 @@ namespace VCustomComponents
         
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
         
-        public static readonly string VRotatorClass = "rotator"; 
-        public static readonly string LeftButtonClass = VRotatorClass + "-left-button"; 
-        public static readonly string RightButtonClass = VRotatorClass + "-right-button";
-        public static readonly string TextClass = VRotatorClass + "-label";
-
         [Header(nameof(VRotator))]
-        [UxmlAttribute]
+        [UxmlAttribute, CreateProperty]
         public int value
         {
             get => _value;
@@ -74,49 +69,48 @@ namespace VCustomComponents
         
         public VRotator() 
         {
-            AddToClassList(VRotatorClass);
-            
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
         }
     
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
-            if (!this.TryGetVisualElement(TextName, null, out _label))
+            if (this.TryGetVisualElement<TemplateContainer>(TextName, null, out var labelTemplate))
             {
-                Debug.LogError($"No label named '{TextName}' added to the Rotator");
+                _label = labelTemplate.Q<Label>();
+            }
+            else if (_label == null && !this.TryGetVisualElement(TextName, null, out _label))
+            {
+                Debug.LogError($"No label or template container named '{TextName}' added to the Rotator");
                 return;
             }
 
-            _label.AddToClassList(TextClass);
             SetValueWithoutNotify(value);
             
             if (!HasButtons)
                 return;
 
-            if (this.TryGetVisualElement<TemplateContainer>(LeftButtonName, null, out var leftButtonTemplate))
+            TemplateContainer leftButtonTemplate;
+            TemplateContainer rightButtonTemplate;
+            
+            if (this.TryGetVisualElement(LeftButtonName, null, out leftButtonTemplate))
             {
                 _leftButton = leftButtonTemplate.Q<Button>();
             }
+            else if (_leftButton == null && !this.TryGetVisualElement(LeftButtonName, null, out _leftButton))
+            {
+                Debug.LogError($"No button or template container named '{LeftButtonName}' attached to the Rotator");
+                return;
+            }
             
-            if (this.TryGetVisualElement<TemplateContainer>(LeftButtonName, null, out var rightButtonTemplate))
+            if (this.TryGetVisualElement(RightButtonName, null, out rightButtonTemplate))
             {
                 _rightButton = rightButtonTemplate.Q<Button>();
             }
-            
-            if (_leftButton == null && !this.TryGetVisualElement(LeftButtonName, null, out _leftButton))
+            else if (_rightButton == null && !this.TryGetVisualElement(RightButtonName, null, out _rightButton))
             {
-                Debug.LogError($"No button named '{LeftButtonName}' attached to the Rotator");
+                Debug.LogError($"No button template container named '{RightButtonName}' attached to the Rotator");
                 return;
             }
-            
-            if (_rightButton == null && !this.TryGetVisualElement(RightButtonName, null, out _rightButton))
-            {
-                Debug.LogError($"No button named '{RightButtonName}' attached to the Rotator");
-                return;
-            }
-            
-            _leftButton.AddToClassList(LeftButtonClass);
-            _rightButton.AddToClassList(RightButtonClass);
 
             _leftButton.clicked += OnLeftButtonClicked;
             _rightButton.clicked += OnRightButtonClicked;
@@ -147,6 +141,9 @@ namespace VCustomComponents
         public void SetValueWithoutNotify(int newValue)
         {
             _value = newValue.Clamp(0, Options.Length - 1);
+
+            if (_label == null)
+                return;
             
             _label.text = Options[_value];
         }
