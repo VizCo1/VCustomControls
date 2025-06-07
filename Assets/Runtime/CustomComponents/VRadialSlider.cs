@@ -343,14 +343,14 @@ namespace VCustomComponents
         private float _draggerOffset2 = 5f;
         
         private Vector2 _center;
-        private State _state;
+        private PseudoStates _pseudoStates;
         private float _previousAngle;
 
         public VRadialSlider() 
         {
             AddToClassList(RadialSliderClass);
 
-            _state = State.Normal;
+            _pseudoStates = PseudoStates.Normal;
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
             generateVisualContent += OnGenerateVisualContent;
@@ -369,13 +369,13 @@ namespace VCustomComponents
             var fillColor = _fillColor;
             var draggerColor = _draggerColor;
 
-            if (_state.HasFlag(State.Active))
+            if (_pseudoStates.HasFlag(PseudoStates.Active))
             {
                 backgroundColor = _backgroundColorActive;
                 fillColor = _fillColorActive;
                 draggerColor = _draggerColorActive;
             }
-            else if (_state.HasFlag(State.Hover))
+            else if (_pseudoStates.HasFlag(PseudoStates.Hover))
             {
                 backgroundColor = _backgroundColorHover;
                 fillColor = _fillColorHover;
@@ -405,8 +405,8 @@ namespace VCustomComponents
                 painter2D.Stroke();
             }
             
-            var circlePathPos1 = GetCircularPosition2D(angle, radius - _draggerOffset1, _center);
-            var circlePathPos2 = GetCircularPosition2D(angle, radius + _draggerOffset2, _center);
+            var circlePathPos1 = VMathExtensions.GetCircumferencePoint(angle, radius - _draggerOffset1, _center);
+            var circlePathPos2 = VMathExtensions.GetCircumferencePoint(angle, radius + _draggerOffset2, _center);
             
             painter2D.strokeColor = draggerColor;
             painter2D.lineWidth = _draggerWidth;
@@ -420,13 +420,13 @@ namespace VCustomComponents
 
         private void OnMouseEnter(MouseEnterEvent evt)
         {
-            _state |= State.Hover;
+            _pseudoStates |= PseudoStates.Hover;
             MarkDirtyRepaint();
         }
 
         private void OnMouseLeave(MouseLeaveEvent evt)
         {
-            _state &= ~State.Hover;
+            _pseudoStates &= ~PseudoStates.Hover;
             MarkDirtyRepaint();
         }
         
@@ -439,7 +439,7 @@ namespace VCustomComponents
             
             RegisterCallback<MouseMoveEvent>(OnMouseMove);
             
-            _state |= State.Active;
+            _pseudoStates |= PseudoStates.Active;
 
             var dir = evt.localMousePosition - _center;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -491,22 +491,12 @@ namespace VCustomComponents
             if (evt.button != 0)
                 return;
 
-            _state &= ~State.Active;
+            _pseudoStates &= ~PseudoStates.Active;
             MarkDirtyRepaint();
             
             UnregisterCallback<MouseMoveEvent>(OnMouseMove);
             
             this.ReleasePointer(0);
-        }
-        
-        private Vector2 GetCircularPosition2D(float angleDegrees, float radius, Vector2 center)
-        {
-            var angleRadians = angleDegrees * Mathf.Deg2Rad;
-            
-            var x = center.x + radius * Mathf.Cos(angleRadians);
-            var y = center.y + radius * Mathf.Sin(angleRadians);
-            
-            return new Vector2(x, y);
         }
         
         public void SetValueWithoutNotify(float newValue)
@@ -521,14 +511,6 @@ namespace VCustomComponents
             var radius = contentRect.width * 0.5f;
             
             return distance < radius;
-        }
-
-        [Flags]
-        private enum State
-        {
-            Normal = 1,
-            Hover = 2,
-            Active = 4
         }
     }
 }

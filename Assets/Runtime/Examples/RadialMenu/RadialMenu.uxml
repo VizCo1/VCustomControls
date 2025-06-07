@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Assets/Runtime/Examples/RadialMenu/RadialMenu.uss?fileID=7433441132597879392&amp;guid=5a86c97c1f23f9847b2b6ca2444b4dbe&amp;type=3#RadialMenu" />
+    <ui:Instance template="ExamplesTemplate" name="RadialMenuExample" style="flex-grow: 1;">
+        <AttributeOverrides element-name="TitleLabel" text="VRadialMenu" />
+        <VCustomComponents.VRadialMenu name="VRadialMenu" slots="4" segment-color="#FF0000FF" style="flex-grow: 1; width: 450px; align-self: center;" />
+    </ui:Instance>
+</ui:UXML>
