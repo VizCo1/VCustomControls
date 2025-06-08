@@ -11,7 +11,7 @@ namespace VCustomComponents
 
         [Header(nameof(VRadialMenu))]
         
-        public IVHasCustomEvent.CustomEventType CustomEvent { get; }
+        public VCustomEventType CustomEvent { get; }
         
         [UxmlAttribute, CreateProperty]
         public int value
@@ -94,7 +94,7 @@ namespace VCustomComponents
         {
             generateVisualContent += OnGenerateVisualContent;
 
-            CustomEvent = IVHasCustomEvent.CustomEventType.AimEvent;
+            CustomEvent |= VCustomEventType.AimEvent;
             
             RegisterCallback<MouseMoveEvent>(OnMouseMove);
             RegisterCallback<VAimEvent>(OnAimed);
@@ -146,8 +146,6 @@ namespace VCustomComponents
             }
 
             SelectMatchingSegment(angle);
-            
-            // Debug.Log(angle);
         }
 
         private void OnAimed(VAimEvent evt)

@@ -23,21 +23,19 @@ namespace VCustomComponents
             _inputActionAsset.UI.Aim.performed += AimOnPerformed;
             
             RegisterCallback<DetachFromPanelEvent>(OnDetachedFromPanel);
-            
         }
 
         private void OnDetachedFromPanel(DetachFromPanelEvent evt)
         {
+            _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.Disable();
         }
         
         private void AimOnPerformed(InputAction.CallbackContext ctx)
         {
             var aimEventTarget = focusController.focusedElement;
-            
-            Debug.Log(aimEventTarget);
 
-            if (aimEventTarget is not IVHasCustomEvent)
+            if (!IsTargetValid(aimEventTarget, VCustomEventType.AimEvent))
                 return;
                 
             if (panel == null) 
@@ -49,6 +47,14 @@ namespace VCustomComponents
             
             pooled.target = aimEventTarget;
             SendEvent(pooled);
+        }
+
+        private bool IsTargetValid(Focusable element, VCustomEventType expectedEventType)
+        {
+            if (element is not IVHasCustomEvent vHasCustomEvent)
+                return false;
+            
+            return vHasCustomEvent.CustomEvent.HasFlag(expectedEventType);
         }
     }
 }
