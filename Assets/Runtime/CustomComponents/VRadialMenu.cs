@@ -5,11 +5,13 @@ using Unity.Properties;
 namespace VCustomComponents
 {
     [UxmlElement]
-    public partial class VRadialMenu : VisualElement, INotifyValueChanged<int>
+    public partial class VRadialMenu : VisualElement, INotifyValueChanged<int>, IVHasCustomEvent
     {
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
 
         [Header(nameof(VRadialMenu))]
+        
+        public IVHasCustomEvent.CustomEventType CustomEvent { get; }
         
         [UxmlAttribute, CreateProperty]
         public int value
@@ -90,9 +92,12 @@ namespace VCustomComponents
         
         public VRadialMenu() 
         {
-            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
-            RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
             generateVisualContent += OnGenerateVisualContent;
+
+            CustomEvent = IVHasCustomEvent.CustomEventType.AimEvent;
+            
+            RegisterCallback<MouseMoveEvent>(OnMouseMove);
+            RegisterCallback<VAimEvent>(OnAimed);
         }
 
         private void OnGenerateVisualContent(MeshGenerationContext mgc)
@@ -128,17 +133,32 @@ namespace VCustomComponents
             var point2 = VMathExtensions.GetCircumferencePoint(nextAngle, radius, contentRect.center);
         
             DrawCircleSegment(painter2D, radius, center, point1, point2, previousAngle, nextAngle);
+        }
+        
+        private void OnMouseMove(MouseMoveEvent evt)
+        {
+            var dir = evt.localMousePosition - contentRect.center;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             
+            if (angle < 0)
+            {
+                angle += 360f;
+            }
+
+            SelectMatchingSegment(angle);
+            
+            // Debug.Log(angle);
         }
 
-        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        private void OnAimed(VAimEvent evt)
         {
-        
+            Debug.Log(evt.Aim);
         }
-    
-        private void OnGeometryChanged(GeometryChangedEvent evt)
+
+        private void SelectMatchingSegment(float angle)
         {
-        
+            var angleSlot = 360f / Slots;
+            value = (int)(angle / angleSlot);
         }
 
         private void DrawCircleSegment(
@@ -161,9 +181,21 @@ namespace VCustomComponents
         
         public void SetValueWithoutNotify(int newValue)
         {
-            _value = newValue.Clamp(0, Slots - 1);
+            _value = newValue.Clamp(-1, Slots - 1);
+
+            if (_value == -1)
+                return;
             
             MarkDirtyRepaint();
+        }
+        
+        public override bool ContainsPoint(Vector2 localPoint)
+        {
+            var center = contentRect.center;
+            var distance = Vector2.Distance(localPoint, center);
+            var radius = contentRect.width * 0.5f;
+            
+            return distance < radius;
         }
     }
 }

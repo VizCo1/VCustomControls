@@ -343,14 +343,14 @@ namespace VCustomComponents
         private float _draggerOffset2 = 5f;
         
         private Vector2 _center;
-        private PseudoStates _pseudoStates;
+        private VPseudoStates _vPseudoStates;
         private float _previousAngle;
 
         public VRadialSlider() 
         {
             AddToClassList(RadialSliderClass);
 
-            _pseudoStates = PseudoStates.Normal;
+            _vPseudoStates = VPseudoStates.Normal;
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
             generateVisualContent += OnGenerateVisualContent;
@@ -369,13 +369,13 @@ namespace VCustomComponents
             var fillColor = _fillColor;
             var draggerColor = _draggerColor;
 
-            if (_pseudoStates.HasFlag(PseudoStates.Active))
+            if (_vPseudoStates.HasFlag(VPseudoStates.Active))
             {
                 backgroundColor = _backgroundColorActive;
                 fillColor = _fillColorActive;
                 draggerColor = _draggerColorActive;
             }
-            else if (_pseudoStates.HasFlag(PseudoStates.Hover))
+            else if (_vPseudoStates.HasFlag(VPseudoStates.Hover))
             {
                 backgroundColor = _backgroundColorHover;
                 fillColor = _fillColorHover;
@@ -420,13 +420,13 @@ namespace VCustomComponents
 
         private void OnMouseEnter(MouseEnterEvent evt)
         {
-            _pseudoStates |= PseudoStates.Hover;
+            _vPseudoStates |= VPseudoStates.Hover;
             MarkDirtyRepaint();
         }
 
         private void OnMouseLeave(MouseLeaveEvent evt)
         {
-            _pseudoStates &= ~PseudoStates.Hover;
+            _vPseudoStates &= ~VPseudoStates.Hover;
             MarkDirtyRepaint();
         }
         
@@ -439,7 +439,7 @@ namespace VCustomComponents
             
             RegisterCallback<MouseMoveEvent>(OnMouseMove);
             
-            _pseudoStates |= PseudoStates.Active;
+            _vPseudoStates |= VPseudoStates.Active;
 
             var dir = evt.localMousePosition - _center;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -491,7 +491,7 @@ namespace VCustomComponents
             if (evt.button != 0)
                 return;
 
-            _pseudoStates &= ~PseudoStates.Active;
+            _vPseudoStates &= ~VPseudoStates.Active;
             MarkDirtyRepaint();
             
             UnregisterCallback<MouseMoveEvent>(OnMouseMove);
