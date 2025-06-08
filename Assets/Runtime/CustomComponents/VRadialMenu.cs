@@ -84,7 +84,7 @@ namespace VCustomComponents
             }
         }
 
-        private int _value;
+        private int _value = -1;
         private Color _backgroundColor = Color.white;
         private Color _borderColor = Color.gray;
         private Color _segmentColor = Color.dimGray;
@@ -123,6 +123,9 @@ namespace VCustomComponents
             painter2D.Fill();
             painter2D.ClosePath();
 
+            if (_value == -1)
+                return;
+            
             var angleSlot = 360f / Slots;
             var previousAngle = angleSlot * _value;
             var nextAngle = previousAngle + angleSlot;
@@ -150,7 +153,18 @@ namespace VCustomComponents
 
         private void OnAimed(VAimEvent evt)
         {
+            if (evt.Aim == Vector2.zero)
+                return;
+            
+            var angle = Mathf.Atan2(evt.Aim.y, evt.Aim.x) * Mathf.Rad2Deg;
+            
+            if (angle < 0)
+            {
+                angle += 360f;
+            }
+            
             Debug.Log(evt.Aim);
+            SelectMatchingSegment(angle);
         }
 
         private void SelectMatchingSegment(float angle)
@@ -180,9 +194,6 @@ namespace VCustomComponents
         public void SetValueWithoutNotify(int newValue)
         {
             _value = newValue.Clamp(-1, Slots - 1);
-
-            if (_value == -1)
-                return;
             
             MarkDirtyRepaint();
         }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using Unity.Properties;
 using UnityEngine.InputSystem;
 
 namespace VCustomComponents
@@ -14,19 +13,25 @@ namespace VCustomComponents
         
         public VCustomEventPanel() 
         {
-            if (_inputActionAsset == null)
-            {
-                _inputActionAsset = new VInputActionUI();
-                _inputActionAsset.UI.Enable();
-            }
+            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
+            RegisterCallback<DetachFromPanelEvent>(OnDetachedFromPanel);
+        }
+
+        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        {
+            Debug.Log("Attached from Panel");
+            if (_inputActionAsset != null)
+                return;
+            
+            _inputActionAsset = new VInputActionUI();
+            _inputActionAsset.UI.Enable();
             
             _inputActionAsset.UI.Aim.performed += AimOnPerformed;
-            
-            RegisterCallback<DetachFromPanelEvent>(OnDetachedFromPanel);
         }
 
         private void OnDetachedFromPanel(DetachFromPanelEvent evt)
         {
+            Debug.Log("Detached from Panel");
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.Disable();
         }

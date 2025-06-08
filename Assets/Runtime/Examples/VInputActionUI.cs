@@ -518,7 +518,7 @@ namespace VCustomComponents
                     ""id"": ""91aee220-8805-40df-8822-3f702817d2c8"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.9),InvertVector2(invertX=false)"",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
