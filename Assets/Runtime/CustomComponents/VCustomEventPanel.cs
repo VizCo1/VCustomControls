@@ -19,7 +19,6 @@ namespace VCustomComponents
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
-            Debug.Log("Attached from Panel");
             if (_inputActionAsset != null)
                 return;
             
@@ -31,7 +30,6 @@ namespace VCustomComponents
 
         private void OnDetachedFromPanel(DetachFromPanelEvent evt)
         {
-            Debug.Log("Detached from Panel");
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.Disable();
         }

@@ -1,0 +1,6 @@
+.radial-menu {
+    --radial-background-color: red;
+    --radial-border-color: yellow;
+    --radial-segment-color: green;
+    --radial-border-width: 10;
+}

@@ -4,7 +4,7 @@
     <VCustomComponents.VCustomEventPanel style="flex-grow: 1;">
         <ui:Instance template="ExamplesTemplate" name="RadialMenuExample" style="flex-grow: 1;">
             <AttributeOverrides element-name="TitleLabel" text="VRadialMenu" />
-            <VCustomComponents.VRadialMenu name="VRadialMenu" slots="4" segment-color="#FF0000FF" focusable="true" style="flex-grow: 1; width: 450px; align-self: center;" />
+            <VCustomComponents.VRadialMenu name="VRadialMenu" slots="4" focusable="true" style="flex-grow: 1; width: 450px; align-self: center;" />
         </ui:Instance>
     </VCustomComponents.VCustomEventPanel>
 </ui:UXML>

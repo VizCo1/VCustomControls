@@ -8,7 +8,12 @@ namespace VCustomComponents
     public partial class VRadialMenu : VisualElement, INotifyValueChanged<int>, IVHasCustomEvent
     {
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
-
+        private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
+        private static readonly CustomStyleProperty<Color> RadialBorderColor = new("--radial-border-color");
+        private static readonly CustomStyleProperty<Color> RadialSegmentColor = new("--radial-segment-color");
+        private static readonly CustomStyleProperty<float> RadialBorderWidth = new("--radial-border-width");
+        public static readonly string RadialMenuClass = "radial-menu";
+        
         [Header(nameof(VRadialMenu))]
         
         public VCustomEventType CustomEvent { get; }
@@ -40,73 +45,47 @@ namespace VCustomComponents
         [UxmlAttribute]
         private int Slots { get; set; } = 2;
 
-        [UxmlAttribute]
-        private Color BackgroundColor
-        {
-            get => _backgroundColor;
-            set
-            {
-                _backgroundColor = value;
-                MarkDirtyRepaint();
-            }
-        }
-        
-        [UxmlAttribute]
-        private Color BorderColor
-        {
-            get => _borderColor;
-            set
-            {
-                _borderColor = value;
-                MarkDirtyRepaint();
-            }
-        }
-        
-        [UxmlAttribute]
-        private Color SegmentColor
-        {
-            get => _segmentColor;
-            set
-            {
-                _segmentColor = value;
-                MarkDirtyRepaint();
-            }
-        }
-        
-        [UxmlAttribute]
-        private int BorderWidth
-        {
-            get => _borderWidth;
-            set
-            {
-                _borderWidth = value;
-                MarkDirtyRepaint();
-            }
-        }
-
         private int _value = -1;
-        private Color _backgroundColor = Color.white;
-        private Color _borderColor = Color.gray;
-        private Color _segmentColor = Color.dimGray;
-        private int _borderWidth = 10;
+        private Color _radialBackgroundColor;
+        private Color _radialBorderColor;
+        private Color _radialSegmentColor;
+        private float _radialBorderWidth;
         
         public VRadialMenu() 
         {
             generateVisualContent += OnGenerateVisualContent;
 
+            AddToClassList(RadialMenuClass);
             CustomEvent |= VCustomEventType.AimEvent;
+
+            var clickable = new Clickable(OnClicked);
+            this.AddManipulator(clickable);
             
             RegisterCallback<MouseMoveEvent>(OnMouseMove);
             RegisterCallback<VAimEvent>(OnAimed);
+            RegisterCallback<CustomStyleResolvedEvent>(OnStylesResolved);
+        }
+
+        private void OnStylesResolved(CustomStyleResolvedEvent evt)
+        {
+            evt.customStyle.TryGetValue(RadialBackgroundColor, out _radialBackgroundColor);
+            evt.customStyle.TryGetValue(RadialBorderColor, out _radialBorderColor);
+            evt.customStyle.TryGetValue(RadialSegmentColor, out _radialSegmentColor);
+            evt.customStyle.TryGetValue(RadialBorderWidth, out _radialBorderWidth);
+
+            if (_radialBackgroundColor == null ||  _radialBorderColor == null || _radialSegmentColor == null)
+                return;
+            
+            MarkDirtyRepaint();
         }
 
         private void OnGenerateVisualContent(MeshGenerationContext mgc)
         {
             var painter2D = mgc.painter2D;
             
-            painter2D.fillColor = BackgroundColor;
-            painter2D.strokeColor = BorderColor;
-            painter2D.lineWidth = BorderWidth;
+            painter2D.fillColor = _radialBackgroundColor;
+            painter2D.strokeColor = _radialBorderColor;
+            painter2D.lineWidth = _radialBorderWidth;
             
             var center = contentRect.center;
             var radius = contentRect.width * 0.5f - painter2D.lineWidth * 0.5f;
@@ -130,7 +109,7 @@ namespace VCustomComponents
             var previousAngle = angleSlot * _value;
             var nextAngle = previousAngle + angleSlot;
             
-            painter2D.fillColor = SegmentColor;
+            painter2D.fillColor = _radialSegmentColor;
         
             var point1 = VMathExtensions.GetCircumferencePoint(previousAngle, radius, contentRect.center);
             var point2 = VMathExtensions.GetCircumferencePoint(nextAngle, radius, contentRect.center);
@@ -163,8 +142,12 @@ namespace VCustomComponents
                 angle += 360f;
             }
             
-            Debug.Log(evt.Aim);
             SelectMatchingSegment(angle);
+        }
+        
+        private void OnClicked()
+        {
+            Debug.Log("Clicked!");   
         }
 
         private void SelectMatchingSegment(float angle)
