@@ -15,9 +15,11 @@
 
 .radial-menu:active {
     --radial-border-color: rgb(205, 139, 255);
+    --radial-segment-color: rgba(176, 113, 222, 0.5);
 }
 
 .radial-menu.radial-menu-submitted {
+    --radial-border-color: rgb(205, 139, 255);
     --radial-segment-color: rgba(176, 113, 222, 0.5);
 }
 
