@@ -1,7 +1,7 @@
 .radial-menu {
     --radial-background-color: var(--color-accent);
     --radial-border-color: var(--color-primary);
-    --radial-segment-color: var(--color-secondary);
+    --radial-segment-color: rgba(176, 113, 222, 0.25);
     --radial-border-width: 10;
 }
 
@@ -17,9 +17,8 @@
     --radial-border-color: rgb(205, 139, 255);
 }
 
-.radial-menu-submitted {
-    --radial-border-color: red;
-    --radial-segment-color: white;
+.radial-menu.radial-menu-submitted {
+    --radial-segment-color: rgba(176, 113, 222, 0.5);
 }
 
 .image-slot {

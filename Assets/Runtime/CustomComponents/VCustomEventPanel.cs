@@ -19,21 +19,32 @@ namespace VCustomComponents
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
+#if UNITY_EDITOR
+            if (panel.contextType == ContextType.Editor)
+                return;
+#endif
+            
             if (_inputActionAsset != null)
                 return;
             
             _inputActionAsset = new VInputActionUI();
             _inputActionAsset.UI.Enable();
-            
             _inputActionAsset.UI.Aim.performed += AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed += PostSubmitOnPerformed;
         }
 
         private void OnDetachedFromPanel(DetachFromPanelEvent evt)
         {
+#if UNITY_EDITOR
+            if (panel.contextType == ContextType.Editor)
+                return;
+#endif
+            
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed -= PostSubmitOnPerformed;
             _inputActionAsset.UI.Disable();
+            
+            _inputActionAsset = null;
         }
         
         private void AimOnPerformed(InputAction.CallbackContext ctx)
@@ -57,7 +68,7 @@ namespace VCustomComponents
         private void PostSubmitOnPerformed(InputAction.CallbackContext obj)
         {
             var postSubmitTarget = focusController.focusedElement;
-
+            
             if (!IsTargetValid(postSubmitTarget, VCustomEventType.PostSubmitEvent))
                 return;
                 

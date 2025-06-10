@@ -16,7 +16,6 @@ namespace VCustomComponents
         
         public static readonly string RadialMenuClass = "radial-menu";
         public static readonly string RadialMenuSubmittedClass = "radial-menu-submitted";
-        public static readonly string RadialMenuPostSubmittedClass = "radial-menu-post-submitted";
         
         public static readonly string ImageSlotName = "ImageSlot";
         public static readonly string ImageSlotClass = "image-slot";
@@ -195,12 +194,6 @@ namespace VCustomComponents
         private void OnPostSubmitted(PostSubmitEvent evt)
         {
             RemoveFromClassList(RadialMenuSubmittedClass);
-            AddToClassList(RadialMenuPostSubmittedClass);
-            
-            schedule
-                .Execute(() => RemoveFromClassList(RadialMenuPostSubmittedClass))
-                .StartingIn(100)
-                .Until(() => true);
             
             OnSlotClicked?.Invoke(_value);
         }
