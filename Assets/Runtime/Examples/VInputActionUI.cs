@@ -108,7 +108,16 @@ namespace VCustomComponents
                     ""id"": ""7607c7b6-cd76-4816-beef-bd0341cfe950"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PostSubmit"",
+                    ""type"": ""Button"",
+                    ""id"": ""b3bf4255-09ed-489f-b7c7-3526432af6c3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -372,6 +381,17 @@ namespace VCustomComponents
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a02bc3be-697f-468d-856d-92caf5e9df12"",
+                    ""path"": ""*/{Submit}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""PostSubmit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""82627dcc-3b13-4ba9-841d-e4b746d6553e"",
                     ""path"": ""*/{Cancel}"",
                     ""interactions"": """",
@@ -594,6 +614,7 @@ namespace VCustomComponents
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
+            m_UI_PostSubmit = m_UI.FindAction("PostSubmit", throwIfNotFound: true);
             m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
             m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
             m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
@@ -685,6 +706,7 @@ namespace VCustomComponents
         private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
         private readonly InputAction m_UI_Navigate;
         private readonly InputAction m_UI_Submit;
+        private readonly InputAction m_UI_PostSubmit;
         private readonly InputAction m_UI_Cancel;
         private readonly InputAction m_UI_Point;
         private readonly InputAction m_UI_Click;
@@ -713,6 +735,10 @@ namespace VCustomComponents
             /// Provides access to the underlying input action "UI/Submit".
             /// </summary>
             public InputAction @Submit => m_Wrapper.m_UI_Submit;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/PostSubmit".
+            /// </summary>
+            public InputAction @PostSubmit => m_Wrapper.m_UI_PostSubmit;
             /// <summary>
             /// Provides access to the underlying input action "UI/Cancel".
             /// </summary>
@@ -781,6 +807,9 @@ namespace VCustomComponents
                 @Submit.started += instance.OnSubmit;
                 @Submit.performed += instance.OnSubmit;
                 @Submit.canceled += instance.OnSubmit;
+                @PostSubmit.started += instance.OnPostSubmit;
+                @PostSubmit.performed += instance.OnPostSubmit;
+                @PostSubmit.canceled += instance.OnPostSubmit;
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
@@ -825,6 +854,9 @@ namespace VCustomComponents
                 @Submit.started -= instance.OnSubmit;
                 @Submit.performed -= instance.OnSubmit;
                 @Submit.canceled -= instance.OnSubmit;
+                @PostSubmit.started -= instance.OnPostSubmit;
+                @PostSubmit.performed -= instance.OnPostSubmit;
+                @PostSubmit.canceled -= instance.OnPostSubmit;
                 @Cancel.started -= instance.OnCancel;
                 @Cancel.performed -= instance.OnCancel;
                 @Cancel.canceled -= instance.OnCancel;
@@ -971,6 +1003,13 @@ namespace VCustomComponents
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnSubmit(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "PostSubmit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnPostSubmit(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>

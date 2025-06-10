@@ -6,5 +6,6 @@ namespace VCustomComponents
     public enum VCustomEventType
     {
         AimEvent,
+        PostSubmitEvent,
     }
 }

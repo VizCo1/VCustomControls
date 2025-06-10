@@ -20,7 +20,16 @@
                     "id": "7607c7b6-cd76-4816-beef-bd0341cfe950",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PostSubmit",
+                    "type": "Button",
+                    "id": "b3bf4255-09ed-489f-b7c7-3526432af6c3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 },
                 {
@@ -279,6 +288,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
                     "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a02bc3be-697f-468d-856d-92caf5e9df12",
+                    "path": "*/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "PostSubmit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

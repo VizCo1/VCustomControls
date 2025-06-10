@@ -26,11 +26,13 @@ namespace VCustomComponents
             _inputActionAsset.UI.Enable();
             
             _inputActionAsset.UI.Aim.performed += AimOnPerformed;
+            _inputActionAsset.UI.PostSubmit.performed += PostSubmitOnPerformed;
         }
 
         private void OnDetachedFromPanel(DetachFromPanelEvent evt)
         {
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
+            _inputActionAsset.UI.PostSubmit.performed -= PostSubmitOnPerformed;
             _inputActionAsset.UI.Disable();
         }
         
@@ -49,6 +51,22 @@ namespace VCustomComponents
             using var pooled = VAimEvent.GetPooled(aimVector);
             
             pooled.target = aimEventTarget;
+            SendEvent(pooled);
+        }
+        
+        private void PostSubmitOnPerformed(InputAction.CallbackContext obj)
+        {
+            var postSubmitTarget = focusController.focusedElement;
+
+            if (!IsTargetValid(postSubmitTarget, VCustomEventType.PostSubmitEvent))
+                return;
+                
+            if (panel == null) 
+                return;
+            
+            using var pooled = PostSubmitEvent.GetPooled();
+            
+            pooled.target = postSubmitTarget;
             SendEvent(pooled);
         }
 

@@ -149,9 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 23b6a9b8500efc44d8d618e393c9ea5e, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: c27dd52cc8b72a44a94ec460518dc51f, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: ed4d0c6c10907b64d8ce0e10c59fe3d9, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 2e617b1edfbeb674c8bed8d5c486e66e, type: 3}
   m_SortingOrder: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -180,9 +180,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 312146388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec85d180fc106b94a9d06f69ea5eff00, type: 3}
+  m_Script: {fileID: 11500000, guid: ace30ef79a0fb1f4da9bcf3c82be3a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _visualTreeAsset: {fileID: 9197481963319205126, guid: 69e3108f953d6854385b366c651bb143, type: 3}
 --- !u!1 &1088474939
 GameObject:
   m_ObjectHideFlags: 0

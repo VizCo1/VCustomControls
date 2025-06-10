@@ -1,6 +1,43 @@
 .radial-menu {
-    --radial-background-color: red;
-    --radial-border-color: yellow;
-    --radial-segment-color: green;
+    --radial-background-color: var(--color-accent);
+    --radial-border-color: var(--color-primary);
+    --radial-segment-color: var(--color-secondary);
     --radial-border-width: 10;
+}
+
+.radial-menu:hover {
+    --radial-border-color: rgb(164, 94, 214);
+}
+
+.radial-menu:focus {
+    --radial-border-color: rgb(164, 94, 214);
+}
+
+.radial-menu:active {
+    --radial-border-color: rgb(205, 139, 255);
+}
+
+.radial-menu-submitted {
+    --radial-border-color: red;
+    --radial-segment-color: white;
+}
+
+.image-slot {
+    -unity-background-image-tint-color: var(--color-background);
+}
+
+.image-slot-pos-0 {
+    background-image: url("project://database/Assets/Runtime/Examples/RadialMenu/panel-002.png?fileID=2800000&guid=effd1f79673aebf47b0cb2eb251ae57b&type=3#panel-002");
+}
+
+.image-slot-pos-1 {
+    background-image: url("project://database/Assets/Runtime/Examples/RadialMenu/panel-006.png?fileID=2800000&guid=0c36c8c489017d14b863600dfc646882&type=3#panel-006");
+}
+
+.image-slot-pos-2 {
+    background-image: url("project://database/Assets/Runtime/Examples/RadialMenu/panel-014.png?fileID=2800000&guid=5e4ae6a5be3097347a722ab721317545&type=3#panel-014");
+}
+
+.image-slot-pos-3 {
+    background-image: url("project://database/Assets/Runtime/Examples/RadialMenu/panel-022.png?fileID=2800000&guid=22a8fde2b65301f42832c8884787e473&type=3#panel-022");
 }

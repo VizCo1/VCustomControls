@@ -1,0 +1,3 @@
+.grid-list-view-example {
+    flex-grow: 1;
+}
