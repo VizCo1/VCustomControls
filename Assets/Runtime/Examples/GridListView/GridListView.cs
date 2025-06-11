@@ -9,9 +9,6 @@ namespace VCustomComponents
         private UIDocument _document;
         private VGridListView _gridListView;
         
-        [SerializeField]
-        private VisualTreeAsset _visualTreeAsset;
-
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
@@ -31,7 +28,7 @@ namespace VCustomComponents
             {
                 for (var x = 0; x < columns; x++)
                 {
-                    ints[y, x] = x + y;
+                    ints[y, x] = x + y + 10;
                 }
             }
 
