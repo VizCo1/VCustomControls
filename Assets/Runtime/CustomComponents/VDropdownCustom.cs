@@ -17,7 +17,7 @@ namespace VCustomComponents
         public VDropdownCustom() 
         {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
+            if (panel.contextType == ContextType.Editor)
                 return;
             
             RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);

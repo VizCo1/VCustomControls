@@ -2,7 +2,7 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    public static class VisualElementExtensions
+    public static class VVisualElementExtensions
     {
         public static float GetTotalHeight(this VisualElement element, bool ignoreTemplateContainer = false)
         {

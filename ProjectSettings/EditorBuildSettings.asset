@@ -12,5 +12,6 @@ EditorBuildSettings:
     path: Assets/UI/FontTest/FontTest.unity
     guid: 72cc97fda58369b4b8a8eb211862d4e5
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings: {fileID: 11400000, guid: 843e9560680e5184f8b724404e7624ff, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 9be99286d0ec8cb429e6f591daf2b996, type: 3}
   m_UseUCBPForAssetBundles: 0

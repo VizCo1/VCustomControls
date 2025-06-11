@@ -17,7 +17,7 @@ namespace VCustomComponents
         public VEnumDropdownCustom() 
         {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
+            if (panel.contextType == ContextType.Editor)
                 return;
             
             RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
