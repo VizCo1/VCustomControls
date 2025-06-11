@@ -7,12 +7,15 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VCustomEventPanel : VisualElement
     {
+        public static readonly string VCustomEventPanelClass = "custom-event-panel";
         private static VInputActionUI _inputActionAsset;
 
         private VisualElement _aimEventTarget;
         
         public VCustomEventPanel() 
         {
+            AddToClassList(VCustomEventPanelClass);
+            
             RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
             RegisterCallback<DetachFromPanelEvent>(OnDetachedFromPanel);
         }

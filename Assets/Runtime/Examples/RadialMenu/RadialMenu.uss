@@ -1,3 +1,7 @@
+.custom-event-panel {
+    flex-grow: 1;
+}
+
 .radial-menu {
     --radial-background-color: var(--color-accent);
     --radial-border-color: var(--color-primary);

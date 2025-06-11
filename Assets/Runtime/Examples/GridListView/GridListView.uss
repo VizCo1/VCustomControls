@@ -1,3 +1,14 @@
 .grid-list-view-example {
     flex-grow: 1;
 }
+
+.grid-row {
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.grid-row > TemplateContainer {
+    flex-grow: 1;
+    padding: 5px 0;
+}

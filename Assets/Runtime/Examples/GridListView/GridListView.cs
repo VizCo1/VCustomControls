@@ -21,15 +21,17 @@ namespace VCustomComponents
         {
             _gridListView = _document.rootVisualElement.Q<VGridListView>();
             
-            _gridListView.MakeCell = _visualTreeAsset.CloneTree;
             _gridListView.BindCell = BindCell;
+
+            var columns = 5;
+            var rows = 20;
             
-            var ints = new int[25, 5];
-            for (var y = 0; y < 25; y++)
+            var ints = new int[rows, columns];
+            for (var y = 0; y < rows; y++)
             {
-                for (var x = 0; x < 5; x++)
+                for (var x = 0; x < columns; x++)
                 {
-                    ints[y, x] = y;
+                    ints[y, x] = x + y;
                 }
             }
 
