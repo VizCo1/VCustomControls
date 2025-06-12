@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Assets/Runtime/Lobby/Lobby.uss?fileID=7433441132597879392&amp;guid=f9e3738e70fe5d54381261b4a4cefd5c&amp;type=3#Lobby" />
+    <ui:Instance template="ExamplesTemplate" name="Lobby" style="flex-grow: 1;">
+        <AttributeOverrides element-name="DescriptionLabel" text=" " />
+    </ui:Instance>
+</ui:UXML>
