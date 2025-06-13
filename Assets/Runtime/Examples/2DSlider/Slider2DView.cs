@@ -4,15 +4,9 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class Slider2DView : MonoBehaviour
+    public class Slider2DView : BaseView
     {
-        private UIDocument _document;
         private VSlider2D _slider2D;
-
-        private void Awake()
-        {
-            _document = GetComponent<UIDocument>();
-        }
 
         private void Start()
         {

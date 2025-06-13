@@ -4,15 +4,9 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class RadialMenu : MonoBehaviour
+    public class RadialMenuView : BaseView
     {
-        private UIDocument _document;
         private VRadialMenu _radialMenu;
-
-        private void Awake()
-        {
-            _document = GetComponent<UIDocument>();
-        }
 
         private void Start()
         {

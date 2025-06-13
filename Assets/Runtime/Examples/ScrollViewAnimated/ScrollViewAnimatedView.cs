@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class ScrollViewAnimatedView : MonoBehaviour
+    public class ScrollViewAnimatedView : BaseView
     {
         private const string EaseEnumDropdownContainerVerticalName = "EaseEnumDropdownContainerVertical";
         private const string DurationFloatFieldContainerVertical = "DurationFloatFieldContainerVertical";
@@ -16,8 +16,6 @@ namespace VCustomComponents
         private const string ScrollViewAnimatedHorizontalTabName = "ScrollViewAnimatedHorizontal";
         private const string RowContainerName = "RowContainer";
         
-        private UIDocument _document;
-        
         private EnumField _easeDropdownVertical;
         private EnumField _easeDropdownHorizontal;
         private FloatField _durationFloatFieldVertical;
@@ -25,11 +23,6 @@ namespace VCustomComponents
 
         private VScrollViewAnimated _scrollViewAnimatedVertical;
         private VScrollViewAnimated _scrollViewAnimatedHorizontal;
-
-        private void Awake()
-        {
-            _document = GetComponent<UIDocument>();
-        }
 
         private void Start()
         {

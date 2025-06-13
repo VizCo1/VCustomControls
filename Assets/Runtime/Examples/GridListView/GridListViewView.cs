@@ -4,16 +4,10 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class GridListView : MonoBehaviour
+    public class GridListViewView : BaseView
     {
-        private UIDocument _document;
         private VGridListView _gridListView;
         
-        private void Awake()
-        {
-            _document = GetComponent<UIDocument>();
-        }
-
         private void Start()
         {
             _gridListView = _document.rootVisualElement.Q<VGridListView>();

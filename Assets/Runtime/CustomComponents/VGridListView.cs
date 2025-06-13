@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace VCustomComponents
@@ -80,6 +81,10 @@ namespace VCustomComponents
 
 		private void AttachedToPanelEvent(AttachToPanelEvent evt)
 		{
+#if UNITY_EDITOR
+			if (panel.contextType == ContextType.Editor || !Application.isPlaying)
+				return;
+#endif
 			_listView.fixedItemHeight = FixedItemHeight;
 			_listView.virtualizationMethod = VirtualizationMethod;
 			_listView.showBorder = ShowBorder;

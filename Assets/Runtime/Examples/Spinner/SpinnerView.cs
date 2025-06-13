@@ -1,25 +1,18 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class SpinnerView : MonoBehaviour
+    public class SpinnerView : BaseView
     {
         private const string ButtonContainer1Name = "ExamplesButtonContainer1";
         private const string ButtonContainer2Name = "ExamplesButtonContainer2";
         
-        private UIDocument _document;
         private VSpinner _spinner;
         private Button _buttonToggle;
         private Button _buttonReset;
         private Slider _slider;
-
-        private void Awake()
-        {
-            _document = GetComponent<UIDocument>();
-        }
 
         private void Start()
         {
