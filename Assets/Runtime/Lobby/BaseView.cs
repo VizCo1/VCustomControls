@@ -17,7 +17,6 @@ namespace VCustomComponents
 
         protected virtual void Start()
         {
-            Debug.Log("TEST");
             _backButton = (Button)_document.rootVisualElement.Q(BackButtonContainerName).ElementAt(0);
 
             _backButton.clicked += OnBackButtonClicked;
