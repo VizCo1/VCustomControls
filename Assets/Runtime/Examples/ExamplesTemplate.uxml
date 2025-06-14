@@ -5,7 +5,7 @@
         <ui:Label text="{Title}" name="TitleLabel" class="title-label" />
         <ui:Label text="{Description}" name="DescriptionLabel" class="description-label" />
         <ui:VisualElement name="ContentContainer" content-container="anyValue" class="content-container" />
-        <ui:Instance template="ExamplesButton" name="BackButtonContainer" style="align-self: flex-end; margin-top: 16px;">
+        <ui:Instance template="ExamplesButton" name="BackButtonContainer" style="align-self: flex-end; margin-top: 16px; flex-shrink: 0;">
             <AttributeOverrides element-name="ExamplesButton" text="Back" />
         </ui:Instance>
     </ui:VisualElement>
