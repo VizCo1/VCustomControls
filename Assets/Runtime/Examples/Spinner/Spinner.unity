@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2864195579340163268, guid: e7bb8ce59042f3c4b815c0e35b3b3db5, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 10fe69d857bb2f0438812bae85187b66, type: 2}
     - target: {fileID: 7066121669986494368, guid: e7bb8ce59042f3c4b815c0e35b3b3db5, type: 3}
       propertyPath: m_Name
       value: SpinnerView

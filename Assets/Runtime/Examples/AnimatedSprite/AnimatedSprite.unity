@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3177452021837804037, guid: 59a1c2d2e69e2da45bb49ebc9187f513, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: fef95c6f424157a4faca3bce62ef6006, type: 2}
     - target: {fileID: 5678764407298687424, guid: 59a1c2d2e69e2da45bb49ebc9187f513, type: 3}
       propertyPath: m_Name
       value: AnimatedSpriteView

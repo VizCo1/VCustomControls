@@ -12,7 +12,7 @@ namespace VCustomComponents
         {
             base.Start();
             
-            _slider2D = _document.rootVisualElement.Q<VSlider2D>();
+            _slider2D = Root.Q<VSlider2D>();
 
             _slider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);
         }

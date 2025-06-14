@@ -304,6 +304,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 171524152690072403, guid: 1b8bad25a9c43f64ebb71953e396e2f8, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 83ef5505e45b57648b21e57929cf2c8f, type: 2}
     - target: {fileID: 8992269430286197291, guid: 1b8bad25a9c43f64ebb71953e396e2f8, type: 3}
       propertyPath: m_Name
       value: Slider2DView

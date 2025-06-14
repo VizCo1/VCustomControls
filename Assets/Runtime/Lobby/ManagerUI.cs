@@ -26,12 +26,22 @@ namespace VCustomComponents
 
         public void PushDocument<T>() where T : BaseView
         {
+            if (_viewStack.TryPeek(out var previousView))
+            {
+                previousView.Root.SetDisplay(false);
+            }
+            
             var view = _viewContainer.GetView<T>();
             _viewStack.Push(Instantiate(view, transform));
         }
 
         public void PushDocument(int viewIndex)
         {
+            if (_viewStack.TryPeek(out var previousView))
+            {
+                previousView.Root.SetDisplay(false);
+            }
+            
             var view = _viewContainer.Views[viewIndex];
             _viewStack.Push(Instantiate(view, transform));
         }
@@ -42,6 +52,11 @@ namespace VCustomComponents
                 return;
             
             Destroy(view.gameObject);
+            
+            if (_viewStack.TryPeek(out var currentView))
+            {
+                currentView.Root.SetDisplay(true);
+            }
         }
     }
 }

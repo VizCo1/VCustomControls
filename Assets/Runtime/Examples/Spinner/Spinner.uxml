@@ -4,8 +4,8 @@
     <ui:Template name="ExamplesSlider" src="project://database/Assets/Runtime/Examples/ExamplesSlider.uxml?fileID=9197481963319205126&amp;guid=1cd9ae2ebcbdea24a91ae718b73e43cc&amp;type=3#ExamplesSlider" />
     <Style src="project://database/Assets/Runtime/Examples/Spinner/Spinner.uss?fileID=7433441132597879392&amp;guid=491a5b5ad9b3ee949a075956b942af83&amp;type=3#Spinner" />
     <ui:Instance template="ExamplesTemplate" name="ExampleSpinner" class="examples-template-instance">
-        <AttributeOverrides element-name="TitleLabel" text="VSpinner" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows you to easily start and stop the rotation of an element." />
+        <AttributeOverrides element-name="TitleLabel" text="VSpinner" />
         <ui:VisualElement name="VSpinnerContainer" class="spinner-container">
             <ui:Instance template="ExamplesButton" name="ExamplesButtonContainer1" class="examples-button-container">
                 <AttributeOverrides element-name="ExamplesButton" text="TOGGLE SPINNER" />

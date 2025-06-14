@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2679626558668458764, guid: 99c5e2575c372ac4f80c7572e2efc405, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 1fcb2fd0f11d84f40a7c94c96d9ae33a, type: 2}
     - target: {fileID: 8522170467148078588, guid: 99c5e2575c372ac4f80c7572e2efc405, type: 3}
       propertyPath: m_Name
       value: DropdownCustomView

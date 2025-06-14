@@ -263,6 +263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScrollViewAnimatedView
       objectReference: {fileID: 0}
+    - target: {fileID: 7705489537445900524, guid: d8b42a5a4b3519645976c0fdd5df8711, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: f8a7369a43d5d8641baaa9b115fea7d7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

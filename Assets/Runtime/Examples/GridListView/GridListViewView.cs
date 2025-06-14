@@ -18,7 +18,7 @@ namespace VCustomComponents
         {
             base.Start();
             
-            _gridListView = _document.rootVisualElement.Q<VGridListView>();
+            _gridListView = Root.Q<VGridListView>();
             
             _gridListView.BindCell = BindCell;
             

@@ -219,6 +219,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1715616203983386731, guid: ac672d648ec63e34b80ce1ef78240946, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c511cb6befc42a4e8b0ba8eb124da99, type: 2}
     - target: {fileID: 3408430985988667810, guid: ac672d648ec63e34b80ce1ef78240946, type: 3}
       propertyPath: m_Name
       value: EnumDropdownCustomView

@@ -14,3 +14,7 @@
 .slider-vertical .unity-base-field__label {
     width: 125px;
 }
+
+#ExampleSlider2DContainer .back-button-container {
+    display: none;
+}

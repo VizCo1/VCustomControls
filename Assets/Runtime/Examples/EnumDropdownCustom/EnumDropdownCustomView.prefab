@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 8c511cb6befc42a4e8b0ba8eb124da99, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: d1d8e89ae692e0d46837c9ca35acbe96, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 0def2792fafe55d4cb9e577ac03f3ae9, type: 3}
   m_SortingOrder: 0

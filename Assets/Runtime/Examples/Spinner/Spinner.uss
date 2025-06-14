@@ -20,7 +20,7 @@
 
 .examples-slider-container {
     position: absolute;
-    left: 450px;
-    right: 550px;
-    bottom: 74px;
+    left: 420px;
+    right: 500px;
+    bottom: 55px;
 }

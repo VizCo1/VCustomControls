@@ -12,7 +12,7 @@ namespace VCustomComponents
         {
             base.Start();
             
-            _radialMenu = _document.rootVisualElement.Q<VRadialMenu>();
+            _radialMenu = Root.Q<VRadialMenu>();
             _radialMenu.OnSlotClicked += OnSlotClicked;
         }
 

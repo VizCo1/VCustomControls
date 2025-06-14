@@ -223,6 +223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RadialMenuView
       objectReference: {fileID: 0}
+    - target: {fileID: 6431229000469927679, guid: 39e938555c86b1d468da824155cf5af4, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 23b6a9b8500efc44d8d618e393c9ea5e, type: 2}
     - target: {fileID: 7026482076106755664, guid: 39e938555c86b1d468da824155cf5af4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

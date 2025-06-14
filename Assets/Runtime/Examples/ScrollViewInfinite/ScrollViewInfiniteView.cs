@@ -20,10 +20,8 @@ namespace VCustomComponents
         {
             base.Start();
             
-            var root = _document.rootVisualElement;
-            
-            var verticalTab = root.Q(VerticalTabName);
-            var horizontalTab = root.Q(HorizontalTabName);
+            var verticalTab = Root.Q(VerticalTabName);
+            var horizontalTab = Root.Q(HorizontalTabName);
 
             var scrollViewInfiniteVertical = verticalTab.Q<VScrollViewInfinite>();
             var scrollViewInfiniteHorizontal = horizontalTab.Q<VScrollViewInfinite>();

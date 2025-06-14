@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2856130760193236101, guid: 2dbed2535f1bf794793858b76b1bc05f, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 18a74d23ecdfeba4ab7a9fd57917dc64, type: 2}
     - target: {fileID: 4074872817512996054, guid: 2dbed2535f1bf794793858b76b1bc05f, type: 3}
       propertyPath: m_Name
       value: RadialSliderView

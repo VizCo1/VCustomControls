@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,7 +19,7 @@ namespace VCustomComponents
         {
             base.Start();
             
-            _libraryGridListView = _document.rootVisualElement.Q<VGridListView>();
+            _libraryGridListView = Root.Q<VGridListView>();
             _libraryGridListView.BindCell = BindCell;
             
             var rows = (int)Mathf.Round(_viewContainer.NumberOfViews / (float)_columns);

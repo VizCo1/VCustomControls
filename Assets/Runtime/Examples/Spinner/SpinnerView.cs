@@ -18,10 +18,10 @@ namespace VCustomComponents
         {
             base.Start();
             
-            _spinner = _document.rootVisualElement.Q<VSpinner>();
-            _slider = _document.rootVisualElement.Q<Slider>();
-            _buttonToggle = (Button)_document.rootVisualElement.Q(ButtonContainer1Name)[0];
-            _buttonReset = (Button)_document.rootVisualElement.Q(ButtonContainer2Name)[0];
+            _spinner = Root.Q<VSpinner>();
+            _slider = Root.Q<Slider>();
+            _buttonToggle = (Button)Root.Q(ButtonContainer1Name)[0];
+            _buttonReset = (Button)Root.Q(ButtonContainer2Name)[0];
 
             _slider.value = _spinner.Speed;
             

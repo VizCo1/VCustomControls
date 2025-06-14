@@ -295,7 +295,7 @@
 
 .unity-scroll-view:hover .unity-scroller .unity-base-slider__drag-container .unity-base-slider__dragger {
     background-color: var(--color-primary);
-    border-color:  var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .examples-enum-dropdown {
@@ -392,7 +392,7 @@
     flex-grow: 1;
     margin: 0;
     --unity-cursor-color: var(--color-accent);
-    --unity-selection-color: rgba(114, 106, 149, 0.20);
+    --unity-selection-color: rgba(114, 106, 149, 0.2);
 }
 
 .examples-float-field .unity-text-element {
@@ -431,4 +431,10 @@
 
 .examples-float-field .unity-base-text-field__input--placeholder {
     -unity-font-style: italic;
+}
+
+.back-button-container {
+    align-self: flex-end;
+    margin-top: 16px;
+    flex-shrink: 0;
 }

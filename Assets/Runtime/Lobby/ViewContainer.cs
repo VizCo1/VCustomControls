@@ -8,7 +8,7 @@ namespace VCustomComponents
     public class ViewContainer : ScriptableObject
     {
         [field: SerializeField]
-        public BaseView[] Views { get; set; }
+        public BaseView[] Views { get; private set; }
         
         public int NumberOfViews => Views.Length;
         
