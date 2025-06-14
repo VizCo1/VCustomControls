@@ -16,8 +16,10 @@ namespace VCustomComponents
         [SerializeField]
         private VisualTreeAsset _elementToAdd;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             var root = _document.rootVisualElement;
             
             var verticalTab = root.Q(VerticalTabName);

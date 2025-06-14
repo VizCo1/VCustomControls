@@ -24,8 +24,10 @@ namespace VCustomComponents
         private VScrollViewAnimated _scrollViewAnimatedVertical;
         private VScrollViewAnimated _scrollViewAnimatedHorizontal;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             var root = _document.rootVisualElement;
             
             _easeDropdownVertical = (EnumField)root.Q(EaseEnumDropdownContainerVerticalName)[0];

@@ -8,13 +8,20 @@ namespace VCustomComponents
         [SerializeField]
         private ViewContainer _viewContainer;
         
-        public ManagerUI Instance { get; private set; }
+        public static ManagerUI Instance { get; private set; }
         
         private Stack<BaseView> _viewStack;
 
-        private void Start()
+        private void Awake()
         {
-            PushDocument<LobbyView>();
+            if (Instance)
+                return;
+            
+            Instance = this;
+            
+            DontDestroyOnLoad(this);
+            
+            _viewStack = new Stack<BaseView>();
         }
 
         public void PushDocument<T>() where T : BaseView
@@ -23,6 +30,12 @@ namespace VCustomComponents
             _viewStack.Push(Instantiate(view, transform));
         }
 
+        public void PushDocument(int viewIndex)
+        {
+            var view = _viewContainer.Views[viewIndex];
+            _viewStack.Push(Instantiate(view, transform));
+        }
+        
         public void PopDocument()
         {
             if (!_viewStack.TryPop(out var view))
@@ -30,6 +43,5 @@ namespace VCustomComponents
             
             Destroy(view.gameObject);
         }
-        
     }
 }

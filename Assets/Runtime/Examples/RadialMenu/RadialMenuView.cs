@@ -8,8 +8,10 @@ namespace VCustomComponents
     {
         private VRadialMenu _radialMenu;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             _radialMenu = _document.rootVisualElement.Q<VRadialMenu>();
             _radialMenu.OnSlotClicked += OnSlotClicked;
         }
@@ -32,10 +34,12 @@ namespace VCustomComponents
                     break;
             }
         }
-        
-        private void OnDestroy() 
+
+        protected override void OnDestroy() 
         {
             _radialMenu.OnSlotClicked -= OnSlotClicked;
+            
+            base.OnDestroy();
         }
     }
 }

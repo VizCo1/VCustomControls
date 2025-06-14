@@ -6,34 +6,40 @@ namespace VCustomComponents
     [RequireComponent(typeof(UIDocument))]
     public class GridListViewView : BaseView
     {
-        private VGridListView _gridListView;
+        [SerializeField]
+        private int _columns;
         
-        private void Start()
+        [SerializeField]
+        private int _rows;
+        
+        private VGridListView _gridListView;
+
+        protected override void Start()
         {
+            base.Start();
+            
             _gridListView = _document.rootVisualElement.Q<VGridListView>();
             
             _gridListView.BindCell = BindCell;
-
-            var columns = 5;
-            var rows = 20;
             
-            var ints = new int[rows, columns];
-            for (var y = 0; y < rows; y++)
+            var grid = new int[_rows, _columns];
+            var cellIndex = 0;
+            for (var y = 0; y < _rows; y++)
             {
-                for (var x = 0; x < columns; x++)
+                for (var x = 0; x < _columns; x++)
                 {
-                    ints[y, x] = x + y + 10;
+                    grid[y, x] = cellIndex++;
                 }
             }
 
-            _gridListView.BindToGrid(ints);
+            _gridListView.BindToGrid(grid);
         }
 
-        private void BindCell(VisualElement visualElement, object data)
+        private void BindCell(VisualElement visualElement, int index)
         {
             var button = (Button)visualElement[0];
             
-            button.text = data.ToString();
+            button.text = index.ToString();
         }
     }
 }

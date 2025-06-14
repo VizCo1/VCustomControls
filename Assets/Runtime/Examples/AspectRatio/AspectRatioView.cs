@@ -11,8 +11,10 @@ namespace VCustomComponents
         
         private VAspectRatio _aspectRatio;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             _aspectRatio =  _document.rootVisualElement.Q<VAspectRatio>();
             var verticalSlider = (SliderInt)_document.rootVisualElement.Q(VerticalSliderName)[0];
             var horizontalSlider = (SliderInt)_document.rootVisualElement.Q(HorizontalSliderName)[0];

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8045ccd200b4e47b4d9292a5f47fa2, type: 3}
   m_Name: ViewContainer
   m_EditorClassIdentifier: 
-  _views:
+  <Views>k__BackingField:
   - {fileID: 3864126556279537813, guid: 1b8bad25a9c43f64ebb71953e396e2f8, type: 3}
   - {fileID: 7546561287111961312, guid: 59a1c2d2e69e2da45bb49ebc9187f513, type: 3}
   - {fileID: 1504310285110151996, guid: c65a8c4834a23b84080f8ac716246f92, type: 3}
@@ -25,4 +25,3 @@ MonoBehaviour:
   - {fileID: 6941684244721172330, guid: d8b42a5a4b3519645976c0fdd5df8711, type: 3}
   - {fileID: 1604132033208266068, guid: a4fd9f3d120a14a40a61ed877f46598a, type: 3}
   - {fileID: 8095249034206717034, guid: e7bb8ce59042f3c4b815c0e35b3b3db5, type: 3}
-  - {fileID: 5106532155896586475, guid: 0e28b766c4b312644aeda4f2b7243515, type: 3}

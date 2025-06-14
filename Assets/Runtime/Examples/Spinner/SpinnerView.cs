@@ -14,8 +14,10 @@ namespace VCustomComponents
         private Button _buttonReset;
         private Slider _slider;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             _spinner = _document.rootVisualElement.Q<VSpinner>();
             _slider = _document.rootVisualElement.Q<Slider>();
             _buttonToggle = (Button)_document.rootVisualElement.Q(ButtonContainer1Name)[0];
@@ -29,12 +31,14 @@ namespace VCustomComponents
             _buttonReset.clicked += OnButtonResetClicked;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             _spinner.UnregisterValueChangedCallback(OnSpinnerValueChanged);
             _slider.UnregisterValueChangedCallback(OnSliderValueChanged);
             _buttonToggle.clicked -= OnButtonToggleClicked;
             _buttonReset.clicked -= OnButtonResetClicked;
+            
+            base.OnDestroy();
         }
 
         private void OnSpinnerValueChanged(ChangeEvent<bool> evt)

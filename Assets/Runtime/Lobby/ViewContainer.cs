@@ -7,15 +7,17 @@ namespace VCustomComponents
     [CreateAssetMenu(fileName = "ViewContainer", menuName = "Scriptable Objects/ViewContainer")]
     public class ViewContainer : ScriptableObject
     {
-        [SerializeField]
-        private BaseView[] _views;
+        [field: SerializeField]
+        public BaseView[] Views { get; set; }
+        
+        public int NumberOfViews => Views.Length;
         
         private Dictionary<Type, BaseView> _viewDictionary;
         
         private void OnEnable()
         {
             _viewDictionary = new Dictionary<Type, BaseView>();
-            foreach (var view in _views)
+            foreach (var view in Views)
             {
                 _viewDictionary.Add(view.GetType(), view);
             }
@@ -28,5 +30,6 @@ namespace VCustomComponents
             
             return view;
         }
+        
     }
 }

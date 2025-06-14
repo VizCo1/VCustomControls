@@ -11,6 +11,32 @@
     --font-size2-example: 14px;
 }
 
+.unity-collection-view__item {
+    background-color: var(--color-transparent);
+}
+
+.unity-collection-view__item:hover:enabled {
+    background-color: var(--color-transparent);
+}
+
+.unity-collection-view:hover .unity-collection-view__item--selected {
+    background-color: var(--color-transparent);
+}
+
+.unity-collection-view:focus:enabled .unity-collection-view__item--selected {
+    background-color: var(--color-transparent);
+}
+
+.unity-collection-view__item--selected {
+    background-color: var(--color-transparent);
+}
+
+.grid-row {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
 .examples-template-instance {
     flex-grow: 1;
 }

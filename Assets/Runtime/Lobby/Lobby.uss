@@ -1,3 +1,17 @@
 .lobby-container {
     flex-grow: 1;
 }
+
+.grid-row {
+    height: 410px;
+    padding: 0 0 16px 0;
+}
+
+.grid-row > TemplateContainer {
+    width: 439px;
+}
+
+.last-grid-row {
+    height: 394px;
+    padding: 0;
+}

@@ -1,8 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesButton" src="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" />
     <Style src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uss?fileID=7433441132597879392&amp;guid=72a0305170ab11347bc3c63a3f1ca84d&amp;type=3#ExamplesTemplate" />
     <ui:VisualElement name="ExamplesTemplateContainer" class="examples-template-container">
         <ui:Label text="{Title}" name="TitleLabel" class="title-label" />
         <ui:Label text="{Description}" name="DescriptionLabel" class="description-label" />
         <ui:VisualElement name="ContentContainer" content-container="anyValue" class="content-container" />
+        <ui:Instance template="ExamplesButton" name="BackButtonContainer" style="align-self: flex-end; margin-top: 16px;">
+            <AttributeOverrides element-name="ExamplesButton" text="Back" />
+        </ui:Instance>
     </ui:VisualElement>
 </ui:UXML>
