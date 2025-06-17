@@ -8,21 +8,19 @@ namespace VCustomComponents
         private const string BackButtonContainerName = "BackButtonContainer";
         
         public VisualElement Root { get; private set; }
+        public UIDocument Document { get; private set; }
         
         protected Button _backButton;
-        
-        private UIDocument _document;
 
         protected virtual void Awake()
         {
-            _document = GetComponent<UIDocument>();
-            Root =  _document.rootVisualElement;
+            Document = GetComponent<UIDocument>();
+            Root = Document.rootVisualElement;
         }
 
         protected virtual void Start()
         {
             _backButton = (Button)Root.Query(BackButtonContainerName).Last().ElementAt(0);
-            
             _backButton.clicked += OnBackButtonClicked;
         }
 

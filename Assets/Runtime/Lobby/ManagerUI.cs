@@ -32,7 +32,9 @@ namespace VCustomComponents
             }
             
             var view = _viewContainer.GetView<T>();
-            _viewStack.Push(Instantiate(view, transform));
+            
+            var baseView = Instantiate(view, transform);
+            _viewStack.Push(baseView);
         }
 
         public void PushDocument(int viewIndex)
@@ -43,7 +45,9 @@ namespace VCustomComponents
             }
             
             var view = _viewContainer.Views[viewIndex];
-            _viewStack.Push(Instantiate(view, transform));
+
+            var baseView = Instantiate(view, transform);
+            _viewStack.Push(baseView);
         }
         
         public void PopDocument()
