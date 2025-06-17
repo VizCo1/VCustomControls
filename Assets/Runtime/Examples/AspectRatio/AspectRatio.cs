@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class AspectRatioView : BaseView
+    public class AspectRatio : ViewBase
     {
         private const string VerticalSliderName = "VerticalSlider";
         private const string HorizontalSliderName = "HorizontalSlider";

@@ -1,6 +1,6 @@
 namespace VCustomComponents
 {
-    public class RadialSliderView : BaseView
+    public class DropdownCustom : ViewBase
     {
 
     }

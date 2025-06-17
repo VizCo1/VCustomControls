@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class LobbyView : BaseView
+    public class Lobby : ViewBase
     {
         [SerializeField]
         private ViewContainer _viewContainer;

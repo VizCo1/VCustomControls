@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class SpinnerView : BaseView
+    public class Spinner : ViewBase
     {
         private const string ButtonContainer1Name = "ExamplesButtonContainer1";
         private const string ButtonContainer2Name = "ExamplesButtonContainer2";

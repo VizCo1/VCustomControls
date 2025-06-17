@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class ScrollViewInfiniteView : BaseView
+    public class ScrollInfinite : ViewBase
     {
         private const string VerticalTabName = "ScrollViewInfiniteVertical";
         private const string HorizontalTabName = "ScrollViewInfiniteHorizontal";

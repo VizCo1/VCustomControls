@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class GridListViewView : BaseView
+    public class GridList : ViewBase
     {
         [SerializeField]
         private int _columns;

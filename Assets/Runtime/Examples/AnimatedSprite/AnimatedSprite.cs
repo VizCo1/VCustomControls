@@ -1,6 +1,6 @@
 namespace VCustomComponents
 {
-    public class AnimatedSpriteView : BaseView
+    public class AnimatedSprite : ViewBase
     {
         
     }

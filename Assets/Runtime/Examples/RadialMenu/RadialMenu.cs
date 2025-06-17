@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class RadialMenuView : BaseView
+    public class RadialMenu : ViewBase
     {
         private VRadialMenu _radialMenu;
 

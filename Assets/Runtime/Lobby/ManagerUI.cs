@@ -10,7 +10,7 @@ namespace VCustomComponents
         
         public static ManagerUI Instance { get; private set; }
         
-        private Stack<BaseView> _viewStack;
+        private Stack<ViewBase> _viewStack;
 
         private void Awake()
         {
@@ -21,10 +21,10 @@ namespace VCustomComponents
             
             DontDestroyOnLoad(this);
             
-            _viewStack = new Stack<BaseView>();
+            _viewStack = new Stack<ViewBase>();
         }
 
-        public void PushDocument<T>() where T : BaseView
+        public void PushDocument<T>() where T : ViewBase
         {
             if (_viewStack.TryPeek(out var previousView))
             {

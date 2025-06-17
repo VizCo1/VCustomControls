@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class ScrollViewAnimatedView : BaseView
+    public class ScrollAnimated : ViewBase
     {
         private const string EaseEnumDropdownContainerVerticalName = "EaseEnumDropdownContainerVertical";
         private const string DurationFloatFieldContainerVertical = "DurationFloatFieldContainerVertical";

@@ -1,6 +1,6 @@
 namespace VCustomComponents
 {
-    public class RotatorView : BaseView
+    public class RadialSlider : ViewBase
     {
 
     }
