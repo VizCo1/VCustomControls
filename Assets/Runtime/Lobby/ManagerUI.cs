@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
@@ -33,8 +34,8 @@ namespace VCustomComponents
             
             var view = _viewContainer.GetView<T>();
             
-            var baseView = Instantiate(view, transform);
-            _viewStack.Push(baseView);
+            var viewBase = Instantiate(view, transform);
+            _viewStack.Push(viewBase);
         }
 
         public void PushDocument(int viewIndex)
@@ -46,8 +47,8 @@ namespace VCustomComponents
             
             var view = _viewContainer.Views[viewIndex];
 
-            var baseView = Instantiate(view, transform);
-            _viewStack.Push(baseView);
+            var viewBase = Instantiate(view, transform);
+            _viewStack.Push(viewBase);
         }
         
         public void PopDocument()
