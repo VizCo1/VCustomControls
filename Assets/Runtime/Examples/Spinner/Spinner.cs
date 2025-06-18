@@ -1,32 +1,27 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class SpinnerView : MonoBehaviour
+    public class Spinner : ViewBase
     {
         private const string ButtonContainer1Name = "ExamplesButtonContainer1";
         private const string ButtonContainer2Name = "ExamplesButtonContainer2";
         
-        private UIDocument _document;
         private VSpinner _spinner;
         private Button _buttonToggle;
         private Button _buttonReset;
         private Slider _slider;
 
-        private void Awake()
+        protected override void Start()
         {
-            _document = GetComponent<UIDocument>();
-        }
-
-        private void Start()
-        {
-            _spinner = _document.rootVisualElement.Q<VSpinner>();
-            _slider = _document.rootVisualElement.Q<Slider>();
-            _buttonToggle = (Button)_document.rootVisualElement.Q(ButtonContainer1Name)[0];
-            _buttonReset = (Button)_document.rootVisualElement.Q(ButtonContainer2Name)[0];
+            base.Start();
+            
+            _spinner = Root.Q<VSpinner>();
+            _slider = Root.Q<Slider>();
+            _buttonToggle = (Button)Root.Q(ButtonContainer1Name)[0];
+            _buttonReset = (Button)Root.Q(ButtonContainer2Name)[0];
 
             _slider.value = _spinner.Speed;
             
@@ -36,12 +31,14 @@ namespace VCustomComponents
             _buttonReset.clicked += OnButtonResetClicked;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             _spinner.UnregisterValueChangedCallback(OnSpinnerValueChanged);
             _slider.UnregisterValueChangedCallback(OnSliderValueChanged);
             _buttonToggle.clicked -= OnButtonToggleClicked;
             _buttonReset.clicked -= OnButtonResetClicked;
+            
+            base.OnDestroy();
         }
 
         private void OnSpinnerValueChanged(ChangeEvent<bool> evt)

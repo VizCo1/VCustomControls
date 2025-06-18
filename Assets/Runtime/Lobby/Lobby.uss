@@ -1,0 +1,25 @@
+.lobby-container {
+    flex-grow: 1;
+}
+
+.lobby-container .title-label {
+    margin-bottom: 0;
+}
+
+.lobby-container .back-button-container {
+    display: none;
+}
+
+.grid-row {
+    height: 413px;
+    padding: 0 0 16px 0;
+}
+
+.grid-row > TemplateContainer {
+    width: 439px;
+}
+
+.last-grid-row {
+    height: 397px;
+    padding: 0;
+}

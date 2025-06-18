@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class ScrollViewInfiniteView : MonoBehaviour
+    public class ScrollInfinite : ViewBase
     {
         private const string VerticalTabName = "ScrollViewInfiniteVertical";
         private const string HorizontalTabName = "ScrollViewInfiniteHorizontal";
@@ -15,20 +15,13 @@ namespace VCustomComponents
         
         [SerializeField]
         private VisualTreeAsset _elementToAdd;
-        
-        private UIDocument _document;
 
-        private void Awake()
+        protected override void Start()
         {
-            _document = GetComponent<UIDocument>();
-        }
-
-        private void Start()
-        {
-            var root = _document.rootVisualElement;
+            base.Start();
             
-            var verticalTab = root.Q(VerticalTabName);
-            var horizontalTab = root.Q(HorizontalTabName);
+            var verticalTab = Root.Q(VerticalTabName);
+            var horizontalTab = Root.Q(HorizontalTabName);
 
             var scrollViewInfiniteVertical = verticalTab.Q<VScrollViewInfinite>();
             var scrollViewInfiniteHorizontal = horizontalTab.Q<VScrollViewInfinite>();

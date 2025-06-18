@@ -3,8 +3,8 @@
     <Style src="project://database/Assets/Runtime/Examples/RadialMenu/RadialMenu.uss?fileID=7433441132597879392&amp;guid=5a86c97c1f23f9847b2b6ca2444b4dbe&amp;type=3#RadialMenu" />
     <VCustomComponents.VCustomEventPanel name="VCustomEventPanel">
         <ui:Instance template="ExamplesTemplate" name="RadialMenuExample" style="flex-grow: 1;">
-            <AttributeOverrides element-name="TitleLabel" text="VRadialMenu" />
             <AttributeOverrides element-name="DescriptionLabel" text="This custom control is a radial menu with a lot of customization and compatible with keyboard and gamepad input!" />
+            <AttributeOverrides element-name="TitleLabel" text="VRadialMenu" />
             <VCustomComponents.VRadialMenu name="VRadialMenu" slots="4" focusable="true" slot-image-width="75" slot-image-height="75" slot-image-position="0.56" style="flex-grow: 1; width: 450px; align-self: center;" />
         </ui:Instance>
     </VCustomComponents.VCustomEventPanel>

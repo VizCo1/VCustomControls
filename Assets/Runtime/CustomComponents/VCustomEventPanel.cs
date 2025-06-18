@@ -23,7 +23,7 @@ namespace VCustomComponents
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
 #if UNITY_EDITOR
-            if (panel.contextType == ContextType.Editor)
+            if (panel.contextType == ContextType.Editor || !Application.isPlaying)
                 return;
 #endif
             
@@ -39,7 +39,7 @@ namespace VCustomComponents
         private void OnDetachedFromPanel(DetachFromPanelEvent evt)
         {
 #if UNITY_EDITOR
-            if (panel.contextType == ContextType.Editor)
+            if (panel.contextType == ContextType.Editor || !Application.isPlaying)
                 return;
 #endif
             

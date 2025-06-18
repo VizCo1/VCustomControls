@@ -4,19 +4,15 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class RadialMenu : MonoBehaviour
+    public class RadialMenu : ViewBase
     {
-        private UIDocument _document;
         private VRadialMenu _radialMenu;
 
-        private void Awake()
+        protected override void Start()
         {
-            _document = GetComponent<UIDocument>();
-        }
-
-        private void Start()
-        {
-            _radialMenu = _document.rootVisualElement.Q<VRadialMenu>();
+            base.Start();
+            
+            _radialMenu = Root.Q<VRadialMenu>();
             _radialMenu.OnSlotClicked += OnSlotClicked;
         }
 
@@ -38,10 +34,12 @@ namespace VCustomComponents
                     break;
             }
         }
-        
-        private void OnDestroy() 
+
+        protected override void OnDestroy() 
         {
             _radialMenu.OnSlotClicked -= OnSlotClicked;
+            
+            base.OnDestroy();
         }
     }
 }

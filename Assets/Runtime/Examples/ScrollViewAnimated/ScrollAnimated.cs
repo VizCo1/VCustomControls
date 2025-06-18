@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class ScrollViewAnimatedView : MonoBehaviour
+    public class ScrollAnimated : ViewBase
     {
         private const string EaseEnumDropdownContainerVerticalName = "EaseEnumDropdownContainerVertical";
         private const string DurationFloatFieldContainerVertical = "DurationFloatFieldContainerVertical";
@@ -16,8 +16,6 @@ namespace VCustomComponents
         private const string ScrollViewAnimatedHorizontalTabName = "ScrollViewAnimatedHorizontal";
         private const string RowContainerName = "RowContainer";
         
-        private UIDocument _document;
-        
         private EnumField _easeDropdownVertical;
         private EnumField _easeDropdownHorizontal;
         private FloatField _durationFloatFieldVertical;
@@ -26,25 +24,20 @@ namespace VCustomComponents
         private VScrollViewAnimated _scrollViewAnimatedVertical;
         private VScrollViewAnimated _scrollViewAnimatedHorizontal;
 
-        private void Awake()
+        protected override void Start()
         {
-            _document = GetComponent<UIDocument>();
-        }
-
-        private void Start()
-        {
-            var root = _document.rootVisualElement;
+            base.Start();
             
-            _easeDropdownVertical = (EnumField)root.Q(EaseEnumDropdownContainerVerticalName)[0];
+            _easeDropdownVertical = (EnumField)Root.Q(EaseEnumDropdownContainerVerticalName)[0];
             _easeDropdownVertical.value = Ease.Linear;
-            _durationFloatFieldVertical =  (FloatField)root.Q(DurationFloatFieldContainerVertical)[0];
+            _durationFloatFieldVertical =  (FloatField)Root.Q(DurationFloatFieldContainerVertical)[0];
             
-            _easeDropdownHorizontal = (EnumField)root.Q(EaseEnumDropdownContainerHorizontal)[0];
+            _easeDropdownHorizontal = (EnumField)Root.Q(EaseEnumDropdownContainerHorizontal)[0];
             _easeDropdownHorizontal.value = Ease.Linear;
-            _durationFloatFieldHorizontal =  (FloatField)root.Q(DurationFloatFieldContainerHorizontal)[0];
+            _durationFloatFieldHorizontal =  (FloatField)Root.Q(DurationFloatFieldContainerHorizontal)[0];
             
-            var verticalTab = root.Q(ScrollViewAnimatedVerticalTabName);
-            var horizontalTab = root.Q(ScrollViewAnimatedHorizontalTabName);
+            var verticalTab = Root.Q(ScrollViewAnimatedVerticalTabName);
+            var horizontalTab = Root.Q(ScrollViewAnimatedHorizontalTabName);
             
             _scrollViewAnimatedVertical = verticalTab.Q<VScrollViewAnimated>();
             _scrollViewAnimatedHorizontal = horizontalTab.Q<VScrollViewAnimated>();

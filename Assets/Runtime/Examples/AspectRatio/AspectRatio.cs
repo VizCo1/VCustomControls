@@ -4,24 +4,20 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [RequireComponent(typeof(UIDocument))]
-    public class AspectRatioView : MonoBehaviour
+    public class AspectRatio : ViewBase
     {
         private const string VerticalSliderName = "VerticalSlider";
         private const string HorizontalSliderName = "HorizontalSlider";
         
-        private UIDocument _document;
         private VAspectRatio _aspectRatio;
-        
-        private void Awake()
-        {
-            _document = GetComponent<UIDocument>();
-        }
 
-        private void Start()
+        protected override void Start()
         {
-            _aspectRatio =  _document.rootVisualElement.Q<VAspectRatio>();
-            var verticalSlider = (SliderInt)_document.rootVisualElement.Q(VerticalSliderName)[0];
-            var horizontalSlider = (SliderInt)_document.rootVisualElement.Q(HorizontalSliderName)[0];
+            base.Start();
+            
+            _aspectRatio =  Root.Q<VAspectRatio>();
+            var verticalSlider = (SliderInt)Root.Q(VerticalSliderName)[0];
+            var horizontalSlider = (SliderInt)Root.Q(HorizontalSliderName)[0];
 
             verticalSlider.value = _aspectRatio.RatioHeight;
             horizontalSlider.value = _aspectRatio.RatioWidth;

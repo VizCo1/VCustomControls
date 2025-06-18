@@ -3,8 +3,8 @@
     <ui:Template name="ExamplesButton" src="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" />
     <Style src="project://database/Assets/Runtime/Examples/Rotator/Rotator.uss?fileID=7433441132597879392&amp;guid=79a035aa7a9f3604d92756ab80661414&amp;type=3#Rotator" />
     <ui:Instance template="ExamplesTemplate" name="RotatorExample" class="rotator-example-container">
-        <AttributeOverrides element-name="TitleLabel" text="VRotator" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows you to easily change a label from a set of options." />
+        <AttributeOverrides element-name="TitleLabel" text="VRotator" />
         <ui:VisualElement name="Container" class="container">
             <VCustomComponents.VRotator name="HorizontalVRotator" options="Some value,Other value,More values!,Nothing" has-buttons="true" are-buttons-loopable="true" value="1" class="horizontal-rotator">
                 <ui:Instance template="ExamplesButton" name="LeftRotatorButton">

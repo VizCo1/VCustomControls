@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace VCustomComponents
@@ -11,7 +12,7 @@ namespace VCustomComponents
 		
 		private readonly ListView _listView;
 		
-		public Action<VisualElement, object> BindCell { get; set; }
+		public Action<VisualElement, int> BindCell { get; set; }
 		
 		public Func<VisualElement> MakeCell { get; private set; }
 		
@@ -80,6 +81,10 @@ namespace VCustomComponents
 
 		private void AttachedToPanelEvent(AttachToPanelEvent evt)
 		{
+#if UNITY_EDITOR
+			if (panel.contextType == ContextType.Editor || !Application.isPlaying)
+				return;
+#endif
 			_listView.fixedItemHeight = FixedItemHeight;
 			_listView.virtualizationMethod = VirtualizationMethod;
 			_listView.showBorder = ShowBorder;
@@ -98,7 +103,7 @@ namespace VCustomComponents
 			MakeCell = ItemTemplate.Instantiate;
 		}
 
-		public void BindToGrid<T>(T[,] grid)
+		public void BindToGrid(int[,] grid)
 		{
 			var height = grid.GetLength(0);
 
@@ -120,7 +125,20 @@ namespace VCustomComponents
 		private void BindItem(VisualElement visualElement, int index)
 		{
 			var rowData = (GridRowData)_listView.itemsSource[index];
+			
 			var gridRow = (GridRow)visualElement;
+			
+			var isLastRow = index == _listView.itemsSource.Count - 1;
+			
+			if (isLastRow)
+			{
+				gridRow.AddToClassList(GridRow.LastGridRowClass);
+			}
+			else
+			{
+				gridRow.RemoveFromClassList(GridRow.LastGridRowClass);
+			}
+			
 			gridRow.BindToGridRowData(rowData);
 		}
 	}
@@ -128,17 +146,12 @@ namespace VCustomComponents
 	public sealed class GridRow : VisualElement
 	{
 		public static readonly string GridRowClass = "grid-row";
+		public static readonly string LastGridRowClass = "last-grid-row";
 			
 		public GridRow(VGridListView gridListView)
 		{
 			_gridView = gridListView;
 				
-			RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
-		}
-
-		private void OnAttachedToPanel(AttachToPanelEvent evt)
-		{
-			ClearClassList();
 			AddToClassList(GridRowClass);
 		}
 
@@ -166,8 +179,8 @@ namespace VCustomComponents
 				var visualElement = _gridElements[i];
 				Add(visualElement);
 					
-				var data = rowData.Grid.GetValue(rowData.Row, i);
-				_gridView.BindCell(visualElement, data);
+				var index = rowData.Grid[rowData.Row, i];
+				_gridView.BindCell(visualElement, index);
 			}
 		}
 	}
@@ -175,9 +188,9 @@ namespace VCustomComponents
 	public readonly struct GridRowData
 	{
 		public readonly int Row;
-		public readonly Array Grid;
+		public readonly int[,] Grid;
 
-		public GridRowData(int row, Array grid)
+		public GridRowData(int row, int[,] grid)
 		{
 			Row = row;
 			Grid = grid;
