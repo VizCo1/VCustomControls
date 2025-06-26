@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1856642205817339763}
   - component: {fileID: 1048434778957944547}
+  - component: {fileID: 6113204057875100750}
   m_Layer: 5
   m_Name: TooltipView
   m_TagString: Untagged
@@ -46,8 +47,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: d1d8e89ae692e0d46837c9ca35acbe96, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 67001d19ea26f1340a8b425e4bd8d02a, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 66d4aa5c1f3007440b6dfc054ff2b050, type: 3}
   m_SortingOrder: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &6113204057875100750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8193731381542734211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bf485b86ad710479be7ba4fbac545b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

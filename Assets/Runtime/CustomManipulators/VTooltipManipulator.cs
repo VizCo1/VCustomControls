@@ -4,12 +4,13 @@ namespace VCustomComponents
 {
     public class VTooltipManipulator : Manipulator
     {
-        
         private readonly VTooltip _vTooltip;
+        private readonly VTooltipPosition _vTooltipPosition;
         
-        public VTooltipManipulator(VTooltip tooltip)
+        public VTooltipManipulator(VTooltip tooltip, VTooltipPosition position)
         {
             _vTooltip = tooltip;
+            _vTooltipPosition = position;
         }
         
         protected override void RegisterCallbacksOnTarget()
@@ -26,15 +27,12 @@ namespace VCustomComponents
         
         private void OnMouseEnter(MouseEnterEvent evt)
         {
-            _vTooltip.text = target.tooltip;
-            
-            _vTooltip.style.left = target.worldBound.center.x;
-            _vTooltip.style.top = target.worldBound.yMin;
+            _vTooltip.Show(target, _vTooltipPosition);
         }
 
         private void OnMouseOut(MouseOutEvent evt)
         {
-            _vTooltip.SetDisplay(false);
+            _vTooltip.Hide();
         }
     }
 }
