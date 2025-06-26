@@ -7,6 +7,8 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VTooltip : Label
     {
+        private const bool DoOneTime = true;
+        
         [Header(nameof(VTooltip))]
         
         [UxmlAttribute]
@@ -21,7 +23,7 @@ namespace VCustomComponents
             if (!Application.isPlaying)
                 return;
 #endif
-            this.SetVisibility(false);
+            this.SetDisplay(false);
             
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
@@ -39,19 +41,24 @@ namespace VCustomComponents
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition)
         {
-            this.SetVisibility(true);
+            this.SetDisplay(true);
             
             text = target.tooltip;
 
-            var position = GetTooltipPosition(target, tooltipPosition);
-            
-            style.left = position.x;
-            style.top = position.y;
+            schedule
+                .Execute(() =>
+                {
+                    var position = GetTooltipPosition(target, tooltipPosition);
+                    
+                    style.left = position.x;
+                    style.top = position.y;
+                })
+                .Until(() => DoOneTime);
         }
         
         public void Hide()
         {
-            this.SetVisibility(false);
+            this.SetDisplay(false);
         }
         
         private Vector2 GetTooltipPosition(VisualElement target, VTooltipPosition tooltipPosition)
@@ -59,9 +66,9 @@ namespace VCustomComponents
             return tooltipPosition switch
             {
                 VTooltipPosition.Top => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMin - resolvedStyle.height),
-                VTooltipPosition.Right => new Vector2(0, 0),
-                VTooltipPosition.Bottom => new Vector2(0, 0),
-                VTooltipPosition.Left => new Vector2(0, 0),
+                VTooltipPosition.Right => new Vector2(target.worldBound.xMax, target.worldBound.center.y - resolvedStyle.height * 0.5f),
+                VTooltipPosition.Bottom => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMax),
+                VTooltipPosition.Left => new Vector2(target.worldBound.xMin - resolvedStyle.width, target.worldBound.center.y - resolvedStyle.height * 0.5f),
                 _ => throw new ArgumentOutOfRangeException(nameof(tooltipPosition), tooltipPosition, null)
             };
         }
