@@ -8,16 +8,24 @@ namespace VCustomComponents
     public partial class VTooltip : Label
     {
         private const bool DoOneTime = true;
-        private const int TooltipDelayMs = 500;
+        private const float FadeRate = 0.05f;
 
         public static readonly string TooltipClass = "tooltip";
 
         [Header(nameof(VTooltip))]
-        [UxmlAttribute, Tooltip("Fade duration in seconds, if set to -1 there will be no fade")]
-        private float FadeTimeInSeconds { get; set; } = -1f;
+        
+        [UxmlAttribute]
+        private float FadeDuration { get; set; } = 0.1f;
+        
+        [UxmlAttribute]
+        private int TooltipDelayMs { get; set; } = 500;
+        
+        [UxmlAttribute]
+        private int Offset { get; set; } = 5;
 
         private IVisualElementScheduledItem _scheduledItem;
         private VisualElement _previousTarget;
+        private int _intervalMs;
         
         public VTooltip() 
         {
@@ -28,6 +36,12 @@ namespace VCustomComponents
                 return;
 #endif
             style.opacity = 0;
+            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
+        }
+
+        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        {
+            _intervalMs = Mathf.RoundToInt(FadeDuration / (1f / FadeRate) * 1000f);
         }
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
@@ -66,10 +80,10 @@ namespace VCustomComponents
         {
             return tooltipPosition switch
             {
-                VTooltipPosition.Top => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMin - resolvedStyle.height),
-                VTooltipPosition.Right => new Vector2(target.worldBound.xMax, target.worldBound.center.y - resolvedStyle.height * 0.5f),
-                VTooltipPosition.Bottom => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMax),
-                VTooltipPosition.Left => new Vector2(target.worldBound.xMin - resolvedStyle.width, target.worldBound.center.y - resolvedStyle.height * 0.5f),
+                VTooltipPosition.Top => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMin - resolvedStyle.height - Offset),
+                VTooltipPosition.Right => new Vector2(target.worldBound.xMax + Offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
+                VTooltipPosition.Bottom => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMax + Offset),
+                VTooltipPosition.Left => new Vector2(target.worldBound.xMin - resolvedStyle.width - Offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
                 _ => throw new ArgumentOutOfRangeException(nameof(tooltipPosition), tooltipPosition, null)
             };
         }
@@ -94,9 +108,10 @@ namespace VCustomComponents
             _scheduledItem = schedule
                 .Execute(() =>
                 { 
-                    style.opacity = resolvedStyle.opacity + 0.01f;  
+                    style.opacity = resolvedStyle.opacity + FadeRate;  
                 })
                 .StartingIn(startingIn)
+                .Every(_intervalMs)
                 .Until(() => resolvedStyle.opacity >= 1f);
         }
 
@@ -106,8 +121,9 @@ namespace VCustomComponents
             _scheduledItem = schedule
                 .Execute(() =>
                 {
-                    style.opacity = resolvedStyle.opacity - 0.01f; 
+                    style.opacity = resolvedStyle.opacity - FadeRate; 
                 })
+                .Every(_intervalMs)
                 .Until(() => resolvedStyle.opacity <= 0f);
         }
     }

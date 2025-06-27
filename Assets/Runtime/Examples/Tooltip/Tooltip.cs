@@ -16,8 +16,8 @@ namespace VCustomComponents
             var tooltipExample1 = Root.Q("TooltipExample1");
             var tooltipExample2 = Root.Q("TooltipExample2");
             
-            tooltipExample1.AddManipulator(new VTooltipManipulator(_tooltip, VTooltipPosition.Top));
-            tooltipExample2.AddManipulator(new VTooltipManipulator(_tooltip, VTooltipPosition.Bottom));
+            tooltipExample1.AddManipulator(new VTooltipManipulator(_tooltip, VTooltipPosition.Left));
+            tooltipExample2.AddManipulator(new VTooltipManipulator(_tooltip, VTooltipPosition.Right));
         }
     }
 }

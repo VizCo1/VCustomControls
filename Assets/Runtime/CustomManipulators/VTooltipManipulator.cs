@@ -49,7 +49,7 @@ namespace VCustomComponents
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
-            _vTooltip.Show(target, _vTooltipPosition, false);
+            _vTooltip.Show(target, _vTooltipPosition);
         }
     }
 }
