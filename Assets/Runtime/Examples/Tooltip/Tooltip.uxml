@@ -5,8 +5,8 @@
         <AttributeOverrides element-name="TitleLabel" text="VTooltip" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control" />
         <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; flex-direction: row;">
-            <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip!" style="width: 650px; height: 400px; background-color: rgb(114, 106, 149);" />
-            <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" style="width: 650px; height: 400px; background-color: rgb(135, 112, 160);" />
+            <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip!" style="width: 250px; height: 100px; background-color: rgb(114, 106, 149);" />
+            <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" style="width: 250px; height: 100px; background-color: rgb(135, 112, 160);" />
         </ui:VisualElement>
     </ui:Instance>
     <VCustomComponents.VTooltip name="Tooltip" text="Tooltip" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 4px; padding-right: 8px; padding-bottom: 4px; padding-left: 8px; color: rgb(255, 231, 185); font-size: 24px; -unity-text-align: middle-center; background-color: rgb(51, 51, 51);" />
