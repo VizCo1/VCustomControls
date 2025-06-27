@@ -8,6 +8,7 @@ namespace VCustomComponents
     public partial class VTooltip : Label
     {
         private const bool DoOneTime = true;
+        private const int TooltipDelayMs = 500;
 
         public static readonly string TooltipClass = "tooltip";
 
@@ -15,6 +16,9 @@ namespace VCustomComponents
         [UxmlAttribute, Tooltip("Fade duration in seconds, if set to -1 there will be no fade")]
         private float FadeTimeInSeconds { get; set; } = -1f;
 
+        private IVisualElementScheduledItem _scheduledItem;
+        private VisualElement _previousTarget;
+        
         public VTooltip() 
         {
             style.position = Position.Absolute;
@@ -26,9 +30,9 @@ namespace VCustomComponents
             style.opacity = 0;
         }
 
-        public void Show(VisualElement target, VTooltipPosition tooltipPosition)
+        public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
         {
-            FadeIn();
+            FadeIn(target, canHaveFadeDelay);
             
             text = target.tooltip;
 
@@ -47,6 +51,16 @@ namespace VCustomComponents
         {
             FadeOut();
         }
+
+        public bool TryHide()
+        {
+            if (resolvedStyle.opacity <= 0f)
+                return false;
+            
+            FadeOut();
+            
+            return true;
+        }
         
         private Vector2 GetTooltipPosition(VisualElement target, VTooltipPosition tooltipPosition)
         {
@@ -60,26 +74,39 @@ namespace VCustomComponents
             };
         }
 
-        private void FadeIn()
+        private void FadeIn(VisualElement target, bool canHaveFadeDelay)
         {
-            style.opacity = 0;
+            if (_previousTarget != target)
+            {
+                style.opacity = 0f;
+            }
             
-            schedule
+            var startingIn = TooltipDelayMs;
+
+            if (!canHaveFadeDelay || _scheduledItem is { isActive: true } && _previousTarget == target)
+            {
+                startingIn = 0;
+            }
+            
+            _previousTarget = target;
+            
+            _scheduledItem?.Pause();
+            _scheduledItem = schedule
                 .Execute(() =>
                 { 
-                    style.opacity = resolvedStyle.opacity + 0.05f;  
+                    style.opacity = resolvedStyle.opacity + 0.01f;  
                 })
+                .StartingIn(startingIn)
                 .Until(() => resolvedStyle.opacity >= 1f);
         }
 
         private void FadeOut()
         {
-            style.opacity = 1;
-            
-            schedule
+            _scheduledItem?.Pause();
+            _scheduledItem = schedule
                 .Execute(() =>
                 {
-                    style.opacity = resolvedStyle.opacity - 0.05f; 
+                    style.opacity = resolvedStyle.opacity - 0.01f; 
                 })
                 .Until(() => resolvedStyle.opacity <= 0f);
         }

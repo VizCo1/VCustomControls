@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace VCustomComponents
@@ -15,24 +16,42 @@ namespace VCustomComponents
         
         protected override void RegisterCallbacksOnTarget()
         {
-            target.RegisterCallback<MouseEnterEvent>(OnMouseEnter);
-            target.RegisterCallback<MouseOutEvent>(OnMouseOut);
+            target.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
+            target.RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
+            target.RegisterCallback<PointerDownEvent>(OnPointerDown);
         }
 
         protected override void UnregisterCallbacksFromTarget()
         {
-            target.UnregisterCallback<MouseEnterEvent>(OnMouseEnter);
-            target.UnregisterCallback<MouseOutEvent>(OnMouseOut);
+            target.UnregisterCallback<PointerEnterEvent>(OnPointerEnter);
+            target.UnregisterCallback<PointerLeaveEvent>(OnPointerLeave);
+            target.UnregisterCallback<PointerDownEvent>(OnPointerDown);
+            target.UnregisterCallback<PointerMoveEvent>(OnPointerMove);
         }
         
-        private void OnMouseEnter(MouseEnterEvent evt)
+        private void OnPointerEnter(PointerEnterEvent evt)
         {
             _vTooltip.Show(target, _vTooltipPosition);
         }
 
-        private void OnMouseOut(MouseOutEvent evt)
+        private void OnPointerLeave(PointerLeaveEvent evt)
         {
             _vTooltip.Hide();
+        }
+        
+        private void OnPointerDown(PointerDownEvent evt)
+        {
+            if (!_vTooltip.TryHide())
+                return;
+            
+            target.RegisterCallbackOnce<PointerMoveEvent>(OnPointerMove);
+        }
+
+        private void OnPointerMove(PointerMoveEvent evt)
+        {
+            Debug.Log(evt.localPosition);
+
+            _vTooltip.Show(target, _vTooltipPosition, false);
         }
     }
 }

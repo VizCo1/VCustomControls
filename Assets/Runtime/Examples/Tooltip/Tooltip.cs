@@ -3,12 +3,10 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    [RequireComponent(typeof(UIDocument))]
     public class Tooltip : ViewBase
     {
         private VTooltip _tooltip;
         
-
         protected override void Start()
         {
             base.Start();

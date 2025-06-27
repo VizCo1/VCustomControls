@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
+    [RequireComponent(typeof(UIDocument))]
     public abstract class ViewBase : MonoBehaviour
     {
         private const string BackButtonContainerName = "BackButtonContainer";
