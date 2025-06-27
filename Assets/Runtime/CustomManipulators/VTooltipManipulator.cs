@@ -49,8 +49,6 @@ namespace VCustomComponents
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
-            Debug.Log(evt.localPosition);
-
             _vTooltip.Show(target, _vTooltipPosition, false);
         }
     }

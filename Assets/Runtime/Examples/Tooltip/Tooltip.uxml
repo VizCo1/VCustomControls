@@ -8,7 +8,7 @@
             <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip!" class="tooltip-example">
                 <ui:Label text="Hover here!" name="TooltipExample1Label" class="tooltip-example-label" />
             </ui:VisualElement>
-            <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" class="tooltip-example tooltip-example2" style="width: 1238px;">
+            <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" class="tooltip-example tooltip-example2">
                 <ui:Label text="Here too!" name="TooltipExample1Labe2" class="tooltip-example-label" />
             </ui:VisualElement>
         </ui:VisualElement>
