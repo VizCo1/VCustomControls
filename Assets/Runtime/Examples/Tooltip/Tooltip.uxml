@@ -1,32 +1,17 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
-    <ui:Template name="ExamplesTabView" src="project://database/Assets/Runtime/Examples/ExamplesTabView.uxml?fileID=9197481963319205126&amp;guid=399537c2bfb4d2a499ce312e7294b9ef&amp;type=3#ExamplesTabView" />
     <Style src="project://database/Assets/Runtime/Examples/Tooltip/Tooltip.uss?fileID=7433441132597879392&amp;guid=c53af25100b69324890dde4aeed18a49&amp;type=3#Tooltip" />
     <ui:Instance template="ExamplesTemplate" name="ExampleTooltip" style="flex-grow: 1;">
         <AttributeOverrides element-name="TitleLabel" text="VTooltip" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to have a runtime tooltip that behaves like the editor tooltip!" />
-        <ui:Instance template="ExamplesTabView" style="flex-grow: 1;">
-            <ui:Tab label="Simple Example">
-                <ui:VisualElement name="TooltipExampleContainer" class="tooltip-example-container">
-                    <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip!" class="tooltip-example">
-                        <ui:Label text="Hover here!" name="TooltipExample1Label" class="tooltip-example-label" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" class="tooltip-example tooltip-example2">
-                        <ui:Label text="Here too!" name="TooltipExample1Labe2" class="tooltip-example-label" />
-                    </ui:VisualElement>
-                    <VCustomComponents.VTooltip name="Tooltip" text="Tooltip" fade-rate="0.01" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 4px; padding-right: 8px; padding-bottom: 4px; padding-left: 8px; color: rgb(255, 231, 185); font-size: 24px; -unity-text-align: middle-center; background-color: rgb(51, 51, 51);" />
-                </ui:VisualElement>
-            </ui:Tab>
-            <ui:Tab label="Complex Example">
-                <ui:VisualElement name="TooltipExampleContainer" class="tooltip-example-container">
-                    <ui:VisualElement name="TooltipExample3" tooltip="I&apos;m a tooltip!" class="tooltip-example">
-                        <ui:Label text="Hover here!" name="TooltipExample1Label" class="tooltip-example-label" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="TooltipExample4" tooltip="I&apos;m a robot!" class="tooltip-example tooltip-example2">
-                        <ui:Label text="Here too!" name="TooltipExample1Labe2" class="tooltip-example-label" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-            </ui:Tab>
-        </ui:Instance>
+        <ui:VisualElement name="TooltipExampleContainer" class="tooltip-example-container">
+            <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip!" class="tooltip-example">
+                <ui:Label text="Hover here!" name="TooltipExample1Label" class="tooltip-example-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" class="tooltip-example tooltip-example2">
+                <ui:Label text="Here too!" name="TooltipExample1Labe2" class="tooltip-example-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:Instance>
+    <VCustomComponents.VTooltip name="Tooltip1" text="Tooltip" fade-rate="0.01" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 4px; padding-right: 8px; padding-bottom: 4px; padding-left: 8px; color: rgb(255, 231, 185); font-size: 24px; -unity-text-align: middle-center; background-color: rgb(51, 51, 51);" />
 </ui:UXML>

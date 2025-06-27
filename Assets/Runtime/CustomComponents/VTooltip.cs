@@ -46,6 +46,8 @@ namespace VCustomComponents
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
         {
+            panel.visualTree.Add(this);
+            
             FadeIn(target, canHaveFadeDelay);
             
             text = target.tooltip;
