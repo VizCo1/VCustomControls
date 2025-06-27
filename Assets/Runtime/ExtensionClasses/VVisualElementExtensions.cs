@@ -62,5 +62,12 @@ namespace VCustomComponents
             
             return visualElement != null;
         }
+
+        public static bool TryGetTooltipFromPanel(this IPanel panel, string name, out VTooltip tooltip)
+        {
+            var root = panel.visualTree;
+
+            return root.TryGetVisualElement(name, null, out tooltip);
+        }
     }
 }
