@@ -9,9 +9,9 @@ namespace VCustomComponents
         private const string BackButtonContainerName = "BackButtonContainer";
         
         public VisualElement Root { get; private set; }
-        public UIDocument Document { get; private set; }
-        
-        protected Button _backButton;
+        private UIDocument Document { get; set; }
+
+        private Button _backButton;
 
         protected virtual void Awake()
         {
@@ -28,7 +28,7 @@ namespace VCustomComponents
         private void OnBackButtonClicked()
         {
             _backButton.SetEnabled(false);
-            ManagerUI.Instance.PopDocument();
+            UiManager.Instance.PopDocument();
         }
 
         protected virtual void OnDestroy()

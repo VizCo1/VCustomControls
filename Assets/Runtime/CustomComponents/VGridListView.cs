@@ -148,16 +148,15 @@ namespace VCustomComponents
 		public static readonly string GridRowClass = "grid-row";
 		public static readonly string LastGridRowClass = "last-grid-row";
 			
+		private readonly VGridListView _gridView;
+		private readonly List<VisualElement> _gridElements = new();
+		
 		public GridRow(VGridListView gridListView)
 		{
 			_gridView = gridListView;
 				
 			AddToClassList(GridRowClass);
 		}
-
-		private readonly VGridListView _gridView;
-
-		private readonly List<VisualElement> _gridElements = new();
 			
 		public void BindToGridRowData(GridRowData rowData)
 		{
@@ -167,6 +166,9 @@ namespace VCustomComponents
 				var dif = width - _gridElements.Count;
 				for (var i = 0; i < dif; i++)
 				{
+					if (rowData.Grid[rowData.Row, i] == -1)
+						break;
+					
 					var visualElement = _gridView.MakeCell();
 					_gridElements.Add(visualElement);
 				}
@@ -176,6 +178,9 @@ namespace VCustomComponents
 				
 			for (var i = 0; i < width; i++)
 			{
+				if (rowData.Grid[rowData.Row, i] == -1)
+					break;
+				
 				var visualElement = _gridElements[i];
 				Add(visualElement);
 					
