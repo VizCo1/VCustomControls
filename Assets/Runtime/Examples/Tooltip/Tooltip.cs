@@ -11,7 +11,7 @@ namespace VCustomComponents
         {
             base.Start();
             
-            Root.panel.TryGetTooltipFromPanel("Tooltip1", out _tooltip);
+            _tooltip = Root.panel.GetTooltipFromPanel("Tooltip1");
 
             var tooltipExample1 = Root.Q("TooltipExample1");
             var tooltipExample2 = Root.Q("TooltipExample2");

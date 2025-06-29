@@ -26,3 +26,13 @@
     align-items: center;
     flex-direction: row;
 }
+
+.tooltip1 {
+    background-color: var(--color-secondary);
+    color: rgb(255, 231, 185);
+    -unity-text-align: middle-center;
+    font-size: 24px;
+    border-radius: var(--border-radius-example);
+    margin: 0;
+    padding: 4px 8px;
+}

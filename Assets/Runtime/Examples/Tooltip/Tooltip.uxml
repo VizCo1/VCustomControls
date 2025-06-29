@@ -13,5 +13,5 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:Instance>
-    <VCustomComponents.VTooltip name="Tooltip1" text="Tooltip" fade-rate="0.01" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 4px; padding-right: 8px; padding-bottom: 4px; padding-left: 8px; color: rgb(255, 231, 185); font-size: 24px; -unity-text-align: middle-center; background-color: rgb(51, 51, 51);" />
+    <VCustomComponents.VTooltip name="Tooltip1" text="Tooltip" fade-rate="0.01" class="tooltip1" />
 </ui:UXML>

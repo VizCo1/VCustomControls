@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,7 +12,7 @@ namespace VCustomComponents
         private const float FadeRate = 0.05f;
 
         public static readonly string TooltipClass = "tooltip";
-
+        
         [Header(nameof(VTooltip))]
         
         [UxmlAttribute]
@@ -37,6 +38,12 @@ namespace VCustomComponents
 #endif
             style.opacity = 0;
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
+        }
+
+        public VTooltip(string tooltipName)
+        {
+            name = tooltipName;
+            AddToClassList(tooltipName);
         }
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
