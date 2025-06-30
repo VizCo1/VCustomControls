@@ -9,10 +9,11 @@ namespace VCustomComponents
         private const string BackButtonContainerName = "BackButtonContainer";
         
         public VisualElement Root { get; private set; }
+        
+        protected Button BackButton { get; private set; }
+        
         private UIDocument Document { get; set; }
-
-        private Button _backButton;
-
+        
         protected virtual void Awake()
         {
             Document = GetComponent<UIDocument>();
@@ -21,19 +22,19 @@ namespace VCustomComponents
 
         protected virtual void Start()
         {
-            _backButton = (Button)Root.Query(BackButtonContainerName).Last().ElementAt(0);
-            _backButton.clicked += OnBackButtonClicked;
+            BackButton = (Button)Root.Query(BackButtonContainerName).Last().ElementAt(0);
+            BackButton.clicked += OnBackButtonClicked;
         }
 
         private void OnBackButtonClicked()
         {
-            _backButton.SetEnabled(false);
+            BackButton.SetEnabled(false);
             UiManager.Instance.PopDocument();
         }
 
         protected virtual void OnDestroy()
         {
-            _backButton.clicked -= OnBackButtonClicked; 
+            BackButton.clicked -= OnBackButtonClicked; 
         }
     }
 }
