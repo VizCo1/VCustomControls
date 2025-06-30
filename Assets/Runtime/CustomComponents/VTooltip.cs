@@ -10,19 +10,16 @@ namespace VCustomComponents
     {
         public static readonly string TooltipClass = "tooltip";
         
+        private static readonly CustomStyleProperty<int> FadeDurationMs = new("--fade-duration-ms");
+        private static readonly CustomStyleProperty<int> TooltipDelayMs = new("--tooltip-delay-ms");
+        private static readonly CustomStyleProperty<int> Offset = new("--offset");
+        
         private const bool DoOneTime = true;
         private const float FadeRate = 0.05f;
         
-        [Header(nameof(VTooltip))]
-        
-        [UxmlAttribute]
-        private float FadeDuration { get; set; } = 0.1f;
-        
-        [UxmlAttribute]
-        private int TooltipDelayMs { get; set; } = 500;
-        
-        [UxmlAttribute]
-        private int Offset { get; set; } = 5;
+        private int _fadeDurationMs;
+        private int _tooltipDelayMs;
+        private int _offset;
 
         private IVisualElementScheduledItem _scheduledItem;
         private VisualElement _previousTarget;
@@ -36,7 +33,7 @@ namespace VCustomComponents
                 return;
 #endif
             style.opacity = 0;
-            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
+            RegisterCallback<CustomStyleResolvedEvent>(OnStylesResolved);
         }
 
         public VTooltip(string tooltipClass) : this()
@@ -48,11 +45,6 @@ namespace VCustomComponents
             
             var textInfo = CultureInfo.InvariantCulture.TextInfo;
             name = textInfo.ToTitleCase(tooltipClass.Trim('-'));
-        }
-
-        private void OnAttachedToPanel(AttachToPanelEvent evt)
-        {
-            _intervalMs = Mathf.RoundToInt(FadeDuration / (1f / FadeRate) * 1000f);
         }
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
@@ -92,14 +84,23 @@ namespace VCustomComponents
             return true;
         }
         
+        private void OnStylesResolved(CustomStyleResolvedEvent evt)
+        {
+            evt.customStyle.TryGetValue(FadeDurationMs, out _fadeDurationMs);
+            evt.customStyle.TryGetValue(TooltipDelayMs, out _tooltipDelayMs);
+            evt.customStyle.TryGetValue(Offset, out _offset);
+            
+            _intervalMs = Mathf.RoundToInt(_fadeDurationMs / (1f / FadeRate));
+        }
+        
         private Vector2 GetTooltipPosition(VisualElement target, VTooltipPosition tooltipPosition)
         {
             return tooltipPosition switch
             {
-                VTooltipPosition.Top => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMin - resolvedStyle.height - Offset),
-                VTooltipPosition.Right => new Vector2(target.worldBound.xMax + Offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
-                VTooltipPosition.Bottom => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMax + Offset),
-                VTooltipPosition.Left => new Vector2(target.worldBound.xMin - resolvedStyle.width - Offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
+                VTooltipPosition.Top => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMin - resolvedStyle.height - _offset),
+                VTooltipPosition.Right => new Vector2(target.worldBound.xMax + _offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
+                VTooltipPosition.Bottom => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMax + _offset),
+                VTooltipPosition.Left => new Vector2(target.worldBound.xMin - resolvedStyle.width - _offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
                 _ => throw new ArgumentOutOfRangeException(nameof(tooltipPosition), tooltipPosition, null)
             };
         }
@@ -111,7 +112,7 @@ namespace VCustomComponents
                 style.opacity = 0f;
             }
             
-            var startingIn = TooltipDelayMs;
+            var startingIn = _tooltipDelayMs;
 
             if (!canHaveFadeDelay || _scheduledItem is { isActive: true } && _previousTarget == target)
             {
