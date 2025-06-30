@@ -5,19 +5,19 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     // The only purpose of this class is to have the :active pseudostate while being able to use the PointerDownEvent
-    public class ExtendedClickable : Clickable
+    public class VExtendedClickable : Clickable
     {
-        public Action<PointerDownEvent> PointerDown;
+        public event Action<PointerDownEvent> PointerDown;
         
-        public ExtendedClickable(Action handler, long delay, long interval) : base(handler, delay, interval)
+        public VExtendedClickable(Action handler, long delay, long interval) : base(handler, delay, interval)
         {
         }
 
-        public ExtendedClickable(Action<EventBase> handler) : base(handler)
+        public VExtendedClickable(Action<EventBase> handler) : base(handler)
         {
         }
 
-        public ExtendedClickable(Action handler) : base(handler)
+        public VExtendedClickable(Action handler) : base(handler)
         {
         }
         

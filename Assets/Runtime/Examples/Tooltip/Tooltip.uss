@@ -1,0 +1,28 @@
+.tooltip-example {
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-accent);
+    border-radius: var(--border-radius-example);
+    width: 250px;
+    height: 100px;
+    padding: 4px 8px;
+}
+
+.tooltip-example2 {
+    background-color: rgb(135, 112, 160);
+    margin: 0 0 0 16px;
+}
+
+.tooltip-example-label {
+    color: var(--color-background);
+    -unity-font-style: bold;
+    font-size: 32px;
+    margin: 0;
+}
+
+.tooltip-example-container {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}

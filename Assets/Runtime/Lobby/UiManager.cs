@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace VCustomComponents
 {
-    public class ManagerUI : MonoBehaviour
+    public class UiManager : MonoBehaviour
     {
         [SerializeField]
         private ViewContainer _viewContainer;
         
-        public static ManagerUI Instance { get; private set; }
+        public static UiManager Instance { get; private set; }
         
         private Stack<ViewBase> _viewStack;
 

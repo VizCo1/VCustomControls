@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19101, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: RadialSliderPanelSettings
+  m_Name: TooltipPanelSettings
   m_EditorClassIdentifier: 
   themeUss: {fileID: -4733365628477956816, guid: f7357267c8db92540b2173772fac62b1, type: 3}
   m_DisableNoThemeWarning: 0
@@ -41,9 +41,6 @@ MonoBehaviour:
   m_AtlasBlitShader: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
   m_RuntimeShader: {fileID: 9100, guid: 0000000000000000f000000000000000, type: 0}
   m_RuntimeWorldShader: {fileID: 9102, guid: 0000000000000000f000000000000000, type: 0}
-  m_SDFShader: {fileID: 19011, guid: 0000000000000000f000000000000000, type: 0}
-  m_BitmapShader: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
-  m_SpriteShader: {fileID: 19012, guid: 0000000000000000f000000000000000, type: 0}
   m_ICUDataAsset: {fileID: 0}
   forceGammaRendering: 0
   textSettings: {fileID: 0}

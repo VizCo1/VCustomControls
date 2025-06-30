@@ -3,15 +3,16 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
+    [RequireComponent(typeof(UIDocument))]
     public abstract class ViewBase : MonoBehaviour
     {
         private const string BackButtonContainerName = "BackButtonContainer";
         
         public VisualElement Root { get; private set; }
-        public UIDocument Document { get; private set; }
-        
-        protected Button _backButton;
 
+        private UIDocument Document { get; set; }
+        
+        private Button _backButton;
         protected virtual void Awake()
         {
             Document = GetComponent<UIDocument>();
@@ -24,15 +25,22 @@ namespace VCustomComponents
             _backButton.clicked += OnBackButtonClicked;
         }
 
-        private void OnBackButtonClicked()
+        protected virtual void BeforeDestroy()
         {
-            _backButton.SetEnabled(false);
-            ManagerUI.Instance.PopDocument();
+            
         }
-
+        
         protected virtual void OnDestroy()
         {
             _backButton.clicked -= OnBackButtonClicked; 
+        }
+        
+        private void OnBackButtonClicked()
+        {
+            BeforeDestroy();
+            
+            _backButton.SetEnabled(false);
+            UiManager.Instance.PopDocument();
         }
     }
 }

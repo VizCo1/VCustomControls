@@ -15,7 +15,7 @@ namespace VCustomComponents
         
         private const float DegreesInCircle = 360f;
         
-        private readonly ExtendedClickable _extendedClickable;
+        private readonly VExtendedClickable _vExtendedClickable;
 
         [Header(nameof(VRadialSlider))]
         [UxmlAttribute]
@@ -28,13 +28,13 @@ namespace VCustomComponents
 
                 if (_isInteractive)
                 {
-                    this.AddManipulator(_extendedClickable);
-                    _extendedClickable.PointerDown += OnPointerDown;
+                    this.AddManipulator(_vExtendedClickable);
+                    _vExtendedClickable.PointerDown += OnPointerDown;
                 }
                 else
                 {
-                    this.RemoveManipulator(_extendedClickable);
-                    _extendedClickable.PointerDown -= OnPointerDown;
+                    this.RemoveManipulator(_vExtendedClickable);
+                    _vExtendedClickable.PointerDown -= OnPointerDown;
                 }
             }
         }
@@ -244,7 +244,7 @@ namespace VCustomComponents
         {
             AddToClassList(RadialSliderClass);
 
-            _extendedClickable = new ExtendedClickable(OnClicked);
+            _vExtendedClickable = new VExtendedClickable(OnClicked);
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
             generateVisualContent += OnGenerateVisualContent;

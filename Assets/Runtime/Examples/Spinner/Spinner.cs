@@ -3,7 +3,6 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    [RequireComponent(typeof(UIDocument))]
     public class Spinner : ViewBase
     {
         private const string ButtonContainer1Name = "ExamplesButtonContainer1";

@@ -3,7 +3,6 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    [RequireComponent(typeof(UIDocument))]
     public class AspectRatio : ViewBase
     {
         private const string VerticalSliderName = "VerticalSlider";

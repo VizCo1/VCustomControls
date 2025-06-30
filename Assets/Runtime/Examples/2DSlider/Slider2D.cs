@@ -3,7 +3,6 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    [RequireComponent(typeof(UIDocument))]
     public class Slider2D : ViewBase
     {
         private VSlider2D _slider2D;
