@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,10 +8,10 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VTooltip : Label
     {
+        public static readonly string TooltipClass = "tooltip";
+        
         private const bool DoOneTime = true;
         private const float FadeRate = 0.05f;
-
-        public static readonly string TooltipClass = "tooltip";
         
         [Header(nameof(VTooltip))]
         
@@ -30,7 +30,6 @@ namespace VCustomComponents
         
         public VTooltip() 
         {
-            style.position = Position.Absolute;
             AddToClassList(TooltipClass);
 #if UNITY_EDITOR
             if (!Application.isPlaying)
@@ -40,10 +39,15 @@ namespace VCustomComponents
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
         }
 
-        public VTooltip(string tooltipName)
+        public VTooltip(string tooltipClass) : this()
         {
-            name = tooltipName;
-            AddToClassList(tooltipName);
+            if (string.IsNullOrEmpty(tooltipClass))
+                throw new ArgumentNullException(nameof(tooltipClass));
+            
+            AddToClassList(tooltipClass);
+            
+            var textInfo = CultureInfo.InvariantCulture.TextInfo;
+            name = textInfo.ToTitleCase(tooltipClass.Trim('-'));
         }
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
@@ -53,7 +57,10 @@ namespace VCustomComponents
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
         {
-            panel.visualTree.Add(this);
+            if (_previousTarget != target)
+            {
+                BringToFront();
+            }
             
             FadeIn(target, canHaveFadeDelay);
             

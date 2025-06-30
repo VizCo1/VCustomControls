@@ -5,13 +5,20 @@
         <AttributeOverrides element-name="TitleLabel" text="VTooltip" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to have a runtime tooltip that behaves like the editor tooltip!" />
         <ui:VisualElement name="TooltipExampleContainer" class="tooltip-example-container">
-            <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip!" class="tooltip-example">
+            <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip! 1" class="tooltip-example">
                 <ui:Label text="Hover here!" name="TooltipExample1Label" class="tooltip-example-label" />
             </ui:VisualElement>
             <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" class="tooltip-example tooltip-example2">
                 <ui:Label text="Here too!" name="TooltipExample1Labe2" class="tooltip-example-label" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="TooltipExampleContainer" class="tooltip-example-container">
+            <ui:VisualElement name="TooltipExample3" tooltip="I&apos;m a tooltip! 2" class="tooltip-example">
+                <ui:Label text="Hover me!" name="TooltipExample1Label" class="tooltip-example-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="TooltipExample4" tooltip="I&apos;m a robot! 3" class="tooltip-example tooltip-example2">
+                <ui:Label text="Hover hover!" name="TooltipExample1Labe2" class="tooltip-example-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:Instance>
-    <VCustomComponents.VTooltip name="Tooltip1" text="Tooltip" fade-rate="0.01" class="tooltip1" />
 </ui:UXML>

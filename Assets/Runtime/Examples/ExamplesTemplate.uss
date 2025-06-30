@@ -438,3 +438,30 @@
     margin-top: 16px;
     flex-shrink: 0;
 }
+
+.tooltip1 {
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+    -unity-text-align: middle-center;
+    font-size: 24px;
+    border-radius: var(--border-radius-example);
+    margin: 0;
+    padding: 4px 8px;
+}
+
+.tooltip2 {
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+    border-color: var(--color-accent);
+    border-width: 2px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    font-size: 18px;
+    border-radius: 12px;
+    margin: 0;
+    padding: 4px 8px;
+}
+
+.tooltip {
+    position: absolute;
+}
