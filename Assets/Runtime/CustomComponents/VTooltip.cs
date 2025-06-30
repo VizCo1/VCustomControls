@@ -49,10 +49,7 @@ namespace VCustomComponents
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
         {
-            if (_previousTarget != target)
-            {
-                BringToFront();
-            }
+            BringToFront();
             
             FadeIn(target, canHaveFadeDelay);
             
