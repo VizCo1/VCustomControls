@@ -9,7 +9,7 @@ namespace VCustomComponents
         public static readonly string ScrollableLabelClass = "scrollable-label";
         public static readonly string ScrollableLabelContainerClass = ScrollableLabelClass + "-container";
 
-        private const long ScrollRate = 250;
+        private const long ScrollRate = 25;
         
         private readonly Label _label;
 
