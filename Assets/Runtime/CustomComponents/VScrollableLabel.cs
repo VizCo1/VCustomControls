@@ -9,7 +9,6 @@ namespace VCustomComponents
         public static readonly string ScrollableLabelClass = "scrollable-label";
         public static readonly string ScrollableLabelContainerClass = ScrollableLabelClass + "-container";
 
-        private const long ScrollRate = 25;
         
         private readonly Label _label;
 
@@ -37,6 +36,9 @@ namespace VCustomComponents
         }
 
         [UxmlAttribute]
+        private long ScrollRate { get; set; } = 10;
+        
+        [UxmlAttribute]
         private bool IsLoopable { get; set; }
 
         private IVisualElementScheduledItem _scheduledItem;
@@ -48,7 +50,7 @@ namespace VCustomComponents
             AddToClassList(ScrollableLabelContainerClass);
             
             _label = new Label();
-            _label.style.alignSelf = new StyleEnum<Align>(Align.FlexStart);
+            // _label.style.alignSelf = new StyleEnum<Align>(Align.FlexStart);
             _label.AddToClassList(ScrollableLabelClass);
 
             Add(_label);

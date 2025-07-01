@@ -6,10 +6,11 @@
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control" />
         <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; flex-grow: 1;">
             <ui:VisualElement style="width: 300px;">
-                <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" name="ScrollableLabel" language-direction="RTL" style="border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-left-color: rgb(255, 0, 0); border-right-color: rgb(255, 0, 0); border-top-color: rgb(255, 0, 0); border-bottom-color: rgb(255, 0, 0);" />
+                <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" name="ScrollableLabel" language-direction="RTL" scroll-speed="5" style="border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-left-color: rgb(255, 0, 0); border-right-color: rgb(255, 0, 0); border-top-color: rgb(255, 0, 0); border-bottom-color: rgb(255, 0, 0);" />
                 <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" name="ScrollableLabel" is-loopable="true" style="border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-left-color: rgb(255, 0, 0); border-right-color: rgb(255, 0, 0); border-top-color: rgb(255, 0, 0); border-bottom-color: rgb(255, 0, 0); margin-top: 16px;" />
-                <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" name="ScrollableLabel" style="margin-top: 16px;" />
-                <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" name="ScrollableLabel" is-loopable="true" style="margin-top: 16px;" />
+                <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" name="ScrollableLabel" scroll-speed="2" style="margin-top: 16px;" />
+                <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" name="ScrollableLabel" is-loopable="true" scroll-speed="4" style="margin-top: 16px;" />
+                <VCustomComponents.VScrollableLabel text="Short text" name="ScrollableLabel" is-loopable="true" scroll-speed="4" style="margin-top: 16px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:Instance>
