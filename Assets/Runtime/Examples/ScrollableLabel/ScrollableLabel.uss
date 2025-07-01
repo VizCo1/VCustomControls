@@ -1,0 +1,16 @@
+.scrollable-label-container {
+    overflow: hidden;
+    background-color: rgb(114, 106, 149);
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    width: 300px;
+}
+
+.scrollable-label {
+    color: rgb(255, 231, 185);
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}

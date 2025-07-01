@@ -4,6 +4,6 @@
     <ui:Instance template="ExamplesTemplate" name="ScrollableLabelExample" style="flex-grow: 1;">
         <AttributeOverrides element-name="TitleLabel" text="VScrollableLabel" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control" />
-        <VCustomComponents.VScrollableLabel />
+        <VCustomComponents.VScrollableLabel text="I&apos;m a really super long text that doesn&apos;t fit inside its container" />
     </ui:Instance>
 </ui:UXML>
