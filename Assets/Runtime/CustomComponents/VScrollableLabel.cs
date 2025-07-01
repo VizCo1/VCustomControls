@@ -28,22 +28,12 @@ namespace VCustomComponents
         }
 
         [UxmlAttribute]
-        private Vector2 ScrollSpeed
-        {
-            get => _scrollSpeed;
-            set
-            {
-                _scrollSpeed = value;
-                _inverseScrollSpeed = -_scrollSpeed;
-            }
-        }
-        
-        [UxmlAttribute, Tooltip("This only affects the X axis, the Y axis is always loopable")]
+        private float ScrollSpeed { get; set; } = -1;
+
+        [UxmlAttribute]
         private bool IsLoopable { get; set; }
 
         private IVisualElementScheduledItem _scheduledItem;
-        private Vector2 _scrollSpeed = Vector2.left;
-        private Vector2 _inverseScrollSpeed;
         private string _text = "Label";
 
         public VScrollableLabel() 
@@ -61,7 +51,13 @@ namespace VCustomComponents
 
         private void OnAttachedToPanel(GeometryChangedEvent evt)
         {
-            style.height = _label.resolvedStyle.height + resolvedStyle.paddingBottom + resolvedStyle.paddingTop;
+            Debug.Log(languageDirection);
+            
+            style.height = _label.resolvedStyle.height + 
+                           resolvedStyle.paddingBottom + 
+                           resolvedStyle.paddingTop + 
+                           resolvedStyle.borderTopWidth + 
+                           resolvedStyle.borderBottomWidth;
         }
 
         protected override void HandleEventBubbleUp(EventBase evt)
@@ -83,7 +79,10 @@ namespace VCustomComponents
         private void OnPointerEnter()
         {
             _scheduledItem?.Pause();
-
+            
+            if (!ShouldStartScrolling())
+                return;
+            
             _scheduledItem = schedule
                 .Execute(() => ScrollText(ScrollSpeed))
                 .Until(ShouldStopScrolling);
@@ -91,30 +90,82 @@ namespace VCustomComponents
 
         private void OnPointerLeave()
         {
-            _scheduledItem.Pause();
-
+            _scheduledItem?.Pause();
+            
+            if (!ShouldStartScrolling())
+                return;
+            
             _scheduledItem = schedule
-                .Execute(() => ScrollText(_inverseScrollSpeed))
-                .Until(() => _label.resolvedStyle.translate == Vector3.zero);
+                .Execute(() => ScrollText(-ScrollSpeed))
+                .Until(ShouldStopInverseScrolling);
         }
-
+        
         private void OnDetachedFromPanel()
         {
             _scheduledItem?.Pause();
         }
 
+        private bool ShouldStopInverseScrolling()
+        {
+            bool shouldStop;
+            if (-ScrollSpeed < 0)
+            {
+                shouldStop = _label.resolvedStyle.translate.x <= 0f;
+            }
+            else
+            {
+                shouldStop = _label.resolvedStyle.translate.x >= 0f;
+            }
+                    
+            if (shouldStop)
+            {
+                _label.style.translate = new Translate(0f, _label.resolvedStyle.translate.y);
+            }
+                    
+            return shouldStop;
+        }
+
+        private bool ShouldStartScrolling()
+        {
+            if (ScrollSpeed != 0)
+                return 
+                    _label.resolvedStyle.width > 
+                    resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
+                    resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth;
+
+            return false;
+        }
+        
         private bool ShouldStopScrolling()
         {
             if (IsLoopable)
                 return false;
 
-            return (int)_label.resolvedStyle.translate.x == (int)(resolvedStyle.width - _label.resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight);
+            var shouldStopScrolling = true;
+            if (ScrollSpeed < 0)
+            {
+                shouldStopScrolling = 
+                    (int)_label.resolvedStyle.translate.x <= 
+                    (int)(resolvedStyle.width - _label.resolvedStyle.width - 
+                          resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
+                          resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth);
+            }
+
+            if (shouldStopScrolling)
+            {
+                _label.style.translate = new Translate(
+                    resolvedStyle.width - _label.resolvedStyle.width - resolvedStyle.paddingLeft - 
+                    resolvedStyle.paddingRight - resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth, 
+                    _label.resolvedStyle.translate.y);
+            }
+            // return (int)_label.resolvedStyle.translate.x >= (int)(resolvedStyle.width - _label.resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight);
+            return shouldStopScrolling;
         }
 
-        private void ScrollText(Vector2 scrollSpeed)
+        private void ScrollText(float scrollSpeed)
         {
-            var nextTranslateX = new Length(_label.resolvedStyle.translate.x + scrollSpeed.x);
-            switch (scrollSpeed.x)
+            var nextTranslateX = new Length(_label.resolvedStyle.translate.x + scrollSpeed);
+            switch (scrollSpeed)
             {
                 case > 0 when nextTranslateX.value > resolvedStyle.width:
                     nextTranslateX = new Length((int)-_label.resolvedStyle.width);
@@ -124,18 +175,7 @@ namespace VCustomComponents
                     break;
             }
             
-            var nextTranslateY = new Length(_label.resolvedStyle.translate.y + scrollSpeed.y);
-            switch (scrollSpeed.y)
-            {
-                case > 0 when nextTranslateY.value > resolvedStyle.height:
-                    nextTranslateY = new Length((int)-_label.resolvedStyle.height);
-                    break;
-                case < 0 when nextTranslateY.value < -_label.resolvedStyle.height:
-                    nextTranslateY = new Length((int)resolvedStyle.height);
-                    break;
-            }
-            
-            _label.style.translate = new Translate(nextTranslateX, nextTranslateY);
+            _label.style.translate = new Translate(nextTranslateX, _label.resolvedStyle.translate.y);
         }
     }
 }

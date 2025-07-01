@@ -5,7 +5,6 @@
     padding-right: 4px;
     padding-bottom: 4px;
     padding-left: 4px;
-    width: 300px;
 }
 
 .scrollable-label {
