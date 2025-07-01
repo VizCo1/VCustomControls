@@ -9,6 +9,8 @@ namespace VCustomComponents
         public static readonly string ScrollableLabelClass = "scrollable-label";
         public static readonly string ScrollableLabelContainerClass = ScrollableLabelClass + "-container";
 
+        private const long ScrollRate = 250;
+        
         private readonly Label _label;
 
         [Header(nameof(VScrollableLabel))]
@@ -27,14 +29,19 @@ namespace VCustomComponents
             }
         }
 
-        [UxmlAttribute]
-        private float ScrollSpeed { get; set; } = -1;
+        [UxmlAttribute, Range(0, 10f)]
+        private float ScrollSpeed
+        {
+            get => _scrollSpeed;
+            set => _scrollSpeed = value;
+        }
 
         [UxmlAttribute]
         private bool IsLoopable { get; set; }
 
         private IVisualElementScheduledItem _scheduledItem;
         private string _text = "Label";
+        private float _scrollSpeed = 1;
 
         public VScrollableLabel() 
         {
@@ -51,13 +58,13 @@ namespace VCustomComponents
 
         private void OnAttachedToPanel(GeometryChangedEvent evt)
         {
-            Debug.Log(languageDirection);
-            
             style.height = _label.resolvedStyle.height + 
                            resolvedStyle.paddingBottom + 
                            resolvedStyle.paddingTop + 
                            resolvedStyle.borderTopWidth + 
                            resolvedStyle.borderBottomWidth;
+
+            _scrollSpeed *= -1f;
         }
 
         protected override void HandleEventBubbleUp(EventBase evt)
@@ -84,7 +91,8 @@ namespace VCustomComponents
                 return;
             
             _scheduledItem = schedule
-                .Execute(() => ScrollText(ScrollSpeed))
+                .Execute(() => ScrollText(_scrollSpeed))
+                .Every(ScrollRate)
                 .Until(ShouldStopScrolling);
         }
 
@@ -96,7 +104,8 @@ namespace VCustomComponents
                 return;
             
             _scheduledItem = schedule
-                .Execute(() => ScrollText(-ScrollSpeed))
+                .Execute(() => ScrollText(-_scrollSpeed))
+                .Every(ScrollRate)
                 .Until(ShouldStopInverseScrolling);
         }
         
@@ -107,27 +116,17 @@ namespace VCustomComponents
 
         private bool ShouldStopInverseScrolling()
         {
-            bool shouldStop;
-            if (-ScrollSpeed < 0)
-            {
-                shouldStop = _label.resolvedStyle.translate.x <= 0f;
-            }
-            else
-            {
-                shouldStop = _label.resolvedStyle.translate.x >= 0f;
-            }
-                    
-            if (shouldStop)
-            {
-                _label.style.translate = new Translate(0f, _label.resolvedStyle.translate.y);
-            }
-                    
-            return shouldStop;
+            if (!(_label.resolvedStyle.translate.x >= _scrollSpeed) || !(_label.resolvedStyle.translate.x <= -_scrollSpeed)) 
+                return false;
+            
+            _label.style.translate = new Translate(0f, _label.resolvedStyle.translate.y);
+                
+            return true;
         }
 
         private bool ShouldStartScrolling()
         {
-            if (ScrollSpeed != 0)
+            if (_scrollSpeed != 0)
                 return 
                     _label.resolvedStyle.width > 
                     resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
@@ -142,7 +141,7 @@ namespace VCustomComponents
                 return false;
 
             var shouldStopScrolling = true;
-            if (ScrollSpeed < 0)
+            if (_scrollSpeed < 0)
             {
                 shouldStopScrolling = 
                     (int)_label.resolvedStyle.translate.x <= 
@@ -158,7 +157,7 @@ namespace VCustomComponents
                     resolvedStyle.paddingRight - resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth, 
                     _label.resolvedStyle.translate.y);
             }
-            // return (int)_label.resolvedStyle.translate.x >= (int)(resolvedStyle.width - _label.resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight);
+            
             return shouldStopScrolling;
         }
 
