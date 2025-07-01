@@ -50,15 +50,14 @@ namespace VCustomComponents
             AddToClassList(ScrollableLabelContainerClass);
             
             _label = new Label();
-            // _label.style.alignSelf = new StyleEnum<Align>(Align.FlexStart);
             _label.AddToClassList(ScrollableLabelClass);
 
             Add(_label);
             
-            RegisterCallbackOnce<GeometryChangedEvent>(OnAttachedToPanel);
+            RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
         }
 
-        private void OnAttachedToPanel(GeometryChangedEvent evt)
+        private void OnGeometryChanged(GeometryChangedEvent evt)
         {
             style.height = _label.resolvedStyle.height + 
                            resolvedStyle.paddingBottom + 
