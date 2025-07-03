@@ -8,9 +8,8 @@ namespace VCustomComponents
     {
         public static readonly string ScrollableLabelClass = "scrollable-label";
         public static readonly string ScrollableLabelContainerClass = ScrollableLabelClass + "-container";
-
         
-        private readonly Label _label;
+        private readonly TextElement _textElement;
 
         [Header(nameof(VScrollableLabel))]
         [UxmlAttribute]
@@ -21,9 +20,9 @@ namespace VCustomComponents
             {
                 _text = value;
 
-                if (_label != null)
+                if (_textElement != null)
                 {
-                    _label.text = _text;
+                    _textElement.text = _text;
                 }
             }
         }
@@ -49,23 +48,28 @@ namespace VCustomComponents
         {
             AddToClassList(ScrollableLabelContainerClass);
             
-            _label = new Label();
-            _label.AddToClassList(ScrollableLabelClass);
+            _textElement = new TextElement();
+            _textElement.AddToClassList(ScrollableLabelClass);
 
-            Add(_label);
+            Add(_textElement);
             
+            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
+        }
+
+        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        {
+            _scrollSpeed *= -1f;
         }
 
         private void OnGeometryChanged(GeometryChangedEvent evt)
         {
-            style.height = _label.resolvedStyle.height + 
-                           resolvedStyle.paddingBottom + 
-                           resolvedStyle.paddingTop + 
-                           resolvedStyle.borderTopWidth + 
-                           resolvedStyle.borderBottomWidth;
-
-            _scrollSpeed *= -1f;
+            style.height = 
+                _textElement.resolvedStyle.height + 
+                resolvedStyle.paddingBottom + 
+                resolvedStyle.paddingTop + 
+                resolvedStyle.borderTopWidth + 
+                resolvedStyle.borderBottomWidth;
         }
 
         protected override void HandleEventBubbleUp(EventBase evt)
@@ -117,10 +121,10 @@ namespace VCustomComponents
 
         private bool ShouldStopInverseScrolling()
         {
-            if (!(_label.resolvedStyle.translate.x >= _scrollSpeed) || !(_label.resolvedStyle.translate.x <= -_scrollSpeed)) 
+            if (!(_textElement.resolvedStyle.translate.x >= _scrollSpeed) || !(_textElement.resolvedStyle.translate.x <= -_scrollSpeed)) 
                 return false;
             
-            _label.style.translate = new Translate(0f, _label.resolvedStyle.translate.y);
+            _textElement.style.translate = new Translate(0f, _textElement.resolvedStyle.translate.y);
                 
             return true;
         }
@@ -129,7 +133,7 @@ namespace VCustomComponents
         {
             if (_scrollSpeed != 0)
                 return 
-                    _label.resolvedStyle.width > 
+                    _textElement.resolvedStyle.width > 
                     resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
                     resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth;
 
@@ -141,41 +145,33 @@ namespace VCustomComponents
             if (IsLoopable)
                 return false;
 
-            var shouldStopScrolling = true;
-            if (_scrollSpeed < 0)
-            {
-                shouldStopScrolling = 
-                    (int)_label.resolvedStyle.translate.x <= 
-                    (int)(resolvedStyle.width - _label.resolvedStyle.width - 
-                          resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
-                          resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth);
-            }
-
-            if (shouldStopScrolling)
-            {
-                _label.style.translate = new Translate(
-                    resolvedStyle.width - _label.resolvedStyle.width - resolvedStyle.paddingLeft - 
-                    resolvedStyle.paddingRight - resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth, 
-                    _label.resolvedStyle.translate.y);
-            }
+            var horizontalBorderAndPadding = 
+                resolvedStyle.paddingLeft + 
+                resolvedStyle.paddingRight +
+                resolvedStyle.borderLeftWidth + 
+                resolvedStyle.borderRightWidth;
             
-            return shouldStopScrolling;
+            if ((int)_textElement.resolvedStyle.translate.x > (int)(resolvedStyle.width - _textElement.resolvedStyle.width - horizontalBorderAndPadding)) 
+                return false;
+            
+            _textElement.style.translate = new Translate(
+                resolvedStyle.width - _textElement.resolvedStyle.width - horizontalBorderAndPadding, 
+                _textElement.resolvedStyle.translate.y);
+
+            return true;
+
         }
 
         private void ScrollText(float scrollSpeed)
         {
-            var nextTranslateX = new Length(_label.resolvedStyle.translate.x + scrollSpeed);
-            switch (scrollSpeed)
+            var nextTranslateX = new Length(_textElement.resolvedStyle.translate.x + scrollSpeed);
+            
+            if (nextTranslateX.value < -_textElement.resolvedStyle.width)
             {
-                case > 0 when nextTranslateX.value > resolvedStyle.width:
-                    nextTranslateX = new Length((int)-_label.resolvedStyle.width);
-                    break;
-                case < 0 when nextTranslateX.value < -_label.resolvedStyle.width:
-                    nextTranslateX = new Length((int)resolvedStyle.width);
-                    break;
+                nextTranslateX = new Length((int)resolvedStyle.width);
             }
             
-            _label.style.translate = new Translate(nextTranslateX, _label.resolvedStyle.translate.y);
+            _textElement.style.translate = new Translate(nextTranslateX, _textElement.resolvedStyle.translate.y);
         }
     }
 }
