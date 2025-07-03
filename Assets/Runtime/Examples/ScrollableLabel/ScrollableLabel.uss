@@ -1,16 +1,23 @@
-.scrollable-label-container {
-    overflow: hidden;
-    background-color: rgb(114, 106, 149);
-    padding-top: 4px;
-    padding-right: 4px;
-    padding-bottom: 4px;
-    padding-left: 4px;
+.container {
+    justify-content: center;
+    flex-grow: 1;
+    width: 400px;
+    align-self: center;
 }
 
 .scrollable-label {
-    color: rgb(255, 231, 185);
+    position: absolute;
     margin: 0;
     padding: 0;
-    position: absolute;
+}
+
+.scrollable-label-container-example {
+    overflow: hidden;
+    background-color: var(--color-accent);
+    padding: 4px;
+}
+
+.scrollable-label-container-example > .scrollable-label {
+    color: var(--color-background);
     font-size: 32px;
 }

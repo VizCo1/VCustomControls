@@ -50,7 +50,8 @@ namespace VCustomComponents
             
             _textElement = new TextElement();
             _textElement.AddToClassList(ScrollableLabelClass);
-
+            _textElement.pickingMode = PickingMode.Ignore;
+            
             Add(_textElement);
             
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
