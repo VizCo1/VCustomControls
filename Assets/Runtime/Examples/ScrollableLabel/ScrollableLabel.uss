@@ -1,7 +1,7 @@
 .container {
     justify-content: center;
     flex-grow: 1;
-    width: 400px;
+    width: 650px;
     align-self: center;
 }
 
@@ -14,10 +14,11 @@
 .scrollable-label-container-example {
     overflow: hidden;
     background-color: var(--color-accent);
+    border-radius: 4px;
     padding: 4px;
 }
 
 .scrollable-label-container-example > .scrollable-label {
     color: var(--color-background);
-    font-size: 32px;
+    font-size: 54px;
 }

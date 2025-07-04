@@ -77,14 +77,17 @@ namespace VCustomComponents
         {
             if (evt.eventTypeId == PointerEnterEvent.TypeId())
             {
+                Debug.Log("PointerEnter");
                 OnPointerEnter();
             }
             else if (evt.eventTypeId == PointerLeaveEvent.TypeId())
             {
+                Debug.Log("PointerLeave");
                 OnPointerLeave();
             }
             else if (evt.eventTypeId == DetachFromPanelEvent.TypeId())
             {
+                Debug.Log("DetachFromPanel");
                 OnDetachedFromPanel();
             }
         }
@@ -97,7 +100,7 @@ namespace VCustomComponents
                 return;
             
             _scheduledItem = schedule
-                .Execute(() => ScrollText(_scrollSpeed))
+                .Execute(() => ScrollText(ScrollSpeed))
                 .Every(ScrollRate)
                 .Until(ShouldStopScrolling);
         }
@@ -110,7 +113,7 @@ namespace VCustomComponents
                 return;
             
             _scheduledItem = schedule
-                .Execute(() => ScrollText(-_scrollSpeed))
+                .Execute(() => ScrollText(-ScrollSpeed))
                 .Every(ScrollRate)
                 .Until(ShouldStopInverseScrolling);
         }
@@ -122,7 +125,7 @@ namespace VCustomComponents
 
         private bool ShouldStopInverseScrolling()
         {
-            if (!(_textElement.resolvedStyle.translate.x >= _scrollSpeed) || !(_textElement.resolvedStyle.translate.x <= -_scrollSpeed)) 
+            if (!(_textElement.resolvedStyle.translate.x >= ScrollSpeed) || !(_textElement.resolvedStyle.translate.x <= -ScrollSpeed)) 
                 return false;
             
             _textElement.style.translate = new Translate(0f, _textElement.resolvedStyle.translate.y);
@@ -132,7 +135,7 @@ namespace VCustomComponents
 
         private bool ShouldStartScrolling()
         {
-            if (_scrollSpeed != 0)
+            if (ScrollSpeed != 0)
                 return 
                     _textElement.resolvedStyle.width > 
                     resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
