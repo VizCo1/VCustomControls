@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19101, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TooltipPanelSettings
+  m_Name: ScrollableLabelPanelSettings
   m_EditorClassIdentifier: 
   themeUss: {fileID: -4733365628477956816, guid: f7357267c8db92540b2173772fac62b1, type: 3}
   m_DisableNoThemeWarning: 0

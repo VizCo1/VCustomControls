@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Assets/Runtime/Examples/ScrollableLabel/ScrollableLabel.uss?fileID=7433441132597879392&amp;guid=40c1e84969302284c97b9b512a6aeabc&amp;type=3#ScrollableLabel" />
+    <ui:Instance template="ExamplesTemplate" name="ScrollableLabelExample" style="flex-grow: 1;">
+        <AttributeOverrides element-name="TitleLabel" text="VScrollableLabel" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control scrolls a label horizontally to allow showing its text in a small container." />
+        <ui:VisualElement name="ScrollableLabelContainer" class="container">
+            <VCustomComponents.VScrollableLabel text="Scrolling when hovering this really long text" name="ScrollableLabel" scroll-speed="2" class="scrollable-label-container-example" />
+            <VCustomComponents.VScrollableLabel text="Infinite scrolling when hovering this long text" name="ScrollableLabel" is-loopable="true" scroll-speed="3" class="scrollable-label-container-example" style="margin-top: 16px;" />
+            <VCustomComponents.VScrollableLabel text="Too short, doesn&apos;t scroll" name="ScrollableLabel" class="scrollable-label-container-example" style="margin-top: 16px;" />
+            <VCustomComponents.VScrollableLabel text="Automatic scrolling and looping!" name="ScrollableLabel" is-loopable="true" scroll-speed="3" is-automatic="true" class="scrollable-label-container-example" style="margin-top: 16px;" />
+            <VCustomComponents.VScrollableLabel text="Automatic scrolling but not looping and waits at the end!" name="ScrollableLabel" scroll-speed="3" is-automatic="true" class="scrollable-label-container-example" style="margin-top: 16px;" />
+        </ui:VisualElement>
+    </ui:Instance>
+</ui:UXML>
