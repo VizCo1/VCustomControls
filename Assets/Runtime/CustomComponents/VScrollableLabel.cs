@@ -27,12 +27,8 @@ namespace VCustomComponents
             }
         }
 
-        [UxmlAttribute, Range(0, 10f)]
-        private float ScrollSpeed
-        {
-            get => _scrollSpeed;
-            set => _scrollSpeed = value;
-        }
+        [UxmlAttribute, Range(0f, 10f)]
+        private float ScrollSpeed { get; set; } = 1;
 
         [UxmlAttribute]
         private long ScrollRate { get; set; } = 10;
@@ -42,7 +38,6 @@ namespace VCustomComponents
 
         private IVisualElementScheduledItem _scheduledItem;
         private string _text = "Label";
-        private float _scrollSpeed = 1;
 
         public VScrollableLabel() 
         {
@@ -54,13 +49,7 @@ namespace VCustomComponents
             
             Add(_textElement);
             
-            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
-        }
-
-        private void OnAttachedToPanel(AttachToPanelEvent evt)
-        {
-            _scrollSpeed *= -1f;
         }
 
         private void OnGeometryChanged(GeometryChangedEvent evt)
@@ -77,17 +66,14 @@ namespace VCustomComponents
         {
             if (evt.eventTypeId == PointerEnterEvent.TypeId())
             {
-                Debug.Log("PointerEnter");
                 OnPointerEnter();
             }
             else if (evt.eventTypeId == PointerLeaveEvent.TypeId())
             {
-                Debug.Log("PointerLeave");
                 OnPointerLeave();
             }
             else if (evt.eventTypeId == DetachFromPanelEvent.TypeId())
             {
-                Debug.Log("DetachFromPanel");
                 OnDetachedFromPanel();
             }
         }
@@ -98,9 +84,9 @@ namespace VCustomComponents
             
             if (!ShouldStartScrolling())
                 return;
-            
+
             _scheduledItem = schedule
-                .Execute(() => ScrollText(ScrollSpeed))
+                .Execute(() => ScrollText(-ScrollSpeed))
                 .Every(ScrollRate)
                 .Until(ShouldStopScrolling);
         }
@@ -111,9 +97,9 @@ namespace VCustomComponents
             
             if (!ShouldStartScrolling())
                 return;
-            
+
             _scheduledItem = schedule
-                .Execute(() => ScrollText(-ScrollSpeed))
+                .Execute(() => ScrollText(ScrollSpeed))
                 .Every(ScrollRate)
                 .Until(ShouldStopInverseScrolling);
         }
@@ -125,7 +111,7 @@ namespace VCustomComponents
 
         private bool ShouldStopInverseScrolling()
         {
-            if (!(_textElement.resolvedStyle.translate.x >= ScrollSpeed) || !(_textElement.resolvedStyle.translate.x <= -ScrollSpeed)) 
+            if (!(_textElement.resolvedStyle.translate.x >= -ScrollSpeed) || !(_textElement.resolvedStyle.translate.x <= ScrollSpeed)) 
                 return false;
             
             _textElement.style.translate = new Translate(0f, _textElement.resolvedStyle.translate.y);
