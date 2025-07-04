@@ -4,6 +4,6 @@
     <ui:Instance template="ExamplesTemplate" name="ExampleRadialSlider" style="flex-grow: 1;">
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control behaves as a slider but it is radial and with a lot of attributes to customize it!" />
         <AttributeOverrides element-name="TitleLabel" text="VRadialSlider" />
-        <VCustomComponents.VRadialSlider is-interactive="true" value="0.5" line-width="10" name="VRadialSlider" dragger-offset1="20" dragger-offset2="20" fill-line-width="12" background-line-width="20" line-cap="Butt" ending-angle="360" dragger-line-cap="Butt" dragger-width="15" fill-line-cap="Butt" />
+        <VCustomComponents.VRadialSlider value="0.5" line-width="10" name="VRadialSlider" dragger-offset1="20" dragger-offset2="20" fill-line-width="12" background-line-width="20" line-cap="Butt" ending-angle="360" dragger-line-cap="Butt" dragger-width="15" fill-line-cap="Butt" />
     </ui:Instance>
 </ui:UXML>
