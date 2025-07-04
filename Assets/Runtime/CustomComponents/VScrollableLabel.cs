@@ -36,6 +36,12 @@ namespace VCustomComponents
         [UxmlAttribute]
         private bool IsLoopable { get; set; }
 
+        [UxmlAttribute, Tooltip("When true the user cannot interact with the label")]
+        private bool IsAutomatic { get; set; }
+        
+        [UxmlAttribute]
+        private long MsBetweenScrollsWhenAutomatic { get; set; } = 250;
+        
         private IVisualElementScheduledItem _scheduledItem;
         private string _text = "Label";
 
@@ -60,15 +66,23 @@ namespace VCustomComponents
                 resolvedStyle.paddingTop + 
                 resolvedStyle.borderTopWidth + 
                 resolvedStyle.borderBottomWidth;
+#if UNITY_EDITOR
+            if (panel.contextType == ContextType.Editor)
+                return;
+#endif
+            if (IsAutomatic)
+            {
+                OnPointerEnter();
+            }
         }
 
         protected override void HandleEventBubbleUp(EventBase evt)
         {
-            if (evt.eventTypeId == PointerEnterEvent.TypeId())
+            if (!IsAutomatic && evt.eventTypeId == PointerEnterEvent.TypeId())
             {
                 OnPointerEnter();
             }
-            else if (evt.eventTypeId == PointerLeaveEvent.TypeId())
+            else if (!IsAutomatic && evt.eventTypeId == PointerLeaveEvent.TypeId())
             {
                 OnPointerLeave();
             }
@@ -78,7 +92,7 @@ namespace VCustomComponents
             }
         }
 
-        private void OnPointerEnter()
+        private void OnPointerEnter(long delay = 0)
         {
             _scheduledItem?.Pause();
             
@@ -88,10 +102,11 @@ namespace VCustomComponents
             _scheduledItem = schedule
                 .Execute(() => ScrollText(-ScrollSpeed))
                 .Every(ScrollRate)
-                .Until(ShouldStopScrolling);
+                .Until(ShouldStopScrolling)
+                .StartingIn(delay);
         }
 
-        private void OnPointerLeave()
+        private void OnPointerLeave(long delay = 0)
         {
             _scheduledItem?.Pause();
             
@@ -101,7 +116,8 @@ namespace VCustomComponents
             _scheduledItem = schedule
                 .Execute(() => ScrollText(ScrollSpeed))
                 .Every(ScrollRate)
-                .Until(ShouldStopInverseScrolling);
+                .Until(ShouldStopInverseScrolling)
+                .StartingIn(delay);
         }
         
         private void OnDetachedFromPanel()
@@ -116,17 +132,21 @@ namespace VCustomComponents
             
             _textElement.style.translate = new Translate(0f, _textElement.resolvedStyle.translate.y);
                 
+            if (IsAutomatic)
+            {
+                OnPointerEnter(MsBetweenScrollsWhenAutomatic);
+            }
+            
             return true;
         }
 
         private bool ShouldStartScrolling()
         {
             if (ScrollSpeed != 0)
-                return 
-                    _textElement.resolvedStyle.width > 
-                    resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
-                    resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth;
-
+                return _textElement.resolvedStyle.width > 
+                       resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
+                       resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth;
+            
             return false;
         }
         
@@ -148,8 +168,12 @@ namespace VCustomComponents
                 resolvedStyle.width - _textElement.resolvedStyle.width - horizontalBorderAndPadding, 
                 _textElement.resolvedStyle.translate.y);
 
+            if (IsAutomatic)
+            {
+                OnPointerLeave(MsBetweenScrollsWhenAutomatic);
+            }
+            
             return true;
-
         }
 
         private void ScrollText(float scrollSpeed)
