@@ -4,6 +4,6 @@
     <ui:Instance template="ExamplesTemplate" name="GridListViewExample" class="grid-list-view-example">
         <AttributeOverrides element-name="TitleLabel" text="VGridListView" />
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows you to have multiple items per row while using a list view." />
-        <VCustomComponents.VGridListView name="GridListView" item-template="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" virtualization-method="DynamicHeight" style="flex-grow: 1;" />
+        <VCustomComponents.VGridListView name="GridListView" item-template="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" fixed-item-height="100" style="flex-grow: 1;" />
     </ui:Instance>
 </ui:UXML>

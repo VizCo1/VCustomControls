@@ -4,6 +4,6 @@
     <ui:Instance template="ExamplesTemplate" name="LobbyContainer" class="lobby-container">
         <AttributeOverrides element-name="DescriptionLabel" text=" " />
         <AttributeOverrides element-name="TitleLabel" text="Lobby" />
-        <VCustomComponents.VGridListView name="LobbyList" item-template="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" virtualization-method="FixedHeight" fixed-item-height="350" />
+        <VCustomComponents.VGridListView name="LobbyList" item-template="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" fixed-item-height="350" />
     </ui:Instance>
 </ui:UXML>

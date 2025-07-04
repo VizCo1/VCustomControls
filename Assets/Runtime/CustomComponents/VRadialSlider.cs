@@ -7,17 +7,21 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VRadialSlider : VisualElement, INotifyValueChanged<float>
     {
+        public static readonly string RadialSliderClass = "radial-slider";
+        
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
         private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
         private static readonly CustomStyleProperty<Color> RadialFillColor = new("--radial-fill-color");
         private static readonly CustomStyleProperty<Color> RadialDraggerColor = new("--radial-dragger-color");
-        public static readonly string RadialSliderClass = "radial-slider";
         
         private const float DegreesInCircle = 360f;
         
         private readonly VExtendedClickable _vExtendedClickable;
 
         [Header(nameof(VRadialSlider))]
+        [UxmlAttribute]
+        private bool IsLoopable { get; set; }
+        
         [UxmlAttribute]
         private bool IsInteractive
         {
@@ -262,7 +266,7 @@ namespace VCustomComponents
             evt.customStyle.TryGetValue(RadialFillColor, out _radialFillColor);
             evt.customStyle.TryGetValue(RadialDraggerColor, out _radialDraggerColor);
 
-            if (_radialBackgroundColor == null ||  _radialFillColor == null || _radialDraggerColor == null)
+            if (_radialBackgroundColor == null || _radialFillColor == null || _radialDraggerColor == null)
                 return;
             
             MarkDirtyRepaint();
@@ -343,25 +347,28 @@ namespace VCustomComponents
             {
                 angle += DegreesInCircle;
             }
-            
-            if(Mathf.DeltaAngle(_previousAngle, angle) > 0f)
+
+            if (!IsLoopable)
             {
-                if (_previousAngle > angle)
+                if (Mathf.DeltaAngle(_previousAngle, angle) > 0f)
                 {
-                    value = _maxValue;
-                    return;
+                    if (_previousAngle > angle)
+                    {
+                        value = _maxValue;
+                        return;
+                    }
                 }
-            }
-            else
-            {
-                if (_previousAngle < angle)
+                else
                 {
-                    value = _minValue;
-                    return;
+                    if (_previousAngle < angle)
+                    {
+                        value = _minValue;
+                        return;
+                    }
                 }
+                
+                _previousAngle = angle;
             }
-            
-            _previousAngle = angle;
             
             value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
         }
