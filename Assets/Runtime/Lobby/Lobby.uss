@@ -11,6 +11,7 @@
 }
 
 .grid-row {
+    justify-content: space-between;
     height: 413px;
     padding: 0 0 16px 0;
 }

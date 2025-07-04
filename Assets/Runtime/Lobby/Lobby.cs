@@ -21,7 +21,7 @@ namespace VCustomComponents
             _libraryGridListView = Root.Q<VGridListView>();
             _libraryGridListView.BindCell = BindCell;
             
-            var rows = (int)Mathf.Round(_viewContainer.NumberOfViews / (float)_columns) + _viewContainer.NumberOfViews % _columns;
+            var rows = Mathf.CeilToInt(_viewContainer.NumberOfViews / (float)_columns);
             
             _names = new string[rows * _columns];
             

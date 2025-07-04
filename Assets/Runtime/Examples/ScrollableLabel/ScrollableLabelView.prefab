@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352067715970411030}
   - component: {fileID: 2284636202221336369}
+  - component: {fileID: 179275882972845552}
   m_Layer: 5
   m_Name: ScrollableLabelView
   m_TagString: Untagged
@@ -51,3 +52,15 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &179275882972845552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3659167948580991929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666df8ded2929fc4e9293bbe195e1b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
