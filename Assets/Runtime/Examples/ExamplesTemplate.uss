@@ -468,3 +468,85 @@
     margin: 0;
     padding: 4px 8px;
 }
+
+.dropdown-primary .unity-base-dropdown__container-outer {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    border-radius: var(--border-radius-example);
+    border-width: 4px;
+}
+
+.dropdown-primary .unity-base-dropdown__container-inner {
+    padding: 0;
+}
+
+.dropdown-primary .unity-scroll-view__content-container {
+    background-color: var(--color-accent);
+}
+
+.dropdown-primary .unity-base-dropdown__item {
+    background-color: var(--color-accent);
+    border-radius: var(--border-radius-example);
+    min-height: auto;
+    padding: 8px;
+}
+
+.dropdown-primary.unity-base-dropdown .unity-base-dropdown__item:hover {
+    background-color: var(--color-primary);
+}
+
+.dropdown-primary.unity-base-dropdown .unity-base-dropdown__item:checked {
+    background-color: var(--color-secondary);
+}
+
+.dropdown-primary .unity-base-dropdown__checkmark {
+    display: none;
+}
+
+.dropdown-primary .unity-base-dropdown__label {
+    color: var(--color-background);
+    font-size: var(--font-size1-example);
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-secondary .unity-base-dropdown__container-outer {
+    background-color: var(--color-accent);
+    border-color: var(--color-primary);
+    border-radius: var(--border-radius-example);
+    border-width: 4px;
+}
+
+.dropdown-secondary .unity-base-dropdown__container-inner {
+    padding: 0;
+}
+
+.dropdown-secondary .unity-base-dropdown__item {
+    background-color: var(--color-primary);
+    min-height: auto;
+    padding: 6px;
+}
+
+.dropdown-secondary.unity-base-dropdown .unity-base-dropdown__item:hover {
+    background-color: var(--color-secondary);
+}
+
+.dropdown-secondary.unity-base-dropdown .unity-base-dropdown__item:checked {
+    background-color: var(--color-accent);
+}
+
+.dropdown-secondary .unity-base-dropdown__checkmark {
+    display: none;
+}
+
+.dropdown-secondary .unity-base-dropdown__label {
+    color: var(--color-background);
+    font-size: var(--font-size1-example);
+    -unity-font-style: italic;
+    margin: 0;
+    padding: 0 4px;
+}
+
+.dropdown-secondary.unity-base-dropdown .unity-base-dropdown__item:checked .unity-base-dropdown__label {
+    -unity-font-style: bold-and-italic;
+}
