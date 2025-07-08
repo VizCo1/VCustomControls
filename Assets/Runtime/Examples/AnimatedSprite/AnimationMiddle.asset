@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0be90cfb346bb044994685cae7f56ccc, type: 3}
+  m_Name: AnimationMiddle
+  m_EditorClassIdentifier: 
+  <Sprites>k__BackingField:
+  - {fileID: -1928505972, guid: 6b4210da143077e44a30d28e119f6c84, type: 3}
+  - {fileID: -1525166425, guid: 6b4210da143077e44a30d28e119f6c84, type: 3}
+  - {fileID: -543424141, guid: 6b4210da143077e44a30d28e119f6c84, type: 3}
+  - {fileID: -1393017993, guid: 6b4210da143077e44a30d28e119f6c84, type: 3}

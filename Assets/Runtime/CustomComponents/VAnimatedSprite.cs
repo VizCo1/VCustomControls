@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.Properties;
@@ -8,9 +7,9 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VAnimatedSprite : VisualElement, INotifyValueChanged<bool>
     {
-        private static readonly BindingId ValueProperty = (BindingId) nameof(value);
-        
         public static readonly string VAnimatedSpriteClass = "animated-sprite"; 
+        
+        private static readonly BindingId ValueProperty = (BindingId) nameof(value);
         
         [Header(nameof(VAnimatedSprite))]
         
@@ -56,20 +55,17 @@ namespace VCustomComponents
         public int Loops  { get; set; } = -1;
         
         [UxmlAttribute]
-        public int CurrentIndex { get; private set; }
-
-        [UxmlAttribute]
-        public Sprite[] Sprites
+        public VSpriteAnimation SpriteAnimation
         {
-            get => _sprites;
+            get => _spriteAnimation;
             set
             {
                 if (value == null)
-                    throw new NullReferenceException("Can't set Sprites to null");
+                    Debug.LogError("Can't set Sprites to null");
 
                 StopAnimation();
                 
-                _sprites = value;
+                _spriteAnimation = value;
                 
                 ResetAnimationIndex();
 
@@ -83,75 +79,35 @@ namespace VCustomComponents
                 }
             }
         }
-
+        
         private bool _value;
         private int _frameRate = 24;
         private int _completedLoops;
-        private Sprite[] _sprites;
+        private VSpriteAnimation _spriteAnimation;
         
+        private int _currentIndex;
         private IVisualElementScheduledItem _scheduledItem;
         
         public VAnimatedSprite() 
         {
             AddToClassList(VAnimatedSpriteClass);
             
+            _completedLoops = 0;
+            
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
         }
     
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
-            _completedLoops = 0;
-            
-            if (Sprites == null)
+            if (SpriteAnimation == null || SpriteAnimation.Sprites.Length == 0)
                 return;
             
-            style.backgroundImage = new StyleBackground(Sprites[CurrentIndex]);
+            style.backgroundImage = new StyleBackground(SpriteAnimation.Sprites[_currentIndex]);
         }
         
-        private void PlayAnimation()
-        {
-            _scheduledItem?.Pause();
-
-            if (ShouldStopAnimation())
-                return;
-            
-            var intervalMs = Mathf.RoundToInt(1000f / FrameRate); 
-            
-            _scheduledItem = schedule
-                .Execute(() =>
-                {
-                    style.backgroundImage = new StyleBackground(Sprites[CurrentIndex]);
-                    CurrentIndex++;
-
-                    if (CurrentIndex < Sprites.Length) 
-                        return;
-                    
-                    CurrentIndex = 0;
-                    _completedLoops++;
-                })
-                .Until(ShouldStopAnimation)
-                .Every(intervalMs);
-        }
-
-        private bool ShouldStopAnimation()
-        {
-            if (Loops == -1)
-                return false;
-
-            if (CurrentIndex >= Sprites.Length || CurrentIndex < 0)
-                return true;
-            
-            return Loops == 0 || _completedLoops >= Loops;
-        }
-
-        private void StopAnimation()
-        {
-            _scheduledItem?.Pause();
-        }
-
         public void ResetAnimationIndex(int newAnimationIndex = 0)
         {
-            CurrentIndex = newAnimationIndex;
+            _currentIndex = newAnimationIndex;
         }
 
         public void ResetLoops()
@@ -171,6 +127,50 @@ namespace VCustomComponents
             {
                 StopAnimation();
             }
+        }
+        
+        private void PlayAnimation()
+        {
+            _scheduledItem?.Pause();
+
+            if (ShouldStopAnimation())
+                return;
+            
+            var intervalMs = Mathf.RoundToInt(1000f / FrameRate); 
+            
+            _scheduledItem = schedule
+                .Execute(() =>
+                {
+                    style.backgroundImage = new StyleBackground(SpriteAnimation.Sprites[_currentIndex]);
+                    _currentIndex++;
+
+                    if (_currentIndex < SpriteAnimation.Sprites.Length) 
+                        return;
+                    
+                    _currentIndex = 0;
+                    _completedLoops++;
+                })
+                .Until(ShouldStopAnimation)
+                .Every(intervalMs);
+        }
+
+        private bool ShouldStopAnimation()
+        {
+            if (SpriteAnimation == null || SpriteAnimation.Sprites.Length == 0)
+                return true;
+            
+            if (Loops == -1)
+                return false;
+
+            if (_currentIndex >= SpriteAnimation.Sprites.Length || _currentIndex < 0)
+                return true;
+            
+            return Loops == 0 || _completedLoops >= Loops;
+        }
+
+        private void StopAnimation()
+        {
+            _scheduledItem?.Pause();
         }
     }
 }
