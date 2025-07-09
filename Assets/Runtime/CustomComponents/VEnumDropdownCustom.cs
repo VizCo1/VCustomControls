@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace VCustomComponents
 {
     [UxmlElement]
-    public partial class VEnumDropdownCustom : DropdownField
+    public partial class VEnumDropdownCustom : EnumField
     {
         private const string BaseDropdownClass = "unity-base-dropdown";
         private const bool OneTime = true;
