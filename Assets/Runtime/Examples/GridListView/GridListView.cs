@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    public class GridList : ViewBase
+    public class GridListView : ViewBase
     {
         [SerializeField]
         private int _columns;
