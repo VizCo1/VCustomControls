@@ -8,18 +8,18 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VRadialMenu : VisualElement, INotifyValueChanged<int>, IVHasCustomEvent
     {
-        private static readonly BindingId ValueProperty = (BindingId) nameof(value);
-        private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
-        private static readonly CustomStyleProperty<Color> RadialBorderColor = new("--radial-border-color");
-        private static readonly CustomStyleProperty<Color> RadialSegmentColor = new("--radial-segment-color");
-        private static readonly CustomStyleProperty<float> RadialBorderWidth = new("--radial-border-width");
-        
         public static readonly string RadialMenuClass = "radial-menu";
         public static readonly string RadialMenuSubmittedClass = "radial-menu-submitted";
         
         public static readonly string ImageSlotName = "ImageSlot";
         public static readonly string ImageSlotClass = "image-slot";
         public static readonly string ImageSlotPosClass = ImageSlotClass + "-pos-";
+        
+        private static readonly BindingId ValueProperty = (BindingId) nameof(value);
+        private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
+        private static readonly CustomStyleProperty<Color> RadialBorderColor = new("--radial-border-color");
+        private static readonly CustomStyleProperty<Color> RadialSegmentColor = new("--radial-segment-color");
+        private static readonly CustomStyleProperty<float> RadialBorderWidth = new("--radial-border-width");
         
         [Header(nameof(VRadialMenu))]
         
@@ -48,18 +48,50 @@ namespace VCustomComponents
                 NotifyPropertyChanged(in ValueProperty);
             }
         }
-        
-        [UxmlAttribute]
-        private int Slots { get; set; } = 2;
 
         [UxmlAttribute]
-        private int SlotImageWidth { get; set; } = 75;
-        
+        private int Slots
+        {
+            get => _slots;
+            set
+            {
+                _slots = value;
+                OnGeometryChangedEvent(null);
+            }
+        }
+
         [UxmlAttribute]
-        private int SlotImageHeight { get; set; } = 75;
-        
+        private int SlotImageWidth
+        {
+            get => _slotImageWidth;
+            set
+            {
+                _slotImageWidth = value;
+                OnGeometryChangedEvent(null);
+            }
+        }
+
+        [UxmlAttribute]
+        private int SlotImageHeight
+        {
+            get => _slotImageHeight;
+            set
+            {
+                _slotImageHeight = value;
+                OnGeometryChangedEvent(null);
+            }
+        }
+
         [UxmlAttribute, Range(0f, 1f)]
-        private float SlotImagePosition { get; set; } = 0.5f;
+        private float SlotImagePosition
+        {
+            get => _slotImagePosition;
+            set
+            {
+                _slotImagePosition = value;
+                OnGeometryChangedEvent(null);
+            }
+        }
 
         private Color _radialBackgroundColor;
         private Color _radialBorderColor;
@@ -67,6 +99,10 @@ namespace VCustomComponents
         private float _radialBorderWidth;
         
         private int _value = -1;
+        private float _slotImagePosition = 0.5f;
+        private int _slotImageHeight = 75;
+        private int _slotImageWidth = 75;
+        private int _slots = 2;
 
         public event Action<int> OnSlotClicked;
         
@@ -82,22 +118,48 @@ namespace VCustomComponents
             this.AddManipulator(clickable);
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChangedEvent);
-            
-            RegisterCallback<PointerMoveEvent>(OnPointerMove);
-            RegisterCallback<NavigationSubmitEvent>(OnSubmitted);
-            RegisterCallback<VAimEvent>(OnAimed);
-            RegisterCallback<PostSubmitEvent>(OnPostSubmitted);
-            RegisterCallback<CustomStyleResolvedEvent>(OnStylesResolved);
         }
 
         private void OnGeometryChangedEvent(GeometryChangedEvent evt)
         {
+            contentContainer.Clear();
+            
             var angleSlot = 360f / Slots;
             var radius = (contentRect.width * 0.5f - _radialBorderWidth * 0.5f) * SlotImagePosition;
+
+            if (Slots == 1)
+            {
+                CreateImageSlotElement(0, 0, 0);
+                return;
+            }
             
             for (var i = 0; i < Slots; i++)
             {
                 CreateImageSlotElement(i, angleSlot, radius);
+            }
+        }
+
+        protected override void HandleEventBubbleUp(EventBase evt)
+        {
+            if (evt.eventTypeId == PointerMoveEvent.TypeId())
+            {
+                OnPointerMove((PointerMoveEvent)evt);
+            }
+            else if (evt.eventTypeId == NavigationSubmitEvent.TypeId())
+            {
+                OnSubmitted((NavigationSubmitEvent)evt);
+            }
+            else if (evt.eventTypeId == VAimEvent.TypeId())
+            {
+                OnAimed((VAimEvent)evt);
+            }
+            else if (evt.eventTypeId == PostSubmitEvent.TypeId())
+            {
+                OnPostSubmitted((PostSubmitEvent)evt);
+            }
+            else if (evt.eventTypeId == CustomStyleResolvedEvent.TypeId())
+            {
+                OnStylesResolved((CustomStyleResolvedEvent)evt);
             }
         }
 

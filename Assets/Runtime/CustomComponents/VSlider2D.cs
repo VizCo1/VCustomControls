@@ -97,15 +97,15 @@ namespace VCustomComponents
         {
             if (evt.eventTypeId == PointerMoveEvent.TypeId())
             {
-                OnMouseMove((PointerMoveEvent)evt);
+                OnPointerMove((PointerMoveEvent)evt);
             }
             else if (evt.eventTypeId == PointerDownEvent.TypeId())
             {
-                OnMouseDown((PointerDownEvent)evt);
+                OnPointerDown((PointerDownEvent)evt);
             }
             else if (evt.eventTypeId == PointerUpEvent.TypeId())
             {
-                OnMouseUp((PointerUpEvent)evt);
+                OnPointerUp((PointerUpEvent)evt);
             }
         }
         
@@ -119,7 +119,7 @@ namespace VCustomComponents
             MoveDragger();
         }
 
-        private void OnMouseDown(PointerDownEvent evt)
+        private void OnPointerDown(PointerDownEvent evt)
         {
             if (evt.button != 0)
                 return;
@@ -130,7 +130,7 @@ namespace VCustomComponents
             this.CapturePointer(evt.button);
         }
     
-        private void OnMouseMove(PointerMoveEvent evt)
+        private void OnPointerMove(PointerMoveEvent evt)
         {
             if (!_canMove)
                 return;
@@ -138,7 +138,7 @@ namespace VCustomComponents
             value = RemapBetweenMinAndHighValues(evt.localPosition);
         }
     
-        private void OnMouseUp(PointerUpEvent evt)
+        private void OnPointerUp(PointerUpEvent evt)
         {
             if (evt.button != 0)
                 return;
