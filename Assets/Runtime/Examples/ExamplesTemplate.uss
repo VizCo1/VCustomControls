@@ -31,11 +31,6 @@
     background-color: var(--color-transparent);
 }
 
-.grid-row {
-    flex-direction: row;
-    flex-grow: 1;
-}
-
 .examples-template-instance {
     flex-grow: 1;
 }

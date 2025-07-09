@@ -1,17 +1,21 @@
+.grid-row {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
 .grid-list-view-example {
     flex-grow: 1;
 }
 
-.grid-row {
-    height: 75px;
-    padding: 0 0 8px 0;
+.grid-list-view-example .grid-row {
+    justify-content: space-between;
+    align-items: center;
 }
 
-.grid-row > TemplateContainer {
-    width: 250px;
+.grid-list-view-example .grid-row > TemplateContainer {
+    height: 92px;
 }
 
-.last-grid-row {
-    height: 67px;
-    padding: 0;
+.grid-list-view-example .grid-row > TemplateContainer {
+    width: 350px;
 }

@@ -20,7 +20,7 @@
     width: 439px;
 }
 
-.last-grid-row {
+.grid-row-last {
     height: 397px;
     padding: 0;
 }

@@ -12,10 +12,6 @@ namespace VCustomComponents
 		
 		private readonly ListView _listView;
 		
-		public Action<VisualElement, int> BindCell { get; set; }
-		
-		public Func<VisualElement> MakeCell { get; private set; }
-		
 		[UxmlAttribute]
 		private int FixedItemHeight { get; set; } = 22;
 		
@@ -63,6 +59,10 @@ namespace VCustomComponents
 		
 		[UxmlAttribute]
 		private VisualTreeAsset ItemTemplate { get; set; }
+		
+		public Action<VisualElement, int> BindCell { get; set; }
+		
+		public Func<VisualElement> MakeCell { get; private set; }
 		
 		public VGridListView()
 		{
@@ -130,77 +130,9 @@ namespace VCustomComponents
 			
 			var isLastRow = index == _listView.itemsSource.Count - 1;
 			
-			if (isLastRow)
-			{
-				gridRow.AddToClassList(GridRow.LastGridRowClass);
-			}
-			else
-			{
-				gridRow.RemoveFromClassList(GridRow.LastGridRowClass);
-			}
+			gridRow.EnableInClassList(GridRow.LastGridRowClass, isLastRow);
 			
 			gridRow.BindToGridRowData(rowData);
 		}
-	}
-	
-	public sealed class GridRow : VisualElement
-	{
-		public static readonly string GridRowClass = "grid-row";
-		public static readonly string LastGridRowClass = "last-grid-row";
-			
-		private readonly VGridListView _gridView;
-		private readonly List<VisualElement> _gridElements = new();
-		
-		public GridRow(VGridListView gridListView)
-		{
-			_gridView = gridListView;
-				
-			AddToClassList(GridRowClass);
-		}
-			
-		public void BindToGridRowData(GridRowData rowData)
-		{
-			var width = rowData.GetWidth();
-			if (_gridElements.Count < width)
-			{
-				var dif = width - _gridElements.Count;
-				for (var i = 0; i < dif; i++)
-				{
-					if (rowData.Grid[rowData.Row, i] == -1)
-						break;
-					
-					var visualElement = _gridView.MakeCell();
-					_gridElements.Add(visualElement);
-				}
-			}
-
-			Clear();
-				
-			for (var i = 0; i < width; i++)
-			{
-				if (rowData.Grid[rowData.Row, i] == -1)
-					break;
-				
-				var visualElement = _gridElements[i];
-				Add(visualElement);
-					
-				var index = rowData.Grid[rowData.Row, i];
-				_gridView.BindCell(visualElement, index);
-			}
-		}
-	}
-	
-	public readonly struct GridRowData
-	{
-		public readonly int Row;
-		public readonly int[,] Grid;
-
-		public GridRowData(int row, int[,] grid)
-		{
-			Row = row;
-			Grid = grid;
-		}
-
-		public int GetWidth() => Grid.GetLength(1);
 	}
 }
