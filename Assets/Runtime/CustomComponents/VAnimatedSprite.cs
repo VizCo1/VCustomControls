@@ -107,7 +107,7 @@ namespace VCustomComponents
         
         public void ResetAnimationIndex(int newAnimationIndex = 0)
         {
-            _currentIndex = newAnimationIndex;
+            _currentIndex = Mathf.Clamp(newAnimationIndex, 0, _spriteAnimation.Sprites.Length - 1);
         }
 
         public void ResetLoops()
@@ -161,9 +161,6 @@ namespace VCustomComponents
             
             if (Loops == -1)
                 return false;
-
-            if (_currentIndex >= SpriteAnimation.Sprites.Length || _currentIndex < 0)
-                return true;
             
             return Loops == 0 || _completedLoops >= Loops;
         }
