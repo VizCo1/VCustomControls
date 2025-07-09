@@ -91,7 +91,7 @@ namespace VCustomComponents
         private float _slotImagePosition = 0.5f;
         private int _slots = 2;
         private float _angleOffset;
-        private bool _isOnSubmitted;
+        private bool _isAboutToSelect;
         
         public event Action<int> OnSlotClicked;
         
@@ -171,11 +171,6 @@ namespace VCustomComponents
             var radius = contentRect.width * 0.5f;
             
             return distance < radius;
-        }
-        
-        private void OnPostCancel()
-        {
-            value = -1;
         }
 
         private void OnStylesResolved(CustomStyleResolvedEvent evt)
@@ -268,6 +263,9 @@ namespace VCustomComponents
         
         private void OnClicked()
         {
+            if (value == -1)
+                return;
+            
             OnSlotClicked?.Invoke(_value);
         }
         
@@ -276,21 +274,28 @@ namespace VCustomComponents
             if (value == -1)
                 return;
             
-            _isOnSubmitted = true;
+            _isAboutToSelect = true;
             
             AddToClassList(RadialMenuSubmittedClass);
         }
         
         private void OnPostSubmitted()
         {
-            if (!_isOnSubmitted)
+            if (!_isAboutToSelect)
                 return;
 
-            _isOnSubmitted = false;
+            _isAboutToSelect = false;
             
             RemoveFromClassList(RadialMenuSubmittedClass);
             
             OnSlotClicked?.Invoke(_value);
+        }
+        
+        private void OnPostCancel()
+        {
+            RemoveFromClassList(RadialMenuSubmittedClass);
+            _isAboutToSelect = false;
+            value = -1;
         }
 
         private void OnAimed(VAimEvent evt)

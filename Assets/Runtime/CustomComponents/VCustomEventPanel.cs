@@ -34,6 +34,7 @@ namespace VCustomComponents
             _inputActionAsset.UI.Enable();
             _inputActionAsset.UI.Aim.performed += AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed += PostSubmitOnPerformed;
+            _inputActionAsset.UI.PostCancel.performed += PostCancelOnPerformed;
         }
 
         private void OnDetachedFromPanel(DetachFromPanelEvent evt)
@@ -79,6 +80,22 @@ namespace VCustomComponents
                 return;
             
             using var pooled = NavigationPostSubmitEvent.GetPooled();
+            
+            pooled.target = postSubmitTarget;
+            SendEvent(pooled);
+        }
+        
+        private void PostCancelOnPerformed(InputAction.CallbackContext obj)
+        {
+            var postSubmitTarget = focusController.focusedElement;
+            
+            if (!IsTargetValid(postSubmitTarget, VCustomEventType.PostCancelEvent))
+                return;
+                
+            if (panel == null) 
+                return;
+            
+            using var pooled = NavigationPostCancelEvent.GetPooled();
             
             pooled.target = postSubmitTarget;
             SendEvent(pooled);
