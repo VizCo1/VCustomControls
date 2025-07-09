@@ -8,14 +8,14 @@ namespace VCustomComponents
     {
         private const string BaseDropdownClass = "unity-base-dropdown";
         private const bool OneTime = true;
-        
+
         [Header(nameof(VDropdownCustom))]
         
         [UxmlAttribute]
-        private string ClassToAdd { get; set; }
+        private string ClassToAdd { get; set; } = string.Empty;
         
         [UxmlAttribute]
-        private string ScrollClassToAdd { get; set; }
+        private string ScrollClassToAdd { get; set; } = string.Empty;
         
         public VDropdownCustom() 
         {

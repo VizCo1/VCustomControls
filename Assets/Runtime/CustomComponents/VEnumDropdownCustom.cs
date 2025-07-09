@@ -12,10 +12,10 @@ namespace VCustomComponents
         [Header(nameof(VEnumDropdownCustom))]
         
         [UxmlAttribute]
-        private string ClassToAdd { get; set; }
+        private string ClassToAdd { get; set; } = string.Empty;
         
         [UxmlAttribute]
-        private string ScrollClassToAdd { get; set; }
+        private string ScrollClassToAdd { get; set; } = string.Empty;
         
         public VEnumDropdownCustom() 
         {
