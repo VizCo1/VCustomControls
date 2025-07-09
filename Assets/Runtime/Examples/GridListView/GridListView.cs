@@ -36,7 +36,7 @@ namespace VCustomComponents
 
         private void BindCell(VisualElement visualElement, int index)
         {
-            var button = (Button)visualElement[0];
+            var button = visualElement.Q<Button>();
             
             button.text = index.ToString();
         }
