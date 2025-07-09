@@ -5,7 +5,7 @@
         <ui:Instance template="ExamplesTemplate" name="RadialMenuExample" class="examples-template-instance">
             <AttributeOverrides element-name="DescriptionLabel" text="This custom control is a radial menu with a lot of customization and compatible with keyboard and gamepad input!" />
             <AttributeOverrides element-name="TitleLabel" text="VRadialMenu" />
-            <VCustomComponents.VRadialMenu name="VRadialMenu" slots="4" focusable="true" slot-image-width="75" slot-image-height="75" class="radial-menu-example" />
+            <VCustomComponents.VRadialMenu name="VRadialMenu" focusable="true" slots="4" class="radial-menu-example" />
         </ui:Instance>
     </VCustomComponents.VCustomEventPanel>
 </ui:UXML>

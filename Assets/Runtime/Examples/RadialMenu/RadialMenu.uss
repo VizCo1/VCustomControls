@@ -1,3 +1,9 @@
+.image-slot {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+}
+
 .radial-menu-example {
     --radial-background-color: var(--color-accent);
     --radial-border-color: var(--color-primary);

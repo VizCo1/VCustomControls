@@ -2,11 +2,11 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    public class PostSubmitEvent : EventBase<PostSubmitEvent>
+    public class NavigationPostSubmitEvent : EventBase<NavigationPostSubmitEvent>
     {
-        public new static PostSubmitEvent GetPooled()
+        public new static NavigationPostSubmitEvent GetPooled()
         {
-            var pooled = EventBase<PostSubmitEvent>.GetPooled();
+            var pooled = EventBase<NavigationPostSubmitEvent>.GetPooled();
             return pooled;
         }
     }

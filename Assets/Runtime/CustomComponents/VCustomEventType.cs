@@ -7,5 +7,6 @@ namespace VCustomComponents
     {
         AimEvent,
         PostSubmitEvent,
+        PostCancelEvent,
     }
 }
