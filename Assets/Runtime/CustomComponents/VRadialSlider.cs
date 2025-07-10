@@ -5,7 +5,7 @@ using Unity.Properties;
 namespace VCustomComponents
 {
     [UxmlElement]
-    public partial class VRadialSlider : VisualElement, INotifyValueChanged<float>
+    public partial class VRadialSlider : VisualElement, IVHasCustomEvent, INotifyValueChanged<float>
     {
         public static readonly string RadialSliderClass = "radial-slider";
         
@@ -13,6 +13,9 @@ namespace VCustomComponents
         private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
         private static readonly CustomStyleProperty<Color> RadialFillColor = new("--radial-fill-color");
         private static readonly CustomStyleProperty<Color> RadialDraggerColor = new("--radial-dragger-color");
+        private static readonly CustomStyleProperty<float> RadialBackgroundWidth = new("--radial-background-width");
+        private static readonly CustomStyleProperty<float> RadialFillWidth = new("--radial-fill-width");
+        private static readonly CustomStyleProperty<float> RadialDraggerWidth = new("--radial-dragger-width");
         
         private const float DegreesInCircle = 360f;
         
@@ -34,6 +37,7 @@ namespace VCustomComponents
                 {
                     this.AddManipulator(_vExtendedClickable);
                     _vExtendedClickable.PointerDown += OnPointerDown;
+                    
                 }
                 else
                 {
@@ -128,17 +132,6 @@ namespace VCustomComponents
         [Header("Background")]
         
         [UxmlAttribute]
-        public float BackgroundLineWidth
-        {
-            get => _backgroundLineWidth;
-            set
-            {
-                _backgroundLineWidth = value;
-                MarkDirtyRepaint();
-            }
-        }
-        
-        [UxmlAttribute]
         public LineCap BackgroundLineCap
         {
             get => _backgroundLineCap;
@@ -152,17 +145,6 @@ namespace VCustomComponents
         [Header("Fill")]
         
         [UxmlAttribute]
-        public float FillLineWidth
-        {
-            get => _fillLineWidth;
-            set
-            {
-                _fillLineWidth = value;
-                MarkDirtyRepaint();
-            }
-        }
-        
-        [UxmlAttribute]
         public LineCap FillLineCap
         {
             get => _fillLineCap;
@@ -174,17 +156,6 @@ namespace VCustomComponents
         }
         
         [Header("Dragger")]
-        
-        [UxmlAttribute]
-        public float DraggerWidth
-        {
-            get => _draggerWidth;
-            set
-            {
-                _draggerWidth = value;
-                MarkDirtyRepaint();
-            }
-        }
         
         [UxmlAttribute]
         public LineCap DraggerLineCap
@@ -218,9 +189,10 @@ namespace VCustomComponents
                 MarkDirtyRepaint();
             }
         }
-
-        private bool _isInteractive = true;
         
+        public VCustomEventType CustomEvent { get; }
+        
+        private bool _isInteractive;
         private float _value;
         private float _minValue;
         private float _maxValue = 1f;
@@ -231,43 +203,84 @@ namespace VCustomComponents
         private Color _radialBackgroundColor;
         private Color _radialFillColor;
         private Color _radialDraggerColor;
+        private float _radialBackgroundWidth;
+        private float _radialFillWidth;
+        private float _radialDraggerWidth;
+        
         private LineCap _backgroundLineCap = LineCap.Round;
         private LineCap _fillLineCap = LineCap.Round;
         private LineCap _draggerLineCap = LineCap.Round;
-        private float _backgroundLineWidth = 10f;
-        private float _fillLineWidth = 10f;
-        private float _draggerWidth = 10f;
-        
         private float _draggerOffset1 = 5f;
         private float _draggerOffset2 = 5f;
         
         private Vector2 _center;
         private float _previousAngle;
+        private bool _canPointerMove;
 
         public VRadialSlider() 
         {
             AddToClassList(RadialSliderClass);
 
+            CustomEvent |= VCustomEventType.AimEvent;
+            
             _vExtendedClickable = new VExtendedClickable(OnClicked);
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
             generateVisualContent += OnGenerateVisualContent;
-            RegisterCallback<CustomStyleResolvedEvent>(OnStylesResolved);
         }
 
         private void OnGeometryChanged(GeometryChangedEvent evt)
         {
             _center = contentRect.center + _centerOffset;
         }
-        
+
+        protected override void HandleEventBubbleUp(EventBase evt)
+        {
+            if (evt.eventTypeId == CustomStyleResolvedEvent.TypeId())
+            {
+                OnStylesResolved((CustomStyleResolvedEvent)evt);
+            }
+            else if (_canPointerMove && evt.eventTypeId == PointerMoveEvent.TypeId())
+            {
+                OnPointerMove((PointerMoveEvent)evt);
+            }
+            else if (_isInteractive && evt.eventTypeId == VAimEvent.TypeId())
+            {
+                OnAimed((VAimEvent)evt);
+            }
+        }
+
         private void OnStylesResolved(CustomStyleResolvedEvent evt)
         {
-            evt.customStyle.TryGetValue(RadialBackgroundColor, out _radialBackgroundColor);
-            evt.customStyle.TryGetValue(RadialFillColor, out _radialFillColor);
-            evt.customStyle.TryGetValue(RadialDraggerColor, out _radialDraggerColor);
-
-            if (_radialBackgroundColor == null || _radialFillColor == null || _radialDraggerColor == null)
-                return;
+            if (evt.customStyle.TryGetValue(RadialBackgroundColor, out var radialBackgroundColor)) 
+            {
+                _radialBackgroundColor = radialBackgroundColor;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialFillColor, out var radialFillColor)) 
+            {
+                _radialFillColor = radialFillColor;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialDraggerColor, out var radialDraggerColor)) 
+            {
+                _radialDraggerColor = radialDraggerColor;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialBackgroundWidth, out var radialBackgroundWidth)) 
+            {
+                _radialBackgroundWidth = radialBackgroundWidth;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialFillWidth, out var radialFillWidth)) 
+            {
+                _radialFillWidth = radialFillWidth;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialDraggerWidth, out var radialDraggerWidth)) 
+            {
+                _radialDraggerWidth = radialDraggerWidth;
+            }
             
             MarkDirtyRepaint();
         }
@@ -276,40 +289,44 @@ namespace VCustomComponents
         {
             var painter2D = mgc.painter2D;
 
-            var backgroundColor = _radialBackgroundColor;
-            var fillColor = _radialFillColor;
-            var draggerColor = _radialDraggerColor;
-            
-            painter2D.lineWidth = _backgroundLineWidth;
-            painter2D.strokeColor = backgroundColor;
-            painter2D.lineCap = _backgroundLineCap;
-            
-            var radius = contentRect.width * 0.5f - _backgroundLineWidth * 0.5f;
-            
-            painter2D.BeginPath();
-            painter2D.Arc(_center, radius, _startingAngle, _endingAngle);
-            painter2D.Stroke();
-            
+            var radius = contentRect.width * 0.5f - _radialBackgroundWidth * 0.5f;
             var angle = (_value - _minValue) / (_maxValue - _minValue) * (_endingAngle - _startingAngle) + _startingAngle;
-
-            if (fillColor.a != 0f)
+            
+            if (_radialBackgroundColor.a != 0f)
             {
-                painter2D.strokeColor = fillColor;
-                painter2D.lineWidth = _fillLineWidth;
+                painter2D.lineWidth = _radialBackgroundWidth;
+                painter2D.strokeColor = _radialBackgroundColor;
+                painter2D.lineCap = _backgroundLineCap;
+                
+                // Draw background
+                painter2D.BeginPath();
+                painter2D.Arc(_center, radius, _startingAngle, _endingAngle);
+                painter2D.Stroke();
+            }
+            
+            if (_radialFillColor.a != 0f)
+            {
+                painter2D.strokeColor = _radialFillColor;
+                painter2D.lineWidth = _radialFillWidth;
                 painter2D.lineCap = _fillLineCap;
                 
+                // Draw fill
                 painter2D.BeginPath();
                 painter2D.Arc(_center, radius, _startingAngle, angle);
                 painter2D.Stroke();
             }
+
+            if (_radialDraggerColor.a == 0f)
+                return;
             
             var circlePathPos1 = VMathExtensions.GetCircumferencePoint(angle, radius - _draggerOffset1, _center);
             var circlePathPos2 = VMathExtensions.GetCircumferencePoint(angle, radius + _draggerOffset2, _center);
             
-            painter2D.strokeColor = draggerColor;
-            painter2D.lineWidth = _draggerWidth;
+            painter2D.strokeColor = _radialDraggerColor;
+            painter2D.lineWidth = _radialDraggerWidth;
             painter2D.lineCap = _draggerLineCap;
             
+            // Draw dragger
             painter2D.BeginPath();
             painter2D.MoveTo(circlePathPos1);
             painter2D.LineTo(circlePathPos2);
@@ -323,7 +340,7 @@ namespace VCustomComponents
             
             this.CapturePointer(0);
             
-            RegisterCallback<MouseMoveEvent>(OnMouseMove);
+            _canPointerMove = true;
             
             var dir = (Vector2)evt.localPosition - _center;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -338,10 +355,47 @@ namespace VCustomComponents
             value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
         }
 
-        private void OnMouseMove(MouseMoveEvent evt)
+        private void OnPointerMove(PointerMoveEvent evt)
         {
-            var dir = evt.localMousePosition - _center;
+            var dir = (Vector2)evt.localPosition - _center;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            
+            if (angle < 0)
+            {
+                angle += DegreesInCircle;
+            }
+
+            if (!IsLoopable)
+            {
+                if (Mathf.DeltaAngle(_previousAngle, angle) > 0f)
+                {
+                    if (_previousAngle > angle)
+                    {
+                        value = _maxValue;
+                        return;
+                    }
+                }
+                else
+                {
+                    if (_previousAngle < angle)
+                    {
+                        value = _minValue;
+                        return;
+                    }
+                }
+                
+                _previousAngle = angle;
+            }
+            
+            value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
+        }
+        
+        private void OnAimed(VAimEvent evt)
+        {
+            if (evt.Aim == Vector2.zero)
+                return;
+            
+            var angle = Mathf.Atan2(evt.Aim.y, evt.Aim.x) * Mathf.Rad2Deg;
             
             if (angle < 0)
             {
@@ -375,7 +429,7 @@ namespace VCustomComponents
         
         private void OnClicked()
         {
-            UnregisterCallback<MouseMoveEvent>(OnMouseMove);
+            _canPointerMove = false;            
             this.ReleasePointer(0);
         }
         

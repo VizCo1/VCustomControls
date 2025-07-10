@@ -1,17 +1,27 @@
-.radial-slider {
+.radial-slider-example {
     align-self: center;
-    top: 90px;
-    width: 600px;
-    height: 600px;
+    flex-grow: 1;
+    width: 500px;
+    height: 500px;
+    --radial-background-width: 20;
+    --radial-fill-width: 10;
+    --radial-dragger-width: 15;
     --radial-background-color: var(--color-accent);
     --radial-fill-color: var(--color-primary);
     --radial-dragger-color: var(--color-secondary);
 }
 
-.radial-slider:hover {
+.radial-slider-example:hover {
     --radial-dragger-color: rgb(164, 94, 214);
 }
 
-.radial-slider:active {
+.radial-slider-example:active {
     --radial-dragger-color: rgb(205, 139, 255);
+}
+
+.focus-button {
+    align-self: center;
+    width: 500px;
+    margin: 16px 0 0 0;
+        
 }

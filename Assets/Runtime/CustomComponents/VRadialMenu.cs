@@ -194,9 +194,6 @@ namespace VCustomComponents
             {
                 _radialBorderWidth = radialBorderWidth;
             }
-
-            if (_radialBackgroundColor == null ||  _radialBorderColor == null || _radialSegmentColor == null)
-                return;
             
             MarkDirtyRepaint();
         }
