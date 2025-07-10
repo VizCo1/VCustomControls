@@ -22,7 +22,7 @@
 
 .vertical-rotator {
     flex-direction: column;
-    height: 130px;
+    height: 170px;
     margin: 0 0 0 24px;
 }
 

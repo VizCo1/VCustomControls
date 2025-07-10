@@ -96,7 +96,7 @@ namespace VCustomComponents
             }
             else if (_leftButton == null && !this.TryGetVisualElement(LeftButtonName, null, out _leftButton))
             {
-                Debug.LogError($"No button or template container named '{LeftButtonName}' attached to the Rotator");
+                Debug.LogError($"No button or template container named '{LeftButtonName}' added to the Rotator");
                 return;
             }
             
@@ -106,7 +106,7 @@ namespace VCustomComponents
             }
             else if (_rightButton == null && !this.TryGetVisualElement(RightButtonName, null, out _rightButton))
             {
-                Debug.LogError($"No button template container named '{RightButtonName}' attached to the Rotator");
+                Debug.LogError($"No button template container named '{RightButtonName}' added to the Rotator");
                 return;
             }
 
