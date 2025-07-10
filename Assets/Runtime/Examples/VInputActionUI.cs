@@ -126,7 +126,16 @@ namespace VCustomComponents
                     ""id"": ""15cef263-9014-4fd5-94d9-4e4a6234a6ef"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PostCancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""38cdf19f-b7ac-4ff0-91cc-9f969e68cfd2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -403,6 +412,17 @@ namespace VCustomComponents
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3b4965df-55eb-45d9-bef4-64e0bba54d05"",
+                    ""path"": ""*/{Cancel}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""PostCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c52c8e0b-8179-41d3-b8a1-d149033bbe86"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
@@ -616,6 +636,7 @@ namespace VCustomComponents
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
             m_UI_PostSubmit = m_UI.FindAction("PostSubmit", throwIfNotFound: true);
             m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+            m_UI_PostCancel = m_UI.FindAction("PostCancel", throwIfNotFound: true);
             m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
             m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
             m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
@@ -708,6 +729,7 @@ namespace VCustomComponents
         private readonly InputAction m_UI_Submit;
         private readonly InputAction m_UI_PostSubmit;
         private readonly InputAction m_UI_Cancel;
+        private readonly InputAction m_UI_PostCancel;
         private readonly InputAction m_UI_Point;
         private readonly InputAction m_UI_Click;
         private readonly InputAction m_UI_RightClick;
@@ -743,6 +765,10 @@ namespace VCustomComponents
             /// Provides access to the underlying input action "UI/Cancel".
             /// </summary>
             public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/PostCancel".
+            /// </summary>
+            public InputAction @PostCancel => m_Wrapper.m_UI_PostCancel;
             /// <summary>
             /// Provides access to the underlying input action "UI/Point".
             /// </summary>
@@ -813,6 +839,9 @@ namespace VCustomComponents
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @PostCancel.started += instance.OnPostCancel;
+                @PostCancel.performed += instance.OnPostCancel;
+                @PostCancel.canceled += instance.OnPostCancel;
                 @Point.started += instance.OnPoint;
                 @Point.performed += instance.OnPoint;
                 @Point.canceled += instance.OnPoint;
@@ -860,6 +889,9 @@ namespace VCustomComponents
                 @Cancel.started -= instance.OnCancel;
                 @Cancel.performed -= instance.OnCancel;
                 @Cancel.canceled -= instance.OnCancel;
+                @PostCancel.started -= instance.OnPostCancel;
+                @PostCancel.performed -= instance.OnPostCancel;
+                @PostCancel.canceled -= instance.OnPostCancel;
                 @Point.started -= instance.OnPoint;
                 @Point.performed -= instance.OnPoint;
                 @Point.canceled -= instance.OnPoint;
@@ -1017,6 +1049,13 @@ namespace VCustomComponents
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnCancel(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "PostCancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnPostCancel(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "Point" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>

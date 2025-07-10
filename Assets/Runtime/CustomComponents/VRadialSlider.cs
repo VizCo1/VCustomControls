@@ -381,7 +381,7 @@ namespace VCustomComponents
         
         public void SetValueWithoutNotify(float newValue)
         {
-            _value = newValue.Clamp(_minValue, _maxValue);
+            _value = Mathf.Clamp(newValue, _minValue, _maxValue);
             MarkDirtyRepaint();
         }
 

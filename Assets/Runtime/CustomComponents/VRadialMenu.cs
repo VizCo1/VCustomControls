@@ -8,18 +8,18 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VRadialMenu : VisualElement, INotifyValueChanged<int>, IVHasCustomEvent
     {
-        private static readonly BindingId ValueProperty = (BindingId) nameof(value);
-        private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
-        private static readonly CustomStyleProperty<Color> RadialBorderColor = new("--radial-border-color");
-        private static readonly CustomStyleProperty<Color> RadialSegmentColor = new("--radial-segment-color");
-        private static readonly CustomStyleProperty<float> RadialBorderWidth = new("--radial-border-width");
-        
         public static readonly string RadialMenuClass = "radial-menu";
         public static readonly string RadialMenuSubmittedClass = "radial-menu-submitted";
         
         public static readonly string ImageSlotName = "ImageSlot";
         public static readonly string ImageSlotClass = "image-slot";
         public static readonly string ImageSlotPosClass = ImageSlotClass + "-pos-";
+        
+        private static readonly BindingId ValueProperty = (BindingId) nameof(value);
+        private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
+        private static readonly CustomStyleProperty<Color> RadialBorderColor = new("--radial-border-color");
+        private static readonly CustomStyleProperty<Color> RadialSegmentColor = new("--radial-segment-color");
+        private static readonly CustomStyleProperty<float> RadialBorderWidth = new("--radial-border-width");
         
         [Header(nameof(VRadialMenu))]
         
@@ -48,18 +48,39 @@ namespace VCustomComponents
                 NotifyPropertyChanged(in ValueProperty);
             }
         }
-        
-        [UxmlAttribute]
-        private int Slots { get; set; } = 2;
 
         [UxmlAttribute]
-        private int SlotImageWidth { get; set; } = 75;
-        
-        [UxmlAttribute]
-        private int SlotImageHeight { get; set; } = 75;
-        
+        private int Slots
+        {
+            get => _slots;
+            set
+            {
+                _slots = value;
+                OnGeometryChangedEvent(null);
+            }
+        }
+
         [UxmlAttribute, Range(0f, 1f)]
-        private float SlotImagePosition { get; set; } = 0.5f;
+        private float SlotImagePosition
+        {
+            get => _slotImagePosition;
+            set
+            {
+                _slotImagePosition = value;
+                OnGeometryChangedEvent(null);
+            }
+        }
+
+        [UxmlAttribute]
+        private float AngleOffset
+        {
+            get => _angleOffset;
+            set
+            {
+                _angleOffset = value;
+                OnGeometryChangedEvent(null);
+            }
+        }
 
         private Color _radialBackgroundColor;
         private Color _radialBorderColor;
@@ -67,7 +88,11 @@ namespace VCustomComponents
         private float _radialBorderWidth;
         
         private int _value = -1;
-
+        private float _slotImagePosition = 0.5f;
+        private int _slots = 2;
+        private float _angleOffset;
+        private bool _isAboutToSelect;
+        
         public event Action<int> OnSlotClicked;
         
         public VRadialMenu() 
@@ -77,23 +102,26 @@ namespace VCustomComponents
             AddToClassList(RadialMenuClass);
             CustomEvent |= VCustomEventType.AimEvent;
             CustomEvent |= VCustomEventType.PostSubmitEvent;
+            CustomEvent |= VCustomEventType.PostCancelEvent;
 
             var clickable = new Clickable(OnClicked);
             this.AddManipulator(clickable);
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChangedEvent);
-            
-            RegisterCallback<PointerMoveEvent>(OnPointerMove);
-            RegisterCallback<NavigationSubmitEvent>(OnSubmitted);
-            RegisterCallback<VAimEvent>(OnAimed);
-            RegisterCallback<PostSubmitEvent>(OnPostSubmitted);
-            RegisterCallback<CustomStyleResolvedEvent>(OnStylesResolved);
         }
 
         private void OnGeometryChangedEvent(GeometryChangedEvent evt)
         {
+            contentContainer.Clear();
+            
             var angleSlot = 360f / Slots;
-            var radius = (contentRect.width * 0.5f - _radialBorderWidth * 0.5f) * SlotImagePosition;
+            var radius = contentRect.width * 0.5f * SlotImagePosition;
+
+            if (Slots == 1)
+            {
+                CreateImageSlotElement(0, 0, 0);
+                return;
+            }
             
             for (var i = 0; i < Slots; i++)
             {
@@ -101,9 +129,37 @@ namespace VCustomComponents
             }
         }
 
+        protected override void HandleEventBubbleUp(EventBase evt)
+        {
+            if (evt.eventTypeId == PointerMoveEvent.TypeId())
+            {
+                OnPointerMove((PointerMoveEvent)evt);
+            }
+            else if (evt.eventTypeId == NavigationSubmitEvent.TypeId())
+            {
+                OnSubmitted();
+            }
+            else if (evt.eventTypeId == VAimEvent.TypeId())
+            {
+                OnAimed((VAimEvent)evt);
+            }
+            else if (evt.eventTypeId == NavigationPostSubmitEvent.TypeId())
+            {
+                OnPostSubmitted();
+            }
+            else if (evt.eventTypeId == CustomStyleResolvedEvent.TypeId())
+            {
+                OnStylesResolved((CustomStyleResolvedEvent)evt);
+            }
+            else if (evt.eventTypeId == NavigationPostCancelEvent.TypeId())
+            {
+                OnPostCancel();
+            }
+        }
+
         public void SetValueWithoutNotify(int newValue)
         {
-            _value = newValue.Clamp(-1, Slots - 1);
+            _value = Mathf.Clamp(newValue, -1, Slots - 1);
             
             MarkDirtyRepaint();
         }
@@ -119,10 +175,25 @@ namespace VCustomComponents
 
         private void OnStylesResolved(CustomStyleResolvedEvent evt)
         {
-            evt.customStyle.TryGetValue(RadialBackgroundColor, out _radialBackgroundColor);
-            evt.customStyle.TryGetValue(RadialBorderColor, out _radialBorderColor);
-            evt.customStyle.TryGetValue(RadialSegmentColor, out _radialSegmentColor);
-            evt.customStyle.TryGetValue(RadialBorderWidth, out _radialBorderWidth);
+            if (evt.customStyle.TryGetValue(RadialBackgroundColor, out var radialBackgroundColor))
+            {
+                _radialBackgroundColor = radialBackgroundColor;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialBorderColor, out var radialBorderColor))
+            {
+                _radialBorderColor = radialBorderColor;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialSegmentColor, out var radialSegmentColor))
+            {
+                _radialSegmentColor = radialSegmentColor;
+            }
+            
+            if (evt.customStyle.TryGetValue(RadialBorderWidth, out var radialBorderWidth))
+            {
+                _radialBorderWidth = radialBorderWidth;
+            }
 
             if (_radialBackgroundColor == null ||  _radialBorderColor == null || _radialSegmentColor == null)
                 return;
@@ -141,13 +212,15 @@ namespace VCustomComponents
             var center = contentRect.center;
             var radius = contentRect.width * 0.5f - painter2D.lineWidth * 0.5f;
             
+            // Draw background border
             painter2D.BeginPath();
             painter2D.Arc(center, radius, 0, 360);
             painter2D.Stroke();
             painter2D.ClosePath();
-
+            
             radius = contentRect.width * 0.5f - painter2D.lineWidth;
             
+            // Draw background
             painter2D.BeginPath();
             painter2D.Arc(center, radius, 0, 360);
             painter2D.Fill();
@@ -156,16 +229,23 @@ namespace VCustomComponents
             if (_value == -1)
                 return;
             
+            // Draw selected slot sector
             var angleSlot = 360f / Slots;
-            var previousAngle = angleSlot * _value;
+            var previousAngle = angleSlot * _value + _angleOffset;
             var nextAngle = previousAngle + angleSlot;
             
             painter2D.fillColor = _radialSegmentColor;
         
             var point1 = VMathExtensions.GetCircumferencePoint(previousAngle, radius, contentRect.center);
             var point2 = VMathExtensions.GetCircumferencePoint(nextAngle, radius, contentRect.center);
-        
-            DrawCircleSegment(painter2D, radius, center, point1, point2, previousAngle, nextAngle);
+            
+            painter2D.BeginPath();
+            painter2D.MoveTo(center);
+            painter2D.LineTo(point1);
+            painter2D.Arc(contentRect.center, radius, previousAngle, nextAngle);
+            painter2D.LineTo(point2);
+            painter2D.Fill();
+            painter2D.ClosePath();
         }
         
         private void OnPointerMove(PointerMoveEvent evt)
@@ -183,19 +263,39 @@ namespace VCustomComponents
         
         private void OnClicked()
         {
+            if (value == -1)
+                return;
+            
             OnSlotClicked?.Invoke(_value);
         }
         
-        private void OnSubmitted(NavigationSubmitEvent evt)
+        private void OnSubmitted()
         {
+            if (value == -1)
+                return;
+            
+            _isAboutToSelect = true;
+            
             AddToClassList(RadialMenuSubmittedClass);
         }
         
-        private void OnPostSubmitted(PostSubmitEvent evt)
+        private void OnPostSubmitted()
         {
+            if (!_isAboutToSelect)
+                return;
+
+            _isAboutToSelect = false;
+            
             RemoveFromClassList(RadialMenuSubmittedClass);
             
             OnSlotClicked?.Invoke(_value);
+        }
+        
+        private void OnPostCancel()
+        {
+            RemoveFromClassList(RadialMenuSubmittedClass);
+            _isAboutToSelect = false;
+            value = -1;
         }
 
         private void OnAimed(VAimEvent evt)
@@ -213,52 +313,38 @@ namespace VCustomComponents
             SelectMatchingSegment(angle);
         }
         
-        private void CreateImageSlotElement(int i, float angleSlot, float radius)
+        private void CreateImageSlotElement(int index, float angleSlot, float radius)
         {
             var imageElement = new VisualElement
             {
-                name = ImageSlotName + i,
-                style =
-                {
-                    position = Position.Absolute,
-                    width = SlotImageWidth,
-                    height = SlotImageHeight,
-                }
+                name = ImageSlotName + index
             };
-                
-            var angle = angleSlot * i + angleSlot * 0.5f;
+
+            imageElement.RegisterCallbackOnce((GeometryChangedEvent _) => 
+                OnGeometryChangedImageSlot(imageElement, index, angleSlot, radius));
+            
+            Add(imageElement);
+            
+            imageElement.AddToClassList(ImageSlotClass);
+            imageElement.AddToClassList(ImageSlotPosClass + index);
+            
+        }
+
+        private void OnGeometryChangedImageSlot(VisualElement imageElement, int index, float angleSlot, float radius)
+        {
+            var angle = angleSlot * index + angleSlot * 0.5f + _angleOffset;
             var position = VMathExtensions.GetCircumferencePoint(angle, radius, contentRect.center);
-            var offset = new Vector2(SlotImageWidth * 0.5f, SlotImageHeight * 0.5f);
+            var offset = new Vector2(imageElement.resolvedStyle.width * 0.5f, imageElement.resolvedStyle.height * 0.5f);
                 
             imageElement.style.translate = new Translate(position.x - offset.x, position.y - offset.y);
-                
-            imageElement.AddToClassList(ImageSlotClass);
-            imageElement.AddToClassList(ImageSlotPosClass + i);
-            Add(imageElement);
         }
 
         private void SelectMatchingSegment(float angle)
         {
+            angle = (angle - _angleOffset + 360f) % 360f;
+
             var angleSlot = 360f / Slots;
             value = (int)(angle / angleSlot);
-        }
-
-        private void DrawCircleSegment(
-            Painter2D painter2D, 
-            float radius, 
-            Vector2 center, 
-            Vector2 point1, 
-            Vector2 point2, 
-            float angle1, 
-            float angle2)
-        {
-            painter2D.BeginPath();
-            painter2D.MoveTo(center);
-            painter2D.LineTo(point1);
-            painter2D.Arc(contentRect.center, radius, angle1, angle2);
-            painter2D.LineTo(point2);
-            painter2D.Fill();
-            painter2D.ClosePath();
         }
     }
 }

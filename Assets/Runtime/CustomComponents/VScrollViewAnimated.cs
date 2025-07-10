@@ -64,7 +64,7 @@ namespace VCustomComponents
             if (_isAnimating)
                 return;
             
-            verticalScroller.value = newValue.Clamp(verticalScroller.lowValue, verticalScroller.highValue);
+            verticalScroller.value = Mathf.Clamp(newValue, verticalScroller.lowValue, verticalScroller.highValue);
         }
         
         private void OnHorizontalScrollerValueChanged(float newValue)
@@ -72,7 +72,7 @@ namespace VCustomComponents
             if (_isAnimating)
                 return;
             
-            horizontalScroller.value = newValue.Clamp(horizontalScroller.lowValue, horizontalScroller.highValue);
+            horizontalScroller.value = Mathf.Clamp(newValue, horizontalScroller.lowValue, horizontalScroller.highValue);
         }
 
         public void AnimatedScrollTo(VisualElement element, float duration, Ease ease = Ease.Linear)
@@ -95,8 +95,10 @@ namespace VCustomComponents
             if (mode == ScrollViewMode.Vertical)
             {
                 var targetPosition = element
-                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position).y
-                    .Clamp(verticalScroller.lowValue, verticalScroller.highValue);
+                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position).y;
+                    
+                targetPosition = 
+                    Mathf.Clamp(targetPosition, verticalScroller.lowValue, verticalScroller.highValue);
 
                 _animationTween1D = DOTween.To(
                     () => verticalScroller.value,
@@ -124,8 +126,10 @@ namespace VCustomComponents
             else if (mode == ScrollViewMode.Horizontal)
             {
                 var targetPosition = element
-                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position).x
-                    .Clamp(horizontalScroller.lowValue, horizontalScroller.highValue);
+                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position).x;
+                    
+                targetPosition = 
+                    Mathf.Clamp(targetPosition, horizontalScroller.lowValue, horizontalScroller.highValue);
 
                 _animationTween1D = DOTween.To(
                     () => horizontalScroller.value,
