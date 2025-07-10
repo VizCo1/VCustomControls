@@ -1,11 +1,8 @@
-.rotator-example-container {
-    flex-grow: 1;
-}
-
 .container {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
+    flex-direction: row;
 }
 
 .horizontal-rotator {
@@ -21,4 +18,14 @@
     width: 150px;
     margin: 0 16px;
     padding: 0;
+}
+
+.vertical-rotator {
+    flex-direction: column;
+    height: 130px;
+    margin: 0 0 0 24px;
+}
+
+.vertical-rotator-label {
+    margin: 16px 16px;
 }
