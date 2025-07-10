@@ -42,6 +42,20 @@ namespace VCustomComponents
                 : DisplayStyle.None;
         }
 
+        public static void ToggleFocus(this VisualElement element)
+        {
+            var focusedElement = element.focusController.focusedElement;
+            
+            if (focusedElement == element)
+            {
+                element.Blur();
+            }
+            else
+            {
+                element.Focus();
+            }
+        }
+
         public static bool TryGetVisualElement(
             this VisualElement element,
             string name,

@@ -5,6 +5,8 @@ namespace VCustomComponents
 {
     public class RadialMenu : ViewBase
     {
+        private const string FocusButtonName = "FocusButton";
+        
         private VRadialMenu _radialMenu;
         private Button _focusButton;
 
@@ -15,14 +17,14 @@ namespace VCustomComponents
             _radialMenu = Root.Q<VRadialMenu>();
             _radialMenu.OnSlotClicked += OnSlotClicked;
             
-            _focusButton = Root.Q<VisualElement>("FocusButton").Q<Button>();
+            _focusButton = Root.Q<VisualElement>(FocusButtonName).Q<Button>();
             
             _focusButton.clicked += OnFocusButtonClicked;
         }
 
         private void OnFocusButtonClicked()
         {
-            _radialMenu.Focus();
+            _radialMenu.ToggleFocus();
         }
 
         private void OnSlotClicked(int index)
