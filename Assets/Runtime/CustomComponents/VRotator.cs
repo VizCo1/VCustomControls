@@ -58,8 +58,7 @@ namespace VCustomComponents
                 this.value = 0;
             }
         }
-
-
+        
         private Button _leftButton;
         private Button _rightButton;
         private Label _label;
@@ -89,10 +88,7 @@ namespace VCustomComponents
             if (!HasButtons)
                 return;
 
-            TemplateContainer leftButtonTemplate;
-            TemplateContainer rightButtonTemplate;
-            
-            if (this.TryGetVisualElement(LeftButtonName, null, out leftButtonTemplate))
+            if (this.TryGetVisualElement(LeftButtonName, null, out TemplateContainer leftButtonTemplate))
             {
                 _leftButton = leftButtonTemplate.Q<Button>();
             }
@@ -102,7 +98,7 @@ namespace VCustomComponents
                 return;
             }
             
-            if (this.TryGetVisualElement(RightButtonName, null, out rightButtonTemplate))
+            if (this.TryGetVisualElement(RightButtonName, null, out TemplateContainer rightButtonTemplate))
             {
                 _rightButton = rightButtonTemplate.Q<Button>();
             }
