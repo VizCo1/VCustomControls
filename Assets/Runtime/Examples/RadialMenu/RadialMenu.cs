@@ -6,6 +6,7 @@ namespace VCustomComponents
     public class RadialMenu : ViewBase
     {
         private VRadialMenu _radialMenu;
+        private Button _focusButton;
 
         protected override void Start()
         {
@@ -13,6 +14,15 @@ namespace VCustomComponents
             
             _radialMenu = Root.Q<VRadialMenu>();
             _radialMenu.OnSlotClicked += OnSlotClicked;
+            
+            _focusButton = Root.Q<VisualElement>("FocusButton").Q<Button>();
+            
+            _focusButton.clicked += OnFocusButtonClicked;
+        }
+
+        private void OnFocusButtonClicked()
+        {
+            _radialMenu.Focus();
         }
 
         private void OnSlotClicked(int index)
@@ -34,11 +44,10 @@ namespace VCustomComponents
             }
         }
 
-        protected override void OnDestroy() 
+        protected override void BeforeDestroy()
         {
             _radialMenu.OnSlotClicked -= OnSlotClicked;
-            
-            base.OnDestroy();
+            _focusButton.clicked -= OnFocusButtonClicked;
         }
     }
 }

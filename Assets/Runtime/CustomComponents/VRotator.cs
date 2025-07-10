@@ -140,7 +140,7 @@ namespace VCustomComponents
 
         public void SetValueWithoutNotify(int newValue)
         {
-            _value = newValue.Clamp(0, Options.Length - 1);
+            _value = Mathf.Clamp(newValue, 0, Options.Length - 1);
 
             if (_label == null)
                 return;

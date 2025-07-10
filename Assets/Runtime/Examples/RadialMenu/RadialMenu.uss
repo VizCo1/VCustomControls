@@ -38,10 +38,12 @@
 
 .radial-menu-example > .image-slot-pos-0 {
     background-image: url("project://database/Assets/Runtime/Examples/RadialMenu/panel-002.png?fileID=2800000&guid=effd1f79673aebf47b0cb2eb251ae57b&type=3#panel-002");
+    left: -4px;
 }
 
 .radial-menu-example > .image-slot-pos-1 {
     background-image: url("project://database/Assets/Runtime/Examples/RadialMenu/panel-006.png?fileID=2800000&guid=0c36c8c489017d14b863600dfc646882&type=3#panel-006");
+    left: 4px;
 }
 
 .radial-menu-example > .image-slot-pos-2 {

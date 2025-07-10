@@ -159,7 +159,7 @@ namespace VCustomComponents
 
         public void SetValueWithoutNotify(int newValue)
         {
-            _value = newValue.Clamp(-1, Slots - 1);
+            _value = Mathf.Clamp(newValue, -1, Slots - 1);
             
             MarkDirtyRepaint();
         }
