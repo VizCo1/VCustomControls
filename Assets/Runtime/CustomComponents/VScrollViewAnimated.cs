@@ -79,7 +79,11 @@ namespace VCustomComponents
             horizontalScroller.value = Mathf.Clamp(newValue, horizontalScroller.lowValue, horizontalScroller.highValue);
         }
 
-        public void AnimatedScrollTo(VisualElement element, float duration, Ease ease = Ease.Linear)
+        public void AnimatedScrollTo(
+            VisualElement element, 
+            float duration, 
+            VAnimatedScrollType animatedScrollType = VAnimatedScrollType.Default, 
+            Ease ease = Ease.Linear)
         {
             if (!contentContainer.Contains(element))
                 throw new ArgumentException("Cannot scroll to a VisualElement that's not a child of the ScrollView contentContainer.");
@@ -100,6 +104,12 @@ namespace VCustomComponents
             {
                 var targetPosition = element
                     .ChangeCoordinatesTo(contentContainer, element.contentRect.position).y;
+
+                if (animatedScrollType == VAnimatedScrollType.Centered)
+                {
+                    var elementCenter = targetPosition + element.resolvedStyle.height * 0.5f;
+                    targetPosition = elementCenter - contentViewport.resolvedStyle.height * 0.5f;
+                }
                     
                 targetPosition = 
                     Mathf.Clamp(targetPosition, verticalScroller.lowValue, verticalScroller.highValue);
@@ -132,6 +142,12 @@ namespace VCustomComponents
                 var targetPosition = element
                     .ChangeCoordinatesTo(contentContainer, element.contentRect.position).x;
                     
+                if (animatedScrollType == VAnimatedScrollType.Centered)
+                {
+                    var elementCenter = targetPosition + element.resolvedStyle.width * 0.5f;
+                    targetPosition = elementCenter - contentViewport.resolvedStyle.width * 0.5f;
+                }
+                
                 targetPosition = 
                     Mathf.Clamp(targetPosition, horizontalScroller.lowValue, horizontalScroller.highValue);
 
@@ -160,9 +176,26 @@ namespace VCustomComponents
             }
             else
             {
+                //TODO: FIX THIS DONT FORGET check if it works!
                 var targetPosition = element
                     .ChangeCoordinatesTo(contentContainer, element.contentRect.position);
 
+                if (animatedScrollType == VAnimatedScrollType.Centered)
+                {
+                    var elementCenter = 
+                        targetPosition + 
+                        new Vector2(element.resolvedStyle.width * 0.5f, element.resolvedStyle.height * 0.5f);
+                    
+                    targetPosition = 
+                        elementCenter - 
+                        new Vector2(contentViewport.resolvedStyle.width * 0.5f, contentViewport.resolvedStyle.height * 0.5f);
+                }
+
+                targetPosition = 
+                    new Vector2(
+                        Mathf.Clamp(targetPosition.x, horizontalScroller.lowValue, horizontalScroller.highValue), 
+                        Mathf.Clamp(targetPosition.y, verticalScroller.lowValue,  verticalScroller.highValue));
+                
                 _animationTween2D = DOTween.To(
                     () => new Vector2(horizontalScroller.value, verticalScroller.value),
                     newValue =>

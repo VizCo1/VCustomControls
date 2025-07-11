@@ -29,6 +29,7 @@
                     <ui:Instance template="ExamplesButton" name="ButtonContainerF" class="row-button">
                         <AttributeOverrides element-name="ExamplesButton" text="F" />
                     </ui:Instance>
+                    </ui:Instance>
                     <ui:Instance template="ExamplesEnumDropdown" name="EaseEnumDropdownContainerVertical" class="ease-enum-dropdown-container">
                         <AttributeOverrides element-name="ExamplesEnumDropdown" label="Ease" />
                     </ui:Instance>
@@ -76,6 +77,9 @@
                     </ui:Instance>
                     <ui:Instance template="ExamplesButton" name="ButtonContainerF" class="row-button">
                         <AttributeOverrides element-name="ExamplesButton" text="F" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesEnumDropdown" name="AnimatedScrollTypeEnumDropdownContainerHorizontal" class="animated-scroll-type-enum-dropdown-container">
+                        <AttributeOverrides element-name="ExamplesEnumDropdown" label="AnimatedScrollType" type="VCustomComponents.VAnimatedScrollType, VCustomComponents" />
                     </ui:Instance>
                     <ui:Instance template="ExamplesEnumDropdown" name="EaseEnumDropdownContainerHorizontal" class="ease-enum-dropdown-container">
                         <AttributeOverrides element-name="ExamplesEnumDropdown" label="Ease" />
