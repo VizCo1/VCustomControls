@@ -46,7 +46,9 @@ namespace VCustomComponents
             
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed -= PostSubmitOnPerformed;
+            _inputActionAsset.UI.PostCancel.performed -= PostCancelOnPerformed;
             _inputActionAsset.UI.Disable();
+            _inputActionAsset.Dispose();
             
             _inputActionAsset = null;
         }
