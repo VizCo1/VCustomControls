@@ -7,9 +7,10 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VRotator : VisualElement, INotifyValueChanged<int>
     {
-        private const string TextName = "RotatorLabel";
-        private const string LeftButtonName = "LeftRotatorButton";
-        private const string RightButtonName = "RightRotatorButton";
+        public static readonly string RotatorClass = "rotator";
+        public static readonly string TextName = "RotatorLabel";
+        public static readonly string LeftButtonName = "LeftRotatorButton";
+        public static readonly string RightButtonName = "RightRotatorButton";
         
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
         
@@ -58,8 +59,7 @@ namespace VCustomComponents
                 this.value = 0;
             }
         }
-
-
+        
         private Button _leftButton;
         private Button _rightButton;
         private Label _label;
@@ -69,6 +69,7 @@ namespace VCustomComponents
         
         public VRotator() 
         {
+            AddToClassList(RotatorClass);
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
         }
     
@@ -89,32 +90,44 @@ namespace VCustomComponents
             if (!HasButtons)
                 return;
 
-            TemplateContainer leftButtonTemplate;
-            TemplateContainer rightButtonTemplate;
-            
-            if (this.TryGetVisualElement(LeftButtonName, null, out leftButtonTemplate))
+            if (this.TryGetVisualElement(LeftButtonName, null, out TemplateContainer leftButtonTemplate))
             {
                 _leftButton = leftButtonTemplate.Q<Button>();
             }
             else if (_leftButton == null && !this.TryGetVisualElement(LeftButtonName, null, out _leftButton))
             {
-                Debug.LogError($"No button or template container named '{LeftButtonName}' attached to the Rotator");
+                Debug.LogError($"No button or template container named '{LeftButtonName}' added to the Rotator");
                 return;
             }
             
-            if (this.TryGetVisualElement(RightButtonName, null, out rightButtonTemplate))
+            if (this.TryGetVisualElement(RightButtonName, null, out TemplateContainer rightButtonTemplate))
             {
                 _rightButton = rightButtonTemplate.Q<Button>();
             }
             else if (_rightButton == null && !this.TryGetVisualElement(RightButtonName, null, out _rightButton))
             {
-                Debug.LogError($"No button template container named '{RightButtonName}' attached to the Rotator");
+                Debug.LogError($"No button template container named '{RightButtonName}' added to the Rotator");
                 return;
             }
 
             _leftButton.clicked += OnLeftButtonClicked;
             _rightButton.clicked += OnRightButtonClicked;
         }
+        
+        public void SetValueWithoutNotify(int newValue)
+        {
+            _value = Mathf.Clamp(newValue, 0, Options.Length - 1);
+
+            if (_label == null)
+                return;
+            
+            _label.text = Options[_value];
+        }
+
+        public string GetCurrentOption()
+        {
+            return _options[_value];
+        } 
 
         private void OnLeftButtonClicked()
         {
@@ -136,16 +149,6 @@ namespace VCustomComponents
             }
             
             value++;
-        }
-
-        public void SetValueWithoutNotify(int newValue)
-        {
-            _value = Mathf.Clamp(newValue, 0, Options.Length - 1);
-
-            if (_label == null)
-                return;
-            
-            _label.text = Options[_value];
         }
     }
 }

@@ -223,7 +223,7 @@ namespace VCustomComponents
 
             CustomEvent |= VCustomEventType.AimEvent;
             
-            _vExtendedClickable = new VExtendedClickable(OnClicked);
+            _vExtendedClickable = new VExtendedClickable();
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
             generateVisualContent += OnGenerateVisualContent;
@@ -233,18 +233,26 @@ namespace VCustomComponents
         {
             _center = contentRect.center + _centerOffset;
         }
-
+    
         protected override void HandleEventBubbleUp(EventBase evt)
         {
             if (evt.eventTypeId == CustomStyleResolvedEvent.TypeId())
             {
                 OnStylesResolved((CustomStyleResolvedEvent)evt);
             }
-            else if (_canPointerMove && evt.eventTypeId == PointerMoveEvent.TypeId())
+
+            if (!_isInteractive)
+                return;
+
+            if (evt.eventTypeId == PointerMoveEvent.TypeId())
             {
                 OnPointerMove((PointerMoveEvent)evt);
             }
-            else if (_isInteractive && evt.eventTypeId == VAimEvent.TypeId())
+            else if (evt.eventTypeId == PointerUpEvent.TypeId())
+            {
+                OnPointerUp();
+            }
+            else if (evt.eventTypeId == VAimEvent.TypeId())
             {
                 OnAimed((VAimEvent)evt);
             }
@@ -357,6 +365,9 @@ namespace VCustomComponents
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
+            if (!_canPointerMove)
+                return;
+            
             var dir = (Vector2)evt.localPosition - _center;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             
@@ -427,7 +438,7 @@ namespace VCustomComponents
             value = (_maxValue - _minValue) * (angle - _startingAngle) / (_endingAngle - _startingAngle) + _minValue;
         }
         
-        private void OnClicked()
+        private void OnPointerUp()
         {
             _canPointerMove = false;            
             this.ReleasePointer(0);
