@@ -36,14 +36,14 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true" mode="VerticalAndHorizontal">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="B" />
                     </ui:Instance>
-                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical" style="width: 2364px;">
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="C" />
                     </ui:Instance>
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
