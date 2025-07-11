@@ -29,6 +29,9 @@
                     <ui:Instance template="ExamplesButton" name="ButtonContainerF" class="row-button">
                         <AttributeOverrides element-name="ExamplesButton" text="F" />
                     </ui:Instance>
+                    <ui:Instance template="ExamplesEnumDropdown" name="AnimatedScrollTypeEnumDropdownContainerVertical" class="animated-scroll-type-enum-dropdown-container">
+                        <AttributeOverrides element-name="ExamplesEnumDropdown" label="AnimatedScrollType" type="VCustomComponents.VAnimatedScrollType, VCustomComponents" />
+                    </ui:Instance>
                     <ui:Instance template="ExamplesEnumDropdown" name="EaseEnumDropdownContainerVertical" class="ease-enum-dropdown-container">
                         <AttributeOverrides element-name="ExamplesEnumDropdown" label="Ease" />
                     </ui:Instance>
@@ -36,7 +39,7 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true" class="scroll-view-animated">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
@@ -77,6 +80,9 @@
                     <ui:Instance template="ExamplesButton" name="ButtonContainerF" class="row-button">
                         <AttributeOverrides element-name="ExamplesButton" text="F" />
                     </ui:Instance>
+                    <ui:Instance template="ExamplesEnumDropdown" name="AnimatedScrollTypeEnumDropdownContainerHorizontal" class="animated-scroll-type-enum-dropdown-container">
+                        <AttributeOverrides element-name="ExamplesEnumDropdown" label="AnimatedScrollType" type="VCustomComponents.VAnimatedScrollType, VCustomComponents" />
+                    </ui:Instance>
                     <ui:Instance template="ExamplesEnumDropdown" name="EaseEnumDropdownContainerHorizontal" class="ease-enum-dropdown-container">
                         <AttributeOverrides element-name="ExamplesEnumDropdown" label="Ease" />
                     </ui:Instance>
@@ -84,7 +90,7 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedHorizontal" mode="Horizontal" class="scroll-view-animated">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedHorizontal" mode="Horizontal">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>

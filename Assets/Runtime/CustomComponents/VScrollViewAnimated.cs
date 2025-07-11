@@ -10,12 +10,16 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VScrollViewAnimated : ScrollView
     {
-        private const string TargetElementClass = "scroll-view-animated-target";
+        public static readonly string ScrollViewAnimatedClass = "scroll-view-animated";
+        public static readonly string TargetElementClass = "scroll-view-animated-target";
         
         [Header(nameof(VScrollViewAnimated))] 
         
         [UxmlAttribute]
         private bool StopAnimationWhenScrolling { get; set; }
+        
+        [UxmlAttribute]
+        private float MinDistanceForMaxDuration { get; set; } = 200f;
         
         private TweenerCore<float, float, FloatOptions> _animationTween1D; 
         private TweenerCore<Vector2, Vector2, VectorOptions> _animationTween2D;
@@ -26,18 +30,13 @@ namespace VCustomComponents
         
         public VScrollViewAnimated() 
         {
+            AddToClassList(ScrollViewAnimatedClass);
             touchScrollBehavior = TouchScrollBehavior.Unrestricted;
-            
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanelEvent);
         }
 
         private void OnAttachedToPanelEvent(AttachToPanelEvent evt)
         {
-            if (StopAnimationWhenScrolling)
-            {
-                RegisterCallback<WheelEvent>(OnMouseWheel);
-            }
-            
             if (mode == ScrollViewMode.Vertical)
             {
                 verticalScroller.valueChanged += OnVerticalScrollerValueChanged;
@@ -53,7 +52,15 @@ namespace VCustomComponents
             }
         }
 
-        private void OnMouseWheel(WheelEvent evt)
+        protected override void HandleEventBubbleUp(EventBase evt)
+        {
+            if (StopAnimationWhenScrolling && evt.eventTypeId == WheelEvent.TypeId())
+            {
+                OnMouseWheel();
+            }
+        }
+
+        private void OnMouseWheel()
         {
             _animationTween1D?.Kill();
             _animationTween2D?.Kill();
@@ -75,7 +82,11 @@ namespace VCustomComponents
             horizontalScroller.value = Mathf.Clamp(newValue, horizontalScroller.lowValue, horizontalScroller.highValue);
         }
 
-        public void AnimatedScrollTo(VisualElement element, float duration, Ease ease = Ease.Linear)
+        public void AnimatedScrollTo(
+            VisualElement element, 
+            float maxDuration, 
+            VAnimatedScrollType animatedScrollType = VAnimatedScrollType.Default, 
+            Ease ease = Ease.Linear)
         {
             if (!contentContainer.Contains(element))
                 throw new ArgumentException("Cannot scroll to a VisualElement that's not a child of the ScrollView contentContainer.");
@@ -92,77 +103,84 @@ namespace VCustomComponents
 
             _previousTarget = element;
             
-            if (mode == ScrollViewMode.Vertical)
+            var targetPosition = element
+                .ChangeCoordinatesTo(contentContainer, element.contentRect.position);
+            
+            if (animatedScrollType == VAnimatedScrollType.Centered)
             {
-                var targetPosition = element
-                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position).y;
+                var elementCenter = 
+                    targetPosition + 
+                    new Vector2(element.resolvedStyle.width * 0.5f, element.resolvedStyle.height * 0.5f);
                     
                 targetPosition = 
-                    Mathf.Clamp(targetPosition, verticalScroller.lowValue, verticalScroller.highValue);
-
+                    elementCenter - 
+                    new Vector2(contentViewport.resolvedStyle.width * 0.5f, contentViewport.resolvedStyle.height * 0.5f);
+            }
+            
+            targetPosition = new Vector2(
+                Mathf.Clamp(targetPosition.x, horizontalScroller.lowValue, horizontalScroller.highValue), 
+                Mathf.Clamp(targetPosition.y, verticalScroller.lowValue,  verticalScroller.highValue));
+            
+            var distance = new Vector2(
+                Mathf.Abs(horizontalScroller.value - targetPosition.x), 
+                Mathf.Abs(verticalScroller.value - targetPosition.y));
+            
+            if (mode == ScrollViewMode.Vertical)
+            {
+                if (distance.y < MinDistanceForMaxDuration)
+                {
+                    var t = distance.y / MinDistanceForMaxDuration;
+                    maxDuration = Mathf.Lerp(0, maxDuration, t);
+                }
+                
                 _animationTween1D = DOTween.To(
                     () => verticalScroller.value,
                     newValue =>
                     {
                         verticalScroller.value = newValue;
                     },
-                    targetPosition,
-                    duration)
+                    targetPosition.y,
+                    maxDuration)
                     .SetEase(ease)
                     .OnStart(() =>
                     {
-                        if (Mathf.Approximately(targetPosition, verticalScroller.value))
-                        {
-                            _animationTween1D.Kill();
-                        }
-                        else
-                        {
-                            element.AddToClassList(TargetElementClass);
-                        }
+                        element.AddToClassList(TargetElementClass);
                     })
-                    .OnComplete(OnAnimationCompleted)
                     .OnKill(OnAnimationCompleted);
             }
             else if (mode == ScrollViewMode.Horizontal)
             {
-                var targetPosition = element
-                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position).x;
-                    
-                targetPosition = 
-                    Mathf.Clamp(targetPosition, horizontalScroller.lowValue, horizontalScroller.highValue);
-
+                if (distance.x < MinDistanceForMaxDuration)
+                {
+                    var t = distance.x / MinDistanceForMaxDuration;
+                    maxDuration = Mathf.Lerp(0, maxDuration, t);
+                }
+                
                 _animationTween1D = DOTween.To(
                     () => horizontalScroller.value,
                     newValue =>
                     {
                         horizontalScroller.value = newValue;
                     },
-                    targetPosition,
-                    duration)
+                    targetPosition.x,
+                    maxDuration)
                     .SetEase(ease)
                     .OnStart(() =>
                     {
-                        if (Mathf.Approximately(targetPosition, horizontalScroller.value))
-                        {
-                            _animationTween1D.Kill();
-                        }
-                        else
-                        {
-                            element.AddToClassList(TargetElementClass);
-                        }
+                        element.AddToClassList(TargetElementClass);
                     })
-                    .OnComplete(OnAnimationCompleted)
                     .OnKill(OnAnimationCompleted);
             }
             else
             {
-                var lowLimit = new Vector2(horizontalScroller.lowValue, horizontalScroller.highValue);
-                var highLimit = new Vector2(verticalScroller.lowValue, verticalScroller.highValue);
+                var greaterDistance = Mathf.Max(distance.x, distance.y);
                 
-                var targetPosition = element
-                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position)
-                    .Clamp(lowLimit, highLimit);
-
+                if (greaterDistance < MinDistanceForMaxDuration)
+                {
+                    var t = greaterDistance / MinDistanceForMaxDuration;
+                    maxDuration = Mathf.Lerp(0, maxDuration, t);
+                }
+                
                 _animationTween2D = DOTween.To(
                     () => new Vector2(horizontalScroller.value, verticalScroller.value),
                     newValue =>
@@ -171,27 +189,18 @@ namespace VCustomComponents
                         verticalScroller.value = newValue.y;
                     },
                     targetPosition,
-                    duration)
+                    maxDuration)
                     .SetEase(ease)
                     .OnStart(() =>
                     {
-                        if (Mathf.Approximately(targetPosition.x, horizontalScroller.value) &&
-                            Mathf.Approximately(targetPosition.y, verticalScroller.value))
-                        {
-                            _animationTween2D.Kill();
-                        }
-                        else
-                        {
-                            element.AddToClassList(TargetElementClass);
-                        }
+                        element.AddToClassList(TargetElementClass);
                     })
-                    .OnComplete(OnAnimationCompleted)
                     .OnKill(OnAnimationCompleted);
             }
         }
         
         private void OnAnimationCompleted()
-        {
+        { 
             _isAnimating = false;
             
             mouseWheelScrollSize = _previousMouseWheelScrollSize;

@@ -21,21 +21,27 @@
     margin: 0 8px 0 0;
 }
 
-.ease-enum-dropdown-container {
+.animated-scroll-type-enum-dropdown-container {
     justify-content: center;
-    width: 300px;
+    width: 350px;
     margin: 0 0 0 8px;
 }
 
-.duration-float-field-container {
-    width: 200px;
+.ease-enum-dropdown-container {
+    justify-content: center;
+    width: 300px;
     margin: 0 0 0 16px;
-    height: 50px;
-    align-self: center;
 }
 
-.scroll-view-animated-target {
-    border-color: rgb(205, 205, 205);
+.duration-float-field-container {
+    align-self: center;
+    width: 200px;
+    height: 50px;
+    margin: 0 0 0 16px;
+}
+
+.scroll-view-animated-target > .examples-button {
+    border-color: var(--color-secondary);
     border-radius: var(--border-radius-example);
     border-width: 10px;
 }
