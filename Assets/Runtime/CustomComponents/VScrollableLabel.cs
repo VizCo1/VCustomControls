@@ -51,6 +51,7 @@ namespace VCustomComponents
             
             _textElement = new TextElement();
             _textElement.AddToClassList(ScrollableLabelClass);
+            _textElement.usageHints = UsageHints.DynamicTransform;
             _textElement.pickingMode = PickingMode.Ignore;
             
             Add(_textElement);
@@ -180,9 +181,13 @@ namespace VCustomComponents
         {
             var nextTranslateX = new Length(_textElement.resolvedStyle.translate.x + scrollSpeed);
             
-            if (nextTranslateX.value < -_textElement.resolvedStyle.width)
+            if (scrollSpeed < 0 && nextTranslateX.value < -_textElement.resolvedStyle.width)
             {
                 nextTranslateX = new Length((int)resolvedStyle.width);
+            }
+            else if (scrollSpeed > 0 && nextTranslateX.value > resolvedStyle.width)
+            {
+                nextTranslateX = new Length((int)-_textElement.resolvedStyle.width);
             }
             
             _textElement.style.translate = new Translate(nextTranslateX, _textElement.resolvedStyle.translate.y);
