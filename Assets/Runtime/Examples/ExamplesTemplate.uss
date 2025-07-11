@@ -1,5 +1,5 @@
 :root {
-    --unity-metrics-single_line-height: 14px;
+    --unity-metrics-single_line-height: 20px;
     --color-background: rgb(255, 231, 185);
     --color-primary: rgb(156, 118, 172);
     --color-secondary: rgb(176, 113, 222);
