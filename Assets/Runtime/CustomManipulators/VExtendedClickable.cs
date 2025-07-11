@@ -20,6 +20,11 @@ namespace VCustomComponents
         public VExtendedClickable(Action handler) : base(handler)
         {
         }
+
+        public VExtendedClickable() : base((Action)null)
+        {
+            
+        }
         
         protected override void ProcessDownEvent(EventBase evt, Vector2 localPosition, int pointerId)
         {

@@ -113,6 +113,21 @@ namespace VCustomComponents
             _leftButton.clicked += OnLeftButtonClicked;
             _rightButton.clicked += OnRightButtonClicked;
         }
+        
+        public void SetValueWithoutNotify(int newValue)
+        {
+            _value = Mathf.Clamp(newValue, 0, Options.Length - 1);
+
+            if (_label == null)
+                return;
+            
+            _label.text = Options[_value];
+        }
+
+        public string GetCurrentOption()
+        {
+            return _options[_value];
+        } 
 
         private void OnLeftButtonClicked()
         {
@@ -134,16 +149,6 @@ namespace VCustomComponents
             }
             
             value++;
-        }
-
-        public void SetValueWithoutNotify(int newValue)
-        {
-            _value = Mathf.Clamp(newValue, 0, Options.Length - 1);
-
-            if (_label == null)
-                return;
-            
-            _label.text = Options[_value];
         }
     }
 }
