@@ -10,7 +10,8 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VScrollViewAnimated : ScrollView
     {
-        private const string TargetElementClass = "scroll-view-animated-target";
+        public static readonly string ScrollViewAnimatedClass = "scroll-view-animated";
+        public static readonly string TargetElementClass = "scroll-view-animated-target";
         
         [Header(nameof(VScrollViewAnimated))] 
         
@@ -26,18 +27,13 @@ namespace VCustomComponents
         
         public VScrollViewAnimated() 
         {
+            AddToClassList(ScrollViewAnimatedClass);
             touchScrollBehavior = TouchScrollBehavior.Unrestricted;
-            
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanelEvent);
         }
 
         private void OnAttachedToPanelEvent(AttachToPanelEvent evt)
         {
-            if (StopAnimationWhenScrolling)
-            {
-                RegisterCallback<WheelEvent>(OnMouseWheel);
-            }
-            
             if (mode == ScrollViewMode.Vertical)
             {
                 verticalScroller.valueChanged += OnVerticalScrollerValueChanged;
@@ -53,7 +49,15 @@ namespace VCustomComponents
             }
         }
 
-        private void OnMouseWheel(WheelEvent evt)
+        protected override void HandleEventBubbleUp(EventBase evt)
+        {
+            if (StopAnimationWhenScrolling && evt.eventTypeId == WheelEvent.TypeId())
+            {
+                OnMouseWheel();
+            }
+        }
+
+        private void OnMouseWheel()
         {
             _animationTween1D?.Kill();
             _animationTween2D?.Kill();
@@ -156,12 +160,8 @@ namespace VCustomComponents
             }
             else
             {
-                var lowLimit = new Vector2(horizontalScroller.lowValue, horizontalScroller.highValue);
-                var highLimit = new Vector2(verticalScroller.lowValue, verticalScroller.highValue);
-                
                 var targetPosition = element
-                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position)
-                    .Clamp(lowLimit, highLimit);
+                    .ChangeCoordinatesTo(contentContainer, element.contentRect.position);
 
                 _animationTween2D = DOTween.To(
                     () => new Vector2(horizontalScroller.value, verticalScroller.value),

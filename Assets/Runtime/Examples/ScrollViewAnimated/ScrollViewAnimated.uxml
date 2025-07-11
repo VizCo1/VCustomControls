@@ -36,14 +36,14 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true" class="scroll-view-animated">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true" mode="VerticalAndHorizontal">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="B" />
                     </ui:Instance>
-                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical" style="width: 2364px;">
                         <AttributeOverrides element-name="ExamplesButton" text="C" />
                     </ui:Instance>
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
@@ -84,7 +84,7 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedHorizontal" mode="Horizontal" class="scroll-view-animated">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedHorizontal" mode="Horizontal">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
