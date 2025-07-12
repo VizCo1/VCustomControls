@@ -47,6 +47,8 @@ namespace VCustomComponents
             _inputActionAsset.UI.PostCancel.performed -= PostCancelOnPerformed;
             
             panel.TryUnregisterInputActionUI();
+
+            _inputActionAsset = null;
         }
         
         private void AimOnPerformed(InputAction.CallbackContext ctx)
