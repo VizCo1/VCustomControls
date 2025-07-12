@@ -16,7 +16,7 @@
                         <AttributeOverrides element-name="ExamplesButton" text="Remove Random Element" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewInfinite name="VScrollViewInfiniteVertical">
+                <VCustomComponents.VScrollViewInfinite name="VScrollViewInfiniteVertical" class="scroll-view-infinite-example">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical" style="height: 400px;">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
@@ -49,7 +49,7 @@
                         <AttributeOverrides element-name="ExamplesButton" text="Remove Random Element" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewInfinite name="VScrollViewInfiniteHorizontal" mode="Horizontal">
+                <VCustomComponents.VScrollViewInfinite name="VScrollViewInfiniteHorizontal" mode="Horizontal" class="scroll-view-infinite-example">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-horizontal">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>

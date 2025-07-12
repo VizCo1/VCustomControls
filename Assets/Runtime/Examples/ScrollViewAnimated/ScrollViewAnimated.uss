@@ -1,4 +1,4 @@
-.scroll-view-animated {
+.scroll-view-animated-example {
     flex-grow: 1;
 }
 

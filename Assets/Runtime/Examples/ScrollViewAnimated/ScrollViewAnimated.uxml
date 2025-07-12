@@ -39,7 +39,7 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true" class="scroll-view-animated-example">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
@@ -90,7 +90,7 @@
                         <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
                     </ui:Instance>
                 </ui:VisualElement>
-                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedHorizontal" mode="Horizontal">
+                <VCustomComponents.VScrollViewAnimated name="VScrollViewAnimatedHorizontal" mode="Horizontal" class="scroll-view-animated-example">
                     <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
                         <AttributeOverrides element-name="ExamplesButton" text="A" />
                     </ui:Instance>
