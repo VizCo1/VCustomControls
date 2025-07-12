@@ -25,11 +25,12 @@ namespace VCustomComponents
             if (panel.contextType == ContextType.Editor || !Application.isPlaying)
                 return;
 #endif
-            if (_inputActionAsset != null)
-                return;
+
+            if (!panel.TryGetInputActionUI(out _inputActionAsset))
+            {
+                panel.TryRegisterInputActionUI(out _inputActionAsset);
+            }
             
-            _inputActionAsset = new VInputActionUI();
-            _inputActionAsset.UI.Enable();
             _inputActionAsset.UI.Aim.performed += AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed += PostSubmitOnPerformed;
             _inputActionAsset.UI.PostCancel.performed += PostCancelOnPerformed;
@@ -44,10 +45,8 @@ namespace VCustomComponents
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed -= PostSubmitOnPerformed;
             _inputActionAsset.UI.PostCancel.performed -= PostCancelOnPerformed;
-            _inputActionAsset.UI.Disable();
-            _inputActionAsset.Dispose();
             
-            _inputActionAsset = null;
+            panel.TryUnregisterInputActionUI();
         }
         
         private void AimOnPerformed(InputAction.CallbackContext ctx)
@@ -68,7 +67,7 @@ namespace VCustomComponents
             SendEvent(pooled);
         }
         
-        private void PostSubmitOnPerformed(InputAction.CallbackContext obj)
+        private void PostSubmitOnPerformed(InputAction.CallbackContext ctx)
         {
             var postSubmitTarget = focusController.focusedElement;
             
@@ -84,7 +83,7 @@ namespace VCustomComponents
             SendEvent(pooled);
         }
         
-        private void PostCancelOnPerformed(InputAction.CallbackContext obj)
+        private void PostCancelOnPerformed(InputAction.CallbackContext ctx)
         {
             var postSubmitTarget = focusController.focusedElement;
             

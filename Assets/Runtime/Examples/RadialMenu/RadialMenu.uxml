@@ -1,15 +1,11 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
-    <ui:Template name="ExamplesButton" src="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" />
     <Style src="project://database/Assets/Runtime/Examples/RadialMenu/RadialMenu.uss?fileID=7433441132597879392&amp;guid=5a86c97c1f23f9847b2b6ca2444b4dbe&amp;type=3#RadialMenu" />
     <VCustomComponents.VCustomEventPanel name="VCustomEventPanel" class="examples-template-instance">
         <ui:Instance template="ExamplesTemplate" name="RadialMenuExample" class="examples-template-instance">
             <AttributeOverrides element-name="DescriptionLabel" text="This custom control is a radial menu with a lot of customization and compatible with keyboard and gamepad input!" />
             <AttributeOverrides element-name="TitleLabel" text="VRadialMenu" />
             <VCustomComponents.VRadialMenu name="VRadialMenu" focusable="true" slots="4" class="radial-menu-example" />
-            <ui:Instance template="ExamplesButton" name="FocusButton" class="focus-button" style="width: 400px; align-self: center;">
-                <AttributeOverrides element-name="ExamplesButton" text="Toggle Focus" />
-            </ui:Instance>
         </ui:Instance>
     </VCustomComponents.VCustomEventPanel>
 </ui:UXML>
