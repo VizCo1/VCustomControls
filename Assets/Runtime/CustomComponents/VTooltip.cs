@@ -33,7 +33,6 @@ namespace VCustomComponents
                 return;
 #endif
             style.opacity = 0;
-            RegisterCallback<CustomStyleResolvedEvent>(OnStylesResolved);
         }
 
         public VTooltip(string tooltipClass) : this()
@@ -45,6 +44,16 @@ namespace VCustomComponents
             
             var textInfo = CultureInfo.InvariantCulture.TextInfo;
             name = textInfo.ToTitleCase(tooltipClass.Trim('-'));
+        }
+
+        protected override void HandleEventBubbleUp(EventBase evt)
+        {
+            base.HandleEventBubbleUp(evt);
+            
+            if (evt.eventTypeId == CustomStyleResolvedEvent.TypeId())
+            {
+                OnStylesResolved((CustomStyleResolvedEvent)evt);
+            }
         }
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
