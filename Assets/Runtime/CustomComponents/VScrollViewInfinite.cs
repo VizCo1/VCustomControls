@@ -8,31 +8,22 @@ namespace VCustomComponents
     public partial class VScrollViewInfinite : ScrollView
     {
         private const bool DoOneTime = true;
-
-        [Header(nameof(VScrollViewInfinite))]
-        [UxmlAttribute]
-        [Tooltip(
-            "Increase the value if you're having popping problems, but we aware that you may need to have more elements in the ScrollView")]
-        private float ScrollerOffsetMultiplier { get; set; } = 1f;
         
-        private Direction _direction;
         private float _lowValue;
         private float _highValue;
-        private float _scrollerOffset;
-        private float _previousScrollerValue;
         
         public VScrollViewInfinite() 
         {
+            touchScrollBehavior = TouchScrollBehavior.Unrestricted;
+            horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+            verticalScrollerVisibility = ScrollerVisibility.Hidden;
+            
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
+            RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
         }
         
         private void OnAttachedToPanel(AttachToPanelEvent evt)
         {
-            touchScrollBehavior = TouchScrollBehavior.Unrestricted;
-            
-            horizontalScrollerVisibility = ScrollerVisibility.Hidden;
-            verticalScrollerVisibility = ScrollerVisibility.Hidden;
-            
             switch (mode)
             {
                 case ScrollViewMode.Vertical:
@@ -45,8 +36,6 @@ namespace VCustomComponents
                     Debug.LogError("ScrollViewMode must be set to Vertical or Horizontal");
                     break;
             }
-            
-            RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
         }
         
         private void OnGeometryChanged(GeometryChangedEvent evt)
@@ -55,7 +44,6 @@ namespace VCustomComponents
             {
                 _highValue = verticalScroller.highValue;
                 _lowValue = verticalScroller.lowValue;
-                _previousScrollerValue =  verticalScroller.value;
 
                 var offset = 0f;
                 foreach (var child in contentContainer.Children())
@@ -70,7 +58,6 @@ namespace VCustomComponents
             {
                 _highValue = horizontalScroller.highValue;
                 _lowValue = horizontalScroller.lowValue;
-                _previousScrollerValue =  horizontalScroller.value;
                 
                 var offset = 0f;
                 foreach (var child in contentContainer.Children())
@@ -88,49 +75,21 @@ namespace VCustomComponents
             if (childCount == 0)
                 return;
             
-            _direction = newValue < _previousScrollerValue ? Direction.Positive : Direction.Negative;
-            
-            _previousScrollerValue = newValue;
-
-            CalculateScrollerOffset();
-            
-            if (newValue + _scrollerOffset >= _highValue && _direction == Direction.Negative)
+            while (newValue + 0 >= _highValue)
             {
                 if (mode == ScrollViewMode.Vertical)
-                {
                     HandleVerticalDown();
-                }
                 else
-                {
                     HandleHorizontalDown();
-                }
             }
-            else if (newValue - _scrollerOffset <= _lowValue && _direction == Direction.Positive)
+
+            while (newValue - 0 <= _lowValue)
             {
                 if (mode == ScrollViewMode.Vertical)
-                {
                     HandleVerticalUp();
-                }
                 else
-                {
                     HandleHorizontalUp();
-                }
             }
-        }
-
-        private void CalculateScrollerOffset()
-        {
-            var index = 
-                _direction == Direction.Negative ?
-                    0 :
-                    childCount - 1;
-            
-            var element = contentContainer[index];
-            
-            _scrollerOffset = 
-                mode == ScrollViewMode.Vertical ? 
-                    element.GetTotalOuterHeight() * ScrollerOffsetMultiplier: 
-                    element.GetTotalOuterWidth() * ScrollerOffsetMultiplier;
         }
 
         private void HandleHorizontalUp()
@@ -186,10 +145,10 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var firstChildTotalHeight = firstChild.GetTotalOuterHeight();
+            var firstChildTotalOuterHeight = firstChild.GetTotalOuterHeight();
                     
-            _lowValue += firstChildTotalHeight;
-            _highValue += firstChildTotalHeight;
+            _lowValue += firstChildTotalOuterHeight;
+            _highValue += firstChildTotalOuterHeight;
                     
             var offset = lastChild.resolvedStyle.translate.y + lastChild.GetTotalOuterHeight();
             firstChild.style.translate = new Translate(0, offset);
@@ -215,9 +174,9 @@ namespace VCustomComponents
                 schedule
                     .Execute(() =>
                     {
-                        var elementTotalHeight = element.GetTotalOuterHeight();
+                        var elementTotalOuterHeight = element.GetTotalOuterHeight();
 
-                        _highValue += elementTotalHeight;
+                        _highValue += elementTotalOuterHeight;
 
                         var offset = 0f;
                         if (lastChild != null)
@@ -236,9 +195,9 @@ namespace VCustomComponents
                 schedule
                     .Execute(() =>
                     {
-                        var elementTotalWidth = element.GetTotalOuterWidth();
+                        var elementTotalOuterWidth = element.GetTotalOuterWidth();
 
-                        _highValue += elementTotalWidth;
+                        _highValue += elementTotalOuterWidth;
 
                         var offset = 0f;
                         if (lastChild != null)
@@ -271,40 +230,34 @@ namespace VCustomComponents
 
             if (mode == ScrollViewMode.Vertical)
             {
-                var elementToRemoveTotalHeight = elementToRemove.GetTotalOuterHeight();
+                var elementToRemoveTotalOuterHeight = elementToRemove.GetTotalOuterHeight();
 
-                _highValue -= elementToRemoveTotalHeight;
+                _highValue -= elementToRemoveTotalOuterHeight;
                 
                 for (var i = index; i < childCount; i++)
                 {
                     var child = contentContainer.ElementAt(i);
                     var childPosition = child.resolvedStyle.translate.y;
                     
-                    child.style.translate = new Translate(0, childPosition - elementToRemoveTotalHeight);
+                    child.style.translate = new Translate(0, childPosition - elementToRemoveTotalOuterHeight);
                 }
             }
             else
             {
-                var elementToRemoveTotalWidth = elementToRemove.GetTotalOuterWidth();
+                var elementToRemoveTotalOuterWidth = elementToRemove.GetTotalOuterWidth();
 
-                _highValue -= elementToRemoveTotalWidth;
+                _highValue -= elementToRemoveTotalOuterWidth;
                 
                 for (var i = index; i < childCount; i++)
                 {
                     var child = contentContainer.ElementAt(i);
                     var childPosition = child.resolvedStyle.translate.x;
                     
-                    child.style.translate = new Translate(childPosition - elementToRemoveTotalWidth, 0);
+                    child.style.translate = new Translate(childPosition - elementToRemoveTotalOuterWidth, 0);
                 }
             }
-
+            
             base.RemoveAt(index);
-        }
-
-        private enum Direction
-        {
-            Positive,
-            Negative,
         }
     }
 }

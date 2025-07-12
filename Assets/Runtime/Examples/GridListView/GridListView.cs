@@ -16,7 +16,7 @@ namespace VCustomComponents
         protected override void Start()
         {
             base.Start();
-            
+
             _gridListView = Root.Q<VGridListView>();
             
             _gridListView.BindCell = BindCell;
