@@ -61,6 +61,7 @@ namespace VCustomComponents
         public VSpinner() 
         {
             AddToClassList(VSpinnerClass);
+            usageHints = UsageHints.DynamicTransform;
         }
 
         public void SetValueWithoutNotify(bool newValue)
