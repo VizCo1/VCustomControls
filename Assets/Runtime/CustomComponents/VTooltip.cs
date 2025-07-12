@@ -17,9 +17,9 @@ namespace VCustomComponents
         private const bool DoOneTime = true;
         private const float FadeRate = 0.05f;
         
-        private int _fadeDurationMs;
-        private int _tooltipDelayMs;
-        private int _offset;
+        private int _fadeDurationMs = 100;
+        private int _tooltipDelayMs = 500;
+        private int _offset = 5;
 
         private IVisualElementScheduledItem _scheduledItem;
         private VisualElement _previousTarget;
@@ -33,7 +33,6 @@ namespace VCustomComponents
                 return;
 #endif
             style.opacity = 0;
-            RegisterCallback<CustomStyleResolvedEvent>(OnStylesResolved);
         }
 
         public VTooltip(string tooltipClass) : this()
@@ -45,6 +44,16 @@ namespace VCustomComponents
             
             var textInfo = CultureInfo.InvariantCulture.TextInfo;
             name = textInfo.ToTitleCase(tooltipClass.Trim('-'));
+        }
+
+        protected override void HandleEventBubbleUp(EventBase evt)
+        {
+            base.HandleEventBubbleUp(evt);
+            
+            if (evt.eventTypeId == CustomStyleResolvedEvent.TypeId())
+            {
+                OnStylesResolved((CustomStyleResolvedEvent)evt);
+            }
         }
 
         public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)
@@ -83,9 +92,18 @@ namespace VCustomComponents
         
         private void OnStylesResolved(CustomStyleResolvedEvent evt)
         {
-            evt.customStyle.TryGetValue(FadeDurationMs, out _fadeDurationMs);
-            evt.customStyle.TryGetValue(TooltipDelayMs, out _tooltipDelayMs);
-            evt.customStyle.TryGetValue(Offset, out _offset);
+            if (evt.customStyle.TryGetValue(FadeDurationMs, out var fadeDurationMs)) 
+            {
+                _fadeDurationMs = fadeDurationMs;
+            }
+            if (evt.customStyle.TryGetValue(TooltipDelayMs, out var tooltipDelayMs)) 
+            {
+                _tooltipDelayMs = tooltipDelayMs;
+            }
+            if (evt.customStyle.TryGetValue(Offset, out var offset)) 
+            {
+                _offset = offset;
+            }
             
             _intervalMs = Mathf.RoundToInt(_fadeDurationMs / (1f / FadeRate));
         }

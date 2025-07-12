@@ -435,9 +435,6 @@
 
 .tooltip {
     position: absolute;
-    --fade-duration-ms: 100;
-    --tooltip-delay-ms: 500;
-    --offset: 5;
 }
 
 .tooltip1 {

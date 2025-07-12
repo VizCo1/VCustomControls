@@ -8,6 +8,7 @@ namespace VCustomComponents
     public partial class VScrollViewInfinite : ScrollView
     {
         public static readonly string VScrollViewInfiniteClass = "scroll-view-infinite"; 
+        public static readonly string VScrollViewInfiniteItemClass = VScrollViewInfiniteClass + "-item"; 
         
         private const bool DoOneTime = true;
         
@@ -72,7 +73,7 @@ namespace VCustomComponents
 
         private void SetUpChild(VisualElement child, float offset, bool isVertical)
         {
-            child.style.position = Position.Absolute;
+            child.AddToClassList(VScrollViewInfiniteItemClass);
             child.usageHints = UsageHints.DynamicTransform;
             child.style.translate =  
                 isVertical ?
@@ -176,7 +177,6 @@ namespace VCustomComponents
             
             base.Add(element);
             
-            element.style.position = Position.Absolute;
             element.SetVisibility(false);
             
             if (mode == ScrollViewMode.Vertical)
@@ -194,8 +194,7 @@ namespace VCustomComponents
                             offset = lastChild.resolvedStyle.translate.y + lastChild.GetTotalOuterHeight();
                         }
                         
-                        element.style.translate = new Translate(0, offset);
-                        
+                        SetUpChild(element, offset, true);
                         element.SetVisibility(true);
                     })
                     .Until(() => DoOneTime);
@@ -215,8 +214,7 @@ namespace VCustomComponents
                             offset = lastChild.resolvedStyle.translate.x + lastChild.GetTotalOuterWidth();
                         }
                         
-                        element.style.translate =  new Translate(offset, 0);
-                        
+                        SetUpChild(element, offset, false);
                         element.SetVisibility(true);
                     })
                     .Until(() => DoOneTime);

@@ -1,4 +1,8 @@
-.scroll-view-infinite {
+.scroll-view-infinite-item {
+    position: absolute;
+}
+
+.scroll-view-infinite-example {
     flex-grow: 1;
 }
 
