@@ -386,7 +386,7 @@
     flex-grow: 1;
     margin: 0;
     --unity-cursor-color: var(--color-accent);
-    --unity-selection-color: rgba(114, 106, 149, 0.2);
+    --unity-selection-color: rgba(176, 113, 222, 0.4);
 }
 
 .examples-float-field .unity-text-element {
