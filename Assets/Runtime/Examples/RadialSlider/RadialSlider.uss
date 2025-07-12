@@ -18,10 +18,3 @@
 .radial-slider-example:active {
     --radial-dragger-color: rgb(205, 139, 255);
 }
-
-.focus-button {
-    align-self: center;
-    width: 500px;
-    margin: 16px 0 0 0;
-        
-}

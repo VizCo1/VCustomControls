@@ -8,16 +8,15 @@ namespace VCustomComponents
     public partial class VCustomEventPanel : VisualElement
     {
         public static readonly string VCustomEventPanelClass = "custom-event-panel";
-        private static VInputActionUI _inputActionAsset;
 
-        private VisualElement _aimEventTarget;
+        private VInputActionUI _inputActionAsset;
         
         public VCustomEventPanel() 
         {
             AddToClassList(VCustomEventPanelClass);
             
-            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
-            RegisterCallback<DetachFromPanelEvent>(OnDetachedFromPanel);
+            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
+            RegisterCallbackOnce<DetachFromPanelEvent>(OnDetachedFromPanel);
         }
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
@@ -26,12 +25,12 @@ namespace VCustomComponents
             if (panel.contextType == ContextType.Editor || !Application.isPlaying)
                 return;
 #endif
+
+            if (!panel.TryGetInputActionUI(out _inputActionAsset))
+            {
+                panel.TryRegisterInputActionUI(out _inputActionAsset);
+            }
             
-            if (_inputActionAsset != null)
-                return;
-            
-            _inputActionAsset = new VInputActionUI();
-            _inputActionAsset.UI.Enable();
             _inputActionAsset.UI.Aim.performed += AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed += PostSubmitOnPerformed;
             _inputActionAsset.UI.PostCancel.performed += PostCancelOnPerformed;
@@ -43,13 +42,12 @@ namespace VCustomComponents
             if (panel.contextType == ContextType.Editor || !Application.isPlaying)
                 return;
 #endif
-            
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed -= PostSubmitOnPerformed;
             _inputActionAsset.UI.PostCancel.performed -= PostCancelOnPerformed;
-            _inputActionAsset.UI.Disable();
-            _inputActionAsset.Dispose();
             
+            panel.TryUnregisterInputActionUI();
+
             _inputActionAsset = null;
         }
         
@@ -71,7 +69,7 @@ namespace VCustomComponents
             SendEvent(pooled);
         }
         
-        private void PostSubmitOnPerformed(InputAction.CallbackContext obj)
+        private void PostSubmitOnPerformed(InputAction.CallbackContext ctx)
         {
             var postSubmitTarget = focusController.focusedElement;
             
@@ -87,7 +85,7 @@ namespace VCustomComponents
             SendEvent(pooled);
         }
         
-        private void PostCancelOnPerformed(InputAction.CallbackContext obj)
+        private void PostCancelOnPerformed(InputAction.CallbackContext ctx)
         {
             var postSubmitTarget = focusController.focusedElement;
             
