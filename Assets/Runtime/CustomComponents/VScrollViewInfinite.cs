@@ -19,7 +19,7 @@ namespace VCustomComponents
         private float _lowValue;
         private float _highValue;
         private float _scrollerOffset;
-        private float _previousVerticalScrollerValue;
+        private float _previousScrollerValue;
         
         public VScrollViewInfinite() 
         {
@@ -42,7 +42,8 @@ namespace VCustomComponents
                     horizontalScroller.valueChanged += OnScrollerValueChanged;
                     break;
                 default:
-                    throw new ArgumentException("ScrollViewMode must be set to Vertical or Horizontal");
+                    Debug.LogError("ScrollViewMode must be set to Vertical or Horizontal");
+                    break;
             }
             
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);
@@ -54,7 +55,7 @@ namespace VCustomComponents
             {
                 _highValue = verticalScroller.highValue;
                 _lowValue = verticalScroller.lowValue;
-                _previousVerticalScrollerValue =  verticalScroller.value;
+                _previousScrollerValue =  verticalScroller.value;
 
                 var offset = 0f;
                 foreach (var child in contentContainer.Children())
@@ -62,14 +63,14 @@ namespace VCustomComponents
                     child.style.position = Position.Absolute;
                     child.style.translate =  new Translate(0, offset);
                     
-                    offset += child.GetTotalHeight();
+                    offset += child.GetTotalOuterHeight();
                 }
             }
             else
             {
                 _highValue = horizontalScroller.highValue;
                 _lowValue = horizontalScroller.lowValue;
-                _previousVerticalScrollerValue =  horizontalScroller.value;
+                _previousScrollerValue =  horizontalScroller.value;
                 
                 var offset = 0f;
                 foreach (var child in contentContainer.Children())
@@ -77,7 +78,7 @@ namespace VCustomComponents
                     child.style.position = Position.Absolute;
                     child.style.translate =  new Translate(offset, 0);
                     
-                    offset += child.GetTotalWidth();
+                    offset += child.GetTotalOuterWidth();
                 }
             }
         }
@@ -87,9 +88,9 @@ namespace VCustomComponents
             if (childCount == 0)
                 return;
             
-            _direction = newValue < _previousVerticalScrollerValue ? Direction.Positive : Direction.Negative;
+            _direction = newValue < _previousScrollerValue ? Direction.Positive : Direction.Negative;
             
-            _previousVerticalScrollerValue = newValue;
+            _previousScrollerValue = newValue;
 
             CalculateScrollerOffset();
             
@@ -119,21 +120,17 @@ namespace VCustomComponents
 
         private void CalculateScrollerOffset()
         {
-            var index = 0;
-            if (_direction == Direction.Negative)
-            {
-                index = childCount - 1;
-            }
+            var index = 
+                _direction == Direction.Negative ?
+                    0 :
+                    childCount - 1;
             
             var element = contentContainer[index];
-            if (mode == ScrollViewMode.Vertical)
-            {
-                _scrollerOffset = element.GetTotalHeight() * ScrollerOffsetMultiplier;
-            }
-            else
-            {
-                _scrollerOffset = element.GetTotalWidth() * ScrollerOffsetMultiplier;
-            }
+            
+            _scrollerOffset = 
+                mode == ScrollViewMode.Vertical ? 
+                    element.GetTotalOuterHeight() * ScrollerOffsetMultiplier: 
+                    element.GetTotalOuterWidth() * ScrollerOffsetMultiplier;
         }
 
         private void HandleHorizontalUp()
@@ -141,7 +138,7 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var lastChildTotalWidth = lastChild.GetTotalWidth();
+            var lastChildTotalWidth = lastChild.GetTotalOuterWidth();
                 
             _lowValue -= lastChildTotalWidth;
             _highValue -= lastChildTotalWidth;
@@ -157,12 +154,12 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var firstChildTotalWidth = firstChild.GetTotalWidth();
+            var firstChildTotalWidth = firstChild.GetTotalOuterWidth();
                     
             _lowValue += firstChildTotalWidth;
             _highValue += firstChildTotalWidth;
                     
-            var offset = lastChild.resolvedStyle.translate.x + lastChild.GetTotalWidth();
+            var offset = lastChild.resolvedStyle.translate.x + lastChild.GetTotalOuterWidth();
             firstChild.style.translate = new Translate(offset, 0);
                     
             firstChild.BringToFront();
@@ -173,7 +170,7 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var lastChildTotalHeight = lastChild.GetTotalHeight();
+            var lastChildTotalHeight = lastChild.GetTotalOuterHeight();
                 
             _lowValue -= lastChildTotalHeight;
             _highValue -= lastChildTotalHeight;
@@ -189,12 +186,12 @@ namespace VCustomComponents
             var firstChild = contentContainer[0];
             var lastChild = contentContainer[childCount - 1];
 
-            var firstChildTotalHeight = firstChild.GetTotalHeight();
+            var firstChildTotalHeight = firstChild.GetTotalOuterHeight();
                     
             _lowValue += firstChildTotalHeight;
             _highValue += firstChildTotalHeight;
                     
-            var offset = lastChild.resolvedStyle.translate.y + lastChild.GetTotalHeight();
+            var offset = lastChild.resolvedStyle.translate.y + lastChild.GetTotalOuterHeight();
             firstChild.style.translate = new Translate(0, offset);
                     
             firstChild.BringToFront();
@@ -218,14 +215,14 @@ namespace VCustomComponents
                 schedule
                     .Execute(() =>
                     {
-                        var elementTotalHeight = element.GetTotalHeight();
-                
+                        var elementTotalHeight = element.GetTotalOuterHeight();
+
                         _highValue += elementTotalHeight;
 
                         var offset = 0f;
                         if (lastChild != null)
                         {
-                            offset = lastChild.resolvedStyle.translate.y + lastChild.GetTotalHeight();
+                            offset = lastChild.resolvedStyle.translate.y + lastChild.GetTotalOuterHeight();
                         }
                         
                         element.style.translate = new Translate(0, offset);
@@ -239,14 +236,14 @@ namespace VCustomComponents
                 schedule
                     .Execute(() =>
                     {
-                        var elementTotalWidth = element.GetTotalWidth();
-                
+                        var elementTotalWidth = element.GetTotalOuterWidth();
+
                         _highValue += elementTotalWidth;
 
                         var offset = 0f;
                         if (lastChild != null)
                         {
-                            offset = lastChild.resolvedStyle.translate.x + lastChild.GetTotalWidth();
+                            offset = lastChild.resolvedStyle.translate.x + lastChild.GetTotalOuterWidth();
                         }
                         
                         element.style.translate =  new Translate(offset, 0);
@@ -274,8 +271,8 @@ namespace VCustomComponents
 
             if (mode == ScrollViewMode.Vertical)
             {
-                var elementToRemoveTotalHeight = elementToRemove.GetTotalHeight();
-                
+                var elementToRemoveTotalHeight = elementToRemove.GetTotalOuterHeight();
+
                 _highValue -= elementToRemoveTotalHeight;
                 
                 for (var i = index; i < childCount; i++)
@@ -285,15 +282,11 @@ namespace VCustomComponents
                     
                     child.style.translate = new Translate(0, childPosition - elementToRemoveTotalHeight);
                 }
-                
-                base.RemoveAt(index);
-                
-                OnScrollerValueChanged(verticalScroller.value);
             }
             else
             {
-                var elementToRemoveTotalWidth = elementToRemove.GetTotalWidth();
-                
+                var elementToRemoveTotalWidth = elementToRemove.GetTotalOuterWidth();
+
                 _highValue -= elementToRemoveTotalWidth;
                 
                 for (var i = index; i < childCount; i++)
@@ -303,11 +296,9 @@ namespace VCustomComponents
                     
                     child.style.translate = new Translate(childPosition - elementToRemoveTotalWidth, 0);
                 }
-                
-                base.RemoveAt(index);
-                
-                OnScrollerValueChanged(horizontalScroller.value);
             }
+
+            base.RemoveAt(index);
         }
 
         private enum Direction
