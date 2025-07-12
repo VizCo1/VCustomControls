@@ -48,9 +48,7 @@ namespace VCustomComponents
                 var offset = 0f;
                 foreach (var child in contentContainer.Children())
                 {
-                    child.style.position = Position.Absolute;
-                    child.style.translate =  new Translate(0, offset);
-                    
+                    SetUpChild(child, offset, true);
                     offset += child.GetTotalOuterHeight();
                 }
             }
@@ -62,12 +60,20 @@ namespace VCustomComponents
                 var offset = 0f;
                 foreach (var child in contentContainer.Children())
                 {
-                    child.style.position = Position.Absolute;
-                    child.style.translate =  new Translate(offset, 0);
-                    
+                    SetUpChild(child, offset, false);
                     offset += child.GetTotalOuterWidth();
                 }
             }
+        }
+
+        private void SetUpChild(VisualElement child, float offset, bool isVertical)
+        {
+            child.style.position = Position.Absolute;
+            child.usageHints = UsageHints.DynamicTransform;
+            child.style.translate =  
+                isVertical ?
+                    new Translate(0, offset) :
+                    new Translate(offset, 0);
         }
 
         private void OnScrollerValueChanged(float newValue)
