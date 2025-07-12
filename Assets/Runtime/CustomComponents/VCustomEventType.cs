@@ -5,8 +5,9 @@ namespace VCustomComponents
     [Flags]
     public enum VCustomEventType
     {
-        AimEvent,
-        PostSubmitEvent,
-        PostCancelEvent,
+        None = 0,
+        AimEvent = 1,
+        PostSubmitEvent = 2,
+        PostCancelEvent = 4
     }
 }

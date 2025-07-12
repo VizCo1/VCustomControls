@@ -7,6 +7,8 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VScrollViewInfinite : ScrollView
     {
+        public static readonly string VScrollViewInfiniteClass = "scroll-view-infinite"; 
+        
         private const bool DoOneTime = true;
         
         private float _lowValue;
@@ -17,6 +19,8 @@ namespace VCustomComponents
             touchScrollBehavior = TouchScrollBehavior.Unrestricted;
             horizontalScrollerVisibility = ScrollerVisibility.Hidden;
             verticalScrollerVisibility = ScrollerVisibility.Hidden;
+            
+            AddToClassList(VScrollViewInfiniteClass);
             
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
             RegisterCallbackOnce<GeometryChangedEvent>(OnGeometryChanged);

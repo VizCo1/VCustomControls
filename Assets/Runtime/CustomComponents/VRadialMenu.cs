@@ -100,9 +100,11 @@ namespace VCustomComponents
             generateVisualContent += OnGenerateVisualContent;
 
             AddToClassList(RadialMenuClass);
-            CustomEvent |= VCustomEventType.AimEvent;
-            CustomEvent |= VCustomEventType.PostSubmitEvent;
-            CustomEvent |= VCustomEventType.PostCancelEvent;
+            
+            CustomEvent |= 
+                VCustomEventType.AimEvent | 
+                VCustomEventType.PostSubmitEvent | 
+                VCustomEventType.PostCancelEvent;
 
             var clickable = new Clickable(OnClicked);
             this.AddManipulator(clickable);
