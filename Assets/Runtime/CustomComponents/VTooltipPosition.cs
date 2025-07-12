@@ -5,6 +5,6 @@ namespace VCustomComponents
         Top,
         Right,
         Bottom,
-        Left,
+        Left
     }
 }

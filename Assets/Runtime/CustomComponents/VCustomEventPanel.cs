@@ -8,16 +8,15 @@ namespace VCustomComponents
     public partial class VCustomEventPanel : VisualElement
     {
         public static readonly string VCustomEventPanelClass = "custom-event-panel";
-        private static VInputActionUI _inputActionAsset;
 
-        private VisualElement _aimEventTarget;
+        private VInputActionUI _inputActionAsset;
         
         public VCustomEventPanel() 
         {
             AddToClassList(VCustomEventPanelClass);
             
-            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
-            RegisterCallback<DetachFromPanelEvent>(OnDetachedFromPanel);
+            RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
+            RegisterCallbackOnce<DetachFromPanelEvent>(OnDetachedFromPanel);
         }
 
         private void OnAttachedToPanel(AttachToPanelEvent evt)
@@ -26,7 +25,6 @@ namespace VCustomComponents
             if (panel.contextType == ContextType.Editor || !Application.isPlaying)
                 return;
 #endif
-            
             if (_inputActionAsset != null)
                 return;
             
@@ -43,7 +41,6 @@ namespace VCustomComponents
             if (panel.contextType == ContextType.Editor || !Application.isPlaying)
                 return;
 #endif
-            
             _inputActionAsset.UI.Aim.performed -= AimOnPerformed;
             _inputActionAsset.UI.PostSubmit.performed -= PostSubmitOnPerformed;
             _inputActionAsset.UI.PostCancel.performed -= PostCancelOnPerformed;
