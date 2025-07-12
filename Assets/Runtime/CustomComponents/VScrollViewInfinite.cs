@@ -75,7 +75,7 @@ namespace VCustomComponents
             if (childCount == 0)
                 return;
             
-            while (newValue + 0 >= _highValue)
+            while (newValue >= _highValue)
             {
                 if (mode == ScrollViewMode.Vertical)
                     HandleVerticalDown();
@@ -83,7 +83,7 @@ namespace VCustomComponents
                     HandleHorizontalDown();
             }
 
-            while (newValue - 0 <= _lowValue)
+            while (newValue <= _lowValue)
             {
                 if (mode == ScrollViewMode.Vertical)
                     HandleVerticalUp();
