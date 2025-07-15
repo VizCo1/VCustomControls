@@ -20,10 +20,10 @@ namespace VCustomComponents
             {
                 _text = value;
 
-                if (_textElement != null)
-                {
-                    _textElement.text = _text;
-                }
+                if (_textElement == null) 
+                    return;
+                
+                _textElement.text = _text;
             }
         }
 
@@ -144,9 +144,7 @@ namespace VCustomComponents
         private bool ShouldStartScrolling()
         {
             if (ScrollSpeed != 0)
-                return _textElement.resolvedStyle.width > 
-                       resolvedStyle.width - resolvedStyle.paddingLeft - resolvedStyle.paddingRight - 
-                       resolvedStyle.borderLeftWidth - resolvedStyle.borderRightWidth;
+                return _textElement.resolvedStyle.width > this.GetTotalInnerWidth();
             
             return false;
         }
@@ -161,13 +159,13 @@ namespace VCustomComponents
                 resolvedStyle.paddingRight +
                 resolvedStyle.borderLeftWidth + 
                 resolvedStyle.borderRightWidth;
+
+            var nextPos = (int)(resolvedStyle.width - _textElement.resolvedStyle.width - horizontalBorderAndPadding);
             
-            if ((int)_textElement.resolvedStyle.translate.x > (int)(resolvedStyle.width - _textElement.resolvedStyle.width - horizontalBorderAndPadding)) 
+            if ((int)_textElement.resolvedStyle.translate.x > nextPos) 
                 return false;
             
-            _textElement.style.translate = new Translate(
-                resolvedStyle.width - _textElement.resolvedStyle.width - horizontalBorderAndPadding, 
-                _textElement.resolvedStyle.translate.y);
+            _textElement.style.translate = new Translate(nextPos, _textElement.resolvedStyle.translate.y);
 
             if (IsAutomatic)
             {

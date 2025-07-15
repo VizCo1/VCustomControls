@@ -89,7 +89,7 @@ namespace VCustomComponents
         {
             if (RatioWidth <= 0.0f || RatioHeight <= 0.0f)
             {
-                throw new ArgumentException($"Invalid width:{RatioWidth} or height:{RatioHeight}");
+                Debug.LogError($"Invalid width:{RatioWidth} or height:{RatioHeight}");
             }
             
             var designRatio = (float)RatioWidth / RatioHeight;

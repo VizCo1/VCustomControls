@@ -13,10 +13,7 @@ namespace VCustomComponents
         {
             inputAction = null;
 
-            if (!InputActions.TryGetValue(panel, out inputAction))
-                return false;
-            
-            return true;
+            return InputActions.TryGetValue(panel, out inputAction);
         }
 
         public static bool TryRegisterInputActionUI(this IPanel panel, out VInputActionUI inputAction)
