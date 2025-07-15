@@ -23,10 +23,10 @@ namespace VCustomComponents
 
         [Header(nameof(VRadialSlider))]
         [UxmlAttribute]
-        private bool IsLoopable { get; set; }
+        public bool IsLoopable { get; set; }
         
         [UxmlAttribute]
-        private bool IsInteractive
+        public bool IsInteractive
         {
             get => _isInteractive;
             set

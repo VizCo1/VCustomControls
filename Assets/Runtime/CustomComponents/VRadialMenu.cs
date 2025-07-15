@@ -50,7 +50,7 @@ namespace VCustomComponents
         }
 
         [UxmlAttribute]
-        private int Slots
+        public int Slots
         {
             get => _slots;
             set
@@ -61,7 +61,7 @@ namespace VCustomComponents
         }
 
         [UxmlAttribute, Range(0f, 1f)]
-        private float SlotImagePosition
+        public float SlotImagePosition
         {
             get => _slotImagePosition;
             set
@@ -72,7 +72,7 @@ namespace VCustomComponents
         }
 
         [UxmlAttribute]
-        private float AngleOffset
+        public float AngleOffset
         {
             get => _angleOffset;
             set

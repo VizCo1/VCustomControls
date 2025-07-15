@@ -28,7 +28,7 @@ namespace VCustomComponents
         }
 
         [UxmlAttribute, Range(0f, 10f)]
-        private float ScrollSpeed { get; set; } = 1;
+        public float ScrollSpeed { get; set; } = 1;
 
         [UxmlAttribute]
         private long ScrollRate { get; set; } = 10;
