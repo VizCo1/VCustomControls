@@ -6,7 +6,7 @@
     <ui:Template name="ExamplesFloatField" src="project://database/Assets/Runtime/Examples/ExamplesFloatField.uxml?fileID=9197481963319205126&amp;guid=98fa129692730044b98fd19a8a4324a2&amp;type=3#ExamplesFloatField" />
     <Style src="project://database/Assets/Runtime/Examples/ScrollViewAnimated/ScrollViewAnimated.uss?fileID=7433441132597879392&amp;guid=59f1e6077ff82084a8bccc016cf5f31e&amp;type=3#ScrollViewAnimated" />
     <ui:Instance template="ExamplesTemplate" name="ScrollViewCustomExample" class="examples-template-instance">
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to scroll to any element. You can set the ease and duration!" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to smoothly scroll to any element." />
         <AttributeOverrides element-name="TitleLabel" text="VScrollViewAnimated" />
         <ui:Instance template="ExamplesTabView" name="ExamplesTabViewContainer" class="examples-template-instance">
             <ui:Tab label="Vertical" name="ScrollViewAnimatedVertical">

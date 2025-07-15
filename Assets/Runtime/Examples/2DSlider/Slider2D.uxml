@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/Runtime/Examples/2DSlider/Slider2D.uss?fileID=7433441132597879392&amp;guid=e830ab12783e9074199facbbb3579419&amp;type=3#Slider2D" />
     <ui:Instance template="ExamplesTemplate" name="ExampleSlider2D" class="examples-template-instance">
         <AttributeOverrides element-name="TitleLabel" text="VSlider2D" />
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom control behaves exactly like a normal Slider but in 2D. Check the console to see how the value changes!" />
+        <AttributeOverrides element-name="DescriptionLabel" text="The Slider2D behaves as a normal slider but in 2D." />
         <VCustomComponents.VSlider2D name="VSlider2D" class="slider2d-example" />
     </ui:Instance>
 </ui:UXML>

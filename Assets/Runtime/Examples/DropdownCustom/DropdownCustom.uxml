@@ -2,7 +2,7 @@
     <ui:Template name="ExamplesTemplate" src="project://database/Assets/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
     <Style src="project://database/Assets/Runtime/Examples/DropdownCustom/DropdownCustom.uss?fileID=7433441132597879392&amp;guid=70ed93b6e654aa54c8caa6c882a3205c&amp;type=3#DropdownCustom" />
     <ui:Instance template="ExamplesTemplate" name="ExampleDropdownCustom" class="examples-template-instance">
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to have more than one style for the dropdown&apos;s list. Choose the class to add and use it to style the list! Make sure that you&apos;re using a global USS for the list." />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to easily style the dropdown&apos;s list. Make sure that you&apos;re using a global USS." />
         <AttributeOverrides element-name="TitleLabel" text="VDropdownCustom" />
         <ui:VisualElement name="DropdownContainer" class="dropdown-container">
             <VCustomComponents.VDropdownCustom name="VDropdownCustomPrimary" class-to-add="dropdown-primary" choices="Choice 1,Choice 2,Choice 3" index="0" focusable="false" class="dropdown-example" />

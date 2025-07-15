@@ -4,7 +4,7 @@
     <ui:Template name="ExamplesButton" src="project://database/Assets/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" />
     <Style src="project://database/Assets/Runtime/Examples/ScrollViewInfinite/ScrollViewInfinite.uss?fileID=7433441132597879392&amp;guid=112d9514f2a9f034185e98c060a747c8&amp;type=3#ScrollViewInfinite" />
     <ui:Instance template="ExamplesTemplate" name="ScrollViewCustomExample" class="examples-template-instance">
-        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to be infinite. But we aware that if all the elements are visible at the same time it will not work properly!" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to be infinite. But it will not behave properly with too few elements." />
         <AttributeOverrides element-name="TitleLabel" text="VScrollViewInfinite" />
         <ui:Instance template="ExamplesTabView" name="ExamplesTabViewContainer" class="examples-template-instance">
             <ui:Tab label="Vertical" name="ScrollViewInfiniteVertical">
