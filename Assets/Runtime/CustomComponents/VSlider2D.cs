@@ -152,8 +152,13 @@ namespace VCustomComponents
             var remappedPercentageX = (_value.x - _minValue.x) / (_maxValue.x - _minValue.x);
             var remappedPercentageY = (_value.y - _minValue.y) / (_maxValue.y - _minValue.y);
         
-            var adjustedPosX = remappedPercentageX * resolvedStyle.width - _offset.x - resolvedStyle.paddingLeft - resolvedStyle.borderLeftWidth;
-            var adjustedPosY = remappedPercentageY * resolvedStyle.height - _offset.y - resolvedStyle.paddingTop - resolvedStyle.borderTopWidth;
+            var adjustedPosX = 
+                remappedPercentageX * resolvedStyle.width - 
+                _offset.x - resolvedStyle.paddingLeft - resolvedStyle.borderLeftWidth;
+            
+            var adjustedPosY = 
+                remappedPercentageY * resolvedStyle.height - _offset.y - 
+                resolvedStyle.paddingTop - resolvedStyle.borderTopWidth;
             
             adjustedPosX = Mathf.Clamp(
                 adjustedPosX, 

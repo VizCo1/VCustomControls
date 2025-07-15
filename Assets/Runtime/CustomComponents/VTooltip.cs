@@ -112,10 +112,18 @@ namespace VCustomComponents
         {
             return tooltipPosition switch
             {
-                VTooltipPosition.Top => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMin - resolvedStyle.height - _offset),
-                VTooltipPosition.Right => new Vector2(target.worldBound.xMax + _offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
-                VTooltipPosition.Bottom => new Vector2(target.worldBound.center.x - resolvedStyle.width * 0.5f, target.worldBound.yMax + _offset),
-                VTooltipPosition.Left => new Vector2(target.worldBound.xMin - resolvedStyle.width - _offset, target.worldBound.center.y - resolvedStyle.height * 0.5f),
+                VTooltipPosition.Top => new Vector2(
+                    target.worldBound.center.x - resolvedStyle.width * 0.5f, 
+                    target.worldBound.yMin - resolvedStyle.height - _offset),
+                VTooltipPosition.Right => new Vector2(
+                    target.worldBound.xMax + _offset, 
+                    target.worldBound.center.y - resolvedStyle.height * 0.5f),
+                VTooltipPosition.Bottom => new Vector2(
+                    target.worldBound.center.x - resolvedStyle.width * 0.5f, 
+                    target.worldBound.yMax + _offset),
+                VTooltipPosition.Left => new Vector2(
+                    target.worldBound.xMin - resolvedStyle.width - _offset, 
+                    target.worldBound.center.y - resolvedStyle.height * 0.5f),
                 _ => throw new ArgumentOutOfRangeException(nameof(tooltipPosition), tooltipPosition, null)
             };
         }
