@@ -249,6 +249,9 @@ namespace VCustomComponents
                     
                     child.style.translate = new Translate(0, childPosition - elementToRemoveTotalOuterHeight);
                 }
+                
+                base.RemoveAt(index);
+                OnScrollerValueChanged(verticalScroller.value);
             }
             else
             {
@@ -263,9 +266,11 @@ namespace VCustomComponents
                     
                     child.style.translate = new Translate(childPosition - elementToRemoveTotalOuterWidth, 0);
                 }
+                
+                base.RemoveAt(index);
+                OnScrollerValueChanged(horizontalScroller.value);
             }
             
-            base.RemoveAt(index);
         }
     }
 }
