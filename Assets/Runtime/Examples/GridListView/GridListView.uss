@@ -13,9 +13,6 @@
 }
 
 .grid-list-view-example .grid-row > TemplateContainer {
-    height: 92px;
-}
-
-.grid-list-view-example .grid-row > TemplateContainer {
     width: 350px;
+    height: 92px;
 }

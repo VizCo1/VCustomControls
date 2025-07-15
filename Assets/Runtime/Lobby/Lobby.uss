@@ -1,3 +1,8 @@
+.grid-row {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
 .lobby-container {
     flex-grow: 1;
 }
@@ -10,17 +15,15 @@
     display: none;
 }
 
-.grid-row {
-    justify-content: space-between;
-    height: 413px;
+.lobby-list {
+    flex-grow: 1;
+}
+
+.lobby-list .grid-row {
     padding: 0 0 16px 0;
 }
 
-.grid-row > TemplateContainer {
-    width: 439px;
-}
-
-.grid-row-last {
-    height: 397px;
-    padding: 0;
+.lobby-list .grid-row > TemplateContainer {
+    width: 440px;
+    margin: 0 8px;
 }
