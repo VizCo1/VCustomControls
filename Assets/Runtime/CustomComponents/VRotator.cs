@@ -112,16 +112,22 @@ namespace VCustomComponents
 
             _leftButton.clicked += OnLeftButtonClicked;
             _rightButton.clicked += OnRightButtonClicked;
+            
+            _leftButton.SetEnabled(!(!AreButtonsLoopable && _value == 0));
+            _rightButton.SetEnabled(!(!AreButtonsLoopable && _value == Options.Length - 1));
         }
         
         public void SetValueWithoutNotify(int newValue)
         {
             _value = Mathf.Clamp(newValue, 0, Options.Length - 1);
-
+            
             if (_label == null)
                 return;
             
             _label.text = Options[_value];
+            
+            _leftButton?.SetEnabled(!(!AreButtonsLoopable && _value == 0));
+            _rightButton?.SetEnabled(!(!AreButtonsLoopable && _value == Options.Length - 1));
         }
 
         public string GetCurrentOption()

@@ -15,6 +15,8 @@
 - [CustomEventPanel](#customeventpanel)
 
 ## Slider2D
+This custom component is a slider but in 2D.
+[Slider2D.webm](ReadmeImages/Slider2D.webm)
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
 - ```public Vector2 MinValue```: Min value for "value".
@@ -27,12 +29,14 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ```public void SetValueWithoutNotify(Vector2 newValue)```: Sets value without triggering events.
 
 ## AnimatedSprite
+This custom component allows to easily have a sprite animation.
+[AnimatedSprite.webm](ReadmeImages/AnimatedSprite.webm)
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
 - <ins>Bindable</ins> ```public bool value```: This value is true when the animation is playing and false when it's not.
 - ```public int FrameRate```: The frame rate used for the animated sprite.
 - ```public int Loops```: Number of loops for the animation. Set to -1 for unlimited loops.
-- public VSpriteAnimation SpriteAnimation: Collection of Sprites used for the animated sprite.
+- ```public VSpriteAnimation SpriteAnimation```: Collection of Sprites used for the animated sprite.
 #### USS classes
 - ```VAnimatedSpriteClass``` ("animated-sprite"): Class added to the animatedSprite.
 #### Public methods
@@ -41,6 +45,8 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```public void SetValueWithoutNotify(bool newValue)```: Sets value without triggering events. 
 
 ## AspectRatio
+This custom component allows forcing the aspect ratio for its children.
+[AspectRatio.webm](ReadmeImages/AspectRatio.webm)
 #### UxmlAttributes
 - <ins>Bindable</ins> ```public int RatioWidth```: Ratio forced for the width.
 - <ins>Bindable</ins> ```public int RatioHeight```: Ratio forced for the height.
@@ -49,11 +55,15 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```VAspectRatioClass``` ("aspect-ratio"): Class added to the aspectRatio.
 
 ## DropdownCustom & EnumDropdownCustom
+This custom component allows to easily style the dropdown's list.
+[DropdownCustom.webm](ReadmeImages/DropdownCustom.webm)
 #### UxmlAttributes
 - ```private string ClassToAdd```: Class added to the root of the dropdown's list.
 - ```private string ScrollClassToAdd```: Class added to the ScrollView of the dropdown's list.
 
 ## GridListView
+This custom component allows to have a listView with multiple columns.
+[GridListView.webm](ReadmeImages/GridListView.webm)
 #### UxmlAttributes
 - The UxmlAttributes used for this component mimic the ones in the [ListView](https://docs.unity3d.com/6000.1/Documentation/ScriptReference/UIElements.ListView.html).
 #### USS classes
@@ -64,6 +74,8 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```public void BindToGrid(int[,] grid)```: Used to bind the data to the grid.
 
 ## RadialMenu
+This custom component is a radial menu which is also compatible with keyboard and gamepad input.
+[RadialMenu.webm](ReadmeImages/RadialMenu.webm)
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
 - <ins>Bindable</ins> ```public int value```: Determines the selected segment.
@@ -84,6 +96,9 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```--radial-border-width```: Border width.
 
 ## RadialSlider
+This custom component is a radial slider which is also compatible with gamepad input.
+[RadialSlider.webm](ReadmeImages/RadialSlider.webm)
+The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
 - ```public bool IsLoopable```: Whether the slider can wrap around instead of clamping at min/max.
 - ```public bool IsInteractive```: Whether the user can interact with the slider.
@@ -111,6 +126,8 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```--radial-dragger-width```: Dragger width.
 
 ## Rotator
+This custom component allows to easily change a label's value from a set of options.
+[Rotator.webm](ReadmeImages/Rotator.webm)
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
 - <ins>Bindable</ins> ```public int value```: The index of the chosen option.
@@ -122,6 +139,8 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```public string GetCurrentOption()```: Returns the string of the chosen option.
 
 ## ScrollableLabel
+This custom component allows to scroll a label when it does not fit in its container.
+[ScrollableLabel.webm](ReadmeImages/ScrollableLabel.webm)
 #### UxmlAttributes
 - ```public string Text```: TextElement's text.
 - ```public float ScrollSpeed```: The distance the text moves very ScrollRate ms.
@@ -134,6 +153,8 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```VScrollableLabelContainerClass``` (ScrollableLabelClass + "-container"): Class added to the scrollableLabel's container.
 
 ## ScrollViewAnimated
+This custom component allows to smoothly scroll to its children.
+[ScrollViewAnimated.webm](ReadmeImages/ScrollViewAnimated.webm)
 #### UxmlAttributes
 - ```public bool StopAnimationWhenScrolling```: Whether the user can stop the animated scrolling when they scroll.
 - ```public float MinDistanceForMaxDuration```: Min distance needed for max duration. If the distance is smaller, the scrolling duration will be proportionally shorter.
@@ -151,25 +172,32 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
     ```
 
 ## ScrollViewInfinite
+This custom component allows to scroll infinitely.
+[ScrollViewInfinite.webm](ReadmeImages/ScrollViewInfinite.webm)
 #### USS classes
 - ```VScrollViewInfiniteClass``` ("scroll-view-infinite"): Class added to the scrollViewInfinite.
 - ```VScrollViewInfiniteItemClass``` (VScrollViewInfiniteClass + "-item"): Class added to each item in the scrollViewInfinite.
 
 ## Spinner
+This custom component allows to easily rotate itself.
+[Spinner.webm](ReadmeImages/Spinner.webm)
+The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
 - <ins>Bindable</ins> ```public bool value```: Whether the spinner is rotating.
 - ```public float Speed```: Degrees that the spinner rotates every RotationRate ms.
 - ```private long RotationRate```: Time in ms between each rotation change.
 #### USS classes
 - ```VSpinnerClass``` ("spinner"): Class added to the spinner.
-### Public methods
+#### Public methods
 - ```public void SetValueWithoutNotify(bool newValue)```: Sets value without triggering events.
 - ```public void ResetRotation()```: Resets the rotation angle to 0.
 
 ## Tooltip
+This custom component allows to easily add runtime tooltips.
+[Tooltip.webm](ReadmeImages/Tooltip.webm)
 #### USS classes
 - ```VTooltipClass``` ("tooltip"): Class added to the tooltip.
-### Public methods
+#### Public methods
 - ```public void Show(VisualElement target, VTooltipPosition tooltipPosition, bool canHaveFadeDelay = true)```: Shows the tooltip.
 - ```public void Hide()```: Hides the tooltip.
 - ```public bool TryHide()```: Tries to hide the tooltip.
@@ -178,5 +206,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```--tooltip-delay-ms```: Delay to start fading.
 - ```--offset```: Distance between the tooltip and the target.
 ## CustomEventPanel
+This custom component allows to easily send custom events that should be sent after an input.
+
 #### USS classes
 - ```VCustomEventPanelClass``` ("custom-event-panel"): Class added to the customEventPanel.
