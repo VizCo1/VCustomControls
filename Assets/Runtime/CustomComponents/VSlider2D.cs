@@ -8,7 +8,7 @@ namespace VCustomComponents
     public partial class VSlider2D : VisualElement, INotifyValueChanged<Vector2>
     {
         public static readonly string VSlider2DClass = "slider2d"; 
-        public static readonly string DraggerClass = VSlider2DClass + "-dragger-element";
+        public static readonly string VDraggerClass = VSlider2DClass + "-dragger-element";
         public static readonly string DraggerName = "DraggerElement";
     
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
@@ -77,7 +77,7 @@ namespace VCustomComponents
             AddToClassList(VSlider2DClass);
         
             _draggerElement = new VisualElement();
-            _draggerElement.AddToClassList(DraggerClass);
+            _draggerElement.AddToClassList(VDraggerClass);
             _draggerElement.name = DraggerName;
             _draggerElement.usageHints = UsageHints.DynamicTransform;
             

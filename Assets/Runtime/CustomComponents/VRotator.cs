@@ -7,7 +7,7 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VRotator : VisualElement, INotifyValueChanged<int>
     {
-        public static readonly string RotatorClass = "rotator";
+        public static readonly string VRotatorClass = "rotator";
         public static readonly string TextName = "RotatorLabel";
         public static readonly string LeftButtonName = "LeftRotatorButton";
         public static readonly string RightButtonName = "RightRotatorButton";
@@ -69,7 +69,7 @@ namespace VCustomComponents
         
         public VRotator() 
         {
-            AddToClassList(RotatorClass);
+            AddToClassList(VRotatorClass);
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanel);
         }
     

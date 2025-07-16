@@ -8,12 +8,12 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VRadialMenu : VisualElement, INotifyValueChanged<int>, IVHasCustomEvent
     {
-        public static readonly string RadialMenuClass = "radial-menu";
-        public static readonly string RadialMenuSubmittedClass = "radial-menu-submitted";
+        public static readonly string VRadialMenuClass = "radial-menu";
+        public static readonly string VRadialMenuSubmittedClass = VRadialMenuClass + "-submitted";
         
         public static readonly string ImageSlotName = "ImageSlot";
-        public static readonly string ImageSlotClass = "image-slot";
-        public static readonly string ImageSlotPosClass = ImageSlotClass + "-pos-";
+        public static readonly string VImageSlotClass = "image-slot";
+        public static readonly string VImageSlotPosClass = VImageSlotClass + "-pos-";
         
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
         private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
@@ -99,7 +99,7 @@ namespace VCustomComponents
         {
             generateVisualContent += OnGenerateVisualContent;
 
-            AddToClassList(RadialMenuClass);
+            AddToClassList(VRadialMenuClass);
             
             CustomEvent |= 
                 VCustomEventType.AimEvent | 
@@ -275,7 +275,7 @@ namespace VCustomComponents
             
             _isAboutToSelect = true;
             
-            AddToClassList(RadialMenuSubmittedClass);
+            AddToClassList(VRadialMenuSubmittedClass);
         }
         
         private void OnPostSubmitted()
@@ -285,14 +285,14 @@ namespace VCustomComponents
 
             _isAboutToSelect = false;
             
-            RemoveFromClassList(RadialMenuSubmittedClass);
+            RemoveFromClassList(VRadialMenuSubmittedClass);
             
             OnSlotClicked?.Invoke(_value);
         }
         
         private void OnPostCancel()
         {
-            RemoveFromClassList(RadialMenuSubmittedClass);
+            RemoveFromClassList(VRadialMenuSubmittedClass);
             _isAboutToSelect = false;
             value = -1;
         }
@@ -324,8 +324,8 @@ namespace VCustomComponents
             
             Add(imageElement);
             
-            imageElement.AddToClassList(ImageSlotClass);
-            imageElement.AddToClassList(ImageSlotPosClass + index);
+            imageElement.AddToClassList(VImageSlotClass);
+            imageElement.AddToClassList(VImageSlotPosClass + index);
             
         }
 

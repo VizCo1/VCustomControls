@@ -67,6 +67,12 @@ namespace VCustomComponents
             AddToClassList(VSpinnerClass);
             usageHints = UsageHints.DynamicTransform;
         }
+        
+        public void ResetRotation()
+        {
+            _degrees = 0;
+            style.rotate = new Rotate(new Angle(_degrees, AngleUnit.Degree));
+        }
 
         public void SetValueWithoutNotify(bool newValue)
         {
@@ -92,12 +98,6 @@ namespace VCustomComponents
                 _degrees = 0;
             }
             
-            style.rotate = new Rotate(new Angle(_degrees, AngleUnit.Degree));
-        }
-
-        public void ResetRotation()
-        {
-            _degrees = 0;
             style.rotate = new Rotate(new Angle(_degrees, AngleUnit.Degree));
         }
     }

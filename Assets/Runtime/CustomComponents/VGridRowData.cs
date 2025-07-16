@@ -1,11 +1,11 @@
 namespace VCustomComponents
 {
-    public readonly struct GridRowData
+    public readonly struct VGridRowData
     {
         public readonly int Row;
         public readonly int[,] Grid;
 
-        public GridRowData(int row, int[,] grid)
+        public VGridRowData(int row, int[,] grid)
         {
             Row = row;
             Grid = grid;

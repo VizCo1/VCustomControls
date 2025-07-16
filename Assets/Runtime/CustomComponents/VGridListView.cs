@@ -107,10 +107,10 @@ namespace VCustomComponents
 		{
 			var height = grid.GetLength(0);
 
-			var rowData = new List<GridRowData>();
+			var rowData = new List<VGridRowData>();
 			for (var i = 0; i < height; i++)
 			{
-				var data = new GridRowData(i, grid);
+				var data = new VGridRowData(i, grid);
 				rowData.Add(data);
 			}
 
@@ -119,18 +119,18 @@ namespace VCustomComponents
 		
 		private VisualElement MakeItem()
 		{
-			return new GridRow(this);
+			return new VGridRow(this);
 		}
 
 		private void BindItem(VisualElement visualElement, int index)
 		{
-			var rowData = (GridRowData)_listView.itemsSource[index];
+			var rowData = (VGridRowData)_listView.itemsSource[index];
 			
-			var gridRow = (GridRow)visualElement;
+			var gridRow = (VGridRow)visualElement;
 			
 			var isLastRow = index == _listView.itemsSource.Count - 1;
 			
-			gridRow.EnableInClassList(GridRow.LastGridRowClass, isLastRow);
+			gridRow.EnableInClassList(VGridRow.VLastGridRowClass, isLastRow);
 			
 			gridRow.BindToGridRowData(rowData);
 		}

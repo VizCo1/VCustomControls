@@ -10,16 +10,16 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VScrollViewAnimated : ScrollView
     {
-        public static readonly string ScrollViewAnimatedClass = "scroll-view-animated";
-        public static readonly string TargetElementClass = "scroll-view-animated-target";
+        public static readonly string VScrollViewAnimatedClass = "scroll-view-animated";
+        public static readonly string VScrollViewAnimatedTargetClass = VScrollViewAnimatedClass + "-target";
         
         [Header(nameof(VScrollViewAnimated))] 
         
         [UxmlAttribute]
-        private bool StopAnimationWhenScrolling { get; set; }
+        public bool StopAnimationWhenScrolling { get; set; }
         
         [UxmlAttribute]
-        private float MinDistanceForMaxDuration { get; set; } = 200f;
+        public float MinDistanceForMaxDuration { get; set; } = 200f;
         
         private TweenerCore<float, float, FloatOptions> _animationTween1D; 
         private TweenerCore<Vector2, Vector2, VectorOptions> _animationTween2D;
@@ -30,7 +30,7 @@ namespace VCustomComponents
         
         public VScrollViewAnimated() 
         {
-            AddToClassList(ScrollViewAnimatedClass);
+            AddToClassList(VScrollViewAnimatedClass);
             touchScrollBehavior = TouchScrollBehavior.Unrestricted;
             RegisterCallbackOnce<AttachToPanelEvent>(OnAttachedToPanelEvent);
         }
@@ -144,7 +144,7 @@ namespace VCustomComponents
                     .SetEase(ease)
                     .OnStart(() =>
                     {
-                        element.AddToClassList(TargetElementClass);
+                        element.AddToClassList(VScrollViewAnimatedTargetClass);
                     })
                     .OnKill(OnAnimationCompleted);
             }
@@ -167,7 +167,7 @@ namespace VCustomComponents
                     .SetEase(ease)
                     .OnStart(() =>
                     {
-                        element.AddToClassList(TargetElementClass);
+                        element.AddToClassList(VScrollViewAnimatedTargetClass);
                     })
                     .OnKill(OnAnimationCompleted);
             }
@@ -193,7 +193,7 @@ namespace VCustomComponents
                     .SetEase(ease)
                     .OnStart(() =>
                     {
-                        element.AddToClassList(TargetElementClass);
+                        element.AddToClassList(VScrollViewAnimatedTargetClass);
                     })
                     .OnKill(OnAnimationCompleted);
             }
@@ -208,7 +208,7 @@ namespace VCustomComponents
             verticalScroller.pickingMode = PickingMode.Position;
             horizontalScroller.pickingMode = PickingMode.Position;
             
-            _previousTarget.RemoveFromClassList(TargetElementClass);
+            _previousTarget.RemoveFromClassList(VScrollViewAnimatedTargetClass);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace VCustomComponents
         {
             tooltip = null;
             
-            if (tooltipClass == VTooltip.TooltipClass)
-                throw new Exception($"The tooltip class can't be equal to {VTooltip.TooltipClass}");
+            if (tooltipClass == VTooltip.VTooltipClass)
+                throw new Exception($"The tooltip class can't be equal to {VTooltip.VTooltipClass}");
 
             if (!TooltipsInPanel.TryGetValue(panel, out var tooltips))
             {
@@ -35,8 +35,8 @@ namespace VCustomComponents
         {
             tooltip = null;
             
-            if (tooltipClass == VTooltip.TooltipClass)
-                throw new Exception($"The tooltip class can't be equal to {VTooltip.TooltipClass}");
+            if (tooltipClass == VTooltip.VTooltipClass)
+                throw new Exception($"The tooltip class can't be equal to {VTooltip.VTooltipClass}");
             
             if (!TooltipsInPanel.TryGetValue(panel, out var tooltips))
             {
@@ -59,8 +59,8 @@ namespace VCustomComponents
         
         public static bool TryUnregisterTooltip(this IPanel panel, string tooltipClass)
         {
-            if (tooltipClass == VTooltip.TooltipClass)
-                throw new Exception($"The tooltip class can't be equal to {VTooltip.TooltipClass}");
+            if (tooltipClass == VTooltip.VTooltipClass)
+                throw new Exception($"The tooltip class can't be equal to {VTooltip.VTooltipClass}");
 
             if (!TooltipsInPanel.TryGetValue(panel, out var tooltips))
             {

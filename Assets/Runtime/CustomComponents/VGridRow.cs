@@ -3,22 +3,22 @@ using UnityEngine.UIElements;
 
 namespace VCustomComponents
 {
-    public sealed class GridRow : VisualElement
+    public sealed class VGridRow : VisualElement
     {
-        public static readonly string GridRowClass = "grid-row";
-        public static readonly string LastGridRowClass = "grid-row-last";
+        public static readonly string VGridRowClass = "grid-row";
+        public static readonly string VLastGridRowClass = VGridRowClass + "-last";
 			
         private readonly VGridListView _gridView;
         private readonly List<VisualElement> _gridElements = new();
 		
-        public GridRow(VGridListView gridListView)
+        public VGridRow(VGridListView gridListView)
         {
             _gridView = gridListView;
 				
-            AddToClassList(GridRowClass);
+            AddToClassList(VGridRowClass);
         }
 			
-        public void BindToGridRowData(GridRowData rowData)
+        public void BindToGridRowData(VGridRowData rowData)
         {
             var width = rowData.GetWidth();
             if (_gridElements.Count < width)

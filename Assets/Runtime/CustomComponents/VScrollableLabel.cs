@@ -6,8 +6,8 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VScrollableLabel : VisualElement
     {
-        public static readonly string ScrollableLabelClass = "scrollable-label";
-        public static readonly string ScrollableLabelContainerClass = ScrollableLabelClass + "-container";
+        public static readonly string VScrollableLabelClass = "scrollable-label";
+        public static readonly string VScrollableLabelContainerClass = VScrollableLabelClass + "-container";
         
         private readonly TextElement _textElement;
 
@@ -47,10 +47,10 @@ namespace VCustomComponents
 
         public VScrollableLabel() 
         {
-            AddToClassList(ScrollableLabelContainerClass);
+            AddToClassList(VScrollableLabelContainerClass);
             
             _textElement = new TextElement();
-            _textElement.AddToClassList(ScrollableLabelClass);
+            _textElement.AddToClassList(VScrollableLabelClass);
             _textElement.usageHints = UsageHints.DynamicTransform;
             _textElement.pickingMode = PickingMode.Ignore;
             

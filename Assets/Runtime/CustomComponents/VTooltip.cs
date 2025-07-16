@@ -8,7 +8,7 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VTooltip : Label
     {
-        public static readonly string TooltipClass = "tooltip";
+        public static readonly string VTooltipClass = "tooltip";
         
         private static readonly CustomStyleProperty<int> FadeDurationMs = new("--fade-duration-ms");
         private static readonly CustomStyleProperty<int> TooltipDelayMs = new("--tooltip-delay-ms");
@@ -27,7 +27,7 @@ namespace VCustomComponents
         
         public VTooltip() 
         {
-            AddToClassList(TooltipClass);
+            AddToClassList(VTooltipClass);
 #if UNITY_EDITOR
             if (!Application.isPlaying)
                 return;

@@ -7,7 +7,7 @@ namespace VCustomComponents
     [UxmlElement]
     public partial class VRadialSlider : VisualElement, IVHasCustomEvent, INotifyValueChanged<float>
     {
-        public static readonly string RadialSliderClass = "radial-slider";
+        public static readonly string VRadialSliderClass = "radial-slider";
         
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
         private static readonly CustomStyleProperty<Color> RadialBackgroundColor = new("--radial-background-color");
@@ -219,7 +219,7 @@ namespace VCustomComponents
 
         public VRadialSlider() 
         {
-            AddToClassList(RadialSliderClass);
+            AddToClassList(VRadialSliderClass);
 
             CustomEvent |= VCustomEventType.AimEvent;
             
