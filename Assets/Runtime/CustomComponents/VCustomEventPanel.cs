@@ -79,7 +79,7 @@ namespace VCustomComponents
             if (panel == null) 
                 return;
             
-            using var pooled = NavigationPostSubmitEvent.GetPooled();
+            using var pooled = VNavigationPostSubmitEvent.GetPooled();
             
             pooled.target = postSubmitTarget;
             SendEvent(pooled);
@@ -95,7 +95,7 @@ namespace VCustomComponents
             if (panel == null) 
                 return;
             
-            using var pooled = NavigationPostCancelEvent.GetPooled();
+            using var pooled = VNavigationPostCancelEvent.GetPooled();
             
             pooled.target = postSubmitTarget;
             SendEvent(pooled);

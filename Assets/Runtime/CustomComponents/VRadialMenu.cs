@@ -145,7 +145,7 @@ namespace VCustomComponents
             {
                 OnAimed((VAimEvent)evt);
             }
-            else if (evt.eventTypeId == NavigationPostSubmitEvent.TypeId())
+            else if (evt.eventTypeId == VNavigationPostSubmitEvent.TypeId())
             {
                 OnPostSubmitted();
             }
@@ -153,7 +153,7 @@ namespace VCustomComponents
             {
                 OnStylesResolved((CustomStyleResolvedEvent)evt);
             }
-            else if (evt.eventTypeId == NavigationPostCancelEvent.TypeId())
+            else if (evt.eventTypeId == VNavigationPostCancelEvent.TypeId())
             {
                 OnPostCancel();
             }

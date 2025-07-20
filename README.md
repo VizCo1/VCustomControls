@@ -1,4 +1,5 @@
 # VCustomControls
+Collection of UI Toolkit custom controls.
 
 - [Slider2D](#slider2d)
 - [AnimatedSprite](#animatedsprite)
@@ -13,6 +14,8 @@
 - [Spinner](#spinner)
 - [Tooltip](#tooltip)
 - [CustomEventPanel](#customeventpanel)
+- [Custom events](#custom-events)
+- [Custom manipulators](#custom-manipulators)
 
 ## Slider2D
 This custom component is a slider but in 2D.
@@ -231,8 +234,36 @@ This custom component allows to easily add runtime tooltips.
 - ```--fade-duration-ms```: Fade duration.
 - ```--tooltip-delay-ms```: Delay to start fading.
 - ```--offset```: Distance between the tooltip and the target.
+#### VTooltipManager
+This class handles the logic to allow the tooltips to be global.
+- ```public static bool TryGetTooltip(this IPanel panel, string tooltipClass, out VTooltip tooltip)```: Tries to get the tooltip with class "tooltipClass" in "panel".
+- ```public static bool TryRegisterTooltip(this IPanel panel, string tooltipClass, out VTooltip tooltip)```: Tries to register a tooltip with class "tooltipClass" in "panel".
+- ```public static bool TryUnregisterTooltip(this IPanel panel, string tooltipClass)```: Tries to unregister the tooltip with class "tooltipClass" in "panel".
+
 ## CustomEventPanel
 This custom component allows to easily send custom events that should be sent after an input.
 
 #### USS classes
 - ```VCustomEventPanelClass``` ("custom-event-panel"): Class added to the customEventPanel.
+#### VCustomEventManager
+- public static bool TryGetInputActionUI(this IPanel panel, out VInputActionUI inputAction): Tries to get the VInputActionUI in "panel".
+- public static bool TryRegisterInputActionUI(this IPanel panel, out VInputActionUI inputAction): Tries to register a VInputActionUI in "panel".
+- public static bool TryUnregisterInputActionUI(this IPanel panel): Tries to unregister the VInputActionUI in "panel".
+
+## Custom events
+These events are related to input, check out the "VInputActionUI" Input Action Asset.
+
+#### VAimEvent
+Event used to get the direction of the right joystick.
+
+#### VNavigationPostCancelEvent
+Event used to get the release of the Cancel button.
+
+#### VNavigationPostSubmitEvent
+Event used to get the release of the Submit button.
+
+## Custom manipulators
+#### VExtendedClickable
+Manipulator used to have access [PointerDownEvent](https://docs.unity3d.com/6000.1/Documentation/ScriptReference/UIElements.PointerDownEvent.html) while maintaining the :active pseudostate.
+#### VTooltipManipulator
+Manipulator used to associate a tooltip with a UI element.
