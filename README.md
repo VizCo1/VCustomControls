@@ -174,7 +174,10 @@ This custom component allows to scroll a label when it does not fit in its conta
 - ```VScrollableLabelContainerClass``` (ScrollableLabelClass + "-container"): Class added to the scrollableLabel's container.
 
 ## ScrollViewAnimated
-This custom component allows to smoothly scroll to its children.
+This custom component allows to smoothly scroll to its children. 
+
+> [!IMPORTANT]
+> This custom componenet uses [DoTween](https://dotween.demigiant.com/).
 
 ![](ReadmeImages/ScrollViewAnimated.webp)
 
