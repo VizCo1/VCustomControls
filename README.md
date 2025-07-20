@@ -177,7 +177,7 @@ This custom component allows to scroll a label when it does not fit in its conta
 This custom component allows to smoothly scroll to its children. 
 
 > [!IMPORTANT]
-> This custom componenet uses [DoTween](https://dotween.demigiant.com/).
+> This custom component uses [DoTween](https://dotween.demigiant.com/).
 
 ![](ReadmeImages/ScrollViewAnimated.webp)
 
