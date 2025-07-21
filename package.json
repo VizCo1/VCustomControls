@@ -14,12 +14,12 @@
     {
       "displayName": "Custom components examples",
       "description": "Contains example for each custom component",
-      "path": "Runtime/Samples~/Examples"
+      "path": "Samples~/Examples"
     },
     {
       "displayName": "Custom components lobby",
       "description": "Contains a lobby where you can play with each custom component in runtime",
-      "path": "Runtime/Samples~/Lobby"
+      "path": "Samples~/Lobby"
     }
   ]
 }
