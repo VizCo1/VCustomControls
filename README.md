@@ -17,6 +17,9 @@ Collection of UI Toolkit custom controls.
 - [Custom events](#custom-events)
 - [Custom manipulators](#custom-manipulators)
 
+> [!IMPORTANT]
+> The ScrollViewAnimated uses [DoTween](https://dotween.demigiant.com/).
+
 ## Slider2D
 This custom component is a slider but in 2D.
 
