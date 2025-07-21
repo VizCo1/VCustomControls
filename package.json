@@ -12,14 +12,9 @@
   },
   "samples": [
     {
-      "displayName": "Custom components examples",
-      "description": "Contains example for each custom component",
-      "path": "Samples~/Examples"
-    },
-    {
-      "displayName": "Custom components lobby",
-      "description": "Contains a lobby where you can play with each custom component in runtime",
-      "path": "Samples~/Lobby"
+      "displayName": "Custom components examples and lobby",
+      "description": "Contains an example for each custom component, and a lobby where you can play around with them in runtime",
+      "path": "Samples~"
     }
   ]
 }
