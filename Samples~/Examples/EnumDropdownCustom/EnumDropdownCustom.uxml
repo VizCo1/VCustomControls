@@ -1,12 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="ExamplesTemplate" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
-    <Style src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/EnumDropdownCustom/EnumDropdownCustom.uss?fileID=7433441132597879392&amp;guid=1e11de320c4c7a34c83e8cd886845c66&amp;type=3#EnumDropdownCustom" />
+    <ui:Template name="ExamplesTemplate" src="project://database/Assets/Samples/VCustomControls/1.0.0/Custom%20components%20examples%20and%20lobby/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Assets/Samples/VCustomControls/1.0.0/Custom%20components%20examples%20and%20lobby/Examples/EnumDropdownCustom/EnumDropdownCustom.uss?fileID=7433441132597879392&amp;guid=1e11de320c4c7a34c83e8cd886845c66&amp;type=3#EnumDropdownCustom" />
     <ui:Instance template="ExamplesTemplate" name="ExampleEnumDropdownCustom" class="examples-template-instance">
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to easily style the dropdown&apos;s list. Make sure that you&apos;re using a global USS." />
         <AttributeOverrides element-name="TitleLabel" text="VEnumDropdownCustom" />
         <ui:VisualElement name="DropdownContainer" class="dropdown-container">
             <VCustomComponents.Runtime.VEnumDropdownCustom name="VEnumDropdownCustomPrimary" class-to-add="dropdown-primary" type="VCustomComponents.Runtime.EnumForDropdown, Assembly-CSharp" focusable="false" class="dropdown-example" />
-            <VCustomComponents.Runtime.VEnumDropdownCustom class-to-add="dropdown-secondary" name="VEnumDropdownCustomSecondary" type="VCustomComponents.Runtime.EnumForDropdown, Assembly-CSharp" value="Bottom" focusable="false" class="dropdown-example" />
+            <VCustomComponents.Runtime.VEnumDropdownCustom class-to-add="dropdown-secondary" name="VEnumDropdownCustomSecondary" type="VCustomComponents.Runtime.EnumForDropdown, VCustomComponents.Runtime" value="Bottom" focusable="false" class="dropdown-example" />
         </ui:VisualElement>
     </ui:Instance>
 </ui:UXML>
