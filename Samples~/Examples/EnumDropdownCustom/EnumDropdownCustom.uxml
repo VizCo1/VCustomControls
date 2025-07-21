@@ -5,8 +5,8 @@
         <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to easily style the dropdown&apos;s list. Make sure that you&apos;re using a global USS." />
         <AttributeOverrides element-name="TitleLabel" text="VEnumDropdownCustom" />
         <ui:VisualElement name="DropdownContainer" class="dropdown-container">
-            <VCustomComponents.Runtime.VEnumDropdownCustom name="VEnumDropdownCustomPrimary" class-to-add="dropdown-primary" type="VCustomComponents.Runtime.EnumForDropdown, Assembly-CSharp" value="Top" focusable="false" class="dropdown-example" />
-            <VCustomComponents.Runtime.VEnumDropdownCustom class-to-add="dropdown-secondary" name="VEnumDropdownCustomSecondary" type="VCustomComponents.Runtime.EnumForDropdown, Assembly-CSharp" value="Bottom" focusable="false" class="dropdown-example" />
+            <VCustomComponents.Runtime.VEnumDropdownCustom name="VEnumDropdownCustomPrimary" class-to-add="dropdown-primary" focusable="false" type="VCustomComponents.Runtime.EnumForDropdown, Assembly-CSharp" value="Up" class="dropdown-example" />
+            <VCustomComponents.Runtime.VEnumDropdownCustom class-to-add="dropdown-secondary" name="VEnumDropdownCustomSecondary" focusable="false" type="VCustomComponents.Runtime.EnumForDropdown, Assembly-CSharp" value="Bottom" class="dropdown-example" />
         </ui:VisualElement>
     </ui:Instance>
 </ui:UXML>
