@@ -23,7 +23,7 @@ Collection of UI Toolkit custom controls.
 ## Slider2D
 This custom component is a slider but in 2D.
 
-![](ReadmeImages/Slider2D.webp)
+![](ReadmeImages~/Slider2D.webp)
 
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
@@ -39,7 +39,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ## AnimatedSprite
 This custom component allows to easily have a sprite animation. Assets used for the animation: [https://dani-maccari.itch.io/nuclear-leak-character-asset-pack](https://dani-maccari.itch.io/nuclear-leak-character-asset-pack).
 
-![](ReadmeImages/AnimatedSprite.webp)
+![](ReadmeImages~/AnimatedSprite.webp)
 
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
@@ -57,7 +57,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ## AspectRatio
 This custom component allows forcing the aspect ratio for its children.
 
-![](ReadmeImages/AspectRatio.webp)
+![](ReadmeImages~/AspectRatio.webp)
 
 #### UxmlAttributes
 - <ins>Bindable</ins> ```public int RatioWidth```: Ratio forced for the width.
@@ -69,7 +69,7 @@ This custom component allows forcing the aspect ratio for its children.
 ## DropdownCustom & EnumDropdownCustom
 This custom component allows to easily style the dropdown's list.
 
-![](ReadmeImages/DropdownCustom.webp)
+![](ReadmeImages~/DropdownCustom.webp)
 
 #### UxmlAttributes
 - ```private string ClassToAdd```: Class added to the root of the dropdown's list.
@@ -78,7 +78,7 @@ This custom component allows to easily style the dropdown's list.
 ## GridListView
 This custom component allows to have a listView with multiple columns.
 
-![](ReadmeImages/GridListView.webp)
+![](ReadmeImages~/GridListView.webp)
 
 #### UxmlAttributes
 - The UxmlAttributes used for this component mimic the ones in the [ListView](https://docs.unity3d.com/6000.1/Documentation/ScriptReference/UIElements.ListView.html).
@@ -92,7 +92,7 @@ This custom component allows to have a listView with multiple columns.
 ## RadialMenu
 This custom component is a radial menu which is also compatible with keyboard and gamepad input.
 
-![](ReadmeImages/RadialMenu.webp)
+![](ReadmeImages~/RadialMenu.webp)
 
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
@@ -116,7 +116,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ## RadialSlider
 This custom component is a radial slider which is also compatible with gamepad input.
 
-![](ReadmeImages/RadialSlider.webp)
+![](ReadmeImages~/RadialSlider.webp)
 
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
@@ -148,7 +148,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ## Rotator
 This custom component allows to easily change a label's value from a set of options.
 
-![](ReadmeImages/Rotator.webp)
+![](ReadmeImages~/Rotator.webp)
 
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
@@ -163,7 +163,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ## ScrollableLabel
 This custom component allows to scroll a label when it does not fit in its container.
 
-![](ReadmeImages/ScrollableLabel.webp)
+![](ReadmeImages~/ScrollableLabel.webp)
 
 #### UxmlAttributes
 - ```public string Text```: TextElement's text.
@@ -182,7 +182,7 @@ This custom component allows to smoothly scroll to its children.
 > [!IMPORTANT]
 > This custom component uses [DoTween](https://dotween.demigiant.com/).
 
-![](ReadmeImages/ScrollViewAnimated.webp)
+![](ReadmeImages~/ScrollViewAnimated.webp)
 
 #### UxmlAttributes
 - ```public bool StopAnimationWhenScrolling```: Whether the user can stop the animated scrolling when they scroll.
@@ -203,7 +203,7 @@ This custom component allows to smoothly scroll to its children.
 ## ScrollViewInfinite
 This custom component allows to scroll infinitely.
 
-![](ReadmeImages/ScrollViewInfinite.webp)
+![](ReadmeImages~/ScrollViewInfinite.webp)
 
 #### USS classes
 - ```VScrollViewInfiniteClass``` ("scroll-view-infinite"): Class added to the scrollViewInfinite.
@@ -212,7 +212,7 @@ This custom component allows to scroll infinitely.
 ## Spinner
 This custom component allows to easily rotate itself.
 
-![](ReadmeImages/Spinner.webp)
+![](ReadmeImages~/Spinner.webp)
 
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
@@ -228,7 +228,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ## Tooltip
 This custom component allows to easily add runtime tooltips.
 
-![](ReadmeImages/Tooltip.webp)
+![](ReadmeImages~/Tooltip.webp)
 
 #### USS classes
 - ```VTooltipClass``` ("tooltip"): Class added to the tooltip.
