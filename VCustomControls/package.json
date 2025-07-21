@@ -1,0 +1,13 @@
+{
+  "name": "com.vizcodev.vcustomcontrols",
+  "version": "1.0.0",
+  "displayName": "VCustomControls",
+  "description": "Collection of UI Toolkit custom controls.\n \n*IMPORTANT*\nDoTween is needed to have full access to the package.",
+  "unity": "6000.1",
+  "unityRelease": "9f1",
+  "author": {
+    "name": "VizCoDev",
+    "email": "vizcodev@gmail.com",
+    "url": "https://vizco1.github.io/portfolio"
+  }
+}

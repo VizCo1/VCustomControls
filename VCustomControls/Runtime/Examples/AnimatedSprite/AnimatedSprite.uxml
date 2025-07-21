@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/AnimatedSprite/AnimatedSprite.uss?fileID=7433441132597879392&amp;guid=d33db24275f06b54e98b60182c522065&amp;type=3#AnimatedSprite" />
+    <ui:Instance template="ExamplesTemplate" name="AnimatedSpriteExample" class="examples-template-instance">
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows using sprite animations in UI Toolkit! You can set the number of Loops and Frame Rate!" />
+        <AttributeOverrides element-name="TitleLabel" text="VAnimatedSprite" />
+        <ui:VisualElement name="Container" class="container">
+            <VCustomComponents.Runtime.VAnimatedSprite frame-rate="6" name="VAnimatedSpriteLeft" value="true" sprite-animation="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/AnimatedSprite/AnimationLeft.asset?fileID=11400000&amp;guid=c8c5167d10377e9468d6bcfaa637ef26&amp;type=2#AnimationLeft" class="animated-sprite-example" />
+            <VCustomComponents.Runtime.VAnimatedSprite frame-rate="12" name="VAnimatedSpriteMiddle" value="true" sprite-animation="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/AnimatedSprite/AnimationMiddle.asset?fileID=11400000&amp;guid=2adee2f5600df4243b6e6630e052f76d&amp;type=2#AnimationMiddle" class="animated-sprite-example" />
+            <VCustomComponents.Runtime.VAnimatedSprite frame-rate="24" name="VAnimatedSpriteRight" value="true" sprite-animation="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/AnimatedSprite/AnimationRight.asset?fileID=11400000&amp;guid=32a5dcfdcd57bc840abd549740db86c0&amp;type=2#AnimationRight" class="animated-sprite-example" />
+        </ui:VisualElement>
+    </ui:Instance>
+</ui:UXML>

@@ -1,0 +1,19 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <ui:Template name="Slider2D" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/2DSlider/Slider2D.uxml?fileID=9197481963319205126&amp;guid=67001d19ea26f1340a8b425e4bd8d02a&amp;type=3#Slider2D" />
+    <ui:Template name="ExamplesIntSlider" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesIntSlider.uxml?fileID=9197481963319205126&amp;guid=9c691b2cba13c8841a8dee9dd6601dca&amp;type=3#ExamplesIntSlider" />
+    <Style src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/AspectRatio/AspectRatio.uss?fileID=7433441132597879392&amp;guid=367d2d05c46b2304486d0627baa8040c&amp;type=3#AspectRatio" />
+    <ui:Instance template="ExamplesTemplate" name="ExampleAspectRatio" class="examples-template-instance">
+        <AttributeOverrides element-name="TitleLabel" text="VAspectRatio" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control maintains a fixed aspect ratio, with an option to only enforce it for wide screens. Usually used as a container filling the entire screen." />
+        <VCustomComponents.Runtime.VAspectRatio name="VAspectRatio" class="aspect-ratio-example">
+            <ui:Instance template="Slider2D" name="ExampleSlider2DContainer" class="examples-template-instance" />
+        </VCustomComponents.Runtime.VAspectRatio>
+        <ui:Instance template="ExamplesIntSlider" name="HorizontalSlider" class="slider-horizontal">
+            <AttributeOverrides element-name="ExamplesIntSlider" label="Ratio Width" low-value="1" high-value="32" />
+        </ui:Instance>
+        <ui:Instance template="ExamplesIntSlider" name="VerticalSlider" class="slider-vertical">
+            <AttributeOverrides element-name="ExamplesIntSlider" label="Ratio Height" low-value="1" high-value="32" />
+        </ui:Instance>
+    </ui:Instance>
+</ui:UXML>

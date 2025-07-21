@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/DropdownCustom/DropdownCustom.uss?fileID=7433441132597879392&amp;guid=70ed93b6e654aa54c8caa6c882a3205c&amp;type=3#DropdownCustom" />
+    <ui:Instance template="ExamplesTemplate" name="ExampleDropdownCustom" class="examples-template-instance">
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to easily style the dropdown&apos;s list. Make sure that you&apos;re using a global USS." />
+        <AttributeOverrides element-name="TitleLabel" text="VDropdownCustom" />
+        <ui:VisualElement name="DropdownContainer" class="dropdown-container">
+            <VCustomComponents.Runtime.VDropdownCustom name="VDropdownCustomPrimary" class-to-add="dropdown-primary" choices="Choice 1,Choice 2,Choice 3" index="0" focusable="false" class="dropdown-example" />
+            <VCustomComponents.Runtime.VDropdownCustom name="VDropdownCustomSecondary" class-to-add="dropdown-secondary" choices="Choice 1,Choice 2,Choice 3" index="1" focusable="false" class="dropdown-example" />
+        </ui:VisualElement>
+    </ui:Instance>
+</ui:UXML>

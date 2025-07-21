@@ -1,0 +1,116 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <ui:Template name="ExamplesTabView" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTabView.uxml?fileID=9197481963319205126&amp;guid=399537c2bfb4d2a499ce312e7294b9ef&amp;type=3#ExamplesTabView" />
+    <ui:Template name="ExamplesButton" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton" />
+    <ui:Template name="ExamplesEnumDropdown" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesEnumDropdown.uxml?fileID=9197481963319205126&amp;guid=19b0847ad9cbc674c83e8deb5ccbbe81&amp;type=3#ExamplesEnumDropdown" />
+    <ui:Template name="ExamplesFloatField" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesFloatField.uxml?fileID=9197481963319205126&amp;guid=98fa129692730044b98fd19a8a4324a2&amp;type=3#ExamplesFloatField" />
+    <Style src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ScrollViewAnimated/ScrollViewAnimated.uss?fileID=7433441132597879392&amp;guid=59f1e6077ff82084a8bccc016cf5f31e&amp;type=3#ScrollViewAnimated" />
+    <ui:Instance template="ExamplesTemplate" name="ScrollViewCustomExample" class="examples-template-instance">
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom controll allows a ScrollView to smoothly scroll to any element." />
+        <AttributeOverrides element-name="TitleLabel" text="VScrollViewAnimated" />
+        <ui:Instance template="ExamplesTabView" name="ExamplesTabViewContainer" class="examples-template-instance">
+            <ui:Tab label="Vertical" name="ScrollViewAnimatedVertical">
+                <ui:VisualElement name="RowContainer" class="row-container">
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerA" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="A" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerB" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="B" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerC" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="C" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerD" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="D" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerE" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="E" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerF" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="F" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesEnumDropdown" name="AnimatedScrollTypeEnumDropdownContainerVertical" class="animated-scroll-type-enum-dropdown-container">
+                        <AttributeOverrides element-name="ExamplesEnumDropdown" label="AnimatedScrollType" type="VCustomComponents.Runtime.VAnimatedScrollType, VCustomComponents.Runtime" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesEnumDropdown" name="EaseEnumDropdownContainerVertical" class="ease-enum-dropdown-container">
+                        <AttributeOverrides element-name="ExamplesEnumDropdown" label="Ease" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesFloatField" name="DurationFloatFieldContainerVertical" class="duration-float-field-container">
+                        <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
+                    </ui:Instance>
+                </ui:VisualElement>
+                <VCustomComponents.Runtime.VScrollViewAnimated name="VScrollViewAnimatedVertical" stop-animation-when-scrolling="true" class="scroll-view-animated-example">
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
+                        <AttributeOverrides element-name="ExamplesButton" text="A" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
+                        <AttributeOverrides element-name="ExamplesButton" text="B" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
+                        <AttributeOverrides element-name="ExamplesButton" text="C" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
+                        <AttributeOverrides element-name="ExamplesButton" text="D" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
+                        <AttributeOverrides element-name="ExamplesButton" text="E" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-vertical">
+                        <AttributeOverrides element-name="ExamplesButton" text="F" />
+                    </ui:Instance>
+                </VCustomComponents.Runtime.VScrollViewAnimated>
+            </ui:Tab>
+            <ui:Tab label="Horizontal" name="ScrollViewAnimatedHorizontal">
+                <ui:VisualElement name="RowContainer" class="row-container">
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerA" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="A" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerB" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="B" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerC" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="C" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerD" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="D" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerE" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="E" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" name="ButtonContainerF" class="row-button">
+                        <AttributeOverrides element-name="ExamplesButton" text="F" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesEnumDropdown" name="AnimatedScrollTypeEnumDropdownContainerHorizontal" class="animated-scroll-type-enum-dropdown-container">
+                        <AttributeOverrides element-name="ExamplesEnumDropdown" label="AnimatedScrollType" type="VCustomComponents.Runtime.VAnimatedScrollType, VCustomComponents.Runtime" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesEnumDropdown" name="EaseEnumDropdownContainerHorizontal" class="ease-enum-dropdown-container">
+                        <AttributeOverrides element-name="ExamplesEnumDropdown" label="Ease" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesFloatField" name="DurationFloatFieldContainerHorizontal" class="duration-float-field-container">
+                        <AttributeOverrides element-name="ExamplesFloatField" label="Duration" max-length="6" value="1" />
+                    </ui:Instance>
+                </ui:VisualElement>
+                <VCustomComponents.Runtime.VScrollViewAnimated name="VScrollViewAnimatedHorizontal" mode="Horizontal" class="scroll-view-animated-example">
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
+                        <AttributeOverrides element-name="ExamplesButton" text="A" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
+                        <AttributeOverrides element-name="ExamplesButton" text="B" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
+                        <AttributeOverrides element-name="ExamplesButton" text="C" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
+                        <AttributeOverrides element-name="ExamplesButton" text="D" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
+                        <AttributeOverrides element-name="ExamplesButton" text="E" />
+                    </ui:Instance>
+                    <ui:Instance template="ExamplesButton" class="examples-button-container-animated-horizontal">
+                        <AttributeOverrides element-name="ExamplesButton" text="F" />
+                    </ui:Instance>
+                </VCustomComponents.Runtime.VScrollViewAnimated>
+            </ui:Tab>
+        </ui:Instance>
+    </ui:Instance>
+</ui:UXML>

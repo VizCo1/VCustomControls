@@ -1,0 +1,24 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/Tooltip/Tooltip.uss?fileID=7433441132597879392&amp;guid=c53af25100b69324890dde4aeed18a49&amp;type=3#Tooltip" />
+    <ui:Instance template="ExamplesTemplate" name="ExampleTooltip" style="flex-grow: 1;">
+        <AttributeOverrides element-name="TitleLabel" text="VTooltip" />
+        <AttributeOverrides element-name="DescriptionLabel" text="This custom control allows to have a runtime tooltip that behaves like the editor tooltip!" />
+        <ui:VisualElement name="TooltipExampleContainer" class="tooltip-example-container">
+            <ui:VisualElement name="TooltipExample1" tooltip="I&apos;m a tooltip! 1" class="tooltip-example">
+                <ui:Label text="Hover here!" name="TooltipExample1Label" class="tooltip-example-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="TooltipExample2" tooltip="I&apos;m a robot!" class="tooltip-example tooltip-example2">
+                <ui:Label text="Here too!" name="TooltipExample1Labe2" class="tooltip-example-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="TooltipExampleContainer" class="tooltip-example-container">
+            <ui:VisualElement name="TooltipExample3" tooltip="I&apos;m a tooltip! 2" class="tooltip-example">
+                <ui:Label text="Hover me!" name="TooltipExample1Label" class="tooltip-example-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="TooltipExample4" tooltip="I&apos;m a robot! 3" class="tooltip-example tooltip-example2">
+                <ui:Label text="Hover hover!" name="TooltipExample1Labe2" class="tooltip-example-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:Instance>
+</ui:UXML>

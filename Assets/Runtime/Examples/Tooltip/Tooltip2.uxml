@@ -1,4 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Runtime/Examples/Tooltip/Tooltip.uss?fileID=7433441132597879392&amp;guid=c53af25100b69324890dde4aeed18a49&amp;type=3#Tooltip" />
-    <VCustomComponents.VTooltip name="Tooltip1" text="Tooltip" class="tooltip2" />
-</ui:UXML>

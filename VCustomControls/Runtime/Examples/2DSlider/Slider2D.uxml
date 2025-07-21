@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesTemplate" src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/ExamplesTemplate.uxml?fileID=9197481963319205126&amp;guid=9a93183587d0ae745bba6f7c2b9b7ce2&amp;type=3#ExamplesTemplate" />
+    <Style src="project://database/Packages/com.vizcodev.vcustomcontrols/Runtime/Examples/2DSlider/Slider2D.uss?fileID=7433441132597879392&amp;guid=e830ab12783e9074199facbbb3579419&amp;type=3#Slider2D" />
+    <ui:Instance template="ExamplesTemplate" name="ExampleSlider2DA" class="examples-template-instance">
+        <AttributeOverrides element-name="TitleLabel" text="VSlider2D" />
+        <AttributeOverrides element-name="DescriptionLabel" text="The Slider2D behaves as a normal slider but in 2D." />
+        <VCustomComponents.Runtime.VSlider2D name="VSlider2D" class="slider2d-example" />
+    </ui:Instance>
+</ui:UXML>
