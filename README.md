@@ -17,6 +17,9 @@ Collection of UI Toolkit custom controls.
 - [Custom events](#custom-events)
 - [Custom manipulators](#custom-manipulators)
 
+> [!IMPORTANT]
+> ScrollViewAnimated uses [DoTween](https://dotween.demigiant.com/).
+
 ## Slider2D
 This custom component is a slider but in 2D.
 
@@ -33,19 +36,19 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 #### Public methods
 ```public void SetValueWithoutNotify(Vector2 newValue)```: Sets value without triggering events.
 
-## AnimatedSprite
+## Sprite
 This custom component allows to easily have a sprite animation.
 
-![](ReadmeImages/AnimatedSprite.webp)
+![](ReadmeImages/Sprite.webp)
 
 The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Manual/UIE-Change-Events.html).
 #### UxmlAttributes
 - <ins>Bindable</ins> ```public bool value```: This value is true when the animation is playing and false when it's not.
-- ```public int FrameRate```: The frame rate used for the animated sprite.
+- ```public int FrameRate```: The frame rate used for the  sprite.
 - ```public int Loops```: Number of loops for the animation. Set to -1 for unlimited loops.
-- ```public VSpriteAnimation SpriteAnimation```: Collection of Sprites used for the animated sprite.
+- ```public VSpriteAnimation SpriteAnimation```: Collection of Sprites used for the  sprite.
 #### USS classes
-- ```VAnimatedSpriteClass``` ("animated-sprite"): Class added to the animatedSprite.
+- ```VSpriteClass``` ("-sprite"): Class added to the Sprite.
 #### Public methods
 - ```public void ResetAnimationIndex(int newAnimationIndex = 0)```: Resets the animation to the chosen index.
 - ```public void ResetLoops()```: Sets the completed loops to 0.
@@ -173,16 +176,16 @@ This custom component allows to scroll a label when it does not fit in its conta
 - ```VScrollableLabelClass``` ("scrollable-label"): Class added to the scrollableLabel.
 - ```VScrollableLabelContainerClass``` (ScrollableLabelClass + "-container"): Class added to the scrollableLabel's container.
 
-## ScrollViewAnimated
+## ScrollView
 This custom component allows to smoothly scroll to its children. 
 
 > [!IMPORTANT]
 > This custom component uses [DoTween](https://dotween.demigiant.com/).
 
-![](ReadmeImages/ScrollViewAnimated.webp)
+![](ReadmeImages/ScrollView.webp)
 
 #### UxmlAttributes
-- ```public bool StopAnimationWhenScrolling```: Whether the user can stop the animated scrolling when they scroll.
+- ```public bool StopAnimationWhenScrolling```: Whether the user can stop the  scrolling when they scroll.
 - ```public float MinDistanceForMaxDuration```: Min distance needed for max duration. If the distance is smaller, the scrolling duration will be proportionally shorter.
 #### USS classes
 - ```VScrollViewAnimatedClass``` ("scroll-view-animated"): Class added to the scrollViewAnimated.
