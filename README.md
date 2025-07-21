@@ -35,6 +35,12 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```VDraggerClass``` (VSlider2DClass + "-dragger-element"): Class added to the dragger element.
 #### Public methods
 ```public void SetValueWithoutNotify(Vector2 newValue)```: Sets value without triggering events.
+#### Mandatory styles
+```
+.slider2d-dragger-element {
+    position: absolute;
+}
+```
 
 ## AnimatedSprite
 This custom component allows to easily have a sprite animation. Assets used for the animation: [https://dani-maccari.itch.io/nuclear-leak-character-asset-pack](https://dani-maccari.itch.io/nuclear-leak-character-asset-pack).
@@ -52,7 +58,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 #### Public methods
 - ```public void ResetAnimationIndex(int newAnimationIndex = 0)```: Resets the animation to the chosen index.
 - ```public void ResetLoops()```: Sets the completed loops to 0.
-- ```public void SetValueWithoutNotify(bool newValue)```: Sets value without triggering events. 
+- ```public void SetValueWithoutNotify(bool newValue)```: Sets value without triggering events.
 
 ## AspectRatio
 This custom component allows forcing the aspect ratio for its children.
@@ -88,6 +94,13 @@ This custom component allows to have a listView with multiple columns.
 - ```VLastGridRowClass``` (GridRowClass + "-last"): Class added to the last gridRow.
 #### Public methods
 - ```public void BindToGrid(int[,] grid)```: Used to bind the data to the grid.
+#### Mandatory styles
+```
+.grid-row {
+    flex-direction: row;
+    flex-grow: 1;
+}
+```
 
 ## RadialMenu
 This custom component is a radial menu which is also compatible with keyboard and gamepad input.
@@ -112,6 +125,12 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 - ```--radial-border-color```: Border color.
 - ```--radial-segment-color```: Selected segment color.
 - ```--radial-border-width```: Border width.
+#### Mandatory styles
+```
+.image-slot {
+    position: absolute;
+}
+```
 
 ## RadialSlider
 This custom component is a radial slider which is also compatible with gamepad input.
@@ -175,9 +194,21 @@ This custom component allows to scroll a label when it does not fit in its conta
 #### USS classes
 - ```VScrollableLabelClass``` ("scrollable-label"): Class added to the scrollableLabel.
 - ```VScrollableLabelContainerClass``` (ScrollableLabelClass + "-container"): Class added to the scrollableLabel's container.
+#### Mandatory styles
+```
+.scrollable-label-container {
+    overflow: hidden;
+}
+
+.scrollable-label {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+```
 
 ## ScrollViewAnimated
-This custom component allows to smoothly scroll to its children. 
+This custom component allows to smoothly scroll to its children.
 
 > [!IMPORTANT]
 > This custom component uses [DoTween](https://dotween.demigiant.com/).
@@ -191,26 +222,29 @@ This custom component allows to smoothly scroll to its children.
 - ```VScrollViewAnimatedClass``` ("scroll-view-animated"): Class added to the scrollViewAnimated.
 - ```VScrollViewAnimatedTargetClass``` (ScrollViewAnimatedClass + "-target"): Class added to the target during the animated scrolling.
 #### Public methods
-  - Smoothly scrolls to the selected element.
-    ```
-      public void AnimatedScrollTo(
-      VisualElement element,
-      float maxDuration,
-      VAnimatedScrollType animatedScrollType = VAnimatedScrollType.Default,
-      Ease ease = Ease.Linear)
-    ```
+- Smoothly scrolls to the selected element.
+  ```
+    public void AnimatedScrollTo(
+    VisualElement element,
+    float maxDuration,
+    VAnimatedScrollType animatedScrollType = VAnimatedScrollType.Default,
+    Ease ease = Ease.Linear)
+  ```
 
 ## ScrollViewInfinite
 This custom component allows to scroll infinitely.
-
-> [!IMPORTANT]
-> For the moment, if the number of children reaches 0, scrolling down will not work properly.
 
 ![](ReadmeImages~/ScrollViewInfinite.webp)
 
 #### USS classes
 - ```VScrollViewInfiniteClass``` ("scroll-view-infinite"): Class added to the scrollViewInfinite.
 - ```VScrollViewInfiniteItemClass``` (VScrollViewInfiniteClass + "-item"): Class added to each item in the scrollViewInfinite.
+#### Mandatory styles
+```
+.scroll-view-infinite-item {
+    position: absolute;
+}
+```
 
 ## Spinner
 This custom component allows to easily rotate itself.
@@ -227,6 +261,12 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 #### Public methods
 - ```public void SetValueWithoutNotify(bool newValue)```: Sets value without triggering events.
 - ```public void ResetRotation()```: Resets the rotation angle to 0.
+- #### Mandatory styles
+```
+.scroll-view-infinite-item {
+    position: absolute;
+}
+```
 
 ## Tooltip
 This custom component allows to easily add runtime tooltips.
