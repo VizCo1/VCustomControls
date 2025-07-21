@@ -33,6 +33,8 @@ namespace VCustomComponents.Runtime
                 return;
 #endif
             style.opacity = 0;
+
+            _intervalMs = Mathf.RoundToInt(_fadeDurationMs / (1f / FadeRate));
         }
 
         public VTooltip(string tooltipClass) : this()
