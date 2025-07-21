@@ -37,7 +37,7 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 ```public void SetValueWithoutNotify(Vector2 newValue)```: Sets value without triggering events.
 
 ## AnimatedSprite
-This custom component allows to easily have a sprite animation.
+This custom component allows to easily have a sprite animation. Assets used for the animation: [https://dani-maccari.itch.io/nuclear-leak-character-asset-pack](https://dani-maccari.itch.io/nuclear-leak-character-asset-pack).
 
 ![](ReadmeImages/AnimatedSprite.webp)
 
