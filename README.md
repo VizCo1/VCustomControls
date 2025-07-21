@@ -234,6 +234,9 @@ This custom component allows to smoothly scroll to its children.
 ## ScrollViewInfinite
 This custom component allows to scroll infinitely.
 
+> [!IMPORTANT]
+> For the moment, when the number of children reaches 0, scrolling down will not behave properly.
+
 ![](ReadmeImages~/ScrollViewInfinite.webp)
 
 #### USS classes
