@@ -316,6 +316,6 @@ Event used to get the release of the Submit button.
 
 ## Custom manipulators
 #### VExtendedClickable
-Manipulator used to have access [PointerDownEvent](https://docs.unity3d.com/6000.1/Documentation/ScriptReference/UIElements.PointerDownEvent.html) while maintaining the :active pseudostate.
+Manipulator used to have access to [PointerDownEvent](https://docs.unity3d.com/6000.1/Documentation/ScriptReference/UIElements.PointerDownEvent.html) while maintaining the :active pseudostate.
 #### VTooltipManipulator
 Manipulator used to associate a tooltip with a UI element.
