@@ -264,12 +264,6 @@ The value property is compatible with [ChangeEvent](https://docs.unity3d.com/Man
 #### Public methods
 - ```public void SetValueWithoutNotify(bool newValue)```: Sets value without triggering events.
 - ```public void ResetRotation()```: Resets the rotation angle to 0.
-- #### Mandatory styles
-```
-.scroll-view-infinite-item {
-    position: absolute;
-}
-```
 
 ## Tooltip
 This custom component allows to easily add runtime tooltips.
