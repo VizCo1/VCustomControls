@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "QW2wC4UpSUY=",
+  "success": true,
+  "projectFilePath": "C:\\ProyectosPersonales\\Unity\\VCustomControl\\Assets\\Runtime\\UserInterfaceGenerator\\UserInterfaceGenerator~\\UserInterfaceGenerator\\UserInterfaceGenerator.Sample\\UserInterfaceGenerator.Sample.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Víctor\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.29\\microsoft.netcore.app.ref.8.0.29.nupkg.sha512",
+    "C:\\Users\\Víctor\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.29\\microsoft.windowsdesktop.app.ref.8.0.29.nupkg.sha512",
+    "C:\\Users\\Víctor\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.29\\microsoft.aspnetcore.app.ref.8.0.29.nupkg.sha512"
+  ],
+  "logs": []
+}

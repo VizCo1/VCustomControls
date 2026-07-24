@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; justify-content: center;">
+        <ui:VisualElement style="align-self: center; flex-direction: row; align-items: center;">
+            <ui:Label text="Label" name="_Label" style="margin-top: 0; margin-right: 8px; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+            <ui:Button text="Button" name="_Button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+            <VCustomComponents.Runtime.VRegion name="_VRegion"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="Button" name="_DiegoLloron"/>
+    <ui:Image name="_DiegoDormilon"/>
+    <ui:VisualElement name="_BocadilloDeAtun"/>
+    <ui:Button text="Button"/>
+</ui:UXML>
