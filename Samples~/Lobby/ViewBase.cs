@@ -40,7 +40,7 @@ namespace VCustomComponents.Runtime
             BeforeDestroy();
             
             _backButton.SetEnabled(false);
-            UiManager.Instance.PopDocument();
+            UIManager.Instance.PopDocument();
         }
     }
 }

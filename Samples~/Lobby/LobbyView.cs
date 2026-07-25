@@ -1,29 +1,22 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UserInterfaceGenerator;
 
 namespace VCustomComponents.Runtime
 {
-    public class Lobby : ViewBase
+    public class LobbyView : VBaseView<LobbyElements>
     {
         [SerializeField]
-        private ViewContainer _viewContainer;
+        private LobbyEntryData _lobbyEntryData;
         
         [SerializeField]
         private int _columns = 4;
         
-        private VGridListView _libraryGridListView;
-        private string[] _names;
-
-        protected override void Start()
+        protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
-            base.Start();
+            Elements.LobbyList.BindCell = BindCell;
             
-            _libraryGridListView = Root.Q<VGridListView>();
-            _libraryGridListView.BindCell = BindCell;
-            
-            var rows = Mathf.CeilToInt(_viewContainer.NumberOfViews / (float)_columns);
-            
-            _names = new string[rows * _columns];
+            var rows = Mathf.CeilToInt(_lobbyEntryData.ViewNames.Length / (float)_columns);
             
             var cellIndex = 0;
             var grid = new int[rows, _columns];
@@ -31,18 +24,17 @@ namespace VCustomComponents.Runtime
             {
                 for (var x = 0; x < grid.GetLength(1); x++)
                 {
-                    if (cellIndex >= _viewContainer.NumberOfViews)
+                    if (cellIndex >= _lobbyEntryData.ViewNames.Length)
                     {
                         grid[y, x] = -1;
                         continue;
-                    } 
+                    }
                     
-                    _names[cellIndex] = _viewContainer.Views[cellIndex].name[0..^4];
                     grid[y, x] = cellIndex++;
                 }
             }
-
-            _libraryGridListView.BindToGrid(grid);
+            
+            Elements.LobbyList.BindToGrid(grid);
         }
 
         private void BindCell(VisualElement visualElement, int index)
@@ -55,12 +47,15 @@ namespace VCustomComponents.Runtime
             button.UnregisterCallback<ClickEvent, int>(OnCellClicked);
             button.RegisterCallback<ClickEvent, int>(OnCellClicked, index);
             
-            button.text = _names[index];
+            button.text = _lobbyEntryData.ViewNames[index];
         }
 
         private void OnCellClicked(ClickEvent evt, int index)
         {
-            UiManager.Instance.PushDocument(index);
+            if (index == -1)
+                return;
+            
+            UIManager.Instance.PushDocument(index);
         }
     }
 }

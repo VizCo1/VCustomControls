@@ -1,26 +1,19 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UserInterfaceGenerator;
 
 namespace VCustomComponents.Runtime
 {
-    public class Slider2D : ViewBase
+    public class Slider2D : VBaseView<Slider2DElements>
     {
-        private VSlider2D _slider2D;
-
-        protected override void Start()
+        protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
-            base.Start();
-            
-            _slider2D = Root.Q<VSlider2D>();
-
-            _slider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);
+            Elements.VSlider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);
         }
-
-        protected override void OnDestroy()
+        
+        protected void OnDestroy()
         {
-            _slider2D.UnregisterValueChangedCallback(OnSlider2DValueChanged);
-            
-            base.OnDestroy();
+            Elements.VSlider2D.UnregisterValueChangedCallback(OnSlider2DValueChanged);
         }
         
         private void OnSlider2DValueChanged(ChangeEvent<Vector2> evt)

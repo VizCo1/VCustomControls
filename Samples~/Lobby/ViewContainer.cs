@@ -10,13 +10,11 @@ namespace VCustomComponents.Runtime
         [field: SerializeField]
         public ViewBase[] Views { get; private set; }
         
-        public int NumberOfViews => Views.Length;
-        
-        private Dictionary<Type, ViewBase> _viewDictionary;
+        private readonly Dictionary<Type, ViewBase> _viewDictionary = new();
         
         private void OnEnable()
         {
-            _viewDictionary = new Dictionary<Type, ViewBase>();
+            _viewDictionary.Clear();
             foreach (var view in Views)
             {
                 _viewDictionary.Add(view.GetType(), view);
@@ -30,6 +28,5 @@ namespace VCustomComponents.Runtime
             
             return view;
         }
-        
     }
 }
