@@ -518,3 +518,7 @@
 .dropdown-secondary.unity-base-dropdown .unity-base-dropdown__item:checked .unity-base-dropdown__label {
     -unity-font-style: bold-and-italic;
 }
+
+.region {
+    flex-grow: 1;
+}

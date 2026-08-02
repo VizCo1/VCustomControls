@@ -1,0 +1,35 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ExamplesButton" src="project://database/Assets/Samples/Examples/ExamplesButton.uxml?fileID=9197481963319205126&amp;guid=69e3108f953d6854385b366c651bb143&amp;type=3#ExamplesButton"/>
+    <Style src="project://database/Assets/Samples/Examples/ScrollViewInfinite/ScrollViewInfinite.uss?fileID=7433441132597879392&amp;guid=112d9514f2a9f034185e98c060a747c8&amp;type=3#ScrollViewInfinite"/>
+    <ui:VisualElement name="RowContainer" class="row-container">
+        <ui:Instance template="ExamplesButton" name="_AddToScrollViewVertical" class="add-to-scroll-button">
+            <AttributeOverrides element-name="_ExamplesButton" text="Add Element"/>
+        </ui:Instance>
+        <ui:Instance template="ExamplesButton" name="_RemoveScrollViewVertical">
+            <AttributeOverrides element-name="_ExamplesButton" text="Remove Random Element"/>
+        </ui:Instance>
+    </ui:VisualElement>
+    <VCustomComponents.Runtime.VScrollViewInfinite name="_VScrollViewInfiniteVertical" class="scroll-view-infinite-example">
+        <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical" style="height: 400px;">
+            <AttributeOverrides element-name="_ExamplesButton" text="A"/>
+        </ui:Instance>
+        <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
+            <AttributeOverrides element-name="_ExamplesButton" text="B"/>
+        </ui:Instance>
+        <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
+            <AttributeOverrides element-name="_ExamplesButton" text="C"/>
+        </ui:Instance>
+        <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical" style="height: 540px;">
+            <AttributeOverrides element-name="_ExamplesButton" text="D"/>
+        </ui:Instance>
+        <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
+            <AttributeOverrides element-name="_ExamplesButton" text="E"/>
+        </ui:Instance>
+        <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
+            <AttributeOverrides element-name="_ExamplesButton" text="F"/>
+        </ui:Instance>
+        <ui:Instance template="ExamplesButton" class="examples-button-container-infinite-vertical">
+            <AttributeOverrides element-name="_ExamplesButton" text="G"/>
+        </ui:Instance>
+    </VCustomComponents.Runtime.VScrollViewInfinite>
+</ui:UXML>

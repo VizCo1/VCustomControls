@@ -1,18 +1,14 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UserInterfaceGenerator;
 
 namespace VCustomComponents.Runtime
 {
-    public class RadialMenu : ViewBase
+    public class RadialMenu : VBaseView<RadialMenuElements>
     {
-        private VRadialMenu _radialMenu;
-
-        protected override void Start()
+        protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
-            base.Start();
-            
-            _radialMenu = Root.Q<VRadialMenu>();
-            _radialMenu.OnSlotClicked += OnSlotClicked;
+            Elements.VRadialMenu.OnSlotClicked += OnSlotClicked;
         }
 
         private void OnSlotClicked(int index)
@@ -34,9 +30,9 @@ namespace VCustomComponents.Runtime
             }
         }
 
-        protected override void BeforeDestroy()
+        protected void OnDestroy()
         {
-            _radialMenu.OnSlotClicked -= OnSlotClicked;
+            Elements.VRadialMenu.OnSlotClicked -= OnSlotClicked;
         }
     }
 }

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="RegionTesting" style="background-color: rgb(156, 74, 74); flex-grow: 1; padding-top: 24px; padding-right: 24px; padding-bottom: 24px; padding-left: 24px;">
+        <ui:Label text="REGION TESTING" name="Header" style="font-size: 64px; -unity-font-style: bold; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+        <ui:Button text="Remove regions" name="_RemoveRegionsButton" style="font-size: 64px; -unity-font-style: italic;"/>
+        <ui:VisualElement name="Body" style="flex-direction: row; flex-grow: 1;">
+            <VCustomComponents.Runtime.VRegion name="RegionA" visual-tree-asset-prefab="project://database/Assets/RegionTestingAgain/RegionA.prefab?fileID=3590995071405866832&amp;guid=0dcf3a53e8273a24080ad7f5003122a9&amp;type=3#RegionA" style="flex-grow: 1;"/>
+            <VCustomComponents.Runtime.VRegion name="RegionB" visual-tree-asset-prefab="project://database/Assets/RegionTestingAgain/RegionB.prefab?fileID=454096403187022779&amp;guid=79bb0c30d6dc3a94a9878a0fab543140&amp;type=3#RegionB" style="flex-grow: 1;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

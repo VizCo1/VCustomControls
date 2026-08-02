@@ -1,43 +1,27 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UserInterfaceGenerator;
 
 namespace VCustomComponents.Runtime
 {
-    public class Spinner : ViewBase
+    public class Spinner : VBaseView<SpinnerElements>
     {
-        private const string ButtonContainer1Name = "ExamplesButtonContainer1";
-        private const string ButtonContainer2Name = "ExamplesButtonContainer2";
-        
-        private VSpinner _spinner;
-        private Button _buttonToggle;
-        private Button _buttonReset;
-        private Slider _slider;
-
-        protected override void Start()
+        protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
-            base.Start();
+            Elements.SpeedSliderContainer.ExamplesSlider.value = Elements.VSpinner.Speed;
             
-            _spinner = Root.Q<VSpinner>();
-            _slider = Root.Q<Slider>();
-            _buttonToggle = (Button)Root.Q(ButtonContainer1Name)[0];
-            _buttonReset = (Button)Root.Q(ButtonContainer2Name)[0];
-
-            _slider.value = _spinner.Speed;
-            
-            _spinner.RegisterValueChangedCallback(OnSpinnerValueChanged);
-            _slider.RegisterValueChangedCallback(OnSliderValueChanged);
-            _buttonToggle.clicked += OnButtonToggleClicked;
-            _buttonReset.clicked += OnButtonResetClicked;
+            Elements.VSpinner.RegisterValueChangedCallback(OnSpinnerValueChanged);
+            Elements.SpeedSliderContainer.ExamplesSlider.RegisterValueChangedCallback(OnSliderValueChanged);
+            Elements.ToggleSpinnerButtonContainer.ExamplesButton.clicked += OnButtonToggleClicked;
+            Elements.ResetRotationButtonContainer.ExamplesButton.clicked += OnButtonResetClicked;
         }
 
-        protected override void OnDestroy()
+        protected void OnDestroy()
         {
-            _spinner.UnregisterValueChangedCallback(OnSpinnerValueChanged);
-            _slider.UnregisterValueChangedCallback(OnSliderValueChanged);
-            _buttonToggle.clicked -= OnButtonToggleClicked;
-            _buttonReset.clicked -= OnButtonResetClicked;
-            
-            base.OnDestroy();
+            Elements.VSpinner.UnregisterValueChangedCallback(OnSpinnerValueChanged);
+            Elements.SpeedSliderContainer.ExamplesSlider.UnregisterValueChangedCallback(OnSliderValueChanged);
+            Elements.ToggleSpinnerButtonContainer.ExamplesButton.clicked -= OnButtonToggleClicked;
+            Elements.ResetRotationButtonContainer.ExamplesButton.clicked -= OnButtonResetClicked;
         }
 
         private void OnSpinnerValueChanged(ChangeEvent<bool> evt)
@@ -47,17 +31,17 @@ namespace VCustomComponents.Runtime
         
         private void OnSliderValueChanged(ChangeEvent<float> evt)
         {
-            _spinner.Speed = evt.newValue;
+            Elements.VSpinner.Speed = evt.newValue;
         }
         
         private void OnButtonToggleClicked()
         {
-            _spinner.value = !_spinner.value;
+            Elements.VSpinner.value = !Elements.VSpinner.value;
         }
         
         private void OnButtonResetClicked()
         {
-            _spinner.ResetRotation();
+            Elements.VSpinner.ResetRotation();
         }
     }
 }

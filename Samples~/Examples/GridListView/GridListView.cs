@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UserInterfaceGenerator;
 
 namespace VCustomComponents.Runtime
 {
-    public class GridListView : ViewBase
+    public class GridListView : VBaseView<GridListViewElements>
     {
         [SerializeField]
         private int _columns;
@@ -11,15 +12,9 @@ namespace VCustomComponents.Runtime
         [SerializeField]
         private int _rows;
         
-        private VGridListView _gridListView;
-
-        protected override void Start()
+        protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
-            base.Start();
-
-            _gridListView = Root.Q<VGridListView>();
-            
-            _gridListView.BindCell = BindCell;
+            Elements.GridListView.BindCell = BindCell;
             
             var grid = new int[_rows, _columns];
             var cellIndex = 0;
@@ -30,8 +25,8 @@ namespace VCustomComponents.Runtime
                     grid[y, x] = cellIndex++;
                 }
             }
-
-            _gridListView.BindToGrid(grid);
+            
+            Elements.GridListView.BindToGrid(grid);
         }
 
         private void BindCell(VisualElement visualElement, int index)

@@ -11,6 +11,7 @@ namespace VCustomComponents.Runtime
         
         private static readonly BindingId ValueProperty = (BindingId) nameof(value);
         private static readonly BindingId SpeedProperty = (BindingId) nameof(Speed);
+        private static readonly BindingId RotationRateProperty = (BindingId) nameof(RotationRate);
 
         [Header(nameof(VSpinner))]
         
@@ -52,17 +53,32 @@ namespace VCustomComponents.Runtime
                 NotifyPropertyChanged(in SpeedProperty);
             }
         }
-        
-        [UxmlAttribute]
-        private long RotationRate { get; set; } = 10;
+
+        [UxmlAttribute, CreateProperty]
+        private long RotationRate
+        {
+            get => _rotationRate;
+            set
+            {
+                _rotationRate = value;
+                
+                if (_rotationRate == value)
+                    return;
+                
+                SetValueWithoutNotify(_value);
+                
+                NotifyPropertyChanged(in RotationRateProperty);
+            }
+        }
 
         private bool _value;
         private float _degrees;
         private float _speed = 5f;
+        private long _rotationRate = 10;
         
         private IVisualElementScheduledItem _scheduledItem;
-        
-        public VSpinner() 
+
+        public VSpinner()
         {
             AddToClassList(VSpinnerClass);
             usageHints = UsageHints.DynamicTransform;
@@ -85,7 +101,7 @@ namespace VCustomComponents.Runtime
             
             _scheduledItem = schedule
                 .Execute(StartRotate)
-                .Every(RotationRate)
+                .Every(_rotationRate)
                 .Until(() => !_value);
         }
 

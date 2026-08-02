@@ -223,6 +223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridListViewView
       objectReference: {fileID: 0}
+    - target: {fileID: 757737664720554521, guid: 7dc0205299b8a2945b06646b27f775e0, type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: d1d8e89ae692e0d46837c9ca35acbe96, type: 2}
     - target: {fileID: 7056332424380660272, guid: 7dc0205299b8a2945b06646b27f775e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace VCustomComponents.Runtime
 {
@@ -22,6 +23,8 @@ namespace VCustomComponents.Runtime
             DontDestroyOnLoad(this);
             
             _viewStack = new Stack<ViewBase>();
+
+            VRegionManager.Init(GetComponentsInChildren<PanelRenderer>(true));
         }
 
         public void PushDocument<T>() where T : ViewBase

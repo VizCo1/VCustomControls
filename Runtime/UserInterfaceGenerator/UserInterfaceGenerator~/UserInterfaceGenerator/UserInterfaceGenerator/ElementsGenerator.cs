@@ -12,7 +12,7 @@ namespace UserInterfaceGenerator;
 public class ElementsGenerator : IIncrementalGenerator
 {
     private static readonly Regex UxmlElementRegex = new("""
-                                                         <(?:ui:)?([\w:\.]+).*?name="_([\w-]+)"
+                                                         <(?:ui:)?(?!AttributeOverrides\b)([\w:\.]+)(?:.*?template="([^"]+)")?.*?name="_([\w-]+)"
                                                          """, RegexOptions.Compiled);
     
     public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -68,7 +68,7 @@ public class ElementsGenerator : IIncrementalGenerator
         codeWriter.WriteLine("{");
         codeWriter.Indent++;
 
-        var typesAndNames = new List<(string elementType, string elementName)>();
+        var typesAndNames = new List<(string elementTypeTemplate, string elementType, string elementName)>();
 
         // Elements
         foreach (var line in uxmlText.Lines)
@@ -79,12 +79,21 @@ public class ElementsGenerator : IIncrementalGenerator
             if (!match.Success) 
                 continue;
             
+            var elementTypeTemplate = match.Groups[2].Value == string.Empty ? string.Empty : match.Groups[2].Value + "Elements";
             var elementType = match.Groups[1].Value;
-            var elementName = match.Groups[2].Value;
+            var elementName = match.Groups[3].Value;
 
-            typesAndNames.Add((elementType, elementName));
+            typesAndNames.Add((elementTypeTemplate, elementType, elementName));
+
+            if (elementTypeTemplate == string.Empty)
+            {
+                codeWriter.WriteLine($"public {elementType} {elementName} {{ get; private set; }}");
+            }
+            else
+            {
+                codeWriter.WriteLine($"public {elementTypeTemplate} {elementName} {{ get; private set; }}");
+            }
             
-            codeWriter.WriteLine($"public {elementType} {elementName} {{ get; private set; }}");
             codeWriter.WriteLine();
         }
         
@@ -101,10 +110,24 @@ public class ElementsGenerator : IIncrementalGenerator
         
         codeWriter.WriteLine("var contentHash = visualTreeAssetSource.contentHash;");
         codeWriter.WriteLine("");
-        
+
+        var i = 0;
         foreach (var typeAndName in typesAndNames)
         {
-            codeWriter.WriteLine($"{typeAndName.elementName} = rootElement.Query<{typeAndName.elementType}>(\"_{typeAndName.elementName}\").Where(element => element.visualTreeAssetSource.contentHash == contentHash).First();");
+            if (typeAndName.elementTypeTemplate == string.Empty)
+            {
+                codeWriter.WriteLine($"{typeAndName.elementName} = rootElement.Query<{typeAndName.elementType}>(\"_{typeAndName.elementName}\").Where(element => element.visualTreeAssetSource.contentHash == contentHash).First();");
+            }
+            else
+            {
+                codeWriter.WriteLine($"var rootElement{typeAndName.elementName} = rootElement.Query<TemplateContainer>(\"_{typeAndName.elementName}\").Where(element => element.visualTreeAssetSource.contentHash == contentHash).First();");
+                codeWriter.WriteLine($"{typeAndName.elementName} = new(rootElement{typeAndName.elementName}, rootElement{typeAndName.elementName}.templateSource);");
+            }
+            
+            if (i < typesAndNames.Count - 1)
+                codeWriter.WriteLine("");
+            
+            i++;
         }
         
         codeWriter.Indent--;
