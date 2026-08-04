@@ -43,9 +43,11 @@ namespace UserInterfaceGenerator.Editor
             _elements.GeneratedFilesFolderObjectField.value = AssetDatabase.LoadAssetAtPath<DefaultAsset>(_singleton.generatedFilesFolderPath);
             
             _elements.GenerationTypeRadioButtonGroup.value = _singleton.generationType;
-            HandleGenerationType();
             
             _elements.FileToGenerateObjectField.value = _singleton.fileToGenerate;
+            
+            HandleGenerationType();
+            HandleButtonEnabled();
             
             _elements.GeneratedFilesFolderObjectField.RegisterCallback<ChangeEvent<Object>>(OnGeneratedFilesFolderChanged);
             _elements.GenerationTypeRadioButtonGroup.RegisterCallback<ChangeEvent<int>>(OnGenerationTypeChanged);
