@@ -12,13 +12,16 @@ namespace UserInterfaceGenerator;
 public class ElementsGenerator : IIncrementalGenerator
 {
     private static readonly Regex UxmlElementRegex = new("""
-                                                         <(?:ui:)?(?!AttributeOverrides\b)([\w:\.]+)(?:.*?template="([^"]+)")?.*?name="_([\w-]+)"
+                                                         <(?:uie?:)?(?!AttributeOverrides\b)([\w:\.]+)(?:.*?template="([^"]+)")?.*?name="_([\w-]+)"
                                                          """, RegexOptions.Compiled);
+
+    private const string RuntimeAssembly = "UserInterfaceGenerator.Runtime";
+    private const string EditorAssembly = "UserInterfaceGenerator.Editor";
     
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var uxmlFilesProvider = context.AdditionalTextsProvider
-            .Where(file => Path.GetExtension(file.Path) == ".additionalfile" || Path.GetExtension(file.Path) == ".uxml" )
+            .Where(file => Path.GetExtension(file.Path) == ".additionalfile")
             .Collect();
 
         var assemblyNameProvider = context.CompilationProvider
@@ -30,7 +33,7 @@ public class ElementsGenerator : IIncrementalGenerator
         {
             var (assemblyName, uxmlFiles) = source;
 
-            if (assemblyName != "Assembly-CSharp" && assemblyName != "UserInterfaceGenerator.Sample") 
+            if (assemblyName != RuntimeAssembly && assemblyName != EditorAssembly) 
                 return;
             
             foreach (var file in uxmlFiles)
@@ -39,17 +42,22 @@ public class ElementsGenerator : IIncrementalGenerator
                 if (uxmlText == null) 
                     continue;
                 
-                var fileName = Path.GetFileNameWithoutExtension(file.Path).Replace(".UserInterfaceGenerator", "") + "Elements" ;
-                
-                if (!ElementsGeneratorLogic(uxmlText, fileName, out var sourceStream)) 
+                var isEditorUxml = uxmlText.ToString().Contains("editor-extension-mode=\"True\"");
+                if (isEditorUxml && assemblyName == RuntimeAssembly)
                     continue;
                 
+                if (!isEditorUxml && assemblyName == EditorAssembly)
+                    continue;
+                
+                var fileName = Path.GetFileNameWithoutExtension(file.Path).Replace(".UserInterfaceGenerator", "") + "Elements";
+
+                ElementsGeneratorLogic(uxmlText, fileName, isEditorUxml, out var sourceStream);
                 productionContext.AddSource($"{fileName}.g.cs", SourceText.From(sourceStream, Encoding.UTF8, canBeEmbedded: true));
             }
         });
     }
 
-    private static bool ElementsGeneratorLogic(SourceText uxmlText, string fileName, out MemoryStream sourceStream)
+    private void ElementsGeneratorLogic(SourceText uxmlText, string fileName, bool isEditorUxml, out MemoryStream sourceStream)
     {
         sourceStream = new MemoryStream();
         StreamWriter sourceStreamWriter = new(sourceStream, Encoding.UTF8, bufferSize: 1024, leaveOpen: true);
@@ -59,18 +67,27 @@ public class ElementsGenerator : IIncrementalGenerator
         codeWriter.WriteLine("using System;");
         codeWriter.WriteLine("using UnityEngine;");
         codeWriter.WriteLine("using UnityEngine.UIElements;");
+        codeWriter.WriteLine("#if UNITY_EDITOR");
+        codeWriter.WriteLine("using UnityEditor.UIElements;");
+        codeWriter.WriteLine("#endif");
         codeWriter.WriteLine();
-        codeWriter.WriteLine("namespace UserInterfaceGenerator");
+        if (isEditorUxml)
+        {
+            codeWriter.WriteLine("namespace UserInterfaceGenerator.Editor");
+        }
+        else
+        {
+            codeWriter.WriteLine("namespace UserInterfaceGenerator.Runtime");
+        }
         codeWriter.WriteLine("{");
         codeWriter.Indent++;
 
         codeWriter.WriteLine($"public class {fileName}");
         codeWriter.WriteLine("{");
         codeWriter.Indent++;
-
-        var typesAndNames = new List<(string elementTypeTemplate, string elementType, string elementName)>();
-
+        
         // Elements
+        var typesAndNames = new List<(string elementTypeTemplate, string elementType, string elementName)>();
         foreach (var line in uxmlText.Lines)
         {
             var lineText = line.ToString().Trim();
@@ -95,12 +112,6 @@ public class ElementsGenerator : IIncrementalGenerator
             }
             
             codeWriter.WriteLine();
-        }
-        
-        if (typesAndNames.Count == 0)
-        {
-            sourceStreamWriter.Dispose();
-            return false;
         }
         
         // Constructor
@@ -144,6 +155,5 @@ public class ElementsGenerator : IIncrementalGenerator
         sourceStreamWriter.Flush();
         
         sourceStream.Position = 0;
-        return true;
     }
 }

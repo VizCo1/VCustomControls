@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     [UsedImplicitly]
     public enum EnumForDropdown

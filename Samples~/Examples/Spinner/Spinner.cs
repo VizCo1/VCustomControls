@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class Spinner : VBaseView<SpinnerElements>
     {
@@ -15,7 +16,7 @@ namespace VCustomComponents.Runtime
             Elements.ToggleSpinnerButtonContainer.ExamplesButton.clicked += OnButtonToggleClicked;
             Elements.ResetRotationButtonContainer.ExamplesButton.clicked += OnButtonResetClicked;
         }
-
+        
         protected void OnDestroy()
         {
             Elements.VSpinner.UnregisterValueChangedCallback(OnSpinnerValueChanged);
@@ -23,7 +24,7 @@ namespace VCustomComponents.Runtime
             Elements.ToggleSpinnerButtonContainer.ExamplesButton.clicked -= OnButtonToggleClicked;
             Elements.ResetRotationButtonContainer.ExamplesButton.clicked -= OnButtonResetClicked;
         }
-
+        
         private void OnSpinnerValueChanged(ChangeEvent<bool> evt)
         {
             Debug.Log(evt.newValue);

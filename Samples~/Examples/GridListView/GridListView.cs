@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class GridListView : VBaseView<GridListViewElements>
     {

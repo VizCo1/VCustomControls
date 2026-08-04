@@ -1,8 +1,8 @@
-using System;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class AnimatedSprite : VBaseView<AnimatedSpriteElements>
     {
@@ -12,14 +12,14 @@ namespace VCustomComponents.Runtime
             Elements.AnimatedSpriteCenterButton.ExamplesButton.clicked += CenterExamplesButtonOnClicked;
             Elements.AnimatedSpriteRightButton.ExamplesButton.clicked += RightExamplesButtonOnClicked;
         }
-
+        
         protected void OnDestroy()
         {
             Elements.AnimatedSpriteLeftButton.ExamplesButton.clicked -= LeftExamplesButtonOnClicked;
             Elements.AnimatedSpriteCenterButton.ExamplesButton.clicked -= CenterExamplesButtonOnClicked;
             Elements.AnimatedSpriteRightButton.ExamplesButton.clicked -= RightExamplesButtonOnClicked;
         }
-
+        
         private void LeftExamplesButtonOnClicked()
         {
             Elements.VAnimatedSpriteLeft.value = !Elements.VAnimatedSpriteLeft.value;

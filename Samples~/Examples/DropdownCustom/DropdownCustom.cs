@@ -1,7 +1,8 @@
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class DropdownCustom : VBaseView<DropdownCustomElements>
     {

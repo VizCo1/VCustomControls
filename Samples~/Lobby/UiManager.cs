@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class UIManager : MonoBehaviour
     {

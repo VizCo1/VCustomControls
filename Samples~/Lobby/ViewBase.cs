@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     [RequireComponent(typeof(UIDocument))]
     public abstract class ViewBase : MonoBehaviour

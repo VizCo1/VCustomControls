@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class RadialMenu : VBaseView<RadialMenuElements>
     {
@@ -10,7 +11,7 @@ namespace VCustomComponents.Runtime
         {
             Elements.VRadialMenu.OnSlotClicked += OnSlotClicked;
         }
-
+        
         private void OnSlotClicked(int index)
         {
             switch (index)
@@ -29,7 +30,7 @@ namespace VCustomComponents.Runtime
                     break;
             }
         }
-
+        
         protected void OnDestroy()
         {
             Elements.VRadialMenu.OnSlotClicked -= OnSlotClicked;

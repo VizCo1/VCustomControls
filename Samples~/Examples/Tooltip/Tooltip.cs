@@ -1,7 +1,9 @@
+using UnityEngine;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class Tooltip : VBaseView<TooltipElements>
     {
@@ -28,7 +30,7 @@ namespace VCustomComponents.Runtime
                 Elements.TooltipExample4.AddManipulator(new VTooltipManipulator(tooltip2, VTooltipPosition.Bottom));
             } 
         }
-
+        
         private void OnDestroy()
         {
             RootElement.panel?.TryUnregisterTooltip(TooltipClass1);

@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class Slider2D : VBaseView<Slider2DElements>
     {
+        
         protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
             Elements.VSlider2D.RegisterValueChangedCallback(OnSlider2DValueChanged);

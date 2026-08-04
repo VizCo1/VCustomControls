@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Editor/UserInterfaceGenerator/UserInterfaceGenerator.uss?fileID=7433441132597879392&amp;guid=fc86182002aef3a4f994c30478532ab1&amp;type=3#UserInterfaceGenerator"/>
+    <ui:VisualElement name="Container" style="padding-left: 4px; padding-right: 4px; padding-top: 4px; padding-bottom: 4px;">
+        <ui:ScrollView name="ScrollView">
+            <uie:ObjectField label="Generated files folder" name="_GeneratedFilesFolderObjectField" type="UnityEditor.DefaultAsset, UnityEditor.CoreModule" style="margin-top: 0; margin-right: 0; margin-bottom: 4px; margin-left: 0;"/>
+            <ui:RadioButtonGroup label="Generation type" choices="Generate all UXML files,Generate one UXML file" name="_GenerationTypeRadioButtonGroup" value="0" style="margin-top: 0; margin-right: 0; margin-bottom: 4px; margin-left: 0;"/>
+            <uie:ObjectField label="File to generate" name="_FileToGenerateObjectField" type="UnityEngine.UIElements.VisualTreeAsset, UnityEngine.UIElementsModule" value="" style="margin-top: 0; margin-right: 0; margin-bottom: 4px; margin-left: 0;"/>
+            <ui:Button text="Generate" name="_GenerateButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

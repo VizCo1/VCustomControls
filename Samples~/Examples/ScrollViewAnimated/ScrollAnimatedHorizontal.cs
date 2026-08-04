@@ -1,15 +1,17 @@
 using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using UserInterfaceGenerator.Runtime;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
     public class ScrollAnimatedHorizontal : VBaseView<ScrollViewAnimatedHorizontalElements>
     {
         protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
         {
             Elements.EaseEnumDropdownContainerHorizontal.ExamplesEnumDropdown.value = Ease.Linear;
-
+        
             Elements.ButtonContainerA.ExamplesButton.RegisterCallback<ClickEvent, int>(OnHorizontalButtonClicked, 0);
             Elements.ButtonContainerB.ExamplesButton.RegisterCallback<ClickEvent, int>(OnHorizontalButtonClicked, 1);
             Elements.ButtonContainerC.ExamplesButton.RegisterCallback<ClickEvent, int>(OnHorizontalButtonClicked, 2);

@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UserInterfaceGenerator;
+using VCustomComponents.Runtime;
 
-namespace VCustomComponents.Runtime
+namespace Samples
 {
-    public class LobbyView : VBaseView<LobbyElements>
+    public class LobbyView// : VBaseView<LobbyElements>
     {
         [SerializeField]
         private LobbyEntryData _lobbyEntryData;
@@ -12,30 +12,30 @@ namespace VCustomComponents.Runtime
         [SerializeField]
         private int _columns = 4;
         
-        protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
-        {
-            Elements.LobbyList.BindCell = BindCell;
-            
-            var rows = Mathf.CeilToInt(_lobbyEntryData.ViewNames.Length / (float)_columns);
-            
-            var cellIndex = 0;
-            var grid = new int[rows, _columns];
-            for (var y = 0; y < grid.GetLength(0); y++)
-            {
-                for (var x = 0; x < grid.GetLength(1); x++)
-                {
-                    if (cellIndex >= _lobbyEntryData.ViewNames.Length)
-                    {
-                        grid[y, x] = -1;
-                        continue;
-                    }
-                    
-                    grid[y, x] = cellIndex++;
-                }
-            }
-            
-            Elements.LobbyList.BindToGrid(grid);
-        }
+        // protected override void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+        // {
+        //     Elements.LobbyList.BindCell = BindCell;
+        //     
+        //     var rows = Mathf.CeilToInt(_lobbyEntryData.ViewNames.Length / (float)_columns);
+        //     
+        //     var cellIndex = 0;
+        //     var grid = new int[rows, _columns];
+        //     for (var y = 0; y < grid.GetLength(0); y++)
+        //     {
+        //         for (var x = 0; x < grid.GetLength(1); x++)
+        //         {
+        //             if (cellIndex >= _lobbyEntryData.ViewNames.Length)
+        //             {
+        //                 grid[y, x] = -1;
+        //                 continue;
+        //             }
+        //             
+        //             grid[y, x] = cellIndex++;
+        //         }
+        //     }
+        //     
+        //     Elements.LobbyList.BindToGrid(grid);
+        // }
 
         private void BindCell(VisualElement visualElement, int index)
         {

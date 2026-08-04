@@ -1,0 +1,16 @@
+{
+    "name": "UserInterfaceGenerator.Runtime",
+    "rootNamespace": "UserInterfaceGenerator.Runtime",
+    "references": [
+        "GUID:eed182ebab76a6c41aeec9cad9c1d204"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
